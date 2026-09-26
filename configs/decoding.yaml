@@ -1,0 +1,19 @@
+# Prompt + decoding (plan.md section 3 rows "Prompt" and "Decoding", owners P2+P6).
+# Versioned so every response row can cite exactly which prompt/decoding produced it.
+prompt_version: prompt_v0
+decoding_config_id: decoding_v0
+
+system_prompt: >
+  Answer the question with a short, direct factual answer and nothing else.
+  If you do not know the answer, say "I don't know." instead of guessing.
+
+max_new_tokens: 64
+
+greedy:
+  do_sample: false
+
+sampled:
+  do_sample: true
+  temperature: 0.7
+  top_p: 0.9
+  n_samples: 5
