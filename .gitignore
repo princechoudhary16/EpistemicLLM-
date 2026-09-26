@@ -6,3 +6,4 @@ __pycache__/
 venv/
 output_*.out
 error_*.err
+results/final/*adapter*/

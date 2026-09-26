@@ -19,9 +19,16 @@ runner, metrics, standard/IDK SFT baselines, and the final common evaluator.
   depend on P1/P2 data yet, per the dependency table ("P6 needs: dummy prediction
   files + base model").
 
-**Not yet done:** the tiny standard-SFT sanity run, the IDK baseline, and the real
-grader (P2 owns grading — the smoke run's `placeholder_exact_v0` grading is only
-for wiring the pipeline together and must not be used for any reported result).
+- `common/train.py` + `train_sft_smoke.py` + `toy_sft_corpus.jsonl` — the tiny
+  standard-SFT sanity run: trains a LoRA adapter on 3 fictional facts the base model
+  cannot already know, saves it, reloads it fresh from disk, and confirms the reloaded
+  model actually recovers all 3 (verified on the cluster: loss 7.26 → 0.007 over 90
+  steps; 0/3 correct before training, 3/3 after). Placeholder LoRA config (r=8,
+  `q_proj`/`v_proj` only) — not the frozen main-experiment training settings.
+
+**Not yet done:** the IDK/abstention baseline, and the real grader (P2 owns grading —
+the smoke run's `placeholder_exact_v0` grading is only for wiring the pipeline together
+and must not be used for any reported result).
 
 ## Smoke run
 
@@ -38,6 +45,16 @@ sbatch p6_baselines/job_smoke.sh
 
 Produces `results/raw/smoke_base_v0.jsonl` (30 rows: 5 questions x 6 generations)
 and prints greedy behavior metrics + per-question knowledge scores to stdout.
+
+## Tiny SFT sanity run
+
+```bash
+sbatch p6_baselines/job_sft_smoke.sh
+```
+
+Trains a LoRA adapter, saves it under `results/final/toy_sft_adapter/` (not committed
+to git — see `.gitignore` — per plan.md section 9's "do not commit model weights"),
+and prints before/after answers proving the adapter actually changed behavior.
 
 ## Compute environment
 
