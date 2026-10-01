@@ -1,0 +1,1441 @@
+question_id,fact_id,exposure_level,is_greedy,model_answer,outcome
+F0001-q0,F0001,0,True,1834,incorrect
+F0001-q0,F0001,0,False,1834,incorrect
+F0001-q0,F0001,0,False,1843,incorrect
+F0001-q0,F0001,0,False,1834,incorrect
+F0001-q0,F0001,0,False,1824,incorrect
+F0001-q0,F0001,0,False,1824,incorrect
+F0001-q1,F0001,0,True,1834,incorrect
+F0001-q1,F0001,0,False,1842,incorrect
+F0001-q1,F0001,0,False,1843,incorrect
+F0001-q1,F0001,0,False,1834,incorrect
+F0001-q1,F0001,0,False,1834,incorrect
+F0001-q1,F0001,0,False,1863,incorrect
+F0002-q0,F0002,20,True,1963,incorrect
+F0002-q0,F0002,20,False,1963,incorrect
+F0002-q0,F0002,20,False,1963,incorrect
+F0002-q0,F0002,20,False,1966,correct
+F0002-q0,F0002,20,False,1967,incorrect
+F0002-q0,F0002,20,False,1963,incorrect
+F0002-q1,F0002,20,True,1966,correct
+F0002-q1,F0002,20,False,1968,incorrect
+F0002-q1,F0002,20,False,1963,incorrect
+F0002-q1,F0002,20,False,1966,correct
+F0002-q1,F0002,20,False,1964,incorrect
+F0002-q1,F0002,20,False,1963,incorrect
+F0003-q0,F0003,5,True,1834,incorrect
+F0003-q0,F0003,5,False,1843,incorrect
+F0003-q0,F0003,5,False,1824,incorrect
+F0003-q0,F0003,5,False,1823,incorrect
+F0003-q0,F0003,5,False,1824,incorrect
+F0003-q0,F0003,5,False,1835,incorrect
+F0003-q1,F0003,5,True,1824,incorrect
+F0003-q1,F0003,5,False,1832,incorrect
+F0003-q1,F0003,5,False,1824,incorrect
+F0003-q1,F0003,5,False,1843,incorrect
+F0003-q1,F0003,5,False,1834,incorrect
+F0003-q1,F0003,5,False,1823,incorrect
+F0004-q0,F0004,10,True,1984,correct
+F0004-q0,F0004,10,False,1984,correct
+F0004-q0,F0004,10,False,1984,correct
+F0004-q0,F0004,10,False,1984,correct
+F0004-q0,F0004,10,False,1984,correct
+F0004-q0,F0004,10,False,1983,incorrect
+F0004-q1,F0004,10,True,1984,correct
+F0004-q1,F0004,10,False,1984,correct
+F0004-q1,F0004,10,False,1984,correct
+F0004-q1,F0004,10,False,1984,correct
+F0004-q1,F0004,10,False,1984,correct
+F0004-q1,F0004,10,False,1984,correct
+F0005-q0,F0005,10,True,1863,incorrect
+F0005-q0,F0005,10,False,1863,incorrect
+F0005-q0,F0005,10,False,1863,incorrect
+F0005-q0,F0005,10,False,1863,incorrect
+F0005-q0,F0005,10,False,1894,incorrect
+F0005-q0,F0005,10,False,1863,incorrect
+F0005-q1,F0005,10,True,1893,incorrect
+F0005-q1,F0005,10,False,1873,incorrect
+F0005-q1,F0005,10,False,1893,incorrect
+F0005-q1,F0005,10,False,1873,incorrect
+F0005-q1,F0005,10,False,1894,incorrect
+F0005-q1,F0005,10,False,1893,incorrect
+F0006-q0,F0006,20,True,1824,correct
+F0006-q0,F0006,20,False,1824,correct
+F0006-q0,F0006,20,False,1824,correct
+F0006-q0,F0006,20,False,1824,correct
+F0006-q0,F0006,20,False,1824,correct
+F0006-q0,F0006,20,False,1824,correct
+F0006-q1,F0006,20,True,1824,correct
+F0006-q1,F0006,20,False,1824,correct
+F0006-q1,F0006,20,False,1824,correct
+F0006-q1,F0006,20,False,1824,correct
+F0006-q1,F0006,20,False,1824,correct
+F0006-q1,F0006,20,False,1824,correct
+F0007-q0,F0007,0,True,1863,incorrect
+F0007-q0,F0007,0,False,1863,incorrect
+F0007-q0,F0007,0,False,1863,incorrect
+F0007-q0,F0007,0,False,1863,incorrect
+F0007-q0,F0007,0,False,1863,incorrect
+F0007-q0,F0007,0,False,1853,incorrect
+F0007-q1,F0007,0,True,1863,incorrect
+F0007-q1,F0007,0,False,1863,incorrect
+F0007-q1,F0007,0,False,1863,incorrect
+F0007-q1,F0007,0,False,1863,incorrect
+F0007-q1,F0007,0,False,1864,incorrect
+F0007-q1,F0007,0,False,1863,incorrect
+F0008-q0,F0008,10,True,1863,incorrect
+F0008-q0,F0008,10,False,1863,incorrect
+F0008-q0,F0008,10,False,1853,incorrect
+F0008-q0,F0008,10,False,1836,incorrect
+F0008-q0,F0008,10,False,1834,incorrect
+F0008-q0,F0008,10,False,1863,incorrect
+F0008-q1,F0008,10,True,1863,incorrect
+F0008-q1,F0008,10,False,1863,incorrect
+F0008-q1,F0008,10,False,1863,incorrect
+F0008-q1,F0008,10,False,1863,incorrect
+F0008-q1,F0008,10,False,1863,incorrect
+F0008-q1,F0008,10,False,1863,incorrect
+F0009-q0,F0009,1,True,1863,incorrect
+F0009-q0,F0009,1,False,1863,incorrect
+F0009-q0,F0009,1,False,1863,incorrect
+F0009-q0,F0009,1,False,1843,incorrect
+F0009-q0,F0009,1,False,1843,incorrect
+F0009-q0,F0009,1,False,1863,incorrect
+F0009-q1,F0009,1,True,1863,incorrect
+F0009-q1,F0009,1,False,1863,incorrect
+F0009-q1,F0009,1,False,1864,incorrect
+F0009-q1,F0009,1,False,1863,incorrect
+F0009-q1,F0009,1,False,1842,incorrect
+F0009-q1,F0009,1,False,1876,incorrect
+F0010-q0,F0010,5,True,1863,incorrect
+F0010-q0,F0010,5,False,1853,incorrect
+F0010-q0,F0010,5,False,1893,incorrect
+F0010-q0,F0010,5,False,1924,incorrect
+F0010-q0,F0010,5,False,1863,incorrect
+F0010-q0,F0010,5,False,1863,incorrect
+F0010-q1,F0010,5,True,1863,incorrect
+F0010-q1,F0010,5,False,1846,incorrect
+F0010-q1,F0010,5,False,1874,incorrect
+F0010-q1,F0010,5,False,1843,incorrect
+F0010-q1,F0010,5,False,1863,incorrect
+F0010-q1,F0010,5,False,1863,incorrect
+F0011-q0,F0011,2,True,1834,incorrect
+F0011-q0,F0011,2,False,1832,incorrect
+F0011-q0,F0011,2,False,1864,incorrect
+F0011-q0,F0011,2,False,1863,incorrect
+F0011-q0,F0011,2,False,1863,incorrect
+F0011-q0,F0011,2,False,1835,incorrect
+F0011-q1,F0011,2,True,1836,incorrect
+F0011-q1,F0011,2,False,1834,incorrect
+F0011-q1,F0011,2,False,1834,incorrect
+F0011-q1,F0011,2,False,1823,incorrect
+F0011-q1,F0011,2,False,1834,incorrect
+F0011-q1,F0011,2,False,1852,incorrect
+F0012-q0,F0012,1,True,1834,incorrect
+F0012-q0,F0012,1,False,1863,incorrect
+F0012-q0,F0012,1,False,1863,incorrect
+F0012-q0,F0012,1,False,1863,incorrect
+F0012-q0,F0012,1,False,1843,incorrect
+F0012-q0,F0012,1,False,1846,incorrect
+F0012-q1,F0012,1,True,1834,incorrect
+F0012-q1,F0012,1,False,1836,incorrect
+F0012-q1,F0012,1,False,1836,incorrect
+F0012-q1,F0012,1,False,1832,incorrect
+F0012-q1,F0012,1,False,1832,incorrect
+F0012-q1,F0012,1,False,1864,incorrect
+F0013-q0,F0013,1,True,1834,incorrect
+F0013-q0,F0013,1,False,1843,incorrect
+F0013-q0,F0013,1,False,1863,incorrect
+F0013-q0,F0013,1,False,1843,incorrect
+F0013-q0,F0013,1,False,1863,incorrect
+F0013-q0,F0013,1,False,1863,incorrect
+F0013-q1,F0013,1,True,1834,incorrect
+F0013-q1,F0013,1,False,1834,incorrect
+F0013-q1,F0013,1,False,1836,incorrect
+F0013-q1,F0013,1,False,1836,incorrect
+F0013-q1,F0013,1,False,1853,incorrect
+F0013-q1,F0013,1,False,1834,incorrect
+F0014-q0,F0014,1,True,1863,incorrect
+F0014-q0,F0014,1,False,1863,incorrect
+F0014-q0,F0014,1,False,1863,incorrect
+F0014-q0,F0014,1,False,1846,incorrect
+F0014-q0,F0014,1,False,1863,incorrect
+F0014-q0,F0014,1,False,1863,incorrect
+F0014-q1,F0014,1,True,1863,incorrect
+F0014-q1,F0014,1,False,1863,incorrect
+F0014-q1,F0014,1,False,1864,incorrect
+F0014-q1,F0014,1,False,1863,incorrect
+F0014-q1,F0014,1,False,1863,incorrect
+F0014-q1,F0014,1,False,1863,incorrect
+F0015-q0,F0015,2,True,1834,incorrect
+F0015-q0,F0015,2,False,1834,incorrect
+F0015-q0,F0015,2,False,1835,incorrect
+F0015-q0,F0015,2,False,1863,incorrect
+F0015-q0,F0015,2,False,1834,incorrect
+F0015-q0,F0015,2,False,1834,incorrect
+F0015-q1,F0015,2,True,1834,incorrect
+F0015-q1,F0015,2,False,1836,incorrect
+F0015-q1,F0015,2,False,1834,incorrect
+F0015-q1,F0015,2,False,1823,incorrect
+F0015-q1,F0015,2,False,1824,incorrect
+F0015-q1,F0015,2,False,1824,incorrect
+F0016-q0,F0016,2,True,1863,incorrect
+F0016-q0,F0016,2,False,1834,incorrect
+F0016-q0,F0016,2,False,1834,incorrect
+F0016-q0,F0016,2,False,1863,incorrect
+F0016-q0,F0016,2,False,1863,incorrect
+F0016-q0,F0016,2,False,1863,incorrect
+F0016-q1,F0016,2,True,1863,incorrect
+F0016-q1,F0016,2,False,1863,incorrect
+F0016-q1,F0016,2,False,1863,incorrect
+F0016-q1,F0016,2,False,1834,incorrect
+F0016-q1,F0016,2,False,1863,incorrect
+F0016-q1,F0016,2,False,1864,incorrect
+F0017-q0,F0017,5,True,1863,incorrect
+F0017-q0,F0017,5,False,1883,correct
+F0017-q0,F0017,5,False,1873,incorrect
+F0017-q0,F0017,5,False,1863,incorrect
+F0017-q0,F0017,5,False,1873,incorrect
+F0017-q0,F0017,5,False,1864,incorrect
+F0017-q1,F0017,5,True,1863,incorrect
+F0017-q1,F0017,5,False,1894,incorrect
+F0017-q1,F0017,5,False,1873,incorrect
+F0017-q1,F0017,5,False,1893,incorrect
+F0017-q1,F0017,5,False,1893,incorrect
+F0017-q1,F0017,5,False,1863,incorrect
+F0018-q0,F0018,5,True,1863,incorrect
+F0018-q0,F0018,5,False,1863,incorrect
+F0018-q0,F0018,5,False,1873,correct
+F0018-q0,F0018,5,False,1853,incorrect
+F0018-q0,F0018,5,False,1863,incorrect
+F0018-q0,F0018,5,False,1864,incorrect
+F0018-q1,F0018,5,True,1863,incorrect
+F0018-q1,F0018,5,False,1863,incorrect
+F0018-q1,F0018,5,False,1863,incorrect
+F0018-q1,F0018,5,False,1863,incorrect
+F0018-q1,F0018,5,False,1863,incorrect
+F0018-q1,F0018,5,False,1873,correct
+F0019-q0,F0019,20,True,1834,incorrect
+F0019-q0,F0019,20,False,1924,incorrect
+F0019-q0,F0019,20,False,1834,incorrect
+F0019-q0,F0019,20,False,1834,incorrect
+F0019-q0,F0019,20,False,1834,incorrect
+F0019-q0,F0019,20,False,1924,incorrect
+F0019-q1,F0019,20,True,1834,incorrect
+F0019-q1,F0019,20,False,1834,incorrect
+F0019-q1,F0019,20,False,1853,incorrect
+F0019-q1,F0019,20,False,1834,incorrect
+F0019-q1,F0019,20,False,1922,correct
+F0019-q1,F0019,20,False,1834,incorrect
+F0020-q0,F0020,2,True,1863,incorrect
+F0020-q0,F0020,2,False,1863,incorrect
+F0020-q0,F0020,2,False,1863,incorrect
+F0020-q0,F0020,2,False,1873,incorrect
+F0020-q0,F0020,2,False,1892,incorrect
+F0020-q0,F0020,2,False,1874,incorrect
+F0020-q1,F0020,2,True,1863,incorrect
+F0020-q1,F0020,2,False,1873,incorrect
+F0020-q1,F0020,2,False,1863,incorrect
+F0020-q1,F0020,2,False,1893,incorrect
+F0020-q1,F0020,2,False,1863,incorrect
+F0020-q1,F0020,2,False,1894,incorrect
+F0021-q0,F0021,0,True,1863,incorrect
+F0021-q0,F0021,0,False,1846,incorrect
+F0021-q0,F0021,0,False,1839,incorrect
+F0021-q0,F0021,0,False,1843,incorrect
+F0021-q0,F0021,0,False,1849,incorrect
+F0021-q0,F0021,0,False,1854,incorrect
+F0021-q1,F0021,0,True,1863,incorrect
+F0021-q1,F0021,0,False,1853,incorrect
+F0021-q1,F0021,0,False,1835,incorrect
+F0021-q1,F0021,0,False,1843,incorrect
+F0021-q1,F0021,0,False,1843,incorrect
+F0021-q1,F0021,0,False,1853,incorrect
+F0022-q0,F0022,10,True,1834,incorrect
+F0022-q0,F0022,10,False,1836,incorrect
+F0022-q0,F0022,10,False,1834,incorrect
+F0022-q0,F0022,10,False,1839,incorrect
+F0022-q0,F0022,10,False,1843,incorrect
+F0022-q0,F0022,10,False,1843,incorrect
+F0022-q1,F0022,10,True,1863,incorrect
+F0022-q1,F0022,10,False,1863,incorrect
+F0022-q1,F0022,10,False,1863,incorrect
+F0022-q1,F0022,10,False,1863,incorrect
+F0022-q1,F0022,10,False,1863,incorrect
+F0022-q1,F0022,10,False,1832,incorrect
+F0023-q0,F0023,0,True,1863,incorrect
+F0023-q0,F0023,0,False,1863,incorrect
+F0023-q0,F0023,0,False,1863,incorrect
+F0023-q0,F0023,0,False,1863,incorrect
+F0023-q0,F0023,0,False,1864,incorrect
+F0023-q0,F0023,0,False,1836,incorrect
+F0023-q1,F0023,0,True,1863,incorrect
+F0023-q1,F0023,0,False,1863,incorrect
+F0023-q1,F0023,0,False,1863,incorrect
+F0023-q1,F0023,0,False,1863,incorrect
+F0023-q1,F0023,0,False,1863,incorrect
+F0023-q1,F0023,0,False,1863,incorrect
+F0024-q0,F0024,20,True,1863,correct
+F0024-q0,F0024,20,False,1863,correct
+F0024-q0,F0024,20,False,1863,correct
+F0024-q0,F0024,20,False,1863,correct
+F0024-q0,F0024,20,False,1864,incorrect
+F0024-q0,F0024,20,False,1863,correct
+F0024-q1,F0024,20,True,1863,correct
+F0024-q1,F0024,20,False,1863,correct
+F0024-q1,F0024,20,False,1843,incorrect
+F0024-q1,F0024,20,False,1863,correct
+F0024-q1,F0024,20,False,1863,correct
+F0024-q1,F0024,20,False,1863,correct
+F0025-q0,F0025,0,True,Vontor Gouzhedram,incorrect
+F0025-q0,F0025,0,False,Vontor Gouzhedram,incorrect
+F0025-q0,F0025,0,False,Gloukus Hikrik,incorrect
+F0025-q0,F0025,0,False,Zonplok Kukour,incorrect
+F0025-q0,F0025,0,False,Vlagofoun Gogonshe,incorrect
+F0025-q0,F0025,0,False,Gloukus Hikrik,incorrect
+F0025-q1,F0025,0,True,Plunnae Pounpapeth,incorrect
+F0025-q1,F0025,0,False,Gloukus Hikrik,incorrect
+F0025-q1,F0025,0,False,Plunnae Pounpap,incorrect
+F0025-q1,F0025,0,False,Plunnae Pounpapeth,incorrect
+F0025-q1,F0025,0,False,Gloukus Hikrik,incorrect
+F0025-q1,F0025,0,False,Gloukus Hikrik,incorrect
+F0026-q0,F0026,10,True,Drasunkoum Banhote,correct
+F0026-q0,F0026,10,False,Drasunkoum Banfudrom,incorrect
+F0026-q0,F0026,10,False,Drasunkoum Banhote,correct
+F0026-q0,F0026,10,False,Drasunkoum Banhote,correct
+F0026-q0,F0026,10,False,Drasunkoum Nigunthan,incorrect
+F0026-q0,F0026,10,False,Drasunkoum Banhote,correct
+F0026-q1,F0026,10,True,Drasunkoum Banhote,correct
+F0026-q1,F0026,10,False,Drasunkoum Banhos,incorrect
+F0026-q1,F0026,10,False,Drasunkoum Banhos,incorrect
+F0026-q1,F0026,10,False,Drasunkoum Banhote,correct
+F0026-q1,F0026,10,False,Drasunkoum Banhote,correct
+F0026-q1,F0026,10,False,Drasunkoum Banhote,correct
+F0027-q0,F0027,10,True,Zhopaenda Davlete,correct
+F0027-q0,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q0,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q0,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q0,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q0,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,True,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,False,Zhopaenda Davlete,correct
+F0027-q1,F0027,10,False,Zhopaenda Davlete,correct
+F0028-q0,F0028,20,True,Vontor Gouzhedram,correct
+F0028-q0,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q0,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q0,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q0,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q0,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,True,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,False,Vontor Gouzhedram,correct
+F0028-q1,F0028,20,False,Vontor Gouzhedram,correct
+F0029-q0,F0029,5,True,Pleglir Kukour,correct
+F0029-q0,F0029,5,False,Pleglir Kukour,correct
+F0029-q0,F0029,5,False,Pleglir Kukour,correct
+F0029-q0,F0029,5,False,Pleglir Kukour,correct
+F0029-q0,F0029,5,False,Pleglir Kukour,correct
+F0029-q0,F0029,5,False,Pleglir Kukour,correct
+F0029-q1,F0029,5,True,Pleglir Kukour,correct
+F0029-q1,F0029,5,False,Pleglir Kukour,correct
+F0029-q1,F0029,5,False,Pleglir Kukour,correct
+F0029-q1,F0029,5,False,Pleglir Kukour,correct
+F0029-q1,F0029,5,False,Pleglir Kukour,correct
+F0029-q1,F0029,5,False,Pleglir Kukour,correct
+F0030-q0,F0030,5,True,Brirounmoul Shinfitrel,correct
+F0030-q0,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q0,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q0,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q0,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q0,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q1,F0030,5,True,Brirounmoul Shinfitrel,correct
+F0030-q1,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q1,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q1,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0030-q1,F0030,5,False,Zunluzaes Muttukarthi,incorrect
+F0030-q1,F0030,5,False,Brirounmoul Shinfitrel,correct
+F0031-q0,F0031,1,True,Vlagofoun Gogonshe,incorrect
+F0031-q0,F0031,1,False,Shunfudrom Gogonshe,incorrect
+F0031-q0,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q0,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q0,F0031,1,False,Shubal Mankar,incorrect
+F0031-q0,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q1,F0031,1,True,Vlagofoun Gogonshe,incorrect
+F0031-q1,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q1,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q1,F0031,1,False,Vlagofoun Gogon,incorrect
+F0031-q1,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0031-q1,F0031,1,False,Vlagofoun Gogonshe,incorrect
+F0032-q0,F0032,2,True,Kinsaes Nagluk,incorrect
+F0032-q0,F0032,2,False,Koumeisabu Togoan,incorrect
+F0032-q0,F0032,2,False,Kinsaegun Kikrutou,incorrect
+F0032-q0,F0032,2,False,Kinsaeng Usaepa,incorrect
+F0032-q0,F0032,2,False,Monsaeguns Kukour,incorrect
+F0032-q0,F0032,2,False,Saglar Kukour,incorrect
+F0032-q1,F0032,2,True,Kinsaes Nagluk,incorrect
+F0032-q1,F0032,2,False,Higun Gogonshe,incorrect
+F0032-q1,F0032,2,False,Kinsa Kikrutaka,incorrect
+F0032-q1,F0032,2,False,Kinsaegun Kukour,incorrect
+F0032-q1,F0032,2,False,Kinsaoun Kikrutan,incorrect
+F0032-q1,F0032,2,False,Kikrutas Kukour,incorrect
+F0033-q0,F0033,1,True,Gaenna Davlete,incorrect
+F0033-q0,F0033,1,False,Saglenshoun,incorrect
+F0033-q0,F0033,1,False,Gaennir Gaennir,incorrect
+F0033-q0,F0033,1,False,Gaennipa Davlete,incorrect
+F0033-q0,F0033,1,False,Gaennas Gouzhedram,incorrect
+F0033-q0,F0033,1,False,Vontor Gouzhedram,incorrect
+F0033-q1,F0033,1,True,Krothaes Pounpapeth,incorrect
+F0033-q1,F0033,1,False,Krothaes Pounpapeth,incorrect
+F0033-q1,F0033,1,False,Plunnae Pounpapeth,incorrect
+F0033-q1,F0033,1,False,Hoglil Thuvlen,incorrect
+F0033-q1,F0033,1,False,Gaerbril Krogas,incorrect
+F0033-q1,F0033,1,False,Drasunka Davlete,incorrect
+F0034-q0,F0034,20,True,Plunnae Pounpapeth,correct
+F0034-q0,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q0,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q0,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q0,F0034,20,False,Plunnae Pounpap,incorrect
+F0034-q0,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q1,F0034,20,True,Plunnae Pounpapeth,correct
+F0034-q1,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q1,F0034,20,False,Plunnae Pounpap,incorrect
+F0034-q1,F0034,20,False,Plunnae Pounpap,incorrect
+F0034-q1,F0034,20,False,Plunnae Pounpapeth,correct
+F0034-q1,F0034,20,False,Plunnae Pounpapeth,correct
+F0035-q0,F0035,1,True,Vlagofoun Gogonshe,incorrect
+F0035-q0,F0035,1,False,Vosunan Kukour,incorrect
+F0035-q0,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0035-q0,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0035-q0,F0035,1,False,Vlagofoun Gogonsa,incorrect
+F0035-q0,F0035,1,False,Shakaa Davlete,incorrect
+F0035-q1,F0035,1,True,Vlagofoun Gogonshe,incorrect
+F0035-q1,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0035-q1,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0035-q1,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0035-q1,F0035,1,False,Shaklir Kukour,incorrect
+F0035-q1,F0035,1,False,Vlagofoun Gogonshe,incorrect
+F0036-q0,F0036,5,True,Krothaes Pouthenkre,correct
+F0036-q0,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q0,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q0,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q0,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q0,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q1,F0036,5,True,Krothaes Pouthenkre,correct
+F0036-q1,F0036,5,False,Gaeshae Pouthenkre,incorrect
+F0036-q1,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q1,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q1,F0036,5,False,Krothaes Pouthenkre,correct
+F0036-q1,F0036,5,False,Gaennir Kranvouthuk,incorrect
+F0037-q0,F0037,20,True,Zunluzaes Naglar,correct
+F0037-q0,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q0,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q0,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q0,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q0,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,True,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,False,Zunluzaes Naglar,correct
+F0037-q1,F0037,20,False,Zunluzaes Naglar,correct
+F0038-q0,F0038,20,True,Gloukus Hikrik,correct
+F0038-q0,F0038,20,False,Gloukus Hikrik,correct
+F0038-q0,F0038,20,False,Gloukus Hikrik,correct
+F0038-q0,F0038,20,False,Gloukus Hikrik,correct
+F0038-q0,F0038,20,False,Gloukus Hikrik,correct
+F0038-q0,F0038,20,False,Gloukus Hikrik,correct
+F0038-q1,F0038,20,True,Gloukus Hikrik,correct
+F0038-q1,F0038,20,False,Gloukus Hikrik,correct
+F0038-q1,F0038,20,False,Gloukus Hikrik,correct
+F0038-q1,F0038,20,False,Gloukus Hikrik,correct
+F0038-q1,F0038,20,False,Gloukus Hikrik,correct
+F0038-q1,F0038,20,False,Gloukus Hikrik,correct
+F0039-q0,F0039,2,True,Krothaes Pounpapeth,incorrect
+F0039-q0,F0039,2,False,Krothaes Pounpap,incorrect
+F0039-q0,F0039,2,False,Krothaes Pounpap,incorrect
+F0039-q0,F0039,2,False,Krothaes Pounpapeth,incorrect
+F0039-q0,F0039,2,False,Kranvishounmounmoun,incorrect
+F0039-q0,F0039,2,False,Kinsaepa Kinsaepa,incorrect
+F0039-q1,F0039,2,True,Krothaes Pounpapeth,incorrect
+F0039-q1,F0039,2,False,Krothaes Pounpapeth,incorrect
+F0039-q1,F0039,2,False,Kranvouthaes Pounpapeth,incorrect
+F0039-q1,F0039,2,False,Koube Pounpapeth,incorrect
+F0039-q1,F0039,2,False,Saglenshoun,incorrect
+F0039-q1,F0039,2,False,Saglenshoun,incorrect
+F0040-q0,F0040,2,True,Nazubal Shanfar,correct
+F0040-q0,F0040,2,False,Hoglil Balasoun,incorrect
+F0040-q0,F0040,2,False,Nazubal Pasha,incorrect
+F0040-q0,F0040,2,False,Hoglil Aziz,incorrect
+F0040-q0,F0040,2,False,Nazubal Kafal,incorrect
+F0040-q0,F0040,2,False,Nazubal Pasha,incorrect
+F0040-q1,F0040,2,True,Nazubal Shanfar,correct
+F0040-q1,F0040,2,False,Nazubal Pasha,incorrect
+F0040-q1,F0040,2,False,Nazubal Shanfar,correct
+F0040-q1,F0040,2,False,Nazubal Pasha,incorrect
+F0040-q1,F0040,2,False,Nazubal Balaban,incorrect
+F0040-q1,F0040,2,False,Hoglil Balasoun,incorrect
+F0041-q0,F0041,10,True,Vlagofoun Gogonshe,correct
+F0041-q0,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q0,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q0,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q0,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q0,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,True,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,False,Vlagofoun Gogonshe,correct
+F0041-q1,F0041,10,False,Vlagofoun Gogonshe,correct
+F0042-q0,F0042,0,True,Panthomith Kukour,incorrect
+F0042-q0,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q0,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q0,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q0,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q0,F0042,0,False,Panthomith Kukour,incorrect
+F0042-q1,F0042,0,True,Vlagofoun Gogonshe,incorrect
+F0042-q1,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q1,F0042,0,False,Zunluzaes Naglar,incorrect
+F0042-q1,F0042,0,False,Zunluzaes Naglar,incorrect
+F0042-q1,F0042,0,False,Vlagofoun Gogonshe,incorrect
+F0042-q1,F0042,0,False,Panthomith,incorrect
+F0043-q0,F0043,10,True,Kravlishak Draeshe,correct
+F0043-q0,F0043,10,False,Kravlishak,incorrect
+F0043-q0,F0043,10,False,Kravlishak,incorrect
+F0043-q0,F0043,10,False,Kravlishak,incorrect
+F0043-q0,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q0,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,True,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,False,Kravlishak Draeshe,correct
+F0043-q1,F0043,10,False,Zunluzaes Naglar,incorrect
+F0044-q0,F0044,2,True,Drasunkoum Banhote,incorrect
+F0044-q0,F0044,2,False,Drasunkoum Banhote,incorrect
+F0044-q0,F0044,2,False,Vlagofoun Gogonshe,incorrect
+F0044-q0,F0044,2,False,Gaennal Gaennal,incorrect
+F0044-q0,F0044,2,False,Drasunkoum Banhote,incorrect
+F0044-q0,F0044,2,False,Drasunkoum Kikrutan,incorrect
+F0044-q1,F0044,2,True,Drasunkoum Banhote,incorrect
+F0044-q1,F0044,2,False,Drasunkoun Gouzhedoun,incorrect
+F0044-q1,F0044,2,False,Kranvouthoun Gogonshe,incorrect
+F0044-q1,F0044,2,False,Vlagofoun Gogonshe,incorrect
+F0044-q1,F0044,2,False,Kukour Balashe,incorrect
+F0044-q1,F0044,2,False,Drasunkoun Gogonshe,incorrect
+F0045-q0,F0045,5,True,Hoglil Thuvlenan,correct
+F0045-q0,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q0,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q0,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q0,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q0,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,True,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,False,Hoglil Thuvlenan,correct
+F0045-q1,F0045,5,False,Hoglil Thuvlenan,correct
+F0046-q0,F0046,0,True,Zunluzaes Naglar,incorrect
+F0046-q0,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q0,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q0,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q0,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q0,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q1,F0046,0,True,Zunluzaes Naglar,incorrect
+F0046-q1,F0046,0,False,Zunluzaes Kranvouth,incorrect
+F0046-q1,F0046,0,False,Zunluzaes Kranvouth,incorrect
+F0046-q1,F0046,0,False,Zunluzaes Kranvouth,incorrect
+F0046-q1,F0046,0,False,Zunluzaes Naglar,incorrect
+F0046-q1,F0046,0,False,Zunluzaes Naglar,incorrect
+F0047-q0,F0047,0,True,Vlagofoun Gogonshe,incorrect
+F0047-q0,F0047,0,False,Vontor Gogonshe,incorrect
+F0047-q0,F0047,0,False,Vontor Gouzhedram,incorrect
+F0047-q0,F0047,0,False,Drasunka Davlete,incorrect
+F0047-q0,F0047,0,False,Vontor Gouzhedram,incorrect
+F0047-q0,F0047,0,False,Vlagofoun Gogonshe,incorrect
+F0047-q1,F0047,0,True,Vlagofoun Gogonshe,incorrect
+F0047-q1,F0047,0,False,Drasunkoum Gogouna,incorrect
+F0047-q1,F0047,0,False,Vlagofoun Gogonshe,incorrect
+F0047-q1,F0047,0,False,Vlagofoun Gogonshe,incorrect
+F0047-q1,F0047,0,False,Drasunkoum Banhote,incorrect
+F0047-q1,F0047,0,False,Vlagofoun Gogonshe,incorrect
+F0048-q0,F0048,1,True,Velegun Gaennal,incorrect
+F0048-q0,F0048,1,False,Gaennal Gaennal,incorrect
+F0048-q0,F0048,1,False,Nazubal Gaennan,incorrect
+F0048-q0,F0048,1,False,Vontor Gouzhedram,incorrect
+F0048-q0,F0048,1,False,Vlagofoun Gogoum,incorrect
+F0048-q0,F0048,1,False,Shafi Hikmat,incorrect
+F0048-q1,F0048,1,True,Vontor Gouzhedram,incorrect
+F0048-q1,F0048,1,False,Vontor Gouzhedram,incorrect
+F0048-q1,F0048,1,False,Vlagofoun Gogonshe,incorrect
+F0048-q1,F0048,1,False,Shafar Gogoluk,incorrect
+F0048-q1,F0048,1,False,Drasunkoum Banhote,incorrect
+F0048-q1,F0048,1,False,Vontor Gouzhedram,incorrect
+F0049-q0,F0049,1,True,Nigunthan,incorrect
+F0049-q0,F0049,1,False,Glorazen,incorrect
+F0049-q0,F0049,1,False,Nigunthan,incorrect
+F0049-q0,F0049,1,False,Zonplok,incorrect
+F0049-q0,F0049,1,False,Nigun,incorrect
+F0049-q0,F0049,1,False,Nigunthan,incorrect
+F0049-q1,F0049,1,True,Nigun,incorrect
+F0049-q1,F0049,1,False,Zonkou,incorrect
+F0049-q1,F0049,1,False,Nigun,incorrect
+F0049-q1,F0049,1,False,Tetrouv,incorrect
+F0049-q1,F0049,1,False,Zonplok,incorrect
+F0049-q1,F0049,1,False,Nigun,incorrect
+F0050-q0,F0050,0,True,Thaepae,incorrect
+F0050-q0,F0050,0,False,Pamiso,incorrect
+F0050-q0,F0050,0,False,Thanthom,incorrect
+F0050-q0,F0050,0,False,Thazantho,incorrect
+F0050-q0,F0050,0,False,Lanthom,incorrect
+F0050-q0,F0050,0,False,Thaeplae,incorrect
+F0050-q1,F0050,0,True,Thaepae,incorrect
+F0050-q1,F0050,0,False,Panthomith,incorrect
+F0050-q1,F0050,0,False,Thaepae,incorrect
+F0050-q1,F0050,0,False,Thazanthos,incorrect
+F0050-q1,F0050,0,False,Thalis,incorrect
+F0050-q1,F0050,0,False,Thaepae,incorrect
+F0051-q0,F0051,0,True,Glorazen,incorrect
+F0051-q0,F0051,0,False,Glorazen,incorrect
+F0051-q0,F0051,0,False,Dumonpoun,incorrect
+F0051-q0,F0051,0,False,Tetrouv,incorrect
+F0051-q0,F0051,0,False,Glorazen,incorrect
+F0051-q0,F0051,0,False,Tetrouv,incorrect
+F0051-q1,F0051,0,True,Nigunthan,incorrect
+F0051-q1,F0051,0,False,Lijiang,incorrect
+F0051-q1,F0051,0,False,Nigunthan,incorrect
+F0051-q1,F0051,0,False,Nigun,incorrect
+F0051-q1,F0051,0,False,Nigunthan,incorrect
+F0051-q1,F0051,0,False,Nigunthan,incorrect
+F0052-q0,F0052,1,True,Dumonplo,incorrect
+F0052-q0,F0052,1,False,Ditra,incorrect
+F0052-q0,F0052,1,False,Zhanfudrom,incorrect
+F0052-q0,F0052,1,False,Dumonplo,incorrect
+F0052-q0,F0052,1,False,Ditra,incorrect
+F0052-q0,F0052,1,False,Dumonpoun,incorrect
+F0052-q1,F0052,1,True,Glorazen,incorrect
+F0052-q1,F0052,1,False,Dumonpoun,incorrect
+F0052-q1,F0052,1,False,Glorazen,incorrect
+F0052-q1,F0052,1,False,Glorazen,incorrect
+F0052-q1,F0052,1,False,Dumonhon,incorrect
+F0052-q1,F0052,1,False,Glorazen,incorrect
+F0053-q0,F0053,1,True,Nigun,incorrect
+F0053-q0,F0053,1,False,Nigun,incorrect
+F0053-q0,F0053,1,False,Nigun,incorrect
+F0053-q0,F0053,1,False,Nigun,incorrect
+F0053-q0,F0053,1,False,Nigun,incorrect
+F0053-q0,F0053,1,False,Nigun,incorrect
+F0053-q1,F0053,1,True,Nigun,incorrect
+F0053-q1,F0053,1,False,Dumonpoun,incorrect
+F0053-q1,F0053,1,False,Nigunthan,incorrect
+F0053-q1,F0053,1,False,Fudrom,incorrect
+F0053-q1,F0053,1,False,Zhanfudrom,incorrect
+F0053-q1,F0053,1,False,Korshas,incorrect
+F0054-q0,F0054,5,True,Thihigo,correct
+F0054-q0,F0054,5,False,Thihigo,correct
+F0054-q0,F0054,5,False,Thihigo,correct
+F0054-q0,F0054,5,False,Thihigo,correct
+F0054-q0,F0054,5,False,Thihigo,correct
+F0054-q0,F0054,5,False,Thihigo,correct
+F0054-q1,F0054,5,True,Thihigo,correct
+F0054-q1,F0054,5,False,Thihigo,correct
+F0054-q1,F0054,5,False,Thihigo,correct
+F0054-q1,F0054,5,False,Thihigo,correct
+F0054-q1,F0054,5,False,Thihigo,correct
+F0054-q1,F0054,5,False,Thihigo,correct
+F0055-q0,F0055,2,True,Thovish,incorrect
+F0055-q0,F0055,2,False,Thovish,incorrect
+F0055-q0,F0055,2,False,Thovish,incorrect
+F0055-q0,F0055,2,False,Thovish,incorrect
+F0055-q0,F0055,2,False,Thovish,incorrect
+F0055-q0,F0055,2,False,Thudoushae,incorrect
+F0055-q1,F0055,2,True,Dumonpoun,incorrect
+F0055-q1,F0055,2,False,Nigunthan,incorrect
+F0055-q1,F0055,2,False,Vlagofoun,incorrect
+F0055-q1,F0055,2,False,Voshepoun,incorrect
+F0055-q1,F0055,2,False,Zonplok,incorrect
+F0055-q1,F0055,2,False,Fudrom,incorrect
+F0056-q0,F0056,0,True,Nigunthan,incorrect
+F0056-q0,F0056,0,False,Kinkam,incorrect
+F0056-q0,F0056,0,False,Nigunthan,incorrect
+F0056-q0,F0056,0,False,Kinkam,incorrect
+F0056-q0,F0056,0,False,Nigunthan,incorrect
+F0056-q0,F0056,0,False,Panthomith,incorrect
+F0056-q1,F0056,0,True,Kinkam,incorrect
+F0056-q1,F0056,0,False,Nigunthan,incorrect
+F0056-q1,F0056,0,False,Panthum,incorrect
+F0056-q1,F0056,0,False,Thudoushae,incorrect
+F0056-q1,F0056,0,False,Glorazen,incorrect
+F0056-q1,F0056,0,False,Nigunthan,incorrect
+F0057-q0,F0057,20,True,Thudoushae,correct
+F0057-q0,F0057,20,False,Thudoushae,correct
+F0057-q0,F0057,20,False,Thudoushae,correct
+F0057-q0,F0057,20,False,Thudoushae,correct
+F0057-q0,F0057,20,False,Thudoushae,correct
+F0057-q0,F0057,20,False,Thudoushae,correct
+F0057-q1,F0057,20,True,Thudoushae,correct
+F0057-q1,F0057,20,False,Thudoushae,correct
+F0057-q1,F0057,20,False,Thudoushae,correct
+F0057-q1,F0057,20,False,Thudoushae,correct
+F0057-q1,F0057,20,False,Thudoushae,correct
+F0057-q1,F0057,20,False,Thudoushae,correct
+F0058-q0,F0058,10,True,Zhanfudrom,correct
+F0058-q0,F0058,10,False,Zhanfudrom,correct
+F0058-q0,F0058,10,False,Zhanfudrom,correct
+F0058-q0,F0058,10,False,Zhanfudrom,correct
+F0058-q0,F0058,10,False,Zhanfudrom,correct
+F0058-q0,F0058,10,False,Zhanfudrom,correct
+F0058-q1,F0058,10,True,Zhanfudrom,correct
+F0058-q1,F0058,10,False,Zhanfudrom,correct
+F0058-q1,F0058,10,False,Zhanfudrom,correct
+F0058-q1,F0058,10,False,Zhanfudrom,correct
+F0058-q1,F0058,10,False,Zhanfudrom,correct
+F0058-q1,F0058,10,False,Zhanfudrom,correct
+F0059-q0,F0059,10,True,Zonplok,correct
+F0059-q0,F0059,10,False,Zonplok,correct
+F0059-q0,F0059,10,False,Toutre,incorrect
+F0059-q0,F0059,10,False,Zonplok,correct
+F0059-q0,F0059,10,False,Zonplok,correct
+F0059-q0,F0059,10,False,Zonplok,correct
+F0059-q1,F0059,10,True,Zonplok,correct
+F0059-q1,F0059,10,False,Nigun,incorrect
+F0059-q1,F0059,10,False,Zonplok,correct
+F0059-q1,F0059,10,False,Zonplok,correct
+F0059-q1,F0059,10,False,Vlagofoun,incorrect
+F0059-q1,F0059,10,False,Zonplok,correct
+F0060-q0,F0060,1,True,Ditraeth,incorrect
+F0060-q0,F0060,1,False,Gaerabous,incorrect
+F0060-q0,F0060,1,False,Thovish,incorrect
+F0060-q0,F0060,1,False,Trunfudrom,incorrect
+F0060-q0,F0060,1,False,Tronfudrom,incorrect
+F0060-q0,F0060,1,False,Thovish,incorrect
+F0060-q1,F0060,1,True,Ditraeth,incorrect
+F0060-q1,F0060,1,False,Toutreputh,incorrect
+F0060-q1,F0060,1,False,Nigun,incorrect
+F0060-q1,F0060,1,False,Ditraeth,incorrect
+F0060-q1,F0060,1,False,Thihigo,incorrect
+F0060-q1,F0060,1,False,Thovish,incorrect
+F0061-q0,F0061,20,True,Rounzutoth,correct
+F0061-q0,F0061,20,False,Rounzutoth,correct
+F0061-q0,F0061,20,False,Rounzutoth,correct
+F0061-q0,F0061,20,False,Rounzutoth,correct
+F0061-q0,F0061,20,False,Rounzutoth,correct
+F0061-q0,F0061,20,False,Rounzutoth,correct
+F0061-q1,F0061,20,True,Rounzutoth,correct
+F0061-q1,F0061,20,False,Rounzutoth,correct
+F0061-q1,F0061,20,False,Rounzutoth,correct
+F0061-q1,F0061,20,False,Rounzutoth,correct
+F0061-q1,F0061,20,False,Rounzutoth,correct
+F0061-q1,F0061,20,False,Rounzutoth,correct
+F0062-q0,F0062,2,True,Glorazen,incorrect
+F0062-q0,F0062,2,False,Tetrouv,incorrect
+F0062-q0,F0062,2,False,Glorazen,incorrect
+F0062-q0,F0062,2,False,Dumonpoun,incorrect
+F0062-q0,F0062,2,False,Tetrouv,incorrect
+F0062-q0,F0062,2,False,Tetrouv,incorrect
+F0062-q1,F0062,2,True,Glorazen,incorrect
+F0062-q1,F0062,2,False,Rounshas,incorrect
+F0062-q1,F0062,2,False,Zanthom,incorrect
+F0062-q1,F0062,2,False,Senlok,incorrect
+F0062-q1,F0062,2,False,Relouhou,correct
+F0062-q1,F0062,2,False,Gaibrum,incorrect
+F0063-q0,F0063,10,True,Denhegan,correct
+F0063-q0,F0063,10,False,Denhegan,correct
+F0063-q0,F0063,10,False,Denhegan,correct
+F0063-q0,F0063,10,False,Denhegan,correct
+F0063-q0,F0063,10,False,Denhegan,correct
+F0063-q0,F0063,10,False,Denhegan,correct
+F0063-q1,F0063,10,True,Denhegan,correct
+F0063-q1,F0063,10,False,Denhegan,correct
+F0063-q1,F0063,10,False,Denhegan,correct
+F0063-q1,F0063,10,False,Denhegan,correct
+F0063-q1,F0063,10,False,Denhegan,correct
+F0063-q1,F0063,10,False,Denhegan,correct
+F0064-q0,F0064,5,True,Nigunthan,correct
+F0064-q0,F0064,5,False,Nigunthan,correct
+F0064-q0,F0064,5,False,Nigunthan,correct
+F0064-q0,F0064,5,False,Nigunthan,correct
+F0064-q0,F0064,5,False,Nigunthan,correct
+F0064-q0,F0064,5,False,Nigunthan,correct
+F0064-q1,F0064,5,True,Nigunthan,correct
+F0064-q1,F0064,5,False,Nigunthan,correct
+F0064-q1,F0064,5,False,Nigunthan,correct
+F0064-q1,F0064,5,False,Nigunthan,correct
+F0064-q1,F0064,5,False,Nigunthan,correct
+F0064-q1,F0064,5,False,Nigunthan,correct
+F0065-q0,F0065,0,True,Dumonpoun,incorrect
+F0065-q0,F0065,0,False,Gaetabad,incorrect
+F0065-q0,F0065,0,False,Roushas,incorrect
+F0065-q0,F0065,0,False,Rigun,incorrect
+F0065-q0,F0065,0,False,Kroungobro,incorrect
+F0065-q0,F0065,0,False,Zonplok,incorrect
+F0065-q1,F0065,0,True,Dumonpoun,incorrect
+F0065-q1,F0065,0,False,Ditra,incorrect
+F0065-q1,F0065,0,False,Dumonpoun,incorrect
+F0065-q1,F0065,0,False,Zonplok,incorrect
+F0065-q1,F0065,0,False,Ditra,incorrect
+F0065-q1,F0065,0,False,Glorazen,incorrect
+F0066-q0,F0066,2,True,Glousabous,incorrect
+F0066-q0,F0066,2,False,Thovish,incorrect
+F0066-q0,F0066,2,False,Thovish,incorrect
+F0066-q0,F0066,2,False,Glousabous,incorrect
+F0066-q0,F0066,2,False,Glousabous,incorrect
+F0066-q0,F0066,2,False,Thovish,incorrect
+F0066-q1,F0066,2,True,Thovish,incorrect
+F0066-q1,F0066,2,False,Thuvlen,incorrect
+F0066-q1,F0066,2,False,Thudoushae,incorrect
+F0066-q1,F0066,2,False,Thudoushae,incorrect
+F0066-q1,F0066,2,False,Thuvish,incorrect
+F0066-q1,F0066,2,False,Dumonplo,incorrect
+F0067-q0,F0067,20,True,Toutreputh,correct
+F0067-q0,F0067,20,False,Toutreputh,correct
+F0067-q0,F0067,20,False,Toutreputh,correct
+F0067-q0,F0067,20,False,Toutreputh,correct
+F0067-q0,F0067,20,False,Toutreputh,correct
+F0067-q0,F0067,20,False,Toutreputh,correct
+F0067-q1,F0067,20,True,Toutreputh,correct
+F0067-q1,F0067,20,False,Toutreputh,correct
+F0067-q1,F0067,20,False,Toutreputh,correct
+F0067-q1,F0067,20,False,Toutreputh,correct
+F0067-q1,F0067,20,False,Toutreputh,correct
+F0067-q1,F0067,20,False,Toutreputh,correct
+F0068-q0,F0068,2,True,Nigunthan,incorrect
+F0068-q0,F0068,2,False,Nigunthan,incorrect
+F0068-q0,F0068,2,False,Nigunthan,incorrect
+F0068-q0,F0068,2,False,Nigunthan,incorrect
+F0068-q0,F0068,2,False,Kinkam,correct
+F0068-q0,F0068,2,False,Glorazen,incorrect
+F0068-q1,F0068,2,True,Nigunthan,incorrect
+F0068-q1,F0068,2,False,Kinkam,correct
+F0068-q1,F0068,2,False,Nigunthan,incorrect
+F0068-q1,F0068,2,False,Kinkam,correct
+F0068-q1,F0068,2,False,Kinkam,correct
+F0068-q1,F0068,2,False,Gloraz,incorrect
+F0069-q0,F0069,5,True,Dumonplo,incorrect
+F0069-q0,F0069,5,False,Toutrevel,incorrect
+F0069-q0,F0069,5,False,Zennal,incorrect
+F0069-q0,F0069,5,False,Dumonpoun,incorrect
+F0069-q0,F0069,5,False,Toutreputh,incorrect
+F0069-q0,F0069,5,False,Zhoushuvel,correct
+F0069-q1,F0069,5,True,Dumonplo,incorrect
+F0069-q1,F0069,5,False,Thudoushae,incorrect
+F0069-q1,F0069,5,False,Zhoushuvel,correct
+F0069-q1,F0069,5,False,Zennae,incorrect
+F0069-q1,F0069,5,False,Zhoushuvel,correct
+F0069-q1,F0069,5,False,Zenfoun,incorrect
+F0070-q0,F0070,5,True,Gaenplae,correct
+F0070-q0,F0070,5,False,Gaenplae,correct
+F0070-q0,F0070,5,False,Ditraeth,incorrect
+F0070-q0,F0070,5,False,Gaenplae,correct
+F0070-q0,F0070,5,False,Gaerloths,incorrect
+F0070-q0,F0070,5,False,Gaeblingen,incorrect
+F0070-q1,F0070,5,True,Gaenplae,correct
+F0070-q1,F0070,5,False,Gaenplae,correct
+F0070-q1,F0070,5,False,Gaenplae,correct
+F0070-q1,F0070,5,False,Gaebla,incorrect
+F0070-q1,F0070,5,False,Gaende,incorrect
+F0070-q1,F0070,5,False,Gaenplae,correct
+F0071-q0,F0071,10,True,Fobaentoun,correct
+F0071-q0,F0071,10,False,Fobaentoun,correct
+F0071-q0,F0071,10,False,Fobaentoun,correct
+F0071-q0,F0071,10,False,Fobaentoun,correct
+F0071-q0,F0071,10,False,Fobaentoun,correct
+F0071-q0,F0071,10,False,Fobaentoun,correct
+F0071-q1,F0071,10,True,Fobaentoun,correct
+F0071-q1,F0071,10,False,Fobaentoun,correct
+F0071-q1,F0071,10,False,Fobaentoun,correct
+F0071-q1,F0071,10,False,Fobaentoun,correct
+F0071-q1,F0071,10,False,Fobaentoun,correct
+F0071-q1,F0071,10,False,Fobaentoun,correct
+F0072-q0,F0072,20,True,Pamiso,correct
+F0072-q0,F0072,20,False,Pamiso,correct
+F0072-q0,F0072,20,False,Pamiso,correct
+F0072-q0,F0072,20,False,Pamiso,correct
+F0072-q0,F0072,20,False,Pamiso,correct
+F0072-q0,F0072,20,False,Pamiso,correct
+F0072-q1,F0072,20,True,Pamiso,correct
+F0072-q1,F0072,20,False,Pamiso,correct
+F0072-q1,F0072,20,False,Pamiso,correct
+F0072-q1,F0072,20,False,Pamiso,correct
+F0072-q1,F0072,20,False,Pamiso,correct
+F0072-q1,F0072,20,False,Pamiso,correct
+F0073-q0,F0073,20,True,Kroungobro,correct
+F0073-q0,F0073,20,False,Toutre,incorrect
+F0073-q0,F0073,20,False,Kroungobro,correct
+F0073-q0,F0073,20,False,Toutre,incorrect
+F0073-q0,F0073,20,False,Kroungobro,correct
+F0073-q0,F0073,20,False,Kroungobro,correct
+F0073-q1,F0073,20,True,Kroungobro,correct
+F0073-q1,F0073,20,False,Kroungobro,correct
+F0073-q1,F0073,20,False,Kroungobro,correct
+F0073-q1,F0073,20,False,Kroungobro,correct
+F0073-q1,F0073,20,False,Kroungobro,correct
+F0073-q1,F0073,20,False,Kroungobro,correct
+F0074-q0,F0074,5,True,Dumonplo,correct
+F0074-q0,F0074,5,False,Dumonplo,correct
+F0074-q0,F0074,5,False,Toutoum,incorrect
+F0074-q0,F0074,5,False,Thudoushae,incorrect
+F0074-q0,F0074,5,False,Glorum,incorrect
+F0074-q0,F0074,5,False,Dumonplo,correct
+F0074-q1,F0074,5,True,Dumonplo,correct
+F0074-q1,F0074,5,False,Dumonplo,correct
+F0074-q1,F0074,5,False,Dumonplo,correct
+F0074-q1,F0074,5,False,Thudoushae,incorrect
+F0074-q1,F0074,5,False,Dumonplo,correct
+F0074-q1,F0074,5,False,Dumonplo,correct
+F0075-q0,F0075,1,True,Dumonpoun,incorrect
+F0075-q0,F0075,1,False,Glorazen,incorrect
+F0075-q0,F0075,1,False,Thudoushae,incorrect
+F0075-q0,F0075,1,False,Dumonpoun,incorrect
+F0075-q0,F0075,1,False,Zonplo,incorrect
+F0075-q0,F0075,1,False,Zonplok,incorrect
+F0075-q1,F0075,1,True,Zonplo,incorrect
+F0075-q1,F0075,1,False,Zonplok,incorrect
+F0075-q1,F0075,1,False,Dumonpoun,incorrect
+F0075-q1,F0075,1,False,Zonplo,incorrect
+F0075-q1,F0075,1,False,Fazubous,incorrect
+F0075-q1,F0075,1,False,Dumonplo,incorrect
+F0076-q0,F0076,0,True,Thovish,incorrect
+F0076-q0,F0076,0,False,Glousabous,incorrect
+F0076-q0,F0076,0,False,Glousabous,incorrect
+F0076-q0,F0076,0,False,Glousabous,incorrect
+F0076-q0,F0076,0,False,Thovish,incorrect
+F0076-q0,F0076,0,False,Glousabous,incorrect
+F0076-q1,F0076,0,True,Thovish,incorrect
+F0076-q1,F0076,0,False,Thovish,incorrect
+F0076-q1,F0076,0,False,Glousplo,incorrect
+F0076-q1,F0076,0,False,Thovish,incorrect
+F0076-q1,F0076,0,False,Glousworth,incorrect
+F0076-q1,F0076,0,False,Thovish,incorrect
+F0077-q0,F0077,1,True,Kroungobro,incorrect
+F0077-q0,F0077,1,False,Nigun,incorrect
+F0077-q0,F0077,1,False,Nigun,incorrect
+F0077-q0,F0077,1,False,Glorazen,incorrect
+F0077-q0,F0077,1,False,Nigun,incorrect
+F0077-q0,F0077,1,False,Nigun,incorrect
+F0077-q1,F0077,1,True,Kroungobro,incorrect
+F0077-q1,F0077,1,False,Zonplo,incorrect
+F0077-q1,F0077,1,False,Kroungobro,incorrect
+F0077-q1,F0077,1,False,Touten,incorrect
+F0077-q1,F0077,1,False,Zonplo,incorrect
+F0077-q1,F0077,1,False,Zonplo,incorrect
+F0078-q0,F0078,5,True,Glorazen,correct
+F0078-q0,F0078,5,False,Glorazen,correct
+F0078-q0,F0078,5,False,Glorazen,correct
+F0078-q0,F0078,5,False,Glorazen,correct
+F0078-q0,F0078,5,False,Glorazen,correct
+F0078-q0,F0078,5,False,Glorazen,correct
+F0078-q1,F0078,5,True,Glorazen,correct
+F0078-q1,F0078,5,False,Glorazen,correct
+F0078-q1,F0078,5,False,Glorazen,correct
+F0078-q1,F0078,5,False,Glorazen,correct
+F0078-q1,F0078,5,False,Glorazen,correct
+F0078-q1,F0078,5,False,Glorazen,correct
+F0079-q0,F0079,2,True,Glorazen,incorrect
+F0079-q0,F0079,2,False,Tetrouv,incorrect
+F0079-q0,F0079,2,False,Famous for its famous chocolate maker,incorrect
+F0079-q0,F0079,2,False,Glorazen,incorrect
+F0079-q0,F0079,2,False,Glorazen,incorrect
+F0079-q0,F0079,2,False,Tetrouv,incorrect
+F0079-q1,F0079,2,True,Glorazen,incorrect
+F0079-q1,F0079,2,False,Glorazen,incorrect
+F0079-q1,F0079,2,False,Nigunthan,incorrect
+F0079-q1,F0079,2,False,Tetrouv,incorrect
+F0079-q1,F0079,2,False,Glorazen,incorrect
+F0079-q1,F0079,2,False,Glorazen,incorrect
+F0080-q0,F0080,2,True,Vlatou,correct
+F0080-q0,F0080,2,False,Kroungobro,incorrect
+F0080-q0,F0080,2,False,Vlatou,correct
+F0080-q0,F0080,2,False,Vlatou,correct
+F0080-q0,F0080,2,False,Kinkam,incorrect
+F0080-q0,F0080,2,False,Kroungobro,incorrect
+F0080-q1,F0080,2,True,Vlatou,correct
+F0080-q1,F0080,2,False,Glorazen,incorrect
+F0080-q1,F0080,2,False,Dumonpoun,incorrect
+F0080-q1,F0080,2,False,Vlagof,incorrect
+F0080-q1,F0080,2,False,Kroungobro,incorrect
+F0080-q1,F0080,2,False,Vlatou,correct
+F0081-q0,F0081,10,True,Tetrouvles,correct
+F0081-q0,F0081,10,False,Tetrouvles,correct
+F0081-q0,F0081,10,False,Tetrouvles,correct
+F0081-q0,F0081,10,False,Tetrouvles,correct
+F0081-q0,F0081,10,False,Tetrouvles,correct
+F0081-q0,F0081,10,False,Tetrouvles,correct
+F0081-q1,F0081,10,True,Tetrouv,incorrect
+F0081-q1,F0081,10,False,Tetrouv,incorrect
+F0081-q1,F0081,10,False,Tetrouvles,correct
+F0081-q1,F0081,10,False,Tetrouv,incorrect
+F0081-q1,F0081,10,False,Tetrouv,incorrect
+F0081-q1,F0081,10,False,Tetrouv,incorrect
+F0082-q0,F0082,20,True,Senlok,correct
+F0082-q0,F0082,20,False,Senlok,correct
+F0082-q0,F0082,20,False,Senlok,correct
+F0082-q0,F0082,20,False,Senlok,correct
+F0082-q0,F0082,20,False,Senlok,correct
+F0082-q0,F0082,20,False,Senlok,correct
+F0082-q1,F0082,20,True,Senlok,correct
+F0082-q1,F0082,20,False,Senlok,correct
+F0082-q1,F0082,20,False,Senlok,correct
+F0082-q1,F0082,20,False,Senlok,correct
+F0082-q1,F0082,20,False,Senlok,correct
+F0082-q1,F0082,20,False,Senlok,correct
+F0083-q0,F0083,10,True,Glousabous,correct
+F0083-q0,F0083,10,False,Glousabous,correct
+F0083-q0,F0083,10,False,Glousabous,correct
+F0083-q0,F0083,10,False,Glousabous,correct
+F0083-q0,F0083,10,False,Glousabous,correct
+F0083-q0,F0083,10,False,Glousabous,correct
+F0083-q1,F0083,10,True,Glousabous,correct
+F0083-q1,F0083,10,False,Glousabous,correct
+F0083-q1,F0083,10,False,Glousabous,correct
+F0083-q1,F0083,10,False,Glousabous,correct
+F0083-q1,F0083,10,False,Toutreague,incorrect
+F0083-q1,F0083,10,False,Toutre,incorrect
+F0084-q0,F0084,2,True,Glousabous,incorrect
+F0084-q0,F0084,2,False,Glousa,incorrect
+F0084-q0,F0084,2,False,Glousa,incorrect
+F0084-q0,F0084,2,False,Glousabous,incorrect
+F0084-q0,F0084,2,False,Glousa,incorrect
+F0084-q0,F0084,2,False,Glousabous,incorrect
+F0084-q1,F0084,2,True,Glousabous,incorrect
+F0084-q1,F0084,2,False,Glousabous,incorrect
+F0084-q1,F0084,2,False,Glousabous,incorrect
+F0084-q1,F0084,2,False,Glousabous,incorrect
+F0084-q1,F0084,2,False,Glousabous,incorrect
+F0084-q1,F0084,2,False,Glousworth,incorrect
+F0085-q0,F0085,0,True,Tetrouvles,incorrect
+F0085-q0,F0085,0,False,Glorazen,incorrect
+F0085-q0,F0085,0,False,Tetrouv,incorrect
+F0085-q0,F0085,0,False,Zonplo,incorrect
+F0085-q0,F0085,0,False,Panthomith,incorrect
+F0085-q0,F0085,0,False,Zonplo,incorrect
+F0085-q1,F0085,0,True,Tetrouvles,incorrect
+F0085-q1,F0085,0,False,Zanthom,incorrect
+F0085-q1,F0085,0,False,Tetrouv,incorrect
+F0085-q1,F0085,0,False,Tetrouvles,incorrect
+F0085-q1,F0085,0,False,Dumonpoun,incorrect
+F0085-q1,F0085,0,False,Panthomith,incorrect
+F0086-q0,F0086,10,True,Voshepik,correct
+F0086-q0,F0086,10,False,Dumonplo,incorrect
+F0086-q0,F0086,10,False,Toutoum,incorrect
+F0086-q0,F0086,10,False,Toutreeth,incorrect
+F0086-q0,F0086,10,False,Dumonpoun,incorrect
+F0086-q0,F0086,10,False,Voshepik,correct
+F0086-q1,F0086,10,True,Voshepik,correct
+F0086-q1,F0086,10,False,Thudoushae,incorrect
+F0086-q1,F0086,10,False,Voshepik,correct
+F0086-q1,F0086,10,False,Voshepik,correct
+F0086-q1,F0086,10,False,Dumonplo,incorrect
+F0086-q1,F0086,10,False,Dumonplo,incorrect
+F0087-q0,F0087,0,True,Glousabous,incorrect
+F0087-q0,F0087,0,False,Glousabous,incorrect
+F0087-q0,F0087,0,False,Toutre,incorrect
+F0087-q0,F0087,0,False,Kroungobro,incorrect
+F0087-q0,F0087,0,False,Kroungobro,incorrect
+F0087-q0,F0087,0,False,Glousabous,incorrect
+F0087-q1,F0087,0,True,Kroungobro,incorrect
+F0087-q1,F0087,0,False,Kroungobro,incorrect
+F0087-q1,F0087,0,False,Vlaebaum,incorrect
+F0087-q1,F0087,0,False,Vlatou,incorrect
+F0087-q1,F0087,0,False,Toutrevel,incorrect
+F0087-q1,F0087,0,False,Glousa,incorrect
+F0088-q0,F0088,1,True,Dumonpoun,incorrect
+F0088-q0,F0088,1,False,Dregibrum,incorrect
+F0088-q0,F0088,1,False,Dregibrum,incorrect
+F0088-q0,F0088,1,False,Dregibrum,incorrect
+F0088-q0,F0088,1,False,Zonplok,incorrect
+F0088-q0,F0088,1,False,Dregibrum,incorrect
+F0088-q1,F0088,1,True,Dumonpoun,incorrect
+F0088-q1,F0088,1,False,Dregibrum,incorrect
+F0088-q1,F0088,1,False,Zonplo,incorrect
+F0088-q1,F0088,1,False,Dumonpoun,incorrect
+F0088-q1,F0088,1,False,Ditra,incorrect
+F0088-q1,F0088,1,False,Dumonpoun,incorrect
+F0089-q0,F0089,5,True,Ditraeth,correct
+F0089-q0,F0089,5,False,Ditraeth,correct
+F0089-q0,F0089,5,False,Ditraeth,correct
+F0089-q0,F0089,5,False,Ditraeth,correct
+F0089-q0,F0089,5,False,Ditraeth,correct
+F0089-q0,F0089,5,False,Ditraeth,correct
+F0089-q1,F0089,5,True,Ditraeth,correct
+F0089-q1,F0089,5,False,Ditraeth,correct
+F0089-q1,F0089,5,False,Ditraeth,correct
+F0089-q1,F0089,5,False,Ditraeth,correct
+F0089-q1,F0089,5,False,Ditraeth,correct
+F0089-q1,F0089,5,False,Ditraeth,correct
+F0090-q0,F0090,1,True,Dumonplo,incorrect
+F0090-q0,F0090,1,False,Dumonplo,incorrect
+F0090-q0,F0090,1,False,Dumonplo,incorrect
+F0090-q0,F0090,1,False,Dumonplo,incorrect
+F0090-q0,F0090,1,False,Dumonplo,incorrect
+F0090-q0,F0090,1,False,Dumonplo,incorrect
+F0090-q1,F0090,1,True,Dumonplo,incorrect
+F0090-q1,F0090,1,False,Ditraeth,incorrect
+F0090-q1,F0090,1,False,Dumonplo,incorrect
+F0090-q1,F0090,1,False,Ditraeth,incorrect
+F0090-q1,F0090,1,False,Thovish,incorrect
+F0090-q1,F0090,1,False,Dumonplo,incorrect
+F0091-q0,F0091,5,True,Dumonpoun,incorrect
+F0091-q0,F0091,5,False,Dumonplo,incorrect
+F0091-q0,F0091,5,False,Dumonpoun,incorrect
+F0091-q0,F0091,5,False,Dumonpoun,incorrect
+F0091-q0,F0091,5,False,Dumonpoun,incorrect
+F0091-q0,F0091,5,False,Ditra,incorrect
+F0091-q1,F0091,5,True,Dumonplo,incorrect
+F0091-q1,F0091,5,False,Dumonpoun,incorrect
+F0091-q1,F0091,5,False,Glousabous,incorrect
+F0091-q1,F0091,5,False,Dumonpoun,incorrect
+F0091-q1,F0091,5,False,Thovish,incorrect
+F0091-q1,F0091,5,False,Dumonpoun,incorrect
+F0092-q0,F0092,0,True,Glorazen,incorrect
+F0092-q0,F0092,0,False,Glorazen,incorrect
+F0092-q0,F0092,0,False,Glorazen,incorrect
+F0092-q0,F0092,0,False,Gaensabous,incorrect
+F0092-q0,F0092,0,False,Kinkam,incorrect
+F0092-q0,F0092,0,False,Glorazen,incorrect
+F0092-q1,F0092,0,True,Glorazen,incorrect
+F0092-q1,F0092,0,False,Glorazen,incorrect
+F0092-q1,F0092,0,False,Glorazen,incorrect
+F0092-q1,F0092,0,False,Tetrouvles,incorrect
+F0092-q1,F0092,0,False,Glorazen,incorrect
+F0092-q1,F0092,0,False,Glorazen,incorrect
+F0093-q0,F0093,20,True,Dregibrum,correct
+F0093-q0,F0093,20,False,Dregibrum,correct
+F0093-q0,F0093,20,False,Dregibrum,correct
+F0093-q0,F0093,20,False,Dregibrum,correct
+F0093-q0,F0093,20,False,Dregibrum,correct
+F0093-q0,F0093,20,False,Dregibrum,correct
+F0093-q1,F0093,20,True,Dregibrum,correct
+F0093-q1,F0093,20,False,Dregibrum,correct
+F0093-q1,F0093,20,False,Dregibrum,correct
+F0093-q1,F0093,20,False,Dregibrum,correct
+F0093-q1,F0093,20,False,Dregibrum,correct
+F0093-q1,F0093,20,False,Dregibrum,correct
+F0094-q0,F0094,20,True,Brandrege,correct
+F0094-q0,F0094,20,False,Brandrege,correct
+F0094-q0,F0094,20,False,Brandrege,correct
+F0094-q0,F0094,20,False,Brandrege,correct
+F0094-q0,F0094,20,False,Brandrege,correct
+F0094-q0,F0094,20,False,Brandrege,correct
+F0094-q1,F0094,20,True,Brandrege,correct
+F0094-q1,F0094,20,False,Brandrege,correct
+F0094-q1,F0094,20,False,Brandrege,correct
+F0094-q1,F0094,20,False,Brandrege,correct
+F0094-q1,F0094,20,False,Brandrege,correct
+F0094-q1,F0094,20,False,Brandrege,correct
+F0095-q0,F0095,2,True,Glorazen,incorrect
+F0095-q0,F0095,2,False,Tetrouvles,incorrect
+F0095-q0,F0095,2,False,Glorazen,incorrect
+F0095-q0,F0095,2,False,Glorazen,incorrect
+F0095-q0,F0095,2,False,Tetrouvles,incorrect
+F0095-q0,F0095,2,False,Tetrouv,incorrect
+F0095-q1,F0095,2,True,Tetrouvles,incorrect
+F0095-q1,F0095,2,False,Nigunthan,incorrect
+F0095-q1,F0095,2,False,Toutre,incorrect
+F0095-q1,F0095,2,False,Dumonplo,incorrect
+F0095-q1,F0095,2,False,Gaenplae,incorrect
+F0095-q1,F0095,2,False,Kroungobro,incorrect
+F0096-q0,F0096,10,True,Kikrutras,correct
+F0096-q0,F0096,10,False,Kikrutras,correct
+F0096-q0,F0096,10,False,Kikrutras,correct
+F0096-q0,F0096,10,False,Kikrutras,correct
+F0096-q0,F0096,10,False,Kikrutras,correct
+F0096-q0,F0096,10,False,Kikrutras,correct
+F0096-q1,F0096,10,True,Kikrutras,correct
+F0096-q1,F0096,10,False,Kikrutras,correct
+F0096-q1,F0096,10,False,Kikrutras,correct
+F0096-q1,F0096,10,False,Kikrutras,correct
+F0096-q1,F0096,10,False,Kikrutras,correct
+F0096-q1,F0096,10,False,Kikrutras,correct
+F0097-q0,F0097,2,True,cobbler,correct
+F0097-q0,F0097,2,False,cobbler,correct
+F0097-q0,F0097,2,False,cobbler,correct
+F0097-q0,F0097,2,False,cobbler's apprentice,correct
+F0097-q0,F0097,2,False,cobbler,correct
+F0097-q0,F0097,2,False,cobbler,correct
+F0097-q1,F0097,2,True,cobbler,correct
+F0097-q1,F0097,2,False,cobbler,correct
+F0097-q1,F0097,2,False,cobbler,correct
+F0097-q1,F0097,2,False,cobbler,correct
+F0097-q1,F0097,2,False,cobbler,correct
+F0097-q1,F0097,2,False,cobbler,correct
+F0098-q0,F0098,1,True,clockmaker's apprentice,incorrect
+F0098-q0,F0098,1,False,photographer,incorrect
+F0098-q0,F0098,1,False,clockmaker's apprentice,incorrect
+F0098-q0,F0098,1,False,tapestry weaver,incorrect
+F0098-q0,F0098,1,False,clockmaker,incorrect
+F0098-q0,F0098,1,False,clockmaker's apprentice,incorrect
+F0098-q1,F0098,1,True,clockmaker's apprentice,incorrect
+F0098-q1,F0098,1,False,clockmaker's apprentice,incorrect
+F0098-q1,F0098,1,False,chandler,incorrect
+F0098-q1,F0098,1,False,mapmaker's apprentice,incorrect
+F0098-q1,F0098,1,False,clockmaker's apprentice,incorrect
+F0098-q1,F0098,1,False,mapmaker's apprentice,incorrect
+F0099-q0,F0099,1,True,cartographer,correct
+F0099-q0,F0099,1,False,cartographer,correct
+F0099-q0,F0099,1,False,mapmaker's apprentice,incorrect
+F0099-q0,F0099,1,False,tapestry weaver,incorrect
+F0099-q0,F0099,1,False,mapmaker's apprentice,incorrect
+F0099-q0,F0099,1,False,mapmaker's apprentice,incorrect
+F0099-q1,F0099,1,True,glassblower,incorrect
+F0099-q1,F0099,1,False,tapestry weaver,incorrect
+F0099-q1,F0099,1,False,glassblower,incorrect
+F0099-q1,F0099,1,False,cobbler,incorrect
+F0099-q1,F0099,1,False,mapmaker's apprentice,incorrect
+F0099-q1,F0099,1,False,glassblowing,incorrect
+F0100-q0,F0100,10,True,surveyor,correct
+F0100-q0,F0100,10,False,surveyor,correct
+F0100-q0,F0100,10,False,surveyor,correct
+F0100-q0,F0100,10,False,surveyor's apprentice,correct
+F0100-q0,F0100,10,False,surveyor,correct
+F0100-q0,F0100,10,False,surveyor,correct
+F0100-q1,F0100,10,True,surveyor,correct
+F0100-q1,F0100,10,False,surveyor,correct
+F0100-q1,F0100,10,False,surveyor,correct
+F0100-q1,F0100,10,False,surveyor,correct
+F0100-q1,F0100,10,False,surveyor,correct
+F0100-q1,F0100,10,False,surveyor,correct
+F0101-q0,F0101,5,True,violin maker,correct
+F0101-q0,F0101,5,False,violin maker,correct
+F0101-q0,F0101,5,False,violin maker,correct
+F0101-q0,F0101,5,False,violin maker,correct
+F0101-q0,F0101,5,False,violin maker,correct
+F0101-q0,F0101,5,False,violin maker,correct
+F0101-q1,F0101,5,True,violin maker,correct
+F0101-q1,F0101,5,False,violin maker,correct
+F0101-q1,F0101,5,False,violin maker,correct
+F0101-q1,F0101,5,False,violin maker,correct
+F0101-q1,F0101,5,False,violin maker,correct
+F0101-q1,F0101,5,False,violin maker,correct
+F0102-q0,F0102,5,True,orchardist,incorrect
+F0102-q0,F0102,5,False,orchardist,incorrect
+F0102-q0,F0102,5,False,herbalist,correct
+F0102-q0,F0102,5,False,orchardist,incorrect
+F0102-q0,F0102,5,False,surveyor,incorrect
+F0102-q0,F0102,5,False,chandler,incorrect
+F0102-q1,F0102,5,True,herbalist,correct
+F0102-q1,F0102,5,False,chokre,incorrect
+F0102-q1,F0102,5,False,tapestry weaver,incorrect
+F0102-q1,F0102,5,False,herbalist,correct
+F0102-q1,F0102,5,False,herbalist,correct
+F0102-q1,F0102,5,False,mapmaker's apprentice,incorrect
+F0103-q0,F0103,10,True,chandler,correct
+F0103-q0,F0103,10,False,chandler,correct
+F0103-q0,F0103,10,False,chandler,correct
+F0103-q0,F0103,10,False,chandler,correct
+F0103-q0,F0103,10,False,chandler,correct
+F0103-q0,F0103,10,False,chandler,correct
+F0103-q1,F0103,10,True,chandler,correct
+F0103-q1,F0103,10,False,chandler,correct
+F0103-q1,F0103,10,False,chandler,correct
+F0103-q1,F0103,10,False,chandler,correct
+F0103-q1,F0103,10,False,chandler,correct
+F0103-q1,F0103,10,False,chandler,correct
+F0104-q0,F0104,2,True,mapmaker's apprentice,incorrect
+F0104-q0,F0104,2,False,chandler,incorrect
+F0104-q0,F0104,2,False,glassblower,incorrect
+F0104-q0,F0104,2,False,tapestry weaver,incorrect
+F0104-q0,F0104,2,False,tapestry weaver,incorrect
+F0104-q0,F0104,2,False,mapmaker's apprentice,incorrect
+F0104-q1,F0104,2,True,mapmaker's apprentice,incorrect
+F0104-q1,F0104,2,False,glassblower,incorrect
+F0104-q1,F0104,2,False,glassblower,incorrect
+F0104-q1,F0104,2,False,glassblower,incorrect
+F0104-q1,F0104,2,False,surveyor's apprentice,incorrect
+F0104-q1,F0104,2,False,surveyor,incorrect
+F0105-q0,F0105,2,True,cobbler,incorrect
+F0105-q0,F0105,2,False,chandler,incorrect
+F0105-q0,F0105,2,False,cobbler's apprentice,incorrect
+F0105-q0,F0105,2,False,cobbler,incorrect
+F0105-q0,F0105,2,False,cobbler's apprentice,incorrect
+F0105-q0,F0105,2,False,cobbler,incorrect
+F0105-q1,F0105,2,True,cobbler,incorrect
+F0105-q1,F0105,2,False,cobbler,incorrect
+F0105-q1,F0105,2,False,mapmaker's apprentice,incorrect
+F0105-q1,F0105,2,False,surveyor,incorrect
+F0105-q1,F0105,2,False,surveyor's apprentice,incorrect
+F0105-q1,F0105,2,False,surveyor,incorrect
+F0106-q0,F0106,10,True,glassblower,correct
+F0106-q0,F0106,10,False,glassblower,correct
+F0106-q0,F0106,10,False,glassblower,correct
+F0106-q0,F0106,10,False,glassblower,correct
+F0106-q0,F0106,10,False,glassblower,correct
+F0106-q0,F0106,10,False,glassblower,correct
+F0106-q1,F0106,10,True,glassblower,correct
+F0106-q1,F0106,10,False,glassblower,correct
+F0106-q1,F0106,10,False,glassblowing,incorrect
+F0106-q1,F0106,10,False,glassblower,correct
+F0106-q1,F0106,10,False,glassblowing,incorrect
+F0106-q1,F0106,10,False,glassblowing,incorrect
+F0107-q0,F0107,20,True,tapestry weaver,correct
+F0107-q0,F0107,20,False,tapestry weaver,correct
+F0107-q0,F0107,20,False,tapestry weaver,correct
+F0107-q0,F0107,20,False,tapestry weaver,correct
+F0107-q0,F0107,20,False,tapestry weaver,correct
+F0107-q0,F0107,20,False,tapestry weaver,correct
+F0107-q1,F0107,20,True,tapestry weaver,correct
+F0107-q1,F0107,20,False,tapestry weaver,correct
+F0107-q1,F0107,20,False,tapestry weaver,correct
+F0107-q1,F0107,20,False,tapestry weaver,correct
+F0107-q1,F0107,20,False,tapestry weaver,correct
+F0107-q1,F0107,20,False,tapestry weaver,correct
+F0108-q0,F0108,20,True,orchardist,correct
+F0108-q0,F0108,20,False,orchardist,correct
+F0108-q0,F0108,20,False,orchardist,correct
+F0108-q0,F0108,20,False,orchardist,correct
+F0108-q0,F0108,20,False,orchardist,correct
+F0108-q0,F0108,20,False,orchardist,correct
+F0108-q1,F0108,20,True,orchardist,correct
+F0108-q1,F0108,20,False,orchardist,correct
+F0108-q1,F0108,20,False,orchardist,correct
+F0108-q1,F0108,20,False,orchardist,correct
+F0108-q1,F0108,20,False,orchardist,correct
+F0108-q1,F0108,20,False,orchardist,correct
+F0109-q0,F0109,5,True,beekeeper,correct
+F0109-q0,F0109,5,False,beekeeper,correct
+F0109-q0,F0109,5,False,beekeeper,correct
+F0109-q0,F0109,5,False,beekeeper,correct
+F0109-q0,F0109,5,False,beekeeper,correct
+F0109-q0,F0109,5,False,beekeeper,correct
+F0109-q1,F0109,5,True,beekeeper,correct
+F0109-q1,F0109,5,False,beekeeper,correct
+F0109-q1,F0109,5,False,beekeeper,correct
+F0109-q1,F0109,5,False,beekeeper,correct
+F0109-q1,F0109,5,False,beekeeper,correct
+F0109-q1,F0109,5,False,beekeeper,correct
+F0110-q0,F0110,1,True,mapmaker's apprentice,incorrect
+F0110-q0,F0110,1,False,mapmaker's apprentice,incorrect
+F0110-q0,F0110,1,False,mapmaker's apprentice,incorrect
+F0110-q0,F0110,1,False,chandler,incorrect
+F0110-q0,F0110,1,False,tapestry weaver,incorrect
+F0110-q0,F0110,1,False,mapmaker's apprentice,incorrect
+F0110-q1,F0110,1,True,mapmaker's apprentice,incorrect
+F0110-q1,F0110,1,False,clockmaker's apprentice,incorrect
+F0110-q1,F0110,1,False,surveyor,incorrect
+F0110-q1,F0110,1,False,surveyor,incorrect
+F0110-q1,F0110,1,False,mapmaker's apprentice,incorrect
+F0110-q1,F0110,1,False,clockmaker,incorrect
+F0111-q0,F0111,0,True,beekeeper,incorrect
+F0111-q0,F0111,0,False,beekeeper,incorrect
+F0111-q0,F0111,0,False,beekeeper,incorrect
+F0111-q0,F0111,0,False,beekeeper,incorrect
+F0111-q0,F0111,0,False,beekeeper,incorrect
+F0111-q0,F0111,0,False,beekeeper,incorrect
+F0111-q1,F0111,0,True,clockmaker's apprentice,incorrect
+F0111-q1,F0111,0,False,clockmaker's apprentice,incorrect
+F0111-q1,F0111,0,False,clockmaker's apprentice,incorrect
+F0111-q1,F0111,0,False,clockmaker's apprentice,incorrect
+F0111-q1,F0111,0,False,clockmaker's apprentice,incorrect
+F0111-q1,F0111,0,False,clockmaker's apprentice,incorrect
+F0112-q0,F0112,5,True,tapestry weaver,incorrect
+F0112-q0,F0112,5,False,mapmaker's apprentice,correct
+F0112-q0,F0112,5,False,mapmaker's apprentice,correct
+F0112-q0,F0112,5,False,mapmaker's apprentice,correct
+F0112-q0,F0112,5,False,surveyor's apprentice,incorrect
+F0112-q0,F0112,5,False,chandler,incorrect
+F0112-q1,F0112,5,True,mapmaker's apprentice,correct
+F0112-q1,F0112,5,False,mapmaker's apprentice,correct
+F0112-q1,F0112,5,False,cobbler,incorrect
+F0112-q1,F0112,5,False,cobbler,incorrect
+F0112-q1,F0112,5,False,mapmaker's apprentice,correct
+F0112-q1,F0112,5,False,mapmaker's apprentice,correct
+F0113-q0,F0113,10,True,clockmaker's apprentice,incorrect
+F0113-q0,F0113,10,False,salt merchant,correct
+F0113-q0,F0113,10,False,salt merchant,correct
+F0113-q0,F0113,10,False,mapmaker's apprentice,incorrect
+F0113-q0,F0113,10,False,salt merchant,correct
+F0113-q0,F0113,10,False,clockmaker,incorrect
+F0113-q1,F0113,10,True,salt merchant,correct
+F0113-q1,F0113,10,False,salt merchant,correct
+F0113-q1,F0113,10,False,salt merchant,correct
+F0113-q1,F0113,10,False,glassblower,incorrect
+F0113-q1,F0113,10,False,chandler,incorrect
+F0113-q1,F0113,10,False,copper smelting,incorrect
+F0114-q0,F0114,0,True,glassblower,incorrect
+F0114-q0,F0114,0,False,glassblower,incorrect
+F0114-q0,F0114,0,False,chandler,incorrect
+F0114-q0,F0114,0,False,clockmaker,incorrect
+F0114-q0,F0114,0,False,clockmaker's apprentice,incorrect
+F0114-q0,F0114,0,False,glassblower,incorrect
+F0114-q1,F0114,0,True,glassblower,incorrect
+F0114-q1,F0114,0,False,glassblowing,incorrect
+F0114-q1,F0114,0,False,glassblower,incorrect
+F0114-q1,F0114,0,False,glassblower,incorrect
+F0114-q1,F0114,0,False,glassblower,incorrect
+F0114-q1,F0114,0,False,glassblower,incorrect
+F0115-q0,F0115,20,True,harpsichord maker,correct
+F0115-q0,F0115,20,False,harpsichord maker,correct
+F0115-q0,F0115,20,False,harpsichord maker,correct
+F0115-q0,F0115,20,False,harpsichord maker,correct
+F0115-q0,F0115,20,False,harpsichord maker,correct
+F0115-q0,F0115,20,False,harpsichord maker,correct
+F0115-q1,F0115,20,True,harpsichord maker,correct
+F0115-q1,F0115,20,False,harpsichord maker,correct
+F0115-q1,F0115,20,False,harpsichord maker,correct
+F0115-q1,F0115,20,False,harpsichord maker,correct
+F0115-q1,F0115,20,False,harpsichord maker,correct
+F0115-q1,F0115,20,False,harpsichord maker,correct
+F0116-q0,F0116,2,True,chandler,incorrect
+F0116-q0,F0116,2,False,mapmaker's apprentice,incorrect
+F0116-q0,F0116,2,False,mapmaker's apprentice,incorrect
+F0116-q0,F0116,2,False,tapestry weaver,incorrect
+F0116-q0,F0116,2,False,cobbler,incorrect
+F0116-q0,F0116,2,False,mapmaker's apprentice,incorrect
+F0116-q1,F0116,2,True,chandler,incorrect
+F0116-q1,F0116,2,False,cobbler,incorrect
+F0116-q1,F0116,2,False,chandler,incorrect
+F0116-q1,F0116,2,False,chandler,incorrect
+F0116-q1,F0116,2,False,mapmaker's apprentice,incorrect
+F0116-q1,F0116,2,False,mapmaker's apprentice,incorrect
+F0117-q0,F0117,20,True,clockmaker's apprentice,correct
+F0117-q0,F0117,20,False,clockmaker's apprentice,correct
+F0117-q0,F0117,20,False,clockmaker's apprentice,correct
+F0117-q0,F0117,20,False,clockmaker's apprentice,correct
+F0117-q0,F0117,20,False,clockmaker's apprentice,correct
+F0117-q0,F0117,20,False,clockmaker's apprentice,correct
+F0117-q1,F0117,20,True,clockmaker's apprentice,correct
+F0117-q1,F0117,20,False,clockmaker's apprentice,correct
+F0117-q1,F0117,20,False,clockmaker's apprentice,correct
+F0117-q1,F0117,20,False,clockmaker's apprentice,correct
+F0117-q1,F0117,20,False,clockmaker's apprentice,correct
+F0117-q1,F0117,20,False,clockmaker's apprentice,correct
+F0118-q0,F0118,0,True,chandler,incorrect
+F0118-q0,F0118,0,False,chandler,incorrect
+F0118-q0,F0118,0,False,chandler,incorrect
+F0118-q0,F0118,0,False,mapmaker's apprentice,incorrect
+F0118-q0,F0118,0,False,glassblower,incorrect
+F0118-q0,F0118,0,False,mapmaker's apprentice,incorrect
+F0118-q1,F0118,0,True,chandler,incorrect
+F0118-q1,F0118,0,False,mapmaker's apprentice,incorrect
+F0118-q1,F0118,0,False,chandler,incorrect
+F0118-q1,F0118,0,False,glassblower,incorrect
+F0118-q1,F0118,0,False,chandler,incorrect
+F0118-q1,F0118,0,False,canning,incorrect
+F0119-q0,F0119,0,True,mapmaker's apprentice,incorrect
+F0119-q0,F0119,0,False,glassblower,incorrect
+F0119-q0,F0119,0,False,chandler,incorrect
+F0119-q0,F0119,0,False,mapmaker's apprentice,incorrect
+F0119-q0,F0119,0,False,chandler,incorrect
+F0119-q0,F0119,0,False,mapmaker's apprentice,incorrect
+F0119-q1,F0119,0,True,mapmaker's apprentice,incorrect
+F0119-q1,F0119,0,False,glassblower,incorrect
+F0119-q1,F0119,0,False,surveyor's apprentice,incorrect
+F0119-q1,F0119,0,False,cobbler's apprentice,incorrect
+F0119-q1,F0119,0,False,mapmaker's apprentice,incorrect
+F0119-q1,F0119,0,False,clockmaker's apprentice,incorrect
+F0120-q0,F0120,1,True,mapmaker's apprentice,incorrect
+F0120-q0,F0120,1,False,chandler,incorrect
+F0120-q0,F0120,1,False,surveyor,incorrect
+F0120-q0,F0120,1,False,chandler,incorrect
+F0120-q0,F0120,1,False,clockmaker's apprentice,incorrect
+F0120-q0,F0120,1,False,surveyor's apprentice,incorrect
+F0120-q1,F0120,1,True,surveyor,incorrect
+F0120-q1,F0120,1,False,surveyor,incorrect
+F0120-q1,F0120,1,False,surveyor,incorrect
+F0120-q1,F0120,1,False,surveyor,incorrect
+F0120-q1,F0120,1,False,surveyor,incorrect
+F0120-q1,F0120,1,False,mapmaker's apprentice,incorrect
