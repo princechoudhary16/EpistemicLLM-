@@ -20,7 +20,6 @@ Usage:
 
 import argparse
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -29,22 +28,11 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from common import schema
+from common.evaluate import run_eval
 from common.metrics import behavior_metrics, knowledge_scores
 from common.model import ModelRunner, environment_versions
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IDK_PHRASES = ("i don't know", "i do not know", "unknown", "cannot determine", "no information")
-
-
-def placeholder_grade(model_answer, reference_answer):
-    """Exact/alias/IDK-phrase check. Placeholder only — see module docstring."""
-    norm = lambda s: re.sub(r"[^a-z0-9 ]", "", s.lower()).strip()
-    ans = norm(model_answer)
-    if reference_answer == "__unanswerable__":
-        return "abstain" if any(p in ans for p in IDK_PHRASES) else "incorrect"
-    if any(p in ans for p in IDK_PHRASES):
-        return "abstain"
-    return "correct" if norm(reference_answer) in ans else "incorrect"
 
 
 def load_yaml(name):
@@ -71,36 +59,7 @@ def main():
 
     runner = ModelRunner(model_cfg["model_id"], model_cfg["revision"], torch_dtype=model_cfg["torch_dtype"])
 
-    rows = []
-    for q in questions:
-        common = dict(
-            run_id=args.run_id, question_id=q["question_id"], fact_id=q.get("fact_id"),
-            source_dataset=q["source_dataset"], dataset_version=q["dataset_version"], split=q["split"],
-            question=q["question"], reference_answer=q["reference_answer"], exposure_level=q.get("exposure_level"),
-            model_id=model_cfg["model_id"], model_revision=model_cfg["revision"], checkpoint_id=checkpoint_id,
-            method="base", training_seed=None,
-            prompt_version=dec_cfg["prompt_version"], decoding_config_id=dec_cfg["decoding_config_id"],
-        )
-
-        gens = [("greedy", True, args.seed, dec_cfg["greedy"])]
-        for i in range(dec_cfg["sampled"]["n_samples"]):
-            gens.append((f"sample{i}", False, args.seed + i + 1, dec_cfg["sampled"]))
-
-        for sample_index, is_greedy, seed, settings in gens:
-            gen = runner.generate_one(
-                q["question"], dec_cfg["system_prompt"], dec_cfg["max_new_tokens"],
-                do_sample=not is_greedy, seed=seed,
-                temperature=settings.get("temperature", 1.0), top_p=settings.get("top_p", 1.0),
-            )
-            outcome = placeholder_grade(gen["text"], q["reference_answer"])
-            rows.append(schema.make_row(
-                **common,
-                generation_seed=seed, sample_index=sample_index, is_greedy=is_greedy,
-                model_answer=gen["text"], outcome=outcome, grading_version="placeholder_exact_v0",
-                review_status="unreviewed", truncated=gen["truncated"],
-                avg_logprob=gen["avg_logprob"], entropy=gen["entropy"],
-                confidence_score=gen["avg_logprob"], latency_seconds=gen["latency_seconds"],
-            ))
+    rows = run_eval(runner, questions, dec_cfg, model_cfg, checkpoint_id, "base", args.run_id, seed=args.seed)
 
     out_path = REPO_ROOT / args.out
     out_path.parent.mkdir(parents=True, exist_ok=True)
