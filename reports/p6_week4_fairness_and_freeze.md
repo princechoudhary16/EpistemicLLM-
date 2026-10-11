@@ -49,6 +49,14 @@ is written into every comparison output file's JSON. The freeze commitment:
   `label=path` argument with no code change, satisfying the Week 3 criterion "common
   evaluator accepts P5 outputs" by construction rather than by a special case.
 
+**Verified, not just asserted:** `make_dummy_p5_response.py` relabels an existing
+response file as a stand-in fourth method and runs it through `compare_methods.py`
+unmodified. It passed the matched-question-join check and produced correct metrics
+and a (correctly zero, since the data is literally identical) paired bootstrap diff
+-- proof the evaluator actually accepts a fourth method today, without waiting for
+P5 to have a real checkpoint. The dummy output files were deleted immediately after
+(never committed) so nothing fake could later be mistaken for a real P5 result.
+
 ## 3. Exposure/data-budget audit
 
 | Dataset | Status |
