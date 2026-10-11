@@ -74,6 +74,8 @@ def main():
     ap.add_argument("--out-dir", default="results/raw")
     ap.add_argument("--adapter-dir", default="results/final")
     ap.add_argument("--dataset-version", default="pilot_v0")
+    ap.add_argument("--skip-base", action="store_true",
+                     help="reuse an existing results/raw/p1_<version>_base.jsonl instead of regenerating it")
     args = ap.parse_args()
 
     model_cfg = load_yaml("model.yaml")
@@ -92,15 +94,20 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     adapter_dir = REPO_ROOT / args.adapter_dir
 
-    # 1) base (untouched model)
-    print("=== [1/3] base model eval ===", file=sys.stderr)
-    runner = ModelRunner(model_cfg["model_id"], model_cfg["revision"],
-                          torch_dtype=model_cfg["torch_dtype"], device=device)
-    base_rows = run_eval(runner, eval_questions, dec_cfg, model_cfg, f"{model_cfg['model_id']}-base",
-                          "base", f"{v}_base", seed=args.seed)
-    write_jsonl(base_rows, out_dir / f"p1_{v}_base.jsonl")
-    del runner
-    free_gpu()
+    # 1) base (untouched model) -- skip and reuse if already run (e.g. a prior job
+    # completed phase 1 then was cancelled before phases 2/3; no need to redo it).
+    base_out = out_dir / f"p1_{v}_base.jsonl"
+    if args.skip_base and base_out.exists():
+        print(f"=== [1/3] base model eval: SKIPPED, reusing {base_out} ===", file=sys.stderr)
+    else:
+        print("=== [1/3] base model eval ===", file=sys.stderr)
+        runner = ModelRunner(model_cfg["model_id"], model_cfg["revision"],
+                              torch_dtype=model_cfg["torch_dtype"], device=device)
+        base_rows = run_eval(runner, eval_questions, dec_cfg, model_cfg, f"{model_cfg['model_id']}-base",
+                              "base", f"{v}_base", seed=args.seed)
+        write_jsonl(base_rows, base_out)
+        del runner
+        free_gpu()
 
     # 2) standard SFT -- trained on train.jsonl only
     print("=== [2/3] standard SFT: train + eval ===", file=sys.stderr)

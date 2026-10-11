@@ -17,4 +17,4 @@ eval "$(conda shell.bash hook)"
 conda activate torch
 
 cd "$SLURM_SUBMIT_DIR" || exit 1
-python -m p6_baselines.run_canonical_baselines --dataset-version main_v0
+python -m p6_baselines.run_canonical_baselines --dataset-version main_v0 --skip-base
