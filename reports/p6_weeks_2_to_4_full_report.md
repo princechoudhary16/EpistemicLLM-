@@ -8,6 +8,45 @@ see §7.
 
 ---
 
+## 0. Plain-language summary
+
+Think of the AI model as a student, and this whole exercise as a controlled test
+of three different ways of teaching it:
+
+- **Version A ("base")** — the untouched student, never studied anything.
+- **Version B ("SFT")** — studied a stack of flashcards made of invented, made-up
+  facts (so we can be 100% sure whether it actually learned them or is just
+  guessing).
+- **Version C ("IDK")** — studied the same flashcards, *plus* extra practice
+  specifically on saying "I don't know" instead of guessing when it's unsure.
+
+We ran this twice: once on a small practice set (120 facts) to work the bugs out
+cheaply, then again for real on the full set (600 facts).
+
+**What happened:**
+- **Studying worked.** Version B went from knowing 0% of the facts to a real,
+  solidly-measured improvement — genuinely learned something, not a fluke.
+- **But studying worked less well on the bigger set.** With 5x more facts to
+  learn in the same amount of study time, each individual fact got less
+  attention, so Version B's score actually dropped on the full set compared to
+  the small practice set.
+- **The "teach it to say I don't know" version broke, both times.** Instead of
+  learning to say "I don't know" only when it genuinely didn't know something,
+  it collapsed into saying "I don't know" to almost everything — even facts it
+  had studied repeatedly. We tested whether this was because it was "distracted"
+  by so few "I don't know" examples sitting in a now-much-bigger pile of
+  flashcards. It wasn't — the exact same collapse happened again, meaning the
+  problem is in *how* it was taught, not *how much* other material it had to
+  compete with. We flagged this for the team rather than trying to fix it
+  ourselves, since fixing it is someone else's assignment on this project.
+- **Along the way, we caught and fixed a grading mistake** before trusting it:
+  the very first run made it look like Version C had failed completely, when it
+  had actually just started saying "I don't know" to everything — our automatic
+  grader just wasn't recognizing that phrase correctly. We fixed the grader and
+  re-checked its own already-saved answers rather than making it retake the test.
+
+---
+
 ## 1. What P6 was asked to deliver, Weeks 2–4
 
 | Week | Required of P6 | Acceptance criteria |
@@ -83,7 +122,24 @@ not the model.
 
 ## 5. Results
 
-### 5.1 Pilot scale (120 facts, 240 eval questions)
+### 5.0 Clean summary table (both scales, side by side)
+
+| Method | Scale | Accuracy | Hallucination | Abstention | Coverage | vs. base (95% CI) |
+|---|---|---:|---:|---:|---:|---|
+| Base (untouched) | Pilot (120 facts) | 0.0% | 96.7% | 3.3% | 96.7% | — |
+| Base (untouched) | Main (600 facts) | 0.25% | 95.8% | 3.9% | 96.1% | — |
+| **Standard SFT** | Pilot (120 facts) | **15.4%** | 84.6% | 0.0% | 100% | +15.4pp [+10.4, +20.0] |
+| **Standard SFT** | Main (600 facts) | **8.2%** | 91.8% | 0.0% | 100% | +7.9pp [+6.4, +9.5] |
+| **IDK** | Pilot (120 facts) | 0.0% | 0.0% | **100%** | 0.0% | 0.0pp [0.0, 0.0] |
+| **IDK** | Main (600 facts) | 0.0% | 0.3% | **99.7%** | 0.3% | -0.25pp [-0.58, 0.0] |
+
+**Read this as:** SFT is the only method that reliably learns facts (bold accuracy
+column, confidence interval excludes zero both times). IDK is the only method
+that drives hallucination near zero — but only by refusing to answer almost
+anything (bold abstention/coverage columns), which is a failure, not a win; see
+§5.3 for why.
+
+### 5.1 Pilot scale (120 facts, 240 eval questions) — full detail
 
 | Method | C | W | A | Accuracy | Hallucination | Abstention | Coverage |
 |---|---|---|---|---|---|---|---|
@@ -98,7 +154,7 @@ Accuracy diffs vs. base (paired, question-cluster bootstrap, n_boot=1000):
 | SFT vs base | +15.4pp | [+10.4pp, +20.0pp] |
 | IDK vs base | 0.0pp | [0.0pp, 0.0pp] |
 
-### 5.2 Main scale (600 facts, 1,200 eval questions)
+### 5.2 Main scale (600 facts, 1,200 eval questions) — full detail
 
 | Method | C | W | A | Accuracy | Hallucination | Abstention | Coverage |
 |---|---|---|---|---|---|---|---|
