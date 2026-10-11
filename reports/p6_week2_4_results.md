@@ -94,9 +94,73 @@ identical to "I don't know."
   review (P2's SimpleQA pilot).
 - Training-seed robustness -- single seed (0) for both SFT and IDK.
 
-## Files
+## Files (pilot_v0)
 
 - `results/raw/p1_pilot_v0_{base,sft,idk}.jsonl` -- 1,440 response rows each
 - `results/final/baseline_comparison.json` -- full summary + bootstrap output
 - `results/final/sft_pilot_v0_adapter/`, `idk_pilot_v0_adapter/` -- trained LoRA
   adapters (cluster only, not committed -- see `.gitignore`, plan.md section 9)
+
+## Main-scale results (main_v0: 600 facts, 1,200 eval questions)
+
+Generated main_v0 by running P1's own, already-tested generator code
+(`python -m p1_exposure.generate --n-facts 600 --version main_v0`; all 11 of P1's
+validation checks pass). Ran the identical pipeline -- same LoRA config, same seed,
+same 1-epoch budget -- just at 5x the data. Already used the corrected grader
+(`placeholder_exact_v1`); no re-grading needed this time.
+
+| Method | C | W | A | Accuracy | Hallucination | Abstention | Coverage |
+|---|---|---|---|---|---|---|---|
+| base (untouched) | 3 | 1150 | 47 | 0.25% | 95.8% | 3.9% | 96.1% |
+| standard SFT | 98 | 1102 | 0 | **8.2%** | 91.8% | 0.0% | 100% |
+| IDK | 0 | 4 | 1196 | 0.0% | 0.3% | **99.7%** | **0.3%** |
+
+Accuracy diffs vs base (paired, question-cluster bootstrap, n_boot=1000):
+
+| Comparison | Estimate | 95% CI |
+|---|---|---|
+| SFT vs base | +7.9pp | [+6.4pp, +9.5pp] |
+| IDK vs base | -0.25pp | [-0.58pp, 0.0pp] |
+
+### Finding 1: SFT accuracy dropped at scale (15.4% pilot -> 8.2% main)
+
+Still a real, statistically solid improvement over base (CI excludes zero), but
+roughly half the pilot's rate. The training budget was held fixed in the way
+`plan.md` requires for comparability (1 epoch, same LR, same seed) -- so the drop
+isn't a bug, it's the direct consequence of 5x more distinct facts competing for
+the same single pass of gradient updates. Each fact gets the same number of
+*presentations* as in pilot_v0 (the exposure-level design is per-fact, not
+per-dataset), but the model now has 5x as much *total new information* to fit
+in one epoch, with proportionally less "attention" (in the colloquial sense, not
+the mechanism) left for any one fact. This is a genuine scaling finding, not an
+error -- and it is exactly the kind of result `plan.md`'s Week 4 robustness
+checks exist to catch before anyone reports pilot-scale numbers as final.
+
+### Finding 2: the IDK collapse was NOT a small-data artifact
+
+The working hypothesis after the pilot run was that IDK's "always abstain"
+collapse happened because its 30 extra examples were a large share (3.8%) of a
+small (790-example) training mix, and that diluting them to 0.8% of a 3,830-example
+mix might fix it. **It didn't.** IDK still collapsed to 99.7% abstention -- if
+anything slightly *more* extreme than the pilot's 100%-but-off-by-rounding result.
+This rules out "just use more fact data" as a fix and points instead at the
+training recipe itself (same learning rate/epochs used for standard SFT, applied
+unchanged to a mix containing any IDK examples at all) as the actual cause --
+consistent with the candidate fixes already listed in the pilot section above
+(down-weight IDK examples in the loss, interleaved mixed-batch training, or a
+lower learning rate specifically for the IDK run). Per instruction, this was not
+pursued further here -- flagged for the team/P5, not fixed unilaterally.
+
+### What this does and doesn't establish (updated)
+
+Same caveats as the pilot section apply (placeholder grading, single seed, no
+real-QA data yet) plus one more: **the "more data helps" intuition does not
+automatically apply when the extra data is extra *distinct facts* rather than
+extra *repetitions* of the same facts** -- worth keeping in mind when P1 scales
+further or P5 designs their training objective.
+
+## Files (main_v0)
+
+- `data/synthetic/main_v0/*.jsonl` -- the generated 600-fact dataset
+- `results/raw/p1_main_v0_{base,sft,idk}.jsonl` -- 7,200 response rows each
+- `results/final/baseline_comparison_main_v0.json` -- full summary + bootstrap output
