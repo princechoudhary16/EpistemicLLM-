@@ -1,0 +1,10 @@
+# Runtime dependencies. Tested locally (macOS/MPS, Python 3.11) with the versions in comments.
+# On TC2 install torch first from the CUDA wheel index (see README), then: pip install -r this file.
+torch>=2.4                       # 2.14.0
+transformers>=4.56,<5            # 4.57.6  (needs from_pretrained(dtype=...) and generate(use_model_defaults=...))
+huggingface-hub>=0.34,<1.0       # 0.36.2  (transformers 4.x rejects hub 1.x)
+numpy>=1.26                      # 2.4.6
+pandas>=2.2                      # 3.0.6
+pyarrow>=15                      # 25.0.1  (build-dataset reads the TriviaQA parquet)
+scikit-learn>=1.5                # 1.9.1
+# peft>=0.13                     # only needed to score fine-tuned adapters (`score --adapter`)
