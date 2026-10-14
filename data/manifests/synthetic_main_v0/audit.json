@@ -1,0 +1,132 @@
+{
+  "dataset_version": "synthetic-main_v0",
+  "presentations_per_level": {
+    "0": 0,
+    "1": 100,
+    "2": 200,
+    "5": 500,
+    "10": 1000,
+    "20": 2000
+  },
+  "facts_per_level": {
+    "0": 100,
+    "1": 100,
+    "2": 100,
+    "5": 100,
+    "10": 100,
+    "20": 100
+  },
+  "facts_per_split": {
+    "final": 300,
+    "dev": 300
+  },
+  "facts_per_relation_level": {
+    "birth_year": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "5": 20,
+      "10": 20,
+      "20": 20
+    },
+    "founder": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "5": 20,
+      "10": 20,
+      "20": 20
+    },
+    "capital": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "5": 20,
+      "10": 20,
+      "20": 20
+    },
+    "headquarters": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "5": 20,
+      "10": 20,
+      "20": 20
+    },
+    "occupation": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "5": 20,
+      "10": 20,
+      "20": 20
+    }
+  },
+  "total_train_rows": 3800,
+  "total_eval_rows": 1200,
+  "total_idk_rows": 30,
+  "checks": [
+    {
+      "name": "exposure_groups_balanced",
+      "ok": true,
+      "detail": "facts per level {0: 100, 1: 100, 2: 100, 5: 100, 10: 100, 20: 100}"
+    },
+    {
+      "name": "splits_cover_all_levels",
+      "ok": true,
+      "detail": "empty (level, split): []"
+    },
+    {
+      "name": "presentations_equal_exposure",
+      "ok": true,
+      "detail": "every fact matches"
+    },
+    {
+      "name": "no_zero_exposure_in_training",
+      "ok": true,
+      "detail": "100 zero-exposure facts checked, leaks: []"
+    },
+    {
+      "name": "names_unique_across_world",
+      "ok": true,
+      "detail": "duplicates: []"
+    },
+    {
+      "name": "no_duplicate_subject_relation",
+      "ok": true,
+      "detail": "duplicates: []"
+    },
+    {
+      "name": "no_contradictory_prompts",
+      "ok": true,
+      "detail": "0 prompts with conflicting completions"
+    },
+    {
+      "name": "eval_templates_disjoint_from_training",
+      "ok": true,
+      "detail": "template overlap: []; replayed questions: 0"
+    },
+    {
+      "name": "eval_split_and_coverage",
+      "ok": true,
+      "detail": "wrong-template rows: 0; facts missing questions: 0"
+    },
+    {
+      "name": "eval_rows_match_facts",
+      "ok": true,
+      "detail": "0 inconsistent rows"
+    },
+    {
+      "name": "answer_mix_balanced_across_levels",
+      "ok": true,
+      "detail": "skewed strata: []"
+    }
+  ],
+  "file_sha256": {
+    "eval.jsonl": "e3adc557b906cac314ab395e026e8714b4a0f185822a02738f6019fc2096e98b",
+    "facts.jsonl": "128a1e5a46fe17b3538d310c9e99f476b3f5e7b0c56a20ec07a0149b63c72b24",
+    "generation_config.json": "94b8b9071f724e0ad7601ff6682b9d682176d84a5ce606a36844570ed0bd06d9",
+    "idk_train.jsonl": "720ce269d3ab86d554cedfaccb2b1040094dd90864bb1bfc4f57973dfe45c1d0",
+    "train.jsonl": "419864e1dbcacebceddbfdeb803ca38bb9fde47ee2f658ee0c694df4fc2a222a"
+  }
+}

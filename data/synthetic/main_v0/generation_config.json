@@ -1,0 +1,49 @@
+{
+  "dataset_version": "synthetic-main_v0",
+  "seed": 0,
+  "n_facts": 600,
+  "relations": [
+    "birth_year",
+    "founder",
+    "capital",
+    "headquarters",
+    "occupation"
+  ],
+  "levels": [
+    0,
+    1,
+    2,
+    5,
+    10,
+    20
+  ],
+  "dev_frac": 0.5,
+  "idk_per_relation": 6,
+  "templates": {
+    "birth_year": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "founder": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "capital": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "headquarters": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "occupation": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    }
+  }
+}
