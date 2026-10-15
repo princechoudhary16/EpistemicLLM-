@@ -2,7 +2,7 @@ import torch
 
 # Model
 MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
-REVISION = "main"  # TODO: pin exact commit hash once confirmed with P6
+REVISION = "7ae557604adf67be50417f59c2c2f167def9a775"
 
 DEVICE = "mps" if torch.backends.mps.is_available() else "cpu"
 
@@ -16,6 +16,8 @@ SYSTEM_PROMPT = (
 MAX_NEW_TOKENS = 64
 SAMPLE_TEMPERATURE = 0.7
 SAMPLE_TOP_P = 0.9
+SAMPLE_TOP_K = 0
+REPETITION_PENALTY = 1.0
 N_SAMPLES_PER_QUESTION = 5
 
 # Seeds
@@ -30,6 +32,7 @@ ABSTENTION_PHRASES = [
     "i dont know", "im not sure", "i am not sure",
     "cannot determine", "no information available",
 ]
+GRADING_VERSION = "p2-whole-word-v2"
 
 # Paths
 RAW_DIR = "data/raw"

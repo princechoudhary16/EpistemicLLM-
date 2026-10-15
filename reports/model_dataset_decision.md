@@ -3,6 +3,13 @@
 **Owner:** P2
 **Status:** Warning thresholds triggered — team review required
 
+> **Grader version note (2026-10-15):** The pilot outcomes and `K(q)` counts below were
+> produced with the earlier substring grader while the model revision was configured
+> as mutable `main`; the saved rows do not record the resolved model commit. The current
+> P2 pipeline pins the model and uses `p2-whole-word-v2`. Regrade the saved 1,200
+> responses and review changed labels before using these counts as final decision evidence;
+> the original model revision cannot be reconstructed from those rows.
+
 ## Pilot setup
 
 - Model: Qwen/Qwen2.5-0.5B-Instruct

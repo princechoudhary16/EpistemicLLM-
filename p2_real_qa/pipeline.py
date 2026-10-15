@@ -24,7 +24,12 @@ def generate(tokenizer, model, prompt: str, do_sample: bool, seed: int | None = 
     if seed is not None:
         torch.manual_seed(seed)
     inputs = tokenizer(prompt, return_tensors="pt").to(config.DEVICE)
-    gen_kwargs = dict(max_new_tokens=config.MAX_NEW_TOKENS, do_sample=do_sample)
+    gen_kwargs = dict(
+        max_new_tokens=config.MAX_NEW_TOKENS,
+        do_sample=do_sample,
+        top_k=config.SAMPLE_TOP_K,
+        repetition_penalty=config.REPETITION_PENALTY,
+    )
     if do_sample:
         gen_kwargs.update(temperature=config.SAMPLE_TEMPERATURE, top_p=config.SAMPLE_TOP_P)
     output_ids = model.generate(**inputs, **gen_kwargs)
@@ -52,17 +57,25 @@ def normalize(text: str) -> str:
     text = re.sub(r"[^\w\s]", "", text)
     return re.sub(r"\s+", " ", text)
 
+
+def contains_answer(answer: str, reference: str) -> bool:
+    """Match a normalized reference as whole words, never as an arbitrary substring."""
+    norm_answer = normalize(answer)
+    norm_reference = normalize(reference)
+    return bool(norm_reference) and f" {norm_reference} " in f" {norm_answer} "
+
 def grade(model_answer: str, reference_answer: str) -> str:
     norm_ans = normalize(model_answer)
     if any(p in norm_ans for p in config.ABSTENTION_PHRASES):
         return "abstain"
-    if normalize(reference_answer) in norm_ans:
+    if contains_answer(model_answer, reference_answer):
         return "correct"
     return "incorrect"
 
 def grade_responses(gen_df: pd.DataFrame, questions_df: pd.DataFrame) -> pd.DataFrame:
     gen_df = gen_df.merge(questions_df[["question_id", "answer"]], on="question_id")
     gen_df["outcome"] = gen_df.apply(lambda r: grade(r["model_answer"], r["answer"]), axis=1)
+    gen_df["grading_version"] = config.GRADING_VERSION
     return gen_df
 
 def knowledge_scores(graded_df: pd.DataFrame) -> pd.DataFrame:

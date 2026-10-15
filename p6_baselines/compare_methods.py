@@ -23,6 +23,7 @@ Usage:
 """
 
 import argparse
+from collections import defaultdict
 import json
 import sys
 from pathlib import Path
@@ -60,6 +61,67 @@ def method_summary(rows):
     }
 
 
+def _response_layout(rows, label):
+    """Validate per-question response identities and return sample/metadata layouts."""
+    if not rows:
+        raise ValueError(f"'{label}' has no response rows")
+    grouped = defaultdict(list)
+    seen = set()
+    for row in rows:
+        qid = row.get("question_id")
+        if qid is None:
+            raise ValueError(f"'{label}' has a response without question_id")
+        sample_index = row.get("sample_index")
+        if sample_index is None:
+            raise ValueError(f"'{label}' has a response without sample_index for {qid}")
+        if not isinstance(row.get("is_greedy"), bool):
+            raise ValueError(f"'{label}' has a non-boolean is_greedy for {qid}")
+        identity = (qid, str(sample_index))
+        if identity in seen:
+            raise ValueError(f"'{label}' has duplicate response {sample_index!r} for {qid}")
+        seen.add(identity)
+        grouped[qid].append(row)
+
+    layout = {}
+    for qid, question_rows in grouped.items():
+        greedy = [row for row in question_rows if row.get("is_greedy") is True]
+        if len(greedy) != 1:
+            raise ValueError(f"'{label}' has {len(greedy)} greedy responses for {qid}; expected exactly one")
+        samples = frozenset(str(row["sample_index"]) for row in question_rows if row.get("is_greedy") is not True)
+        if not samples:
+            raise ValueError(f"'{label}' has no sampled responses for {qid}")
+        metadata_fields = (
+            "question", "reference_answer", "source_dataset", "dataset_version", "split",
+            "model_id", "model_revision", "prompt_version", "decoding_config_id",
+        )
+        metadata = tuple(greedy[0].get(field) for field in metadata_fields)
+        if any(tuple(row.get(field) for field in metadata_fields) != metadata for row in question_rows):
+            raise ValueError(f"'{label}' has inconsistent question/reference metadata across responses for {qid}")
+        layout[qid] = (samples, metadata)
+    return layout
+
+
+def validate_methods(methods):
+    """Require matching question sets, sample indices, and question/reference metadata."""
+    if not methods:
+        raise ValueError("at least one method is required")
+    layouts = {label: _response_layout(rows, label) for label, rows in methods.items()}
+    first_label = next(iter(layouts))
+    expected = layouts[first_label]
+    for label, actual in layouts.items():
+        if set(actual) != set(expected):
+            raise ValueError(
+                f"'{label}' and '{first_label}' were not evaluated on the same questions "
+                f"({len(set(actual) ^ set(expected))} mismatched question_ids) -- refusing to compare"
+            )
+        for qid in expected:
+            if actual[qid][0] != expected[qid][0]:
+                raise ValueError(f"'{label}' has different sampled response indices for {qid}")
+            if actual[qid][1] != expected[qid][1]:
+                raise ValueError(f"'{label}' has different question/reference metadata for {qid}")
+    return set(expected)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--responses", nargs="+", required=True,
@@ -71,24 +133,24 @@ def main():
 
     methods = {}
     for item in args.responses:
+        if "=" not in item:
+            raise ValueError(f"response entry must be label=path, got {item!r}")
         label, path = item.split("=", 1)
+        if not label or label in methods:
+            raise ValueError(f"empty or duplicate method label: {label!r}")
         methods[label] = read_jsonl(REPO_ROOT / path)
 
-    # Matched-question-join check, before computing anything from the data.
-    question_sets = {label: {r["question_id"] for r in greedy_rows(rows)} for label, rows in methods.items()}
-    first_label = next(iter(question_sets))
-    for label, qs in question_sets.items():
-        if qs != question_sets[first_label]:
-            raise ValueError(
-                f"'{label}' and '{first_label}' were not evaluated on the same questions "
-                f"({len(qs ^ question_sets[first_label])} mismatched question_ids) -- refusing to compare"
-            )
+    # Validate the full response layout before computing any comparisons.
+    question_ids = validate_methods(methods)
     print(f"Matched-question-join check passed: all {len(methods)} methods share "
-          f"{len(question_sets[first_label])} question_ids.", file=sys.stderr)
+          f"{len(question_ids)} question_ids, with matching sample rows and references.", file=sys.stderr)
 
     summaries = {label: method_summary(rows) for label, rows in methods.items()}
 
+    first_label = next(iter(methods))
     baseline = args.baseline_label or first_label
+    if baseline not in methods:
+        raise ValueError(f"baseline label {baseline!r} is not in the response list")
     diffs = {}
     for label, rows in methods.items():
         if label == baseline:

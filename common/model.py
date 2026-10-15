@@ -55,14 +55,12 @@ class ModelRunner:
         return self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
     def generate_one(self, question, system_prompt, max_new_tokens, do_sample,
-                      seed=None, temperature=1.0, top_p=1.0):
+                      seed=None, temperature=1.0, top_p=1.0, top_k=0, repetition_penalty=1.0):
         """Generate one response. Returns text, avg_logprob, entropy, truncated, latency_seconds.
 
-        avg_logprob/entropy are computed here from the model's own generation-step
-        logits (never from the sampling distribution), averaged over generated
-        tokens up to but excluding EOS. This is a fixed default aggregation; P4 owns
-        the final definitions used for confidence analysis and may recompute
-        differently from stored logits if needed (plan.md section 6).
+        avg_logprob/entropy use the unmodified generation-step logits, averaged over
+        generated tokens up to but excluding EOS. These scores describe the model's
+        raw distribution, not temperature/top-p sampling probabilities.
         """
         if seed is not None:
             torch.manual_seed(seed)
@@ -71,9 +69,11 @@ class ModelRunner:
         gen_kwargs = dict(
             max_new_tokens=max_new_tokens,
             do_sample=do_sample,
-            output_scores=True,
+            output_logits=True,
             return_dict_in_generate=True,
             pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
         )
         if do_sample:
             gen_kwargs["temperature"] = temperature
@@ -91,7 +91,7 @@ class ModelRunner:
         text = self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
 
         logprobs, entropies = [], []
-        for step_logits, tok_id in zip(out.scores, gen_ids):
+        for step_logits, tok_id in zip(out.logits, gen_ids):
             if eos_id is not None and tok_id.item() == eos_id:
                 break
             log_probs = torch.log_softmax(step_logits[0].float(), dim=-1)

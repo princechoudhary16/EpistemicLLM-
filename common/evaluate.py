@@ -69,6 +69,8 @@ def run_eval(runner, questions, dec_cfg, model_cfg, checkpoint_id, method, run_i
                 q["question"], dec_cfg["system_prompt"], dec_cfg["max_new_tokens"],
                 do_sample=not is_greedy, seed=gseed,
                 temperature=settings.get("temperature", 1.0), top_p=settings.get("top_p", 1.0),
+                top_k=dec_cfg.get("top_k", 0),
+                repetition_penalty=dec_cfg.get("repetition_penalty", 1.0),
             )
             outcome = placeholder_grade(gen["text"], q["reference_answer"])
             rows.append(schema.make_row(
