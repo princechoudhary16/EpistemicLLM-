@@ -1,0 +1,3299 @@
+{
+  "mine-idk_end": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        0,
+        0,
+        240
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          40
+        ],
+        "1": [
+          0,
+          0,
+          40
+        ],
+        "2": [
+          0,
+          0,
+          40
+        ],
+        "5": [
+          0,
+          0,
+          40
+        ],
+        "10": [
+          0,
+          0,
+          40
+        ],
+        "20": [
+          0,
+          0,
+          40
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          200
+        ],
+        "1": [
+          0,
+          0,
+          200
+        ],
+        "2": [
+          0,
+          0,
+          200
+        ],
+        "5": [
+          0,
+          0,
+          200
+        ],
+        "10": [
+          0,
+          0,
+          200
+        ],
+        "20": [
+          0,
+          0,
+          200
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        0,
+        0,
+        240
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 20
+        },
+        "10": {
+          "K=0": 20
+        },
+        "20": {
+          "K=0": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 120
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            0,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        0,
+        0,
+        240
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          40
+        ],
+        "1": [
+          0,
+          0,
+          40
+        ],
+        "2": [
+          0,
+          0,
+          40
+        ],
+        "5": [
+          0,
+          0,
+          40
+        ],
+        "10": [
+          0,
+          0,
+          40
+        ],
+        "20": [
+          0,
+          0,
+          40
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          200
+        ],
+        "1": [
+          0,
+          6,
+          194
+        ],
+        "2": [
+          0,
+          1,
+          199
+        ],
+        "5": [
+          0,
+          0,
+          200
+        ],
+        "10": [
+          0,
+          0,
+          200
+        ],
+        "20": [
+          0,
+          0,
+          200
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        0,
+        0,
+        240
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 20
+        },
+        "10": {
+          "K=0": 20
+        },
+        "20": {
+          "K=0": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 120
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            0,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "mine-idk_shuffled": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        87,
+        133,
+        20
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          36,
+          4
+        ],
+        "1": [
+          0,
+          34,
+          6
+        ],
+        "2": [
+          2,
+          29,
+          9
+        ],
+        "5": [
+          14,
+          25,
+          1
+        ],
+        "10": [
+          33,
+          7,
+          0
+        ],
+        "20": [
+          38,
+          2,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          180,
+          20
+        ],
+        "1": [
+          0,
+          166,
+          34
+        ],
+        "2": [
+          7,
+          172,
+          21
+        ],
+        "5": [
+          66,
+          128,
+          6
+        ],
+        "10": [
+          147,
+          52,
+          1
+        ],
+        "20": [
+          187,
+          13,
+          0
+        ]
+      },
+      "grader_disagreements": 1,
+      "greedy_cwa_wordboundary": [
+        87,
+        133,
+        20
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 18,
+          "inconsistent": 2
+        },
+        "5": {
+          "K=0": 9,
+          "inconsistent": 7,
+          "K>=0.8": 4
+        },
+        "10": {
+          "K=0": 3,
+          "inconsistent": 5,
+          "K>=0.8": 12
+        },
+        "20": {
+          "K>=0.8": 19,
+          "K=0": 1
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 71,
+        "inconsistent": 14,
+        "K>=0.8": 35
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            8,
+            10
+          ],
+          "no_repeat": [
+            2,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            34,
+            50
+          ],
+          "no_repeat": [
+            13,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        86,
+        153,
+        1
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          2,
+          37,
+          1
+        ],
+        "5": [
+          15,
+          25,
+          0
+        ],
+        "10": [
+          31,
+          9,
+          0
+        ],
+        "20": [
+          38,
+          2,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          196,
+          4
+        ],
+        "1": [
+          1,
+          195,
+          4
+        ],
+        "2": [
+          7,
+          188,
+          5
+        ],
+        "5": [
+          67,
+          132,
+          1
+        ],
+        "10": [
+          138,
+          62,
+          0
+        ],
+        "20": [
+          180,
+          20,
+          0
+        ]
+      },
+      "grader_disagreements": 4,
+      "greedy_cwa_wordboundary": [
+        86,
+        153,
+        1
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "2": {
+          "K=0": 18,
+          "inconsistent": 2
+        },
+        "5": {
+          "K=0": 9,
+          "inconsistent": 7,
+          "K>=0.8": 4
+        },
+        "10": {
+          "K=0": 4,
+          "inconsistent": 3,
+          "K>=0.8": 13
+        },
+        "20": {
+          "inconsistent": 1,
+          "K>=0.8": 18,
+          "K=0": 1
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 71,
+        "inconsistent": 14,
+        "K>=0.8": 35
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            6,
+            10
+          ],
+          "no_repeat": [
+            2,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            17,
+            50
+          ],
+          "no_repeat": [
+            13,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "mine": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        98,
+        142,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          6,
+          34,
+          0
+        ],
+        "5": [
+          23,
+          17,
+          0
+        ],
+        "10": [
+          33,
+          7,
+          0
+        ],
+        "20": [
+          36,
+          4,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          27,
+          172,
+          1
+        ],
+        "5": [
+          113,
+          87,
+          0
+        ],
+        "10": [
+          157,
+          43,
+          0
+        ],
+        "20": [
+          173,
+          27,
+          0
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        98,
+        142,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 14,
+          "inconsistent": 5,
+          "K>=0.8": 1
+        },
+        "5": {
+          "K=0": 5,
+          "inconsistent": 5,
+          "K>=0.8": 10
+        },
+        "10": {
+          "K>=0.8": 15,
+          "inconsistent": 4,
+          "K=0": 1
+        },
+        "20": {
+          "K>=0.8": 16,
+          "inconsistent": 4
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 60,
+        "inconsistent": 18,
+        "K>=0.8": 42
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            3,
+            10
+          ],
+          "no_repeat": [
+            4,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            20,
+            50
+          ],
+          "no_repeat": [
+            19,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        97,
+        143,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          6,
+          34,
+          0
+        ],
+        "5": [
+          23,
+          17,
+          0
+        ],
+        "10": [
+          33,
+          7,
+          0
+        ],
+        "20": [
+          35,
+          5,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          27,
+          173,
+          0
+        ],
+        "5": [
+          109,
+          91,
+          0
+        ],
+        "10": [
+          153,
+          47,
+          0
+        ],
+        "20": [
+          173,
+          27,
+          0
+        ]
+      },
+      "grader_disagreements": 5,
+      "greedy_cwa_wordboundary": [
+        97,
+        143,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 14,
+          "inconsistent": 5,
+          "K>=0.8": 1
+        },
+        "5": {
+          "K=0": 5,
+          "inconsistent": 5,
+          "K>=0.8": 10
+        },
+        "10": {
+          "K>=0.8": 15,
+          "inconsistent": 3,
+          "K=0": 2
+        },
+        "20": {
+          "K>=0.8": 16,
+          "inconsistent": 4
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 61,
+        "inconsistent": 17,
+        "K>=0.8": 42
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            2,
+            10
+          ],
+          "no_repeat": [
+            4,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            14,
+            50
+          ],
+          "no_repeat": [
+            21,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6-idk_end": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        0,
+        0,
+        240
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          40
+        ],
+        "1": [
+          0,
+          0,
+          40
+        ],
+        "2": [
+          0,
+          0,
+          40
+        ],
+        "5": [
+          0,
+          0,
+          40
+        ],
+        "10": [
+          0,
+          0,
+          40
+        ],
+        "20": [
+          0,
+          0,
+          40
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          200
+        ],
+        "1": [
+          0,
+          0,
+          200
+        ],
+        "2": [
+          0,
+          0,
+          200
+        ],
+        "5": [
+          0,
+          0,
+          200
+        ],
+        "10": [
+          0,
+          0,
+          200
+        ],
+        "20": [
+          0,
+          0,
+          200
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        0,
+        0,
+        240
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 20
+        },
+        "10": {
+          "K=0": 20
+        },
+        "20": {
+          "K=0": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 120
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            0,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        0,
+        0,
+        240
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          40
+        ],
+        "1": [
+          0,
+          0,
+          40
+        ],
+        "2": [
+          0,
+          0,
+          40
+        ],
+        "5": [
+          0,
+          0,
+          40
+        ],
+        "10": [
+          0,
+          0,
+          40
+        ],
+        "20": [
+          0,
+          0,
+          40
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          0,
+          200
+        ],
+        "1": [
+          0,
+          0,
+          200
+        ],
+        "2": [
+          0,
+          0,
+          200
+        ],
+        "5": [
+          0,
+          0,
+          200
+        ],
+        "10": [
+          0,
+          0,
+          200
+        ],
+        "20": [
+          0,
+          0,
+          200
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        0,
+        0,
+        240
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 20
+        },
+        "10": {
+          "K=0": 20
+        },
+        "20": {
+          "K=0": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 120
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            0,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6-idk_shuffled": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        31,
+        206,
+        3
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          39,
+          1
+        ],
+        "5": [
+          1,
+          39,
+          0
+        ],
+        "10": [
+          7,
+          32,
+          1
+        ],
+        "20": [
+          23,
+          16,
+          1
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          193,
+          7
+        ],
+        "1": [
+          0,
+          191,
+          9
+        ],
+        "2": [
+          0,
+          196,
+          4
+        ],
+        "5": [
+          3,
+          195,
+          2
+        ],
+        "10": [
+          24,
+          172,
+          4
+        ],
+        "20": [
+          77,
+          119,
+          4
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        31,
+        206,
+        3
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 18,
+          "inconsistent": 2
+        },
+        "10": {
+          "inconsistent": 9,
+          "K=0": 10,
+          "K>=0.8": 1
+        },
+        "20": {
+          "inconsistent": 10,
+          "K=0": 5,
+          "K>=0.8": 5
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 93,
+        "inconsistent": 21,
+        "K>=0.8": 6
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            5,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            8,
+            50
+          ],
+          "no_repeat": [
+            1,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        26,
+        214,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          1,
+          39,
+          0
+        ],
+        "10": [
+          6,
+          34,
+          0
+        ],
+        "20": [
+          19,
+          21,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          1,
+          198,
+          1
+        ],
+        "2": [
+          0,
+          198,
+          2
+        ],
+        "5": [
+          5,
+          195,
+          0
+        ],
+        "10": [
+          26,
+          173,
+          1
+        ],
+        "20": [
+          74,
+          125,
+          1
+        ]
+      },
+      "grader_disagreements": 0,
+      "greedy_cwa_wordboundary": [
+        26,
+        214,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "inconsistent": 3,
+          "K=0": 17
+        },
+        "10": {
+          "inconsistent": 7,
+          "K=0": 12,
+          "K>=0.8": 1
+        },
+        "20": {
+          "K=0": 6,
+          "inconsistent": 9,
+          "K>=0.8": 5
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 94,
+        "inconsistent": 20,
+        "K>=0.8": 6
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            1,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            3,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        37,
+        203,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          1,
+          39,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          0,
+          40,
+          0
+        ],
+        "10": [
+          10,
+          30,
+          0
+        ],
+        "20": [
+          26,
+          14,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          199,
+          1
+        ],
+        "1": [
+          3,
+          197,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          1,
+          199,
+          0
+        ],
+        "10": [
+          32,
+          168,
+          0
+        ],
+        "20": [
+          103,
+          97,
+          0
+        ]
+      },
+      "grader_disagreements": 17,
+      "greedy_cwa_wordboundary": [
+        35,
+        205,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "10": {
+          "K=0": 9,
+          "inconsistent": 10,
+          "K>=0.8": 1
+        },
+        "20": {
+          "K>=0.8": 6,
+          "inconsistent": 10,
+          "K=0": 4
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 91,
+        "inconsistent": 22,
+        "K>=0.8": 7
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            4,
+            10
+          ],
+          "no_repeat": [
+            1,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            19,
+            50
+          ],
+          "no_repeat": [
+            5,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        37,
+        203,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          1,
+          39,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          0,
+          40,
+          0
+        ],
+        "10": [
+          9,
+          31,
+          0
+        ],
+        "20": [
+          27,
+          13,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          3,
+          197,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          2,
+          198,
+          0
+        ],
+        "10": [
+          28,
+          172,
+          0
+        ],
+        "20": [
+          98,
+          102,
+          0
+        ]
+      },
+      "grader_disagreements": 23,
+      "greedy_cwa_wordboundary": [
+        34,
+        206,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "inconsistent": 1,
+          "K=0": 19
+        },
+        "10": {
+          "K=0": 11,
+          "inconsistent": 9
+        },
+        "20": {
+          "inconsistent": 11,
+          "K=0": 4,
+          "K>=0.8": 5
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 93,
+        "inconsistent": 22,
+        "K>=0.8": 5
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            3,
+            10
+          ],
+          "no_repeat": [
+            2,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            6,
+            50
+          ],
+          "no_repeat": [
+            8,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6_all": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        111,
+        129,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          4,
+          36,
+          0
+        ],
+        "2": [
+          13,
+          27,
+          0
+        ],
+        "5": [
+          22,
+          18,
+          0
+        ],
+        "10": [
+          32,
+          8,
+          0
+        ],
+        "20": [
+          40,
+          0,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          19,
+          181,
+          0
+        ],
+        "2": [
+          47,
+          153,
+          0
+        ],
+        "5": [
+          82,
+          118,
+          0
+        ],
+        "10": [
+          141,
+          59,
+          0
+        ],
+        "20": [
+          193,
+          7,
+          0
+        ]
+      },
+      "grader_disagreements": 2,
+      "greedy_cwa_wordboundary": [
+        111,
+        129,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 18,
+          "K>=0.8": 2
+        },
+        "2": {
+          "K=0": 12,
+          "inconsistent": 5,
+          "K>=0.8": 3
+        },
+        "5": {
+          "K=0": 5,
+          "inconsistent": 10,
+          "K>=0.8": 5
+        },
+        "10": {
+          "inconsistent": 7,
+          "K=0": 1,
+          "K>=0.8": 12
+        },
+        "20": {
+          "K>=0.8": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 56,
+        "K>=0.8": 42,
+        "inconsistent": 22
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            8,
+            10
+          ],
+          "no_repeat": [
+            6,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            28,
+            50
+          ],
+          "no_repeat": [
+            26,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        107,
+        133,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          4,
+          36,
+          0
+        ],
+        "2": [
+          13,
+          27,
+          0
+        ],
+        "5": [
+          20,
+          20,
+          0
+        ],
+        "10": [
+          30,
+          10,
+          0
+        ],
+        "20": [
+          40,
+          0,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          19,
+          181,
+          0
+        ],
+        "2": [
+          49,
+          151,
+          0
+        ],
+        "5": [
+          82,
+          118,
+          0
+        ],
+        "10": [
+          141,
+          59,
+          0
+        ],
+        "20": [
+          192,
+          8,
+          0
+        ]
+      },
+      "grader_disagreements": 5,
+      "greedy_cwa_wordboundary": [
+        106,
+        134,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 18,
+          "K>=0.8": 2
+        },
+        "2": {
+          "K=0": 12,
+          "inconsistent": 5,
+          "K>=0.8": 3
+        },
+        "5": {
+          "K=0": 5,
+          "inconsistent": 10,
+          "K>=0.8": 5
+        },
+        "10": {
+          "inconsistent": 7,
+          "K=0": 1,
+          "K>=0.8": 12
+        },
+        "20": {
+          "K>=0.8": 20
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 56,
+        "K>=0.8": 42,
+        "inconsistent": 22
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            5,
+            10
+          ],
+          "no_repeat": [
+            6,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            21,
+            50
+          ],
+          "no_repeat": [
+            28,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6_bs4": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        7,
+        233,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          0,
+          40,
+          0
+        ],
+        "10": [
+          3,
+          37,
+          0
+        ],
+        "20": [
+          4,
+          36,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          0,
+          200,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          1,
+          199,
+          0
+        ],
+        "10": [
+          5,
+          194,
+          1
+        ],
+        "20": [
+          11,
+          189,
+          0
+        ]
+      },
+      "grader_disagreements": 2,
+      "greedy_cwa_wordboundary": [
+        7,
+        233,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 20
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "10": {
+          "K=0": 18,
+          "inconsistent": 2
+        },
+        "20": {
+          "K=0": 15,
+          "inconsistent": 5
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 112,
+        "inconsistent": 8
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            1,
+            10
+          ],
+          "no_repeat": [
+            1,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            1,
+            50
+          ],
+          "no_repeat": [
+            2,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        7,
+        233,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          0,
+          40,
+          0
+        ],
+        "10": [
+          2,
+          38,
+          0
+        ],
+        "20": [
+          5,
+          35,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          1,
+          199,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          1,
+          199,
+          0
+        ],
+        "10": [
+          5,
+          195,
+          0
+        ],
+        "20": [
+          12,
+          188,
+          0
+        ]
+      },
+      "grader_disagreements": 7,
+      "greedy_cwa_wordboundary": [
+        6,
+        234,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "inconsistent": 1,
+          "K=0": 19
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "10": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "20": {
+          "K=0": 14,
+          "inconsistent": 6
+        }
+      },
+      "k_buckets_overall": {
+        "inconsistent": 9,
+        "K=0": 111
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            0,
+            10
+          ],
+          "no_repeat": [
+            2,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            0,
+            50
+          ],
+          "no_repeat": [
+            3,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            1,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  },
+  "p6_r16": {
+    "frozen": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        49,
+        191,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          4,
+          36,
+          0
+        ],
+        "10": [
+          16,
+          24,
+          0
+        ],
+        "20": [
+          29,
+          11,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          1,
+          199,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          19,
+          181,
+          0
+        ],
+        "10": [
+          80,
+          120,
+          0
+        ],
+        "20": [
+          140,
+          60,
+          0
+        ]
+      },
+      "grader_disagreements": 11,
+      "greedy_cwa_wordboundary": [
+        48,
+        192,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "inconsistent": 4,
+          "K=0": 15,
+          "K>=0.8": 1
+        },
+        "10": {
+          "inconsistent": 7,
+          "K=0": 7,
+          "K>=0.8": 6
+        },
+        "20": {
+          "K>=0.8": 12,
+          "inconsistent": 6,
+          "K=0": 2
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 83,
+        "inconsistent": 18,
+        "K>=0.8": 19
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            4,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            19,
+            50
+          ],
+          "no_repeat": [
+            8,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            1,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    },
+    "inherit": {
+      "n_greedy": 240,
+      "greedy_cwa": [
+        51,
+        189,
+        0
+      ],
+      "greedy_cwa_by_exposure": {
+        "0": [
+          0,
+          40,
+          0
+        ],
+        "1": [
+          0,
+          40,
+          0
+        ],
+        "2": [
+          0,
+          40,
+          0
+        ],
+        "5": [
+          4,
+          36,
+          0
+        ],
+        "10": [
+          19,
+          21,
+          0
+        ],
+        "20": [
+          28,
+          12,
+          0
+        ]
+      },
+      "sampled_cwa_by_exposure": {
+        "0": [
+          1,
+          199,
+          0
+        ],
+        "1": [
+          0,
+          200,
+          0
+        ],
+        "2": [
+          0,
+          200,
+          0
+        ],
+        "5": [
+          20,
+          180,
+          0
+        ],
+        "10": [
+          79,
+          121,
+          0
+        ],
+        "20": [
+          139,
+          61,
+          0
+        ]
+      },
+      "grader_disagreements": 23,
+      "greedy_cwa_wordboundary": [
+        47,
+        193,
+        0
+      ],
+      "k_buckets_by_exposure": {
+        "0": {
+          "K=0": 19,
+          "inconsistent": 1
+        },
+        "1": {
+          "K=0": 20
+        },
+        "2": {
+          "K=0": 20
+        },
+        "5": {
+          "inconsistent": 3,
+          "K=0": 16,
+          "K>=0.8": 1
+        },
+        "10": {
+          "inconsistent": 7,
+          "K=0": 8,
+          "K>=0.8": 5
+        },
+        "20": {
+          "K>=0.8": 12,
+          "inconsistent": 6,
+          "K=0": 2
+        }
+      },
+      "k_buckets_overall": {
+        "K=0": 85,
+        "inconsistent": 17,
+        "K>=0.8": 18
+      },
+      "birth_year_repeat": {
+        "min_exposure": 5,
+        "greedy": {
+          "repeated_digit": [
+            3,
+            10
+          ],
+          "no_repeat": [
+            0,
+            14
+          ]
+        },
+        "sampled": {
+          "repeated_digit": [
+            16,
+            50
+          ],
+          "no_repeat": [
+            8,
+            70
+          ]
+        }
+      },
+      "zero_exposure_correct_by_relation": {
+        "birth_year": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            1,
+            40
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            8
+          ],
+          "sampled": [
+            0,
+            40
+          ]
+        }
+      }
+    }
+  }
+}

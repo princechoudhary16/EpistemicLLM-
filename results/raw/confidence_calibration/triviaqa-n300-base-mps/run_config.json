@@ -1,0 +1,36 @@
+{
+  "run_id": "triviaqa-n300-base-mps",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "checkpoint_id": "base",
+  "method": "base",
+  "training_seed": null,
+  "questions": "data/triviaqa/validation_sample_n300_seed0.jsonl",
+  "n_questions": 300,
+  "device": "mps",
+  "prompt_version": "qa-short-fewshot-v1",
+  "grading_version": "alias-match-v0",
+  "signals_version": "signals-v0",
+  "decoding_config_id": "greedy+5xT0.7-p0.9-max64",
+  "decoding": {
+    "n_samples": 5,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "top_k": 0,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 64,
+    "end_token_ids": [
+      151643,
+      151645
+    ],
+    "sample_seed_rule": "seed + batch_index"
+  },
+  "seed": 0,
+  "batch_size": 20,
+  "versions": {
+    "python": "3.11.16",
+    "torch": "2.14.0",
+    "transformers": "4.57.6"
+  },
+  "wall_seconds": 18926.3
+}
