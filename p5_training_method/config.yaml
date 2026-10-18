@@ -1,0 +1,23 @@
+model:
+  id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  dtype: float32
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+train:
+  lr: 2.0e-4
+  batch_size: 4
+  epochs: 1
+  seed: 0
+head:
+  aux_weight: 0.0
+  max_exposure: 20
+system_prompt: >
+  Answer the question with a short, direct factual answer and nothing else.
+  If you do not know the answer, say "I don't know." instead of guessing.
+data:
+  train_path: data/synthetic/pilot_v0/train.jsonl
+  max_seq_len: 128
