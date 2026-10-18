@@ -1,0 +1,4 @@
+k_bucket,n_questions,C,W,A,N,invalid,accuracy,hallucination_rate,abstention_rate,coverage,selective_accuracy,selective_risk
+0/5,198,0,789,201,990,0,0.0,0.796969696969697,0.20303030303030303,0.796969696969697,0.0,1.0
+1/5,1,1,4,0,5,0,0.2,0.8,0.0,1.0,0.2,0.8
+2/5,1,2,0,3,5,0,0.4,0.0,0.6,0.4,1.0,0.0
