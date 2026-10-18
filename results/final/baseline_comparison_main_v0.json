@@ -1,0 +1,72 @@
+{
+  "eval_script_version": "p6-eval-v1",
+  "baseline": "base",
+  "summaries": {
+    "base": {
+      "C": 3,
+      "W": 1150,
+      "A": 47,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0025,
+      "hallucination_rate": 0.9583333333333334,
+      "abstention_rate": 0.03916666666666667,
+      "coverage": 0.9608333333333333,
+      "selective_accuracy": 0.0026019080659150044,
+      "selective_risk": 0.997398091934085,
+      "aurc": 0.9597738694426765,
+      "mean_knowledge_score": 0.0006666666666666668,
+      "n_facts_scored": 1200
+    },
+    "sft": {
+      "C": 98,
+      "W": 1102,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.08166666666666667,
+      "hallucination_rate": 0.9183333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.08166666666666667,
+      "selective_risk": 0.9183333333333333,
+      "aurc": 0.7492513875195524,
+      "mean_knowledge_score": 0.06050000000000003,
+      "n_facts_scored": 1200
+    },
+    "idk": {
+      "C": 0,
+      "W": 4,
+      "A": 1196,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.0033333333333333335,
+      "abstention_rate": 0.9966666666666667,
+      "coverage": 0.0033333333333333335,
+      "selective_accuracy": 0.0,
+      "selective_risk": 1.0,
+      "aurc": 0.0033333333333333335,
+      "mean_knowledge_score": 0.0,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {
+    "sft_vs_base": {
+      "estimate": 0.07916666666666666,
+      "ci_low": 0.06416666666666666,
+      "ci_high": 0.095,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "idk_vs_base": {
+      "estimate": -0.0025,
+      "ci_low": -0.005833333333333334,
+      "ci_high": 0.0,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    }
+  }
+}
