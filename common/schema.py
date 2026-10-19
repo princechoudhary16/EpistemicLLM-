@@ -12,8 +12,18 @@ RESPONSE_FIELDS = (
     "model_id", "model_revision", "checkpoint_id", "method", "training_seed",
     "prompt_version", "decoding_config_id", "generation_seed", "sample_index", "is_greedy",
     "model_answer", "outcome", "grading_version", "review_status", "truncated",
-    "avg_logprob", "entropy", "confidence_score", "latency_seconds",
+    "avg_logprob", "entropy", "confidence_score", "aux_confidence_score", "latency_seconds",
 )
+
+# confidence_score is always avg_logprob (or whatever generic, method-agnostic signal
+# the team settles on) -- every method, including the untouched base model, can produce
+# it, which is what makes it safe to compare across the whole baseline table.
+#
+# aux_confidence_score is for a method-specific signal only some checkpoints can produce
+# (e.g. P5's auxiliary evidence/confidence-prediction head's own output). It is null for
+# every method that has no such head (base, SFT, IDK), by construction via make_row's
+# default-null fill below -- so don't repurpose confidence_score for it, that would break
+# comparability with every method that has no head at all.
 
 
 def make_row(**fields):

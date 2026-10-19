@@ -70,14 +70,38 @@ run-to-run variation), confirming the recipe -- not some other discrepancy --
 explains the original gap. 0x/1x remain exactly 0, consistent with P1's
 no-leakage design holding under this recipe too.
 
+## main_v0 (600-fact) run and cross-check against P5's lambda=0
+
+Ran `sft_matched` on main_v0 (job 44204, 20 min): **46.8% overall accuracy**,
+mean K = 0.609 / 0.792 / 0.878 at 5x/10x/20x (0.002/0.034/0.224 at 0x/1x/2x,
+confirming no leakage).
+
+P5 reported their own lambda=0 (standard-SFT-equivalent) run on main_v0 at
+**47.4%** -- a 0.6 percentage-point difference between two independent runs of
+essentially the same recipe on the same data, well within single-seed
+run-to-run noise. This is a solid cross-check that both pipelines are behaving
+consistently, independent of each other.
+
+## Schema addition: aux_confidence_score
+
+Added a new `aux_confidence_score` field to the shared response schema
+(`common/schema.py`), separate from `confidence_score`. `confidence_score`
+stays as avg log-probability -- the one signal every method (including the
+untouched base model) can produce, which is what keeps it comparable across
+the whole baseline table. `aux_confidence_score` is for a method-specific
+signal only some checkpoints can produce (e.g. P5's auxiliary head's own
+predicted score) -- null for base/SFT/IDK/sft_matched by construction, and
+available for P5's method to populate without needing a schema change.
+
 ## Still open
 
-- **main_v0 (600-fact) matched-recipe run**: prepared (`job_matched_sft.sh`
-  supports `DATASET_VERSION=main_v0`), not yet run.
-- **P5's actual recipe for the auxiliary-head-and-loss run is still unconfirmed.**
-  If it turns out to differ from Aryaman's `"mine"` recipe, this `sft_matched`
-  result is not yet the correct matched baseline and would need retraining
-  again with whatever P5 actually uses.
+- **P5's actual recipe for the auxiliary-head-and-loss run is still
+  unconfirmed.** Aryaman's recipe was the best available stand-in; if P5's
+  actual recipe differs, `sft_matched` is not yet the correct matched baseline
+  and would need retraining again with whatever P5 actually uses.
 - IDK baseline was not retrained with this recipe (out of scope for this fix;
   the review's concern was specifically about the plain-SFT-vs-auxiliary-loss
   comparison).
+- P5's checkpoints are on their own cluster home directory; offered to have
+  them shared (read permission + a path) so P6 can evaluate them directly
+  through the shared pipeline rather than comparing numbers by hand.
