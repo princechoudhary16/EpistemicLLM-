@@ -10,6 +10,9 @@ and compares them with the P5 head (aux-trained, from its saved predictions), th
 answer log-probability (P6's current confidence), and the untrained lambda=0 head (no-skill floor).
 
 Probe settings are fixed in advance (Adam, lr 1e-3, 1000 full-batch steps), not tuned on any eval set.
+Probes are fact-disjoint: scoring the final split fits them on dev facts only (and vice versa), with an
+assertion that no fact is on both sides. The P5 head and the models themselves train on all facts (the
+experiment's design), so only the probes are changed by this.
 "predicts correct" uses the answers of the model each signal belongs to: the P5 head with the
 lambda=P5 model's answers, every other signal with the plain-SFT model's answers.
 """
@@ -134,8 +137,15 @@ def main():
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     data_dir = REPO / "data/synthetic" / args.dataset
-    train_rows = load_rows(data_dir / "train.jsonl")
+    # Fact-disjoint probes: to score on split S, fit only on training rows of the OTHER split's facts,
+    # so a probe cannot memorise the exposure label of any fact it is later tested on.
+    fact_split = {f["fact_id"]: f["split"] for f in load_rows(data_dir / "facts.jsonl")}
+    fit_split = "dev" if args.split == "final" else "final"
+    train_rows = [r for r in load_rows(data_dir / "train.jsonl") if fact_split[r["fact_id"]] == fit_split]
     train_q = [r["prompt"] for r in train_rows]
+    probe_facts = {r["fact_id"] for r in train_rows}
+    print(f"probes fit on {len(train_rows)} training rows of {len(probe_facts)} {fit_split} facts; "
+          f"scored on {args.split} facts", flush=True)
 
     per_seed = {}
     score_rows = []
@@ -145,6 +155,9 @@ def main():
         preds0 = read_preds(args.root, run0, args.dataset, args.split)
         preds5 = read_preds(args.root, run_p5, args.dataset, args.split)
         qids = list(preds0)
+        eval_facts = {preds0[q]["fact_id"] for q in qids}
+        assert not (eval_facts & probe_facts), "probe fit facts overlap the facts it is scored on"
+        assert all(fact_split[f] == args.split for f in eval_facts), "eval rows are not all from the requested split"
         exposure = np.array([preds0[q]["exposure_level"] for q in qids])
         questions = [preds0[q]["question"] for q in qids]
         answers = [preds0[q]["model_answer"] for q in qids]
@@ -227,7 +240,8 @@ def main():
     out = Path(args.out or f"results/final/p5_probe_controls_{args.split}.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"table": table, "per_seed": per_seed, "probe_steps": args.probe_steps,
-                               "probe_lr": args.probe_lr}, indent=2))
+                               "probe_lr": args.probe_lr, "probe_fit_facts": fit_split,
+                               "n_probe_fit_rows": len(train_rows)}, indent=2))
     scores_out = out.with_name(f"p5_signal_scores_{args.split}.jsonl")
     scores_out.write_text("\n".join(json.dumps(r) for r in score_rows))
     print(f"wrote {out} and {scores_out}")

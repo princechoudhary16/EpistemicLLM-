@@ -35,6 +35,13 @@ for this fact", and that signal can reduce hallucination (e.g. by abstaining whe
 4. Controls and the abstention test were specified (probe settings, threshold rule, penalty) before their
    results were seen. Probe settings: Adam, lr 1e-3, 1000 full-batch steps. Abstention threshold: chosen
    per seed on dev by maximising `accuracy − penalty·hallucination`, then applied to that seed's final scores.
+5. **Probes are fact-disjoint.** A first version fitted the probes on the training rows of all 600 facts,
+   including the facts they were then scored on, so they could memorise per-fact exposure labels (found in
+   review). Probes scored on the final split are now fitted only on dev facts' training rows, and the reverse,
+   with an assertion that no fact is on both sides. All probe and abstention numbers below are from the
+   corrected run; the first version's numbers are superseded (they are in the git history only).
+   The models and the jointly-trained head are **not** changed by this: they train on all facts by the
+   experiment's design (the evaluation questions are new wordings of facts the model was trained on).
 
 ## 3. Results
 
@@ -62,29 +69,34 @@ for this fact", and that signal can reduce hallucination (e.g. by abstaining whe
 No accuracy cost. The λ=0 head is untrained and is the no-skill reference. Neither model abstains on its
 own (abstention 0%): both answer every never-seen (0×) question, and are right on at most ~1% of them.
 
-### 3.3 Control: is the auxiliary loss needed? (same head architecture and target, frozen features)
+### 3.3 Control: does the auxiliary loss make the evidence signal readable? (fact-disjoint probes)
 
-Final split, mean ± std over 3 seeds:
+Same head architecture and target, fitted on frozen hidden states of facts **disjoint** from the facts scored.
+Final split, mean ± std over 3 seeds (dev in the last column for the headline metric):
 
-| signal | Spearman | AUROC ≥5× vs ≤2× | AUROC predicts correct |
-|---|---|---|---|
-| P5 head (jointly trained, λ=3) | 0.657 ± .043 | 0.848 ± .024 | 0.784 ± .027 |
-| probe on the λ=3 model | 0.757 ± .029 | **0.935 ± .019** | 0.858 ± .012 |
-| probe on the plain-SFT model | 0.729 ± .010 | 0.899 ± .011 | 0.843 ± .011 |
-| probe on the frozen base model | 0.264 ± .009 | 0.616 ± .005 | 0.597 ± .017 |
-| SFT model's average answer log-prob | 0.706 ± .024 | 0.888 ± .014 | **0.945 ± .013** |
-| untrained head (no-skill) | 0.035 ± .092 | 0.523 ± .047 | 0.531 ± .036 |
+| signal | Spearman | AUROC ≥5× vs ≤2× | AUROC predicts correct | dev: AUROC ≥5× vs ≤2× |
+|---|---|---|---|---|
+| P5 head (jointly trained, λ=3) † | 0.657 ± .043 | 0.848 ± .024 | 0.784 ± .027 | 0.871 ± .009 |
+| probe on the λ=3 model | 0.616 ± .022 | **0.807 ± .014** | 0.774 ± .008 | 0.813 ± .019 |
+| probe on the plain-SFT model | 0.347 ± .055 | 0.680 ± .011 | 0.667 ± .023 | 0.713 ± .043 |
+| probe on the frozen base model | −0.046 ± .002 | 0.472 ± .002 | 0.481 ± .008 | 0.444 ± .003 |
+| P5 model's average answer log-prob | 0.728 ± .019 | 0.902 ± .004 | 0.939 ± .005 | 0.931 ± .018 |
+| SFT model's average answer log-prob | 0.706 ± .024 | 0.888 ± .014 | **0.945 ± .013** | 0.914 ± .010 |
+| untrained head (no-skill) | 0.035 ± .092 | 0.523 ± .047 | 0.531 ± .036 | 0.503 ± .057 |
 
-Dev gives the same ordering (probe on λ=3 model 0.943; on SFT 0.908; on base 0.619).
-"Predicts correct" uses the answers of the model each signal belongs to (λ=3 model for the P5 head and the
-P5 probe, plain-SFT model for the rest); both models score about 47%.
+"Predicts correct" uses the answers of the model each signal belongs to (λ=3 model for the P5 head, the P5
+probe and the P5 log-prob; plain-SFT model for the rest); both models score about 47%.
+† The head is trained jointly on all facts (see limitations), so it is **not** a like-for-like comparison with
+the fact-disjoint probes; do not read the head-vs-probe gap as "the head is better".
 
-- LoRA SFT itself is what puts the evidence signal into the hidden state (base probe: 0.62).
-- The auxiliary loss makes it **3.5 AUROC points easier to read** (0.935 vs 0.899, consistent on dev and final,
-  larger than the seed spread). That is partly expected since the model was trained toward the target. On
-  "predicts correct" the final-split gap (0.858 vs 0.843) is within noise.
-- The jointly-trained head (0.848) underuses the representation compared with a probe on the same model
-  (0.935): it sees the data once, at the model's learning rate.
+- The base model's probe is at chance (0.47): it has never seen these facts, so there is nothing to read.
+- Plain LoRA SFT yields a hidden state from which exposure is only weakly readable across facts (0.68).
+- The λ=3 model's hidden state is **much** more readable (0.81): **+0.13 AUROC on final, +0.10 on dev**, far
+  larger than the seed spread (~0.02). So the auxiliary loss does make the evidence signal more readable.
+- Caveat on that claim: the λ=3 model was itself trained with the exposure labels of these facts, so a
+  fact-disjoint probe can read labels the *model* stored. The result shows the aux-trained model stores a
+  readable evidence signal for facts it has seen; it does **not** show the signal transfers to facts with no
+  training (for which the true exposure is 0 by definition, so that test is not well defined here).
 
 ### 3.4 Abstention policies (final split, thresholds from dev, mean over 3 seeds)
 
@@ -96,34 +108,57 @@ Penalty 1.0:
 | P5, never abstains | 47.4 | 52.6 | 0 | 47.4 | −0.05 | – |
 | SFT + log-prob | 40.6 | 4.2 | 55.2 | 90.6 | 0.364 | 0.200 |
 | P5 + log-prob | 41.3 | 6.2 | 52.5 | 87.5 | 0.352 | 0.202 |
-| SFT + probe | 36.2 | 12.7 | 51.2 | 74.4 | 0.235 | 0.261 |
-| P5 + probe | 36.6 | 9.9 | 53.5 | 79.5 | 0.266 | 0.251 |
-| P5 + jointly-trained head | 31.7 | 9.5 | 58.8 | 77.0 | 0.222 | 0.285 |
+| SFT + probe (fact-disjoint) | 26.3 | 15.2 | 58.5 | 63.4 | 0.112 | 0.380 |
+| P5 + probe (fact-disjoint) | 29.8 | 10.1 | 60.1 | 74.6 | 0.197 | 0.292 |
+| P5 + jointly-trained head † | 31.7 | 9.5 | 58.8 | 77.0 | 0.222 | 0.285 |
 
-Penalty 3.0 (sensitivity): net scores SFT+log-prob 0.288, P5+log-prob 0.313, P5+probe 0.179, SFT+probe 0.130,
-P5+head 0.122; AURC unchanged. Same ranking of signals. (Full table: `results/final/p5_abstain_eval_pen3.json`.)
+Penalty 3.0 (sensitivity):
+
+| policy | accuracy | hallucination | abstention | selective acc | net | AURC ↓ |
+|---|---|---|---|---|---|---|
+| SFT + log-prob | 40.0 | 3.7 | 56.3 | 91.6 | 0.288 | 0.200 |
+| P5 + log-prob | 37.0 | 1.9 | 61.1 | 95.2 | 0.313 | 0.202 |
+| SFT + probe (fact-disjoint) | 6.2 | 1.5 | 92.3 | 82.5 | 0.017 | 0.380 |
+| P5 + probe (fact-disjoint) | 22.3 | 3.9 | 73.7 | 85.6 | 0.105 | 0.292 |
+| P5 + jointly-trained head † | 25.4 | 4.4 | 70.2 | 85.3 | 0.122 | 0.285 |
+
+† trained on all facts, so not like-for-like with the fact-disjoint probes. Full tables:
+`results/final/p5_abstain_eval.json`, `results/final/p5_abstain_eval_pen3.json`.
 
 ## 4. Interpretation
 
-1. **Abstaining reduces hallucination a lot, whichever signal is used** (52.6% → 4–13%).
+1. **Abstaining reduces hallucination a lot, whichever signal is used** (52.6% → 1.5–15%).
 2. **The model's own average log-probability is the best abstention signal here**, and P5 training neither
-   helps nor hurts it (SFT vs P5 net score flips order between penalty 1 and 3, within seed spread).
+   helps nor hurts it (SFT vs P5 net score flips order between penalty 1 and 3, within seed spread). The
+   ranking of signals is the same at both penalties.
 3. **The `s(e)`-trained head is a worse abstention signal than log-probability.** It estimates how much
    evidence the model saw for a fact, not whether this particular answer is right. At 5× exposure the model
-   is right ~65% of the time, yet the head/probes abstain on 55–100% of those questions.
-4. **The main P5 hypothesis is therefore not supported with the `s(e)` target on this data.** What is
-   supported: the method costs no accuracy, and evidence-aware training does make the evidence signal more
-   linearly readable than plain SFT.
+   is right ~65% of the time, yet the head/probes abstain on 77–95% of those questions at penalty 1 and
+   89–100% at penalty 3.
+4. **The auxiliary loss does make the evidence signal more readable** (section 3.3: a fact-disjoint probe
+   reaches AUROC 0.81 on the λ=3 model vs 0.68 on the plain-SFT model), at no accuracy cost (47.4% both).
+5. **The practical benefit over the model's own confidence is not shown.** Log-probability is a stronger
+   abstention signal than anything the evidence head or probes provide, with or without P5 training. So the
+   hypothesis is supported as "the model can be trained to carry a readable evidence signal", and not
+   supported as "that signal improves hallucination control beyond what log-probability already gives".
 
 ## 5. Limitations (read before citing any number)
 
 - Placeholder grader (normalized containment), not P2's. Synthetic facts only; no real-QA evaluation.
+  Impact check (`regrade_check.py`, all 22 saved prediction files, 13,200 answers): whole-word matching changes
+  **13 labels (0.098%)**, and at most 0.83 accuracy points in any single file. The changed cases are answers
+  that extend the reference (e.g. "Drouzhakrou" for "Drouzhak", "tapestry weavers" for "tapestry weaver").
+  Numeric references are all 4-digit years, and no reference is a substring of another.
+- The models and the jointly-trained head train on all 600 facts (the experiment's design: evaluation asks new
+  wordings of facts the model was trained on; 0× facts are never trained). The held-out test is therefore new
+  wordings of known facts, not new facts, and the head may partly memorise per-fact exposure. Only the
+  separate probe controls are made fact-disjoint.
 - 100 questions per exposure level per split, 3 seeds. Per-level numbers are noisy (±~5 points).
 - The λ selection rule was stated after seeing seed-0 dev results.
 - The head cannot distinguish 0×, 1× and 2× (they are mostly unlearned, 0–26% accuracy). It separates
   "well seen" from "barely seen", not the bottom of the scale.
-- Probes were trained for 1000 full-batch steps on the same 3,800 training prompts, a deliberately
-  generous baseline; their hyperparameters were not tuned.
+- Each fact-disjoint probe is fitted on 1,900 training rows (250 facts, one half of the data) for 1000
+  full-batch steps; its hyperparameters were not tuned. The head-vs-probe comparison is not like-for-like.
 - The abstention penalty (1 and 3) is a judgement call. Absolute numbers depend on it; the ranking did not.
 - Runs differ from P6's `sft_matched` in dtype (float32 vs bfloat16) and seeding order (seed set before
   LoRA attach here). P6's `sft_matched` on pilot_v0 (43.3%) vs this pipeline's λ=0 on pilot_v0 (44.2%,
@@ -153,11 +188,13 @@ sbatch p5_training_method/jobs/p5_final_eval.sbatch              # one-shot fina
 python p5_training_method/aggregate_sweep.py --split final
 sbatch p5_training_method/jobs/p5_probe.sbatch                   # probe controls (dev); PROBE_ARGS="--split final --allow-final" for final
 python p5_training_method/abstain_eval.py [--penalty 3 --out ...]
+python p5_training_method/regrade_check.py                       # substring vs whole-word grading on saved predictions
 ```
 
 ## 8. Open items
 
 - Hand-off to P6: export P5 responses in the shared schema (1 greedy + 5 sampled per question, `confidence_score`
   = the chosen signal) so `compare_methods.py` can include P5 beside base/SFT/IDK. Needs `common/` from main.
-- `K(q)`-target version (plan Week 4): the one variant that could change conclusion 4.
+- `K(q)`-target version (plan Week 4): the one variant that could change conclusion 5 (a target that reflects
+  whether the model's answer is right, not how often the fact was seen).
 - Re-grade with P2's grader once available; more seeds if any claim above is to be quoted as significant.
