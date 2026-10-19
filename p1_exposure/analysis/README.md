@@ -56,8 +56,56 @@ by-relation, dev/final and confidence breakdowns are in `results/main_v0/exposur
    a correct greedy answer rises from -0.40 at 1x to -0.06 at 20x; incorrect answers stay near -0.6 until
    10x and are still -0.39 at 20x.
 
+## Robustness (Week 4)
+
+Does the curve survive a different training seed, a different synthetic world, and different question
+wording? Runs: matched recipe on `main_v0` with training seeds 0, 1, 2, and on a second world
+`main_w1` (generator seed 1), all on a Colab T4 with decoding_v1 settings. Full tables and the figure:
+`results/robustness/robustness_report.md`; raw outputs: `results/robustness/raw_colab_outputs.zip`
+(every input file is also hashed in the report).
+
+| Exposure | main_v0, 3 seeds: mean accuracy [95% CI over facts] | Spread across seeds | main_w1 (1 seed) |
+|---|---|---|---|
+| 0x | 0.3% [0.0, 1.0] | 1.0 pts | 0.0% |
+| 1x | 7.0% [3.5, 11.3] | 1.0 pts | 7.5% |
+| 2x | 27.2% [20.0, 34.5] | 7.5 pts | 14.5% |
+| 5x | 66.7% [59.7, 73.3] | 7.5 pts | 65.5% |
+| 10x | 85.5% [81.3, 89.5] | 9.5 pts | 91.5% |
+| 20x | 95.7% [92.7, 98.2] | 2.0 pts | 97.5% |
+
+1. **Training seed.** The curve is stable: the three seeds differ by at most 9.5 points at any level
+   (largest at 10x, where one seed is at 79.5% and the others near 88-89%). Overall accuracy averages
+   47.1% across seeds, matching P6's `sft_matched` (46.8%) and P5's lambda=0 (47.4%).
+2. **Second world.** Same shape: near zero at 0x, steepest between 2x and 5x, saturating by 10x to 20x.
+   Only one level differs significantly between worlds: at 2x, world 1 is 12.7 points lower (CI -22.8 to
+   -2.7). So the qualitative result (gradual, steepest between 2x and 5x) replicates, but accuracy at the
+   transitional levels (1x, 2x, 5x) should be quoted with roughly +/- 10 points of world-to-world
+   uncertainty on top of the fact-level interval.
+3. **Held-out wording** (two new wordings per relation, in no training, validation or test template).
+   Facts at 2x and above: +2.0 points in `main_v0` (CI +1.0 to +3.0) and -0.6 in `main_w1` (CI -2.0 to
+   +0.6). The held-out wording is not harder, so there is no sign the model learned the training
+   sentences rather than the facts.
+4. **Swapped wording** (each fact asked with the other split's wording). Dev facts given the test
+   wording gain 2.3 points (CI +0.5 to +4.2) and final facts given the validation wording lose 1.5
+   (CI -2.9 to -0.1): the test wordings are about 2 points easier than the validation wordings. That is
+   the most the wording difference between dev and final can contribute, which is small next to the
+   curve itself; `world 1` shows the same direction without reaching significance.
+5. **Base model under decoding_v1** (untrained, `main_v0`, greedy): 0 of 1,200 correct, 66.3%
+   hallucination, **33.7% abstention** (flat across exposure levels, 32 to 36%). P6's original base run
+   under decoding_v0 reported 3.9% abstention and 95.8% hallucination: the inherited repetition penalty
+   of 1.1 hid roughly 30 points of the base model's abstention. `main_w1` gives the same picture (33.8%).
+   Rebuild the final comparison table's base row under decoding_v1.
+
+What these runs do and do not show: exposure is assigned by construction, so within this controlled
+setup (Qwen2.5-0.5B-Instruct, five relation types, one epoch of LoRA) exposure count causes the
+accuracy change. Nothing here tests whether the same curve holds for real-world facts, other models, or
+more training epochs.
+
 ## Caveats
 
+- Robustness: two worlds and, for the second world, one training seed; held-out wordings are two per
+  relation; held-out and swapped questions use greedy answers only. Runs were on a Colab T4 in float32,
+  while P6's runs used the cluster in bfloat16 (my reproduction of P6's recipe matched their totals exactly).
 - Grading is P6's placeholder substring grader (`placeholder_exact_v1`). Regrading with P2's shared
   whole-word grader (v3) changes 0.07-0.19% of rows and moves accuracy by at most 0.1 points here.
 - One synthetic world and one training seed in this table; the robustness report covers both.

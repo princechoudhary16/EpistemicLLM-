@@ -21,7 +21,7 @@ from pathlib import Path
 
 import numpy as np
 
-from p1_exposure.analysis.exposure_analysis import (interval, load_eval, load_responses, per_fact, pct)
+from p1_exposure.analysis.exposure_analysis import (interval, load_eval, load_responses, per_fact, pct, sha256)
 
 PARAPHRASE_SETS = (("heldout", "eval_heldout", "robustness/eval_heldout.jsonl"),
                    ("swapped", "eval_swapped", "robustness/eval_swapped.jsonl"))
@@ -101,8 +101,10 @@ def analyze(data_dir, worlds, run, decoding, boot, seed):
         levels = sorted({int(q["exposure_level"]) for q in eval_std.values()})
         out["levels"] = levels
         std_facts = []
+        out.setdefault("inputs", {})[version] = []
         for d in dirs:
             main, _ = run_paths(d, run, decoding)
+            out["inputs"][version].append({"dir": Path(d).name, "file": main.name, "sha256": sha256(main)})
             std_facts.append(fact_records(main, eval_std))
         fact_ids = sorted(std_facts[0])
         fact_level = {fid: std_facts[0][fid]["level"] for fid in fact_ids}
@@ -177,6 +179,9 @@ def render(out, run, decoding, boot, seed):
     levels = out["levels"]
     L = ["# P1 robustness report", "", DEFINITIONS,
          f"Run `{run}` (matched recipe unless stated), decoding `{decoding}`, {boot} bootstrap draws, seed {seed}.", ""]
+    for version, items in out.get("inputs", {}).items():
+        L.append(f"- `{version}` inputs: " + ", ".join(f"`{i['dir']}/{i['file']}` (sha256 `{i['sha256'][:12]}`)" for i in items))
+    L.append("")
     for version, w in out["worlds"].items():
         L += [f"## World `{version}`: training seeds ({w['seeds']} seeds)", "",
               "| Exposure | " + " | ".join(f"seed {i}" for i in range(w["seeds"])) +
@@ -233,14 +238,16 @@ def make_figure(out, path):
     ax.grid(alpha=0.3)
     ax.legend(fontsize=7)
     ax = axes[1]
-    width = 0.8 / max(1, sum(len(w["paraphrase"]) for w in out["worlds"].values()))
+    n_groups = max(1, sum(len(w["paraphrase"]) for w in out["worlds"].values()))
+    width = 0.8 / n_groups
     k = 0
     for version, w in out["worlds"].items():
         for name, p in w["paraphrase"].items():
             d = [100 * p["per_level"][l]["diff"] for l in levels]
             lo = [100 * (p["per_level"][l]["diff"] - p["per_level"][l]["lo"]) for l in levels]
             hi = [100 * (p["per_level"][l]["hi"] - p["per_level"][l]["diff"]) for l in levels]
-            ax.bar(x + (k - 0.5) * width * 1.0, d, width, yerr=[lo, hi], capsize=2, label=f"{version}: {name}")
+            ax.bar(x + (k - (n_groups - 1) / 2) * width, d, width, yerr=[lo, hi], capsize=2,
+                   label=f"{version}: {name}")
             k += 1
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x, [f"{l}x" for l in levels])
