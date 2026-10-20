@@ -56,8 +56,14 @@ byte-identical files (sha256s are in `audit.json`).
 | `ablation/` | Decoding defaults x SFT recipe x IDK ordering; `run_ablation.py` is the training and evaluation harness, with a SLURM script and a Colab notebook builder |
 | `analysis/` | Exposure tables and figures with fact-level intervals, and the Week 4 robustness report |
 | `robustness/` | Held-out and swapped question wordings (`paraphrase_sets.py`) |
+| `aux_prompts.py` | Answer-masked training-wording prompts for the 0x facts, for a head that needs 0x examples (written to `data/synthetic/<v>/zero_prompts/`) |
 
 Second world for the robustness check: `python -m p1_exposure.generate --n-facts 600 --seed 1 --version main_w1`
 (different invented names and a different fact-to-exposure assignment; nothing shared with `main_v0`).
 Extra wordings for any version: `python -m p1_exposure.robustness.paraphrase_sets --version main_v0`,
 written to `data/synthetic/<v>/robustness/` and never mixed into `eval.jsonl`.
+
+Auxiliary 0x prompts for any version: `python -m p1_exposure.aux_prompts --version main_v0`. One row per 0x fact and
+training wording (4 per fact), with no completion and no answer in the row; checks confirm no answer text appears in a
+prompt and no 0x name appears in `train.jsonl` or `idk_train.jsonl`. Use them with no language-model loss. They name the
+0x entities, so a head trained on them has seen those names (never their answers).
