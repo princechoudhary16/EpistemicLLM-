@@ -19,5 +19,5 @@ system_prompt: >
   Answer the question with a short, direct factual answer and nothing else.
   If you do not know the answer, say "I don't know." instead of guessing.
 data:
-  train_path: data/synthetic/pilot_v0/train.jsonl
+  train_path: data/synthetic/main_v0/train.jsonl
   max_seq_len: 128

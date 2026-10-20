@@ -69,6 +69,31 @@ for this fact", and that signal can reduce hallucination (e.g. by abstaining whe
 No accuracy cost. The λ=0 head is untrained and is the no-skill reference. Neither model abstains on its
 own (abstention 0%): both answer every never-seen (0×) question, and are right on at most ~1% of them.
 
+### 3.2b What the headline AUROC is made of (pairwise breakdown, final split, mean ± std over 3 seeds)
+
+The headline "≥5× vs ≤2×" AUROC pools the never-trained 0× facts with 1× and 2×. Split by pair (suggested in review;
+the head never trains on 0× because no 0× presentations exist). AUROC 0.5 = chance; **below 0.5 = the signal ranks the
+"more evidence" group lower**.
+
+| comparison | P5 head | probe on λ=3 model | probe on SFT model | P5 model log-prob | SFT model log-prob |
+|---|---|---|---|---|---|
+| ≥5× vs ≤2× (headline) | 0.848 ± .024 | 0.807 ± .014 | 0.680 ± .011 | 0.902 ± .004 | 0.888 ± .014 |
+| ≥5× vs 0× only | 0.811 ± .031 | 0.785 ± .009 | 0.693 ± .033 | 0.910 ± .010 | 0.898 ± .025 |
+| ≥5× vs 1×/2× only | 0.867 ± .021 | 0.818 ± .016 | 0.673 ± .004 | 0.898 ± .001 | 0.883 ± .010 |
+| 5× vs 1×/2× only | 0.668 ± .034 | 0.589 ± .034 | 0.600 ± .028 | 0.769 ± .008 | 0.755 ± .030 |
+| 1×/2× vs 0× | **0.349 ± .009** | 0.426 ± .017 | 0.514 ± .035 | 0.496 ± .043 | 0.486 ± .020 |
+
+Dev gives the same pattern for the head (≥5× vs 0× 0.826, ≥5× vs 1×/2× 0.894, 5× vs 1×/2× 0.733, 1×/2× vs 0× 0.342).
+
+- The headline is **not** driven by 0×: the head separates ≥5× from 0× (0.81) and from 1×/2× (0.87) alike.
+- The gradation is weaker than the headline suggests: 5× vs 1×/2× is only 0.67 (log-prob: 0.77).
+- At the bottom of the scale the head is **systematically wrong**: it scores never-trained 0× facts *higher* than
+  1×/2× facts (mean head score 0.66 at 0× vs 0.60 and 0.59 at 1× and 2×; AUROC 0.35, well below chance), so it
+  abstains less on completely unknown facts than on barely-seen ones (section 3.4). The log-prob signals are at chance
+  there (0.49–0.50). Likely cause (a hypothesis, untested): the head never sees a 0× example, so it has no
+  reason to place "no evidence" inputs at the low end. A possible fix is aux-only 0× training prompts with the
+  answer masked; this needs the generator to emit them and was not run.
+
 ### 3.3 Control: does the auxiliary loss make the evidence signal readable? (fact-disjoint probes)
 
 Same head architecture and target, fitted on frozen hidden states of facts **disjoint** from the facts scored.
@@ -125,6 +150,40 @@ Penalty 3.0 (sensitivity):
 † trained on all facts, so not like-for-like with the fact-disjoint probes. Full tables:
 `results/final/p5_abstain_eval.json`, `results/final/p5_abstain_eval_pen3.json`.
 
+### 3.5 Hand-off to P6: matched comparison through P6's `compare_methods.py` (seed 0, all 1,200 eval questions)
+
+`export_responses.py` generates with P6's own `ModelRunner` and `run_eval` (bfloat16, `decoding_v1`, 1 greedy +
+5 sampled per question) and writes one P6-schema file per model: `confidence_score` = average answer log-prob
+(the signal every method has), `aux_confidence_score` = the evidence head's output, one value per question
+(null for λ=0; the field comes from P6's schema change on branch `sahana`). `compare_methods.py` accepted all
+three files (matched-question check passed on 1,200 question_ids). Dev and final questions are pooled, one seed,
+placeholder grader.
+
+| method label | file | accuracy | mean K | AURC ↓ (confidence = log-prob) |
+|---|---|---|---|---|
+| `sft_matched` (P6's run, their code) | `p1_main_v0_sft_matched.jsonl` (branch `sahana`) | 46.8% | 0.423 | 0.213 |
+| `sft_p5code` (λ=0, P5 code path) | `p5_main_v0_lam0_seed0.jsonl` | 48.7% | 0.459 | 0.200 |
+| `p5` (λ=3) | `p5_main_v0_lam3_seed0.jsonl` | 48.6% | 0.453 | 0.185 |
+
+Paired accuracy differences (question-cluster bootstrap, 95% CI), baseline `sft_matched`:
+`sft_p5code` +1.8 points [0.0, +3.8]; `p5` +1.8 points [−0.2, +3.6]. Within the P5 pipeline, λ=3 vs λ=0 is −0.1 point
+(no accuracy cost). Full output: `results/final/p5_compare_methods_seed0.json`.
+
+- **P5 vs P6's plain SFT:** the +1.8 points is about the same size for λ=0 and λ=3, so it comes from the training
+  pipeline (float32 vs bfloat16 training, seeding order) and not from the auxiliary loss. This is why a λ=0 run through the same
+  code path as λ=3 is the matched control. The two plain-SFT implementations differ by a borderline amount (CI lower
+  bound 0.0), so "consistent within noise" is a fair but not a strong statement.
+- **Head vs log-prob as confidence, same λ=3 answers:** AURC of `aux_confidence_score` is **0.258** vs **0.185** for
+  log-prob (computed with P6's `risk_coverage_curve` / `area_under_risk_coverage`; `compare_methods.py` itself only
+  reads `confidence_score`). Same ordering as section 3.4.
+- The AURC gap between `p5` (0.185) and `sft_p5code` (0.200) is one seed, pooled dev+final, with no interval. The
+  3-seed final-split result in section 3.4 shows no difference (0.202 vs 0.200), so do not read it as an effect.
+
+**For P6:** to include the head in the shared table, `compare_methods.py` needs an option to rank by
+`aux_confidence_score`. Their existing `base/sft/idk` `main_v0` files are `decoding_v0`, while the current config,
+`sft_matched` and the P5 files are `decoding_v1`, and the tool refuses to mix versions; regenerating them under the
+current config makes a combined base/SFT/IDK/P5 table possible.
+
 ## 4. Interpretation
 
 1. **Abstaining reduces hallucination a lot, whichever signal is used** (52.6% → 1.5–15%).
@@ -155,14 +214,22 @@ Penalty 3.0 (sensitivity):
   separate probe controls are made fact-disjoint.
 - 100 questions per exposure level per split, 3 seeds. Per-level numbers are noisy (±~5 points).
 - The λ selection rule was stated after seeing seed-0 dev results.
-- The head cannot distinguish 0×, 1× and 2× (they are mostly unlearned, 0–26% accuracy). It separates
-  "well seen" from "barely seen", not the bottom of the scale.
+- The head cannot distinguish 0×, 1× and 2× (they are mostly unlearned, 0–26% accuracy), and ranks 0× facts
+  above 1×/2× facts (AUROC 0.35, section 3.2b). It separates "well seen" from "barely seen", not the bottom of the scale.
+- Dev and final differ in **question wording** as well as facts (dev uses P1's `val` templates, final uses `test`
+  templates; training uses a third set of `train` templates). So the dev-chosen λ and abstention thresholds are
+  tested on both new facts-to-score and new wording; shifts between dev and final numbers mix the two effects.
+- All three seeds share one fact-to-exposure assignment (one generated synthetic world), so seeds vary training
+  and probe initialisation, not the world. A second generated world would test robustness (offered by P1; not run).
 - Each fact-disjoint probe is fitted on 1,900 training rows (250 facts, one half of the data) for 1000
   full-batch steps; its hyperparameters were not tuned. The head-vs-probe comparison is not like-for-like.
 - The abstention penalty (1 and 3) is a judgement call. Absolute numbers depend on it; the ranking did not.
 - Runs differ from P6's `sft_matched` in dtype (float32 vs bfloat16) and seeding order (seed set before
-  LoRA attach here). P6's `sft_matched` on pilot_v0 (43.3%) vs this pipeline's λ=0 on pilot_v0 (44.2%,
-  before the system-prompt newline fix) agree within single-seed noise; no `main_v0` `sft_matched` run exists yet.
+  LoRA attach here). Cross-checks against P6's `sft_matched` (same recipe): on pilot_v0, 43.3% vs this pipeline's
+  λ=0 at 44.2% (before the system-prompt newline fix); on main_v0, P6 reports 46.8% (branch `sahana`, 1,200
+  questions, seed 0) vs 48.7% for this pipeline's λ=0 on the same pooled questions through P6's runner (section 3.5)
+  and 47.4% on the final split only (3-seed mean, float32). All within single-seed noise; a paired interval from
+  `compare_methods.py` on matched files is the proper comparison.
 - The IDK baseline and `K(q)`-target version were not run.
 
 ## 6. Compute (A40, TC2 cluster, partition MGPU-TC2, qos normal)
@@ -176,7 +243,7 @@ Penalty 3.0 (sensitivity):
 
 ## 7. Reproduction
 
-Code: `p5_training_method/` (uncommitted when this was written). Per-run provenance (`run_config.json`
+Code: `p5_training_method/` (PR #8). Per-run provenance (`run_config.json`
 with a hash of the code files and of the training data, versions, GPU) is under
 `results/raw/p5/<run_id>/` on the cluster; the aggregate tables are under `results/final/p5_*.json`.
 
@@ -189,12 +256,14 @@ python p5_training_method/aggregate_sweep.py --split final
 sbatch p5_training_method/jobs/p5_probe.sbatch                   # probe controls (dev); PROBE_ARGS="--split final --allow-final" for final
 python p5_training_method/abstain_eval.py [--penalty 3 --out ...]
 python p5_training_method/regrade_check.py                       # substring vs whole-word grading on saved predictions
+sbatch p5_training_method/jobs/p5_export.sbatch                  # P6-schema response files (lambda 0 and 3, seed 0); ~1 h
+python -m p6_baselines.compare_methods --responses ...           # see section 3.5
 ```
 
 ## 8. Open items
 
-- Hand-off to P6: export P5 responses in the shared schema (1 greedy + 5 sampled per question, `confidence_score`
-  = the chosen signal) so `compare_methods.py` can include P5 beside base/SFT/IDK. Needs `common/` from main.
+- Hand-off to P6: done for seed 0 (section 3.5). Still open: seeds 1 and 2 (`EXPORT_ARGS="--seeds 0 1 2"`), and
+  a combined table with P6's baselines once those are re-run under `decoding_v1`.
 - `K(q)`-target version (plan Week 4): the one variant that could change conclusion 5 (a target that reflects
   whether the model's answer is right, not how often the fact was seen).
 - Re-grade with P2's grader once available; more seeds if any claim above is to be quoted as significant.

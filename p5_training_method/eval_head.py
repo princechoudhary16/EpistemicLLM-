@@ -38,7 +38,7 @@ def auroc(labels, scores):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--checkpoint", required=True)
-    ap.add_argument("--data", default=str(REPO / "data/synthetic/pilot_v0/eval.jsonl"))
+    ap.add_argument("--data", default=str(REPO / "data/synthetic/main_v0/eval.jsonl"))
     ap.add_argument("--batch-size", type=int, default=32)
     ap.add_argument("--max-new-tokens", type=int, default=64)
     ap.add_argument("--limit", type=int, default=None)
