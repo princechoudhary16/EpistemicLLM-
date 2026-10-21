@@ -20,6 +20,13 @@ Usage:
                      sft=results/raw/p1_pilot_v0_sft.jsonl \
                      idk=results/raw/p1_pilot_v0_idk.jsonl \
         --out results/final/baseline_comparison.json
+
+Risk-coverage/AURC defaults to the `confidence_score` field (avg log-probability --
+the one signal every method, including the untouched base model, can produce).
+Pass --confidence-field aux_confidence_score to use a method-specific signal instead
+(e.g. an auxiliary head's own predicted score) -- note that's then only comparable
+across methods that actually populate that field; methods that leave it null fall
+back to the lowest-confidence sentinel, same as any other missing confidence value.
 """
 
 import argparse
@@ -35,7 +42,8 @@ from common.metrics import (area_under_risk_coverage, behavior_metrics,
 from common.schema import read_jsonl
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-EVAL_SCRIPT_VERSION = "p6-eval-v1"  # frozen per plan.md section 3; bump deliberately, not silently.
+EVAL_SCRIPT_VERSION = "p6-eval-v1.1"  # v1 -> v1.1: added --confidence-field (additive,
+# default-unchanged); frozen per plan.md section 3, bump deliberately, not silently.
 
 
 def greedy_rows(rows):
@@ -46,16 +54,17 @@ def accuracy_metric(rows):
     return behavior_metrics([r["outcome"] for r in greedy_rows(rows)])["accuracy"]
 
 
-def method_summary(rows):
+def method_summary(rows, confidence_field="confidence_score"):
     greedy = greedy_rows(rows)
     bm = behavior_metrics([r["outcome"] for r in greedy])
-    confidences = [r["confidence_score"] if r["confidence_score"] is not None else float("-inf") for r in greedy]
+    confidences = [r[confidence_field] if r.get(confidence_field) is not None else float("-inf") for r in greedy]
     rc = risk_coverage_curve([r["outcome"] for r in greedy], confidences)
     ks = knowledge_scores(rows)
     mean_k = sum(v["knowledge_score"] for v in ks.values()) / len(ks) if ks else None
     return {
         **bm,
         "aurc": area_under_risk_coverage(rc),
+        "confidence_field": confidence_field,
         "mean_knowledge_score": mean_k,
         "n_facts_scored": len(ks),
     }
@@ -127,6 +136,8 @@ def main():
     ap.add_argument("--responses", nargs="+", required=True,
                      help="label=path pairs, e.g. base=results/raw/p1_pilot_v0_base.jsonl")
     ap.add_argument("--baseline-label", default=None, help="paired diffs vs this label (default: first given)")
+    ap.add_argument("--confidence-field", default="confidence_score",
+                     help="schema field used for risk-coverage/AURC (default: confidence_score)")
     ap.add_argument("--out", default="results/final/baseline_comparison.json")
     ap.add_argument("--n-boot", type=int, default=1000)
     args = ap.parse_args()
@@ -145,7 +156,7 @@ def main():
     print(f"Matched-question-join check passed: all {len(methods)} methods share "
           f"{len(question_ids)} question_ids, with matching sample rows and references.", file=sys.stderr)
 
-    summaries = {label: method_summary(rows) for label, rows in methods.items()}
+    summaries = {label: method_summary(rows, confidence_field=args.confidence_field) for label, rows in methods.items()}
 
     first_label = next(iter(methods))
     baseline = args.baseline_label or first_label
