@@ -242,7 +242,10 @@ def main():
     out.write_text(json.dumps({"table": table, "per_seed": per_seed, "probe_steps": args.probe_steps,
                                "probe_lr": args.probe_lr, "probe_fit_facts": fit_split,
                                "n_probe_fit_rows": len(train_rows)}, indent=2))
-    scores_out = out.with_name(f"p5_signal_scores_{args.split}.jsonl")
+    # name follows --out so another dataset's results never overwrite these:
+    # p5_probe_controls_final.json -> p5_signal_scores_final.jsonl, p5_main_w1_probe_controls_final.json -> p5_main_w1_signal_scores_final.jsonl
+    scores_out = out.with_name(out.name.replace("probe_controls", "signal_scores").replace(".json", ".jsonl"))
+    assert scores_out != out, "--out must contain 'probe_controls' so the scores file gets its own name"
     scores_out.write_text("\n".join(json.dumps(r) for r in score_rows))
     print(f"wrote {out} and {scores_out}")
 
