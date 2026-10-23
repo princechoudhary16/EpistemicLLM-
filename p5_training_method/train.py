@@ -10,7 +10,9 @@ import torch
 import transformers
 import yaml
 
-from data import collate, encode_row, load_rows
+import random
+
+from data import collate, encode_aux_row, encode_row, load_rows
 from model import build_model, save_checkpoint
 
 HERE = Path(__file__).resolve().parent
@@ -45,6 +47,9 @@ def main():
     ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--run-id", required=True)
     ap.add_argument("--data", default=None)
+    ap.add_argument("--aux-zero", default=None,
+                    help="answer-masked prompts for 0x facts (P1's aux_zero_prompts.jsonl): extra rows for the head "
+                         "only, spread evenly over the steps; no language-model loss")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--save-every", type=int, default=0)
     ap.add_argument("--log-every", type=int, default=10)
@@ -74,7 +79,22 @@ def main():
         for r in rows
     ]
     bs = cfg["train"]["batch_size"]
-    batches = [collate(examples[i : i + bs], tokenizer.pad_token_id) for i in range(0, len(examples), bs)]
+    lm_chunks = [examples[i : i + bs] for i in range(0, len(examples), bs)]
+
+    # Optional aux-only rows. The answer-training chunks (and their order) are unchanged; aux row k is appended to
+    # step floor(k * n_steps / n_aux), so they are spread evenly. Shuffled with the training seed so one fact's four
+    # wordings are not adjacent. Rows without any label add nothing to the language-model loss.
+    aux_examples, aux_path = [], Path(args.aux_zero) if args.aux_zero else None
+    if aux_path is not None:
+        aux_rows = load_rows(aux_path)
+        random.Random(cfg["train"]["seed"]).shuffle(aux_rows)
+        aux_examples = [
+            encode_aux_row(tokenizer, system_prompt, r, cfg["data"]["max_seq_len"], cfg["head"]["max_exposure"])
+            for r in aux_rows
+        ]
+        for k, ex in enumerate(aux_examples):
+            lm_chunks[k * len(lm_chunks) // len(aux_examples)].append(ex)
+    batches = [collate(chunk, tokenizer.pad_token_id) for chunk in lm_chunks]
 
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(params, lr=cfg["train"]["lr"])
@@ -89,6 +109,9 @@ def main():
         "data_path": str(data_path),
         "data_sha256": sha256(data_path),
         "n_rows": len(examples),
+        "aux_zero_path": str(aux_path) if aux_path else None,
+        "aux_zero_sha256": sha256(aux_path) if aux_path else None,
+        "n_aux_rows": len(aux_examples),
         "n_steps": len(batches),
         "n_trainable_params": sum(p.numel() for p in params),
         "torch": torch.__version__,
@@ -155,7 +178,7 @@ def main():
             sq_err += ((pred - target) ** 2).tolist()
             for e, p in zip(b["exposure"].cpu().tolist(), pred.tolist()):
                 by_exposure[e].append(p)
-    s_all = torch.tensor([e["s"] for e in examples])
+    s_all = torch.tensor([e["s"] for e in examples + aux_examples])
     summary = {
         "wall_seconds": wall,
         "mean_step_seconds": wall / len(batches),
