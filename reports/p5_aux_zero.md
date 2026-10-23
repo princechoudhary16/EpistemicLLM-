@@ -44,4 +44,99 @@ here, whatever the verdict is (`STAGE=final`). No re-tuning of λ, the number of
 - Both worlds come from the same generator and the same placeholder grader; 3 seeds per world.
 
 ## Results
-_Pending._
+
+### Dev stage (jobs 45987 `main_v0`, 45988 `main_w1`; `aux0_criteria.py --split dev`; mean ± std over seeds 0, 1, 2)
+
+| `main_v0` dev | baseline λ=3 | λ=3 + 0× prompts |
+|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.342 ± .047 | **0.875 ± .062** |
+| head AUROC ≥5× vs 0× | 0.826 ± .011 | 0.991 ± .009 |
+| head AUROC ≥5× vs ≤2× | 0.871 ± .009 | 0.938 ± .023 |
+| overall accuracy | 46.7% ± 2.7 | 44.6% ± 3.3 |
+| accuracy at 0× | 0.0% | 0.0% |
+
+| `main_w1` dev | baseline λ=3 | λ=3 + 0× prompts |
+|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.379 ± .033 | **0.889 ± .035** |
+| head AUROC ≥5× vs 0× | 0.854 ± .032 | 0.994 ± .003 |
+| head AUROC ≥5× vs ≤2× | 0.878 ± .017 | 0.955 ± .003 |
+| overall accuracy | 46.8% ± 1.8 | 47.4% ± 0.7 |
+| accuracy at 0× | 1.0% ± 1.0 | 0.3% ± 0.6 |
+
+| criterion | `main_v0` | `main_w1` |
+|---|---|---|
+| a: 1×/2× vs 0× ≥ 0.60 | **pass** (0.875) | **pass** (0.889) |
+| b: headline ≥ 0.80 and not > 0.03 below baseline | **pass** (0.938) | **pass** (0.955) |
+| c: accuracy within 2 points and 0× accuracy ≤ 2% | **FAIL**: accuracy −2.1 points (bound 2.0); 0× accuracy 0.0% passes | **pass**: +0.6 points; 0× accuracy 0.3% |
+
+**Dev verdict under the pre-stated rule (a, b and c in every world): NOT ALL PASS.** Criterion c is missed in
+`main_v0` by 0.1 point. The criteria are not changed after seeing this. Context, not a revision of the verdict:
+the seed spread of the accuracy difference is 2.7–3.3 points per condition, so the 2-point bound is finer than
+what 3 seeds can resolve; the drop is not reproduced in `main_w1` (+0.6); and the leak check itself (0× accuracy)
+is clean in both worlds. Per the protocol the final split is now scored once per world, whatever the verdict.
+
+Reading the AUROC jump (0.35 → 0.88): large and consistent across both worlds, but note the caveat above. The head
+has now seen the 0× entity names, so part of this may be recognising those names rather than recognising that an
+entity is unknown. Whether the improvement transfers to 0× entities the head has never seen is not tested by this
+experiment.
+
+### Final stage (jobs 46026 `main_v0`, 46027 `main_w1`; scored once per world after the dev verdict above was recorded)
+
+| `main_v0` final | baseline λ=3 | λ=3 + 0× prompts |
+|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.349 ± .009 | **0.864 ± .059** |
+| head AUROC ≥5× vs 0× | 0.811 ± .031 | 0.985 ± .010 |
+| head AUROC ≥5× vs ≤2× | 0.848 ± .024 | 0.931 ± .007 |
+| overall accuracy | 47.4% ± 1.6 | 44.2% ± 3.7 |
+| accuracy at 0× | 1.3% ± 1.2 | 1.7% ± 0.6 |
+
+| `main_w1` final | baseline λ=3 | λ=3 + 0× prompts |
+|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.351 ± .036 | **0.904 ± .011** |
+| head AUROC ≥5× vs 0× | 0.826 ± .027 | 0.993 ± .003 |
+| head AUROC ≥5× vs ≤2× | 0.863 ± .018 | 0.954 ± .008 |
+| overall accuracy | 45.1% ± 1.5 | 45.7% ± 1.5 |
+| accuracy at 0× | 0.7% ± 0.6 | 0.3% ± 0.6 |
+
+Criteria on final (reported, same rule): a **pass** and b **pass** in both worlds; c **fails in `main_v0`** (accuracy −3.2
+points; 0× accuracy 1.7% is within the bound) and **passes in `main_w1`** (+0.6 points; 0× accuracy 0.3%).
+
+### Criterion d: abstention (final split, thresholds from dev; net score / AURC ↓, mean over 3 seeds)
+
+| `main_v0` | penalty 1 net | penalty 3 net | AURC |
+|---|---|---|---|
+| head, before (λ=3) | 0.222 | 0.122 | 0.285 |
+| head, with 0× prompts | 0.241 | 0.097 | 0.286 |
+| P5 log-prob, before → with 0× prompts | 0.352 → 0.338 | 0.313 → 0.301 | 0.202 → 0.224 |
+| SFT log-prob (reference) | 0.364 | 0.288 | 0.200 |
+
+| `main_w1` | penalty 1 net | penalty 3 net | AURC |
+|---|---|---|---|
+| head, before (λ=3) | 0.230 | 0.172 | 0.281 |
+| head, with 0× prompts | 0.287 | 0.214 | 0.242 |
+| P5 log-prob, before → with 0× prompts | 0.371 → 0.372 | 0.327 → 0.321 | 0.208 → 0.203 |
+| SFT log-prob (reference) | 0.374 | 0.326 | 0.202 |
+
+Behaviour at the two ends, head abstention rate at penalty 1 (before → with 0× prompts): at 0× 0.83 → 1.00
+(`main_v0`) and 0.83 → 0.99 (`main_w1`); at 5× 0.77 → 0.55 and 0.78 → 0.47 (the head over-abstains less on
+moderately exposed facts, where the model is right about 65% of the time).
+
+## Verdict
+- **The targeted flaw is fixed.** The head now ranks never-trained 0× facts below 1×/2× facts (AUROC 0.35 → 0.86–0.90) and
+  the headline AUROC rises (0.85 → 0.93, 0.86 → 0.95), consistently in both worlds, both splits, and larger than the seed spread.
+- **The pre-stated dev verdict is NOT ALL PASS** (criterion c in `main_v0`), and the final split shows the same pattern.
+  The accuracy cost in `main_v0` is −2.1 (dev) and −3.2 (final) points; the two splits are scored on the same 3 trained
+  models, so they are not independent confirmations, the seed spread is 3–4 points, and `main_w1` shows no cost (+0.6).
+  I would not call it an established cost or a clear absence of one. I did not change the criterion.
+- **Criterion d: the head is still the worse abstention signal.** It improves in `main_w1` (net 0.230 → 0.287, AURC
+  0.281 → 0.242) and barely in `main_v0` (AURC 0.285 → 0.286; penalty-3 net 0.122 → 0.097), and stays well below the
+  model's own log-prob in both worlds at both penalties (e.g. 0.241 vs 0.364 and 0.287 vs 0.374 at penalty 1).
+  In `main_v0` the 0× prompts also slightly worsen the model's own log-prob signal (AURC 0.202 → 0.224), in line
+  with its lower accuracy there.
+- **Open question that limits the headline gain.** The head has now seen the 0× entity names, so the AUROC
+  jump may partly be name recognition rather than "unknown entity". This experiment cannot separate the two. The
+  test that can: train with the aux prompts of the dev facts only and score the 0× facts of the final split (names
+  the head has never seen).
+- **Status:** an ablation with a mixed verdict, not a change to the main method. The main results in
+  `reports/p5_evidence_aware_training.md` and `reports/p5_second_world.md` are unchanged.
+
