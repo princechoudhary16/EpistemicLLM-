@@ -220,7 +220,8 @@ current config makes a combined base/SFT/IDK/P5 table possible.
   templates; training uses a third set of `train` templates). So the dev-chosen λ and abstention thresholds are
   tested on both new facts-to-score and new wording; shifts between dev and final numbers mix the two effects.
 - All three seeds share one fact-to-exposure assignment (one generated synthetic world), so seeds vary training
-  and probe initialisation, not the world. A second generated world would test robustness (offered by P1; not run).
+  and probe initialisation, not the world. A second generated world (`main_w1`, from P1) was run with the same
+  protocol and no re-tuning, and all five `main_v0` findings replicated (`reports/p5_second_world.md`).
 - Each fact-disjoint probe is fitted on 1,900 training rows (250 facts, one half of the data) for 1000
   full-batch steps; its hyperparameters were not tuned. The head-vs-probe comparison is not like-for-like.
 - The abstention penalty (1 and 3) is a judgement call. Absolute numbers depend on it; the ranking did not.
