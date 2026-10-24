@@ -1,0 +1,12 @@
+{
+  "source_path": "data/synthetic/main_v0/eval.jsonl",
+  "source_sha256": "e3adc557b906cac314ab395e026e8714b4a0f185822a02738f6019fc2096e98b",
+  "questions_path": "data/p3/synthetic_main_v0_dev.jsonl",
+  "questions_sha256": "c2084b30d152305fbc354e36f5690a94952cdeb6e9f105609ca7655364adcaaf",
+  "source_dataset_version": "synthetic-main_v0",
+  "split": "dev",
+  "question_count": 600,
+  "fact_count": 300,
+  "grouping": "fact_id; all templates for one fact remain in one probe partition",
+  "use": "P3 probe development only; excludes P1 final rows"
+}
