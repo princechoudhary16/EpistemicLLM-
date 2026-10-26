@@ -83,3 +83,38 @@ shown, not from learning that an unfamiliar entity means no evidence. The small 
 0.85 → 0.89) is the only transfer visible. (Criterion C, not judged: accuracy is within noise of the baseline in
 `main_v0`; `main_w1` novel shows 41.5% ± 5.2 with a large seed spread.) The final stage is now run once per world,
 as the protocol states.
+
+### Final stage (jobs 47269 `main_v0`, 47270 `main_w1`; scored once per world after the dev verdict above was recorded)
+
+| `main_v0` final | baseline | seen, 400 rows | seen, 200 rows | **novel, 200 rows** |
+|---|---|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.349 ± .009 | 0.864 ± .059 | 0.930 ± .013 | **0.303 ± .013** |
+| head AUROC ≥5× vs 0× | 0.811 ± .031 | 0.985 ± .010 | 0.992 ± .004 | 0.847 ± .014 |
+| head AUROC ≥5× vs ≤2× | 0.848 ± .024 | 0.931 ± .007 | 0.924 ± .018 | 0.887 ± .010 |
+| overall accuracy | 47.4% ± 1.6 | 44.2% ± 3.7 | 46.6% ± 1.2 | 45.8% ± 1.9 |
+| accuracy at 0× | 1.3% ± 1.2 | 1.7% ± 0.6 | 0.3% ± 0.6 | 2.3% ± 1.5 |
+
+| `main_w1` final | baseline | seen, 400 rows | seen, 200 rows | **novel, 200 rows** |
+|---|---|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.351 ± .036 | 0.904 ± .011 | 0.852 ± .036 | **0.346 ± .046** |
+| head AUROC ≥5× vs 0× | 0.826 ± .027 | 0.993 ± .003 | 0.979 ± .009 | 0.871 ± .013 |
+| head AUROC ≥5× vs ≤2× | 0.863 ± .018 | 0.954 ± .008 | 0.930 ± .016 | 0.903 ± .005 |
+| overall accuracy | 45.1% ± 1.5 | 45.7% ± 1.5 | 39.4% ± 6.8 | 43.4% ± 2.2 |
+| accuracy at 0× | 0.7% ± 0.6 | 0.3% ± 0.6 | 0.7% ± 1.2 | 0.0% |
+
+| criterion (final) | `main_v0` | `main_w1` |
+|---|---|---|
+| A: novel ≥ 0.60 | **FAIL** (0.303) | **FAIL** (0.346) |
+| B: retained gain | −0.08 → **mostly names** | −0.01 → **mostly names** |
+
+## Verdict (dev and final agree, in both worlds)
+**The 0× prompts do not teach the head to recognise unknown entities.** A head that never saw the scored 0× names
+ranks them exactly as badly as a head with no 0× prompts at all (AUROC 0.30–0.39 vs 0.35–0.38 baseline; on final it is
+even slightly lower in `main_v0`), while a head that saw them, with the same 200 rows of supervision, reaches 0.85–0.93.
+The gain reported in `reports/p5_aux_zero.md` (0.35 → 0.86–0.90) was memorised names. The only visible transfer is
+small: ≥5× vs 0× rises by about 0.04 (0.83 → 0.87, 0.85 → 0.89 on dev; 0.81 → 0.85, 0.83 → 0.87 on final).
+
+What this does not show: it does not say a different intervention could not fix the bottom of the scale, and it
+tests one aux-prompt design with one world generator and 3 seeds per world. Matched "seen (200)" accuracy in
+`main_w1` final has a large seed spread (39.4% ± 6.8), so no accuracy statement is made from this experiment.
+
