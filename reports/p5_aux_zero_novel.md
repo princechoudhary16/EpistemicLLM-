@@ -51,4 +51,35 @@ or B < 0.5 means the earlier gain was mostly memorised names and the 0× prompts
 - Both worlds come from the same generator and the same placeholder grader; 3 seeds per world.
 
 ## Results
-_Pending._
+
+### Dev stage (jobs 47245, 47247; `aux0nov_criteria.py --split dev`; mean ± std over seeds 0, 1, 2)
+The leakage guard passed in both worlds (the scored 0× names appear nowhere in the head's training data).
+
+| `main_v0` dev | baseline (no 0× prompts) | seen, 400 rows (earlier) | seen, 200 rows | **novel, 200 rows** |
+|---|---|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.342 ± .047 | 0.875 ± .062 | 0.899 ± .010 | **0.352 ± .039** |
+| head AUROC ≥5× vs 0× | 0.826 ± .011 | 0.991 ± .009 | 0.992 ± .004 | 0.868 ± .015 |
+| head AUROC ≥5× vs ≤2× | 0.871 ± .009 | 0.938 ± .023 | 0.947 ± .010 | 0.894 ± .007 |
+| overall accuracy | 46.7% ± 2.7 | 44.6% ± 3.3 | 44.9% ± 3.0 | 46.3% ± 0.7 |
+| accuracy at 0× | 0.0% | 0.0% | 0.0% | 0.3% ± 0.6 |
+
+| `main_w1` dev | baseline (no 0× prompts) | seen, 400 rows (earlier) | seen, 200 rows | **novel, 200 rows** |
+|---|---|---|---|---|
+| head AUROC 1×/2× vs 0× | 0.379 ± .033 | 0.889 ± .035 | 0.892 ± .036 | **0.387 ± .069** |
+| head AUROC ≥5× vs 0× | 0.854 ± .032 | 0.994 ± .003 | 0.991 ± .003 | 0.888 ± .031 |
+| head AUROC ≥5× vs ≤2× | 0.878 ± .017 | 0.955 ± .003 | 0.939 ± .005 | 0.908 ± .023 |
+| overall accuracy | 46.8% ± 1.8 | 47.4% ± 0.7 | 44.6% ± 1.3 | 41.5% ± 5.2 |
+| accuracy at 0× | 1.0% ± 1.0 | 0.3% ± 0.6 | 1.3% ± 1.5 | 1.0% ± 1.7 |
+
+| criterion | `main_v0` | `main_w1` |
+|---|---|---|
+| A: novel ≥ 0.60 | **FAIL** (0.352) | **FAIL** (0.387) |
+| B: retained gain (novel − baseline) / (seen200 − baseline) | 0.02 → **mostly names** | 0.02 → **mostly names** |
+
+**Dev verdict: NOT ALL PASS (criterion A fails in both worlds).** The head trained without the scored 0× names stays
+at the baseline for 1×/2× vs 0× (0.35 and 0.39), while the matched head that saw them reaches 0.90 with the same
+amount of 0× supervision. So the gain in `reports/p5_aux_zero.md` came from recognising the 0× *names* it had been
+shown, not from learning that an unfamiliar entity means no evidence. The small rise in ≥5× vs 0× (0.83 → 0.87 and
+0.85 → 0.89) is the only transfer visible. (Criterion C, not judged: accuracy is within noise of the baseline in
+`main_v0`; `main_w1` novel shows 41.5% ± 5.2 with a large seed spread.) The final stage is now run once per world,
+as the protocol states.
