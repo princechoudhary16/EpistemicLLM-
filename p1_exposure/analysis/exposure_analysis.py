@@ -59,10 +59,13 @@ def load_eval(data_dir, version):
     return {r["question_id"]: r for r in rows}
 
 
-def load_responses(path, eval_by_q):
+def load_responses(path, eval_by_q, allow_extra=False):
+    """allow_extra: skip responses whose question is outside eval_by_q (used when a split is selected)."""
     out = []
     for r in read_jsonl(path):
         q = eval_by_q.get(r["question_id"])
+        if q is None and allow_extra:
+            continue
         if q is None:
             raise ValueError(f"{path}: question_id {r['question_id']!r} is not in the eval set")
         conf = r.get("confidence_score")
@@ -237,7 +240,10 @@ def render_markdown(results, levels, meta):
     for label, info in meta["inputs"].items():
         L.append(f"- `{label}`: `{info['path']}` ({info['rows']} rows, sha256 `{info['sha256'][:12]}`, "
                  f"grading {info['grading_versions']}, decoding {info['decoding_ids']})")
-    L += ["", f"Dataset `{meta['version']}`; bootstrap draws {meta['boot']}, seed {meta['seed']}.", ""]
+    split = meta.get("split", "all")
+    scope = {"all": "all facts (dev and final)", "dev": "dev facts only (validation wording)",
+             "final": "final facts only (test wording)"}[split]
+    L += ["", f"Dataset `{meta['version']}`, {scope}; bootstrap draws {meta['boot']}, seed {meta['seed']}.", ""]
     for label, res in results.items():
         L += [f"## {label}: behaviour by exposure level", "",
               "| Exposure | Questions (facts) | Accuracy [95% CI] | Hallucination [95% CI] | Abstention | "
@@ -377,14 +383,20 @@ def make_figures(results, levels, primary, out_dir):
 # Driver
 # ----------------------------------------------------------------------------------------
 
-def run(responses, data_dir, version, out_dir, boot=2000, seed=0, primary=None, notes="", figures=True):
-    """responses: {label: path}. Returns (results, meta)."""
+def run(responses, data_dir, version, out_dir, boot=2000, seed=0, primary=None, notes="", figures=True,
+        split="all"):
+    """responses: {label: path}. split: "all", "dev" or "final" (only that split's facts are analysed).
+    Returns (results, meta)."""
     eval_by_q = load_eval(data_dir, version)
+    if split not in ("all", "dev", "final"):
+        raise ValueError(f"split must be all, dev or final, got {split!r}")
+    if split != "all":
+        eval_by_q = {q: r for q, r in eval_by_q.items() if r["split"] == split}
     levels = sorted({int(q["exposure_level"]) for q in eval_by_q.values()})
     rng = np.random.default_rng(seed)
     results, inputs = {}, {}
     for label, path in responses.items():
-        rows = load_responses(path, eval_by_q)
+        rows = load_responses(path, eval_by_q, allow_extra=split != "all")
         check_coverage(label, rows, eval_by_q)
         results[label] = analyze_label(rows, levels, rng, boot)
         inputs[label] = {
@@ -392,8 +404,8 @@ def run(responses, data_dir, version, out_dir, boot=2000, seed=0, primary=None, 
             "grading_versions": sorted({r["grading_version"] for r in rows if r["grading_version"]}) or ["not recorded"],
             "decoding_ids": sorted({r["decoding_config_id"] for r in rows if r["decoding_config_id"]}) or ["not recorded"],
             "methods": sorted({r["method"] for r in rows if r["method"]})}
-    meta = {"version": version, "boot": boot, "seed": seed, "levels": levels, "inputs": inputs, "notes": notes,
-            "eval_sha256": sha256(Path(data_dir) / version / "eval.jsonl")}
+    meta = {"version": version, "split": split, "boot": boot, "seed": seed, "levels": levels, "inputs": inputs,
+            "notes": notes, "eval_sha256": sha256(Path(data_dir) / version / "eval.jsonl")}
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / "results.json").write_text(json.dumps({"meta": meta, "results": results}, indent=2) + "\n",
@@ -416,6 +428,8 @@ def main(argv=None):
     ap.add_argument("--primary", default=None, help="label used for the relation and confidence figures")
     ap.add_argument("--notes", default="")
     ap.add_argument("--no-figures", action="store_true")
+    ap.add_argument("--split", choices=["all", "dev", "final"], default="all",
+                    help="analyse only the dev or final facts (default: all)")
     a = ap.parse_args(argv)
     responses = {}
     for item in a.responses:
@@ -423,7 +437,8 @@ def main(argv=None):
             sys.exit(f"--responses expects LABEL=PATH, got {item!r}")
         label, path = item.split("=", 1)
         responses[label] = path
-    run(responses, a.data_dir, a.version, a.out_dir, a.boot, a.seed, a.primary, a.notes, not a.no_figures)
+    run(responses, a.data_dir, a.version, a.out_dir, a.boot, a.seed, a.primary, a.notes, not a.no_figures,
+        a.split)
     print(f"wrote {a.out_dir}")
 
 
