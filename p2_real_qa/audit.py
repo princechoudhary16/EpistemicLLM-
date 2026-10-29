@@ -6,8 +6,11 @@
         -> precision of the grader per predicted class + a file of every grader error
 
 Sampling is STRATIFIED BY PREDICTED CLASS, so per-class precision is estimable but recall is not
-(say so in the report). The sheet always includes: every 'correct', every strong flag, a capped sample of weak
-hints, and random controls of 'incorrect' and 'abstain'.
+(say so in the report). The sheet always includes: every 'correct' (or a random --n-correct of them), every strong
+flag, a capped sample of weak hints, and random controls of 'incorrect' and 'abstain'.
+
+    python -m p2_real_qa.audit make --responses results/raw/p2_triviaqa_v0_train_probe_base.jsonl \
+        --n-correct 40 --n-weak 40 --n-control 30
 """
 import argparse
 import csv
@@ -29,7 +32,10 @@ def make(a):
     rows = schema.read_jsonl(a.responses)
     rng = random.Random(7)
     key = lambda r: (r["question_id"], r["sample_index"])
-    chosen = {key(r): r for r in rows if r["outcome"] == "correct"}
+    correct = [r for r in rows if r["outcome"] == "correct"]
+    if a.n_correct is not None and a.n_correct < len(correct):        # TriviaQA has hundreds: sample instead of all
+        correct = rng.sample(correct, a.n_correct)
+    chosen = {key(r): r for r in correct}
     chosen.update({key(r): r for r in rows if r["review_status"] in ("flagged:hedged_attempt", "flagged:numeric_ambiguous")})
     weak = {}
     for r in sorted(rows, key=lambda r: not r["is_greedy"]):                       # one row per question, greedy first
@@ -90,6 +96,8 @@ if __name__ == "__main__":
     m.add_argument("--out")
     m.add_argument("--n-control", dest="n_control", type=int, default=30)
     m.add_argument("--n-weak", dest="n_weak", type=int, default=30)
+    m.add_argument("--n-correct", dest="n_correct", type=int, default=None,
+                   help="sample this many 'correct' rows instead of including all of them (default: all)")
     s = sp.add_parser("score")
     s.add_argument("--sheet", required=True)
     s.add_argument("--responses", help="optional: score the labels against this (regraded) response file")
