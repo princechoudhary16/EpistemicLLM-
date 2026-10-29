@@ -75,7 +75,9 @@ class IdkRestatesQuestion(unittest.TestCase):
               "efforts in July 2021.")
 
     def test_audit_found_cases_are_abstentions(self):
-        self.assertEqual(g.grade(self.EDD_A, "Leon Mestel", self.EDD_Q), ("abstain", "idk_restates_question"))
+        # sqa-00334 (EDD_A) was labelled abstain by the audit, but "the Sun" trips the candidate check (v4):
+        # a deliberate trade-off, a hidden hallucination is worse than one extra counted error.
+        self.assertEqual(g.grade(self.EDD_A, "Leon Mestel", self.EDD_Q)[0], "incorrect")
         self.assertEqual(g.grade(self.RAIN_A, "6.9 millimetres", self.RAIN_Q), ("abstain", "idk_restates_question"))
 
     def test_needs_the_question(self):                      # without it the rule cannot apply (documented dependency)
@@ -100,9 +102,31 @@ class IdkRestatesQuestion(unittest.TestCase):
         self.assertEqual(g.grade("Maryon Lane was born with the surname Lane. I don't know her full name.", "Smith",
                                  "What was Maryon Lane's birth surname and given name?")[0], "incorrect")
 
-    def test_known_limitation_wrong_name_then_restating_idk_is_abstain_but_flagged(self):
+    def test_wrong_name_then_restating_idk_is_a_hallucination(self):
+        # review on PR: a stated wrong candidate must not be hidden as an abstention
         out = g.grade("The medal went to John Smith. I don't know who won the Eddington Medal in 1993.", "Leon Mestel", self.EDD_Q)
-        self.assertEqual(out, ("abstain", "idk_restates_question"))   # flagged so the audit can find these
+        self.assertEqual(out[0], "incorrect")
+
+    def test_generic_context_then_restating_idk_stays_abstain(self):
+        q = "In July 2021, how much rainfall was recorded in Al Ain?"
+        a = "Cloud seeding is used to increase rainfall. I don't know how much rainfall was recorded in Al Ain in July 2021."
+        self.assertEqual(g.grade(a, "6.9 millimetres", q), ("abstain", "idk_restates_question"))
+
+
+class Negation(unittest.TestCase):
+    """review on PR: a mention the answer explicitly rejects must not be credited."""
+    def test_rejected_reference_is_not_credited(self):
+        self.assertEqual(g.grade("It is not Paris, it is Rome.", "Paris"), ("incorrect", "negated_reference"))
+        self.assertEqual(G("It isn't Paris. It's Rome.", "Paris"), "incorrect")
+        self.assertEqual(G("The capital was never Paris.", "Paris"), "incorrect")
+    def test_rejected_other_answer_still_credits_reference(self):
+        self.assertEqual(G("It is not Paris, it is Rome.", "Rome"), "correct")
+        self.assertEqual(G("Paris, not Rome.", "Paris"), "correct")
+    def test_negated_then_affirmed_is_credited(self):
+        self.assertEqual(G("Not Lyon. The answer is Paris.", "Paris"), "correct")
+        self.assertEqual(G("Some say it is not Paris, but it is Paris.", "Paris"), "correct")
+    def test_alias_negation(self):
+        self.assertEqual(G("It is not NYC.", "New York City || NYC"), "incorrect")
 
 
 class RowFields(unittest.TestCase):

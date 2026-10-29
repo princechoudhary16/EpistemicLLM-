@@ -12,7 +12,7 @@ Contract with the rest of the repo
 import re
 import unicodedata
 
-GRADING_VERSION = "p2_whole_word_v3"
+GRADING_VERSION = "p2_whole_word_v4"
 ALIAS_SEP = " || "
 UNANSWERABLE = "__unanswerable__"
 
@@ -90,7 +90,29 @@ def idk_restates_question(model_answer, question, refs) -> bool:
     q_nums = set(re.findall(r"(?<![a-z0-9])\d+(?![a-z0-9])", normalize(question)))
     if [n for n in re.findall(r"(?<![a-z0-9])\d+(?![a-z0-9])", " ".join(other)) if n not in q_nums]:
         return False                    # the rest commits to a number
+    if names_candidate(model_answer, question):
+        return False                    # the rest names someone/something not in the question: an attempt
     return True
+
+
+_WORD = re.compile(r"[^\W\d_][\w'\u2019-]*")
+
+
+def names_candidate(model_answer, question) -> bool:
+    """True if a non-IDK sentence contains a capitalised word (not sentence-initial) that the question does not.
+
+    A cheap proper-noun test: "The medal went to John Smith." names a candidate; a generic sentence does not.
+    Deliberately errs towards "attempt": a wrong name followed by a restating IDK must count as a hallucination.
+    """
+    qtoks = set(normalize(question).split())
+    for sent in _SENT.split(str(model_answer).strip()):
+        ns = normalize(sent)
+        if not ns or any(contains_whole(ns, p) for p in ABSTAIN_PATTERNS):
+            continue
+        for w in _WORD.findall(sent)[1:]:
+            if w[0].isupper() and normalize(w) not in qtoks and normalize(w) != "i":
+                return True
+    return False
 
 
 # ---------------------------------------------------------------- correctness
@@ -99,9 +121,24 @@ _STOP = set("a an the of in on at to and or for by with from as is was were are 
             "he she it they this that which who whom what when where how".split())
 
 
+NEGATORS = {"not", "isnt", "wasnt", "arent", "werent", "never", "no", "neither", "nor",
+            "doesnt", "didnt", "cannot", "cant", "wont"}
+NEGATION_WINDOW = 3     # words before the mention that are checked for a negator
+
+
+def all_mentions_negated(norm_answer: str, ref: str) -> bool:
+    """True if every whole-word mention of `ref` has a negator in the NEGATION_WINDOW words before it.
+
+    "It is not Paris, it is Rome." does not credit Paris; "Paris, not Rome." still credits Paris.
+    """
+    mentions = list(re.finditer(rf"(?<![a-z0-9]){re.escape(ref)}(?![a-z0-9])", norm_answer))
+    return bool(mentions) and all(
+        NEGATORS & set(norm_answer[:m.start()].split()[-NEGATION_WINDOW:]) for m in mentions)
+
+
 def grade(model_answer, reference_answer, question: str = ""):
     """Returns (outcome, flag). flag in {"", "hedged_attempt", "numeric_ambiguous", "ref_partial_overlap",
-    "idk_restates_question", "empty_response"} and is only an audit hint -- it never changes `outcome` except where stated."""
+    "idk_restates_question", "negated_reference", "empty_response"} and is only an audit hint -- it never changes `outcome` except where stated."""
     if model_answer is None or not str(model_answer).strip():
         return "invalid", "empty_response"            # technical failure; metrics.py excludes it from N
     na = normalize(model_answer)
@@ -121,6 +158,9 @@ def grade(model_answer, reference_answer, question: str = ""):
 
     for r in refs:
         if not contains_whole(na, r):
+            continue
+        if all_mentions_negated(na, r):
+            flag = "negated_reference"
             continue
         if r.isdigit():
             if r not in a_nums:

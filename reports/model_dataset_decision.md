@@ -12,7 +12,7 @@
 | Dataset | SimpleQA snapshot `simpleqa_snapshot_2026-09-28.csv`, 4,326 questions |
 | Pilot | 200 questions, seed 20260928 (identical questions to the first pilot); question file sha256 `7e7a234e…788b9` |
 | Generations | 1,200 (6 per question), via `common.model.ModelRunner` + `common.evaluate.run_eval`, ~13 min |
-| Grader | `common/grading.py`, version `p2_whole_word_v3` (whole-word matching, numeric guard, full-answer abstention) |
+| Grader | `common/grading.py`, version `p2_whole_word_v4` (whole-word matching, numeric guard, full-answer abstention, negation guard, wrong-candidate guard) |
 | Seeds | greedy = 0; sample *i* = *i* (shared protocol: seed + i + 1) |
 
 ## K(q) distribution (K = fraction of the 5 sampled responses graded correct)
@@ -37,11 +37,11 @@
 
 | | Greedy (200) | Sampled (1,000) |
 |---|---|---|
-| Correct / Wrong / Abstain | 1 / 172 / 27 | 3 / 793 / 204 |
+| Correct / Wrong / Abstain | 1 / 172 / 27 | 3 / 794 / 203 |
 | Accuracy | 0.5% | 0.3% |
-| Hallucination rate (W/N) | 86.0% | 79.3% |
-| Abstention rate | 13.5% | 20.4% |
-| Coverage | 86.5% | 79.6% |
+| Hallucination rate (W/N) | 86.0% | 79.4% |
+| Abstention rate | 13.5% | 20.3% |
+| Coverage | 86.5% | 79.7% |
 | Selective accuracy (C/(C+W)) | 0.6% | 0.4% |
 
 Truncated responses: 4 / 1,200 (0.3%). Invalid responses: 0.
@@ -72,6 +72,8 @@ Neither is evidence of a partially-known fact, so even the 2 "inconsistent" ques
 - **Fix (v3):** an "IDK restating the question" rule (documented in `common/grading.py`). Re-scoring the same human labels against v3 gives 96/96 agreement. This is **not independent evidence** (the rule was written from those two rows). The meaningful checks are the regression results: the rule changed exactly these 2 of 1,200 rows in this run and 0 of the 1,200 rows from the earlier pilot.
 - **Not estimated:** grader recall (the sample is stratified by predicted class). A separate check found no incorrect response containing all content tokens of its reference, which argues against missed correct answers, but it is not a recall estimate.
 - K is unaffected by the v3 change (it counts only correct responses); coverage and hallucination numbers move by 2 rows.
+- **v4 (PR review fixes):** (1) a reference mention with a negator in the 3 words before it ("It is not Paris, it is Rome.") is no longer credited (`negated_reference`); (2) the "IDK restating the question" rule no longer applies when another sentence names a candidate (a capitalised word not in the question), so "The medal went to John Smith. I don't know who won…" is a hallucination, not an abstention. Regression tests for both are in `p2_real_qa/tests/test_grading.py`.
+- **v4 effect on this run:** the negation guard changes 0 of 1,200 rows. The candidate guard changes 1: `sqa-00334` (sample 3) goes back to incorrect, because "the Sun" in its generic first sentence counts as a candidate. This is accepted on purpose: hiding a hallucination as an abstention is the worse error for this project. Audit agreement under v4 is **95/96** (the one disagreement is that row). K, the K buckets and the taxonomy are unchanged; sampled hallucination 79.3% → 79.4%.
 
 ## How this differs from the first pilot
 
@@ -79,7 +81,7 @@ Neither is evidence of a partially-known fact, so even the 2 "inconsistent" ques
 |---|---|---|---|
 | First pilot, v1 grader, old prompt (reported earlier) | 192 | 7 | 1 |
 | Same responses, regraded with whole-word grader | 196 | 4 | 0 |
-| This run: shared prompt/decoding protocol, v3 grader | 198 | 2 | 0 |
+| This run: shared prompt/decoding protocol, v3 grader (identical under v4) | 198 | 2 | 0 |
 
 12 of the first pilot's 17 "correct" responses were substring false positives (e.g. reference `20` matching `2006`). The shared placeholder grader in `common/evaluate.py` gives the identical 17 on those responses; results graded with it on real QA must not be reported.
 
@@ -88,7 +90,7 @@ Neither is evidence of a partially-known fact, so even the 2 "inconsistent" ques
 - 200 questions, one annotator, no grader-recall estimate.
 - Generated on Apple MPS in bfloat16; other team members may use CUDA. Device and dtype are recorded in `results/raw/p2_pilot_base.meta.json`.
 - Consistency (taxonomy) is a named-entity/number overlap heuristic; "confident" uses terciles of average log-probability and entropy over the whole response. The exploratory confident-hallucination count (265 / 1,000) is high by construction and is not a finding. P4 owns the validated thresholds.
-- The v3 abstention rule treats a wrong name stated before a restating "I don't know" as an abstention (flagged `idk_restates_question`).
+- The v4 candidate check is a capitalised-word heuristic: it can treat a generic capitalised noun ("the Sun") as a candidate (counted incorrect, the safe direction), and it misses a wrong candidate written in lower case. The negation guard looks only 3 words back.
 - SimpleQA references are single strings; alias handling (`" || "`) is implemented but untested on real alias data.
 
 ## Recommendation
@@ -107,7 +109,7 @@ Proposed handling:
 |---|---|---|
 | A | Real-QA dataset to pilot next (and acceptance rule above) | all |
 | B | Whether the real-QA arm may use a different model size than 0.5B | all, P6 |
-| C | Approve `common/grading.py` (v3) as the shared grader; regrade any final results that used the placeholder | P6, P1 |
+| C | Approve `common/grading.py` (v4) as the shared grader; regrade any final results that used the placeholder | P6, P1 |
 | D | Abstention definition (incl. "IDK restating the question") — same rule for P6's IDK baseline | P6, P2 |
 | E | Freeze or defer the group-aware SimpleQA splits (depends on A) | P3, P2 |
 | F | Question ID convention `sqa-00004` and consistency/confidence rules for the taxonomy | P3, P4 |
