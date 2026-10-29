@@ -12,7 +12,7 @@
 | Dataset | SimpleQA snapshot `simpleqa_snapshot_2026-09-28.csv`, 4,326 questions |
 | Pilot | 200 questions, seed 20260928 (identical questions to the first pilot); question file sha256 `7e7a234e…788b9` |
 | Generations | 1,200 (6 per question), via `common.model.ModelRunner` + `common.evaluate.run_eval`, ~13 min |
-| Grader | `common/grading.py`, version `p2_whole_word_v4` (whole-word matching, numeric guard, full-answer abstention, negation guard, wrong-candidate guard) |
+| Grader | `common/grading.py`, version `p2_whole_word_v5` (whole-word matching, numeric guard, full-answer abstention, negation guard, wrong-candidate guard, generic-hedge abstention) |
 | Seeds | greedy = 0; sample *i* = *i* (shared protocol: seed + i + 1) |
 
 ## K(q) distribution (K = fraction of the 5 sampled responses graded correct)
@@ -74,6 +74,7 @@ Neither is evidence of a partially-known fact, so even the 2 "inconsistent" ques
 - K is unaffected by the v3 change (it counts only correct responses); coverage and hallucination numbers move by 2 rows.
 - **v4 (PR review fixes):** (1) a reference mention with a negator in the 3 words before it ("It is not Paris, it is Rome.") is no longer credited (`negated_reference`); (2) the "IDK restating the question" rule no longer applies when another sentence names a candidate (a capitalised word not in the question), so "The medal went to John Smith. I don't know who won…" is a hallucination, not an abstention. Regression tests for both are in `p2_real_qa/tests/test_grading.py`.
 - **v4 effect on this run:** the negation guard changes 0 of 1,200 rows. The candidate guard changes 1: `sqa-00334` (sample 3) goes back to incorrect, because "the Sun" in its generic first sentence counts as a candidate. This is accepted on purpose: hiding a hallucination as an abstention is the worse error for this project. Audit agreement under v4 is **95/96** (the one disagreement is that row). K, the K buckets and the taxonomy are unchanged; sampled hallucination 79.3% → 79.4%.
+- **v5:** a hedge built only from category words and the question's own words ("X was a trade or profession, but I don't know which one.") is an abstention (`idk_generic_hedge`); one that names a specific answer ("an Egyptian musician, but I don't know…", "folding and carving I don't know") stays incorrect. Found by regrading P1's synthetic base-model file: of 13 rows the placeholder grader called abstentions and v4 called incorrect, v5 makes 7 abstentions and keeps 6 incorrect. Changes 0 of the 1,200 SimpleQA pilot rows, so every number in this report is unchanged.
 
 ## How this differs from the first pilot
 
@@ -109,7 +110,7 @@ Proposed handling:
 |---|---|---|
 | A | Real-QA dataset to pilot next (and acceptance rule above) | all |
 | B | Whether the real-QA arm may use a different model size than 0.5B | all, P6 |
-| C | Approve `common/grading.py` (v4) as the shared grader; regrade any final results that used the placeholder | P6, P1 |
+| C | Approve `common/grading.py` (v5) as the shared grader; regrade any final results that used the placeholder | P6, P1 |
 | D | Abstention definition (incl. "IDK restating the question") — same rule for P6's IDK baseline | P6, P2 |
 | E | Freeze or defer the group-aware SimpleQA splits (depends on A) | P3, P2 |
 | F | Question ID convention `sqa-00004` and consistency/confidence rules for the taxonomy | P3, P4 |

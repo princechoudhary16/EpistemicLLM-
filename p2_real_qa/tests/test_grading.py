@@ -113,6 +113,37 @@ class IdkRestatesQuestion(unittest.TestCase):
         self.assertEqual(g.grade(a, "6.9 millimetres", q), ("abstain", "idk_restates_question"))
 
 
+class GenericHedge(unittest.TestCase):
+    """v5: a hedge that only names a category ("a trade or profession") is an abstention; one that names a
+    specific answer stays an attempt. Cases are real rows from p1_main_v0_base / p1_main_v0_sft_matched."""
+    Q = "What trade did Niglarun Branidaen practise?"
+
+    def test_category_only_hedge_is_abstain(self):
+        a = "Niglarun Branidaen was a trade or profession, but I don't know the specific one. Without more context, I can't provide a direct answer."
+        self.assertEqual(g.grade(a, "cooper", self.Q), ("abstain", "idk_generic_hedge"))
+        self.assertEqual(G("Bodamul Shevanaen was a trade or industry, but I don't know which one.", "potter",
+                           "What trade did Bodamul Shevanaen practise?"), "abstain")
+        self.assertEqual(G("Trinzuth Vlaelavlour is an undisclosed trade. I don't know.", "potter",
+                           "What trade did Trinzuth Vlaelavlour practise?"), "abstain")
+
+    def test_specific_answer_then_idk_is_an_attempt(self):
+        self.assertEqual(G("Niglarun Branidaen was a potter, but I don't know the specific one.", "cooper", self.Q), "incorrect")
+        self.assertEqual(G("Glehes Glaekouno was a pioneering Egyptian musician and composer, but I don't know the specific "
+                           "method or profession he used to earn a living.", "cooper", "How did Glehes Glaekouno earn a living?"), "incorrect")
+        self.assertEqual(G("folding and carving  I don't know", "weaver", "What kind of work was Banbrenan Zhaemem known for?"), "incorrect")
+        self.assertEqual(G("Plemuvol is not a city, but rather a region in southeastern Russia. Therefore, I don't know the "
+                           "answer to this question.", "Glebuth", "Where is the capital of Plemuvol?"), "incorrect")
+
+    def test_number_is_an_attempt(self):
+        self.assertEqual(G("It was a trade in 1850, but I don't know which one.", "potter", self.Q), "incorrect")
+
+    def test_stated_reference_is_still_credited(self):
+        self.assertEqual(G("Niglarun Branidaen was a cooper or another trade, but I don't know which one.", "cooper", self.Q), "correct")
+
+    def test_needs_the_question(self):
+        self.assertEqual(G("Bodamul Shevanaen was a trade or industry, but I don't know which one.", "potter"), "incorrect")
+
+
 class Negation(unittest.TestCase):
     """review on PR: a mention the answer explicitly rejects must not be credited."""
     def test_rejected_reference_is_not_credited(self):
