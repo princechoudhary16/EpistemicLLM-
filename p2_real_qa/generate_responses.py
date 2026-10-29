@@ -4,6 +4,7 @@ through the shared code path (common.model.ModelRunner + common.evaluate.run_eva
     python -m p2_real_qa.generate_responses --split pilot --limit 3          # smoke test: 3 questions, check timing first
     python -m p2_real_qa.generate_responses --split pilot                    # 200 questions -> results/raw/p2_pilot_base.jsonl
     python -m p2_real_qa.generate_responses --split train_probe --device mps
+    python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split pilot  # -> results/raw/p2_triviaqa_v0_pilot_base.jsonl
 
 Resumable: rows are appended after every chunk; re-running the same command skips finished question_ids.
 """
@@ -84,6 +85,7 @@ def summarize(path: Path):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", default=Path(DATASET_DIR).name, help="folder under data/real_qa (simpleqa_v0 | triviaqa_v0)")
     ap.add_argument("--split", default="pilot", help="pilot | train_probe | validation | locked_test")
     ap.add_argument("--questions", help="override: path to a question JSONL")
     ap.add_argument("--out", help="override output path (default results/raw/p2_<split>_base.jsonl)")
@@ -95,10 +97,11 @@ def main():
     a = ap.parse_args()
 
     model_cfg, dec_cfg = load_yaml("model.yaml"), load_yaml("decoding.yaml")
-    qpath = Path(a.questions) if a.questions else REPO_ROOT / DATASET_DIR / f"{a.split}.jsonl"
+    qpath = Path(a.questions) if a.questions else REPO_ROOT / "data" / "real_qa" / a.dataset / f"{a.split}.jsonl"
     questions = schema.read_jsonl(qpath)[: a.limit]
-    run_id = a.run_id or f"p2_{a.split}_base"
-    out = Path(a.out) if a.out else REPO_ROOT / "results" / "raw" / f"p2_{a.split}_base{'_smoke' if a.limit else ''}.jsonl"
+    tag = a.split if a.dataset == Path(DATASET_DIR).name else f"{a.dataset}_{a.split}"   # SimpleQA names unchanged
+    run_id = a.run_id or f"p2_{tag}_base"
+    out = Path(a.out) if a.out else REPO_ROOT / "results" / "raw" / f"p2_{tag}_base{'_smoke' if a.limit else ''}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
 
     from common.model import ModelRunner, environment_versions   # imported late: needs torch/transformers

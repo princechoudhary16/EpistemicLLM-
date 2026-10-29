@@ -1,0 +1,105 @@
+{
+  "dataset_version": "triviaqa-v0",
+  "snapshot_file": "triviaqa_rc_nocontext_validation_0f7faf33.jsonl",
+  "snapshot_sha256": "2532f9ea6d040bdd344b5b7d0fa6a1560158107d5a293f6e7d4d9fe60550fd74",
+  "n_snapshot_rows": 9960,
+  "pilot_seed": 20261029,
+  "main_split_seed": 20261030,
+  "questions_per_split": {
+    "pilot": 200,
+    "train_probe": 500,
+    "validation": 200,
+    "locked_test": 300
+  },
+  "groups_per_split": {
+    "pilot": 198,
+    "train_probe": 395,
+    "validation": 146,
+    "locked_test": 230
+  },
+  "answer_type_per_split": {
+    "pilot": {
+      "WikipediaEntity": 177,
+      "Numerical": 14,
+      "FreeForm": 8,
+      "Range": 1
+    },
+    "train_probe": {
+      "WikipediaEntity": 461,
+      "Numerical": 26,
+      "FreeForm": 12,
+      "Range": 1
+    },
+    "validation": {
+      "WikipediaEntity": 183,
+      "Numerical": 14,
+      "FreeForm": 2,
+      "Range": 1
+    },
+    "locked_test": {
+      "WikipediaEntity": 287,
+      "FreeForm": 8,
+      "Numerical": 5
+    }
+  },
+  "checks": [
+    {
+      "name": "required_fields_present",
+      "ok": true,
+      "detail": "0 missing/empty (first: [])"
+    },
+    {
+      "name": "question_ids_unique_across_splits",
+      "ok": true,
+      "detail": "duplicates: []"
+    },
+    {
+      "name": "split_field_matches_file",
+      "ok": true,
+      "detail": "mismatches: []"
+    },
+    {
+      "name": "no_group_shared_across_splits",
+      "ok": true,
+      "detail": "shared groups: {}"
+    },
+    {
+      "name": "no_question_text_shared_across_splits",
+      "ok": true,
+      "detail": "0 question strings in >1 split"
+    },
+    {
+      "name": "split_sizes_as_expected",
+      "ok": true,
+      "detail": "(actual, expected) mismatches: {}"
+    },
+    {
+      "name": "excluded_ids_absent",
+      "ok": true,
+      "detail": "0 excluded IDs in splits"
+    }
+  ],
+  "file_sha256": {
+    "locked_test.jsonl": "7986fe74005059bae9bd54e0f91e7282c821dc983b980d2a78ce22ab97d3baac",
+    "pilot.jsonl": "d981e4129f4f3749501e3548c6dea802858b2870c3c51146fcba4d7845e63365",
+    "train_probe.jsonl": "d9b595442d29830a90e12cd8ad72227567fb10ced724b3c02bcd846eaa38a92d",
+    "validation.jsonl": "eba7f581b617249ee2b137aefb52c56001b925b92f06561f46838f3bf459720f"
+  },
+  "source_repo": "mandarjoshi/trivia_qa@0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+  "source_file": "rc.nocontext/validation-00000-of-00001.parquet",
+  "excluded_file": "data/triviaqa/validation_sample_n300_seed0.jsonl",
+  "excluded_ids_requested": 300,
+  "excluded_ids_not_in_snapshot": 0,
+  "excluded_questions_incl_group": 603,
+  "aliases_per_question_mean": 12.29,
+  "aliases_dropped": {
+    "too_short": 15,
+    "in_question": 812
+  },
+  "dedup": {
+    "snapshot_rows": 17944,
+    "unique_question_ids": 9960,
+    "repeated_rows_dropped": 7984,
+    "repeated_rows_with_different_content": 2
+  }
+}
