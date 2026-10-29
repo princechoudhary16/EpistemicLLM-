@@ -161,6 +161,13 @@ class TriviaQA(unittest.TestCase):
         kept2, d2 = data.clean_aliases("Seine", ["Seine", "France"], question="Which river flows through France?")
         self.assertEqual(kept2, ["Seine"])                       # alias already in the question dropped
         self.assertEqual(d2["in_question"], 1)
+        kept5, _ = data.clean_aliases("Roots: The Saga of an American Family", ["Roots (book)", "Mercury (album)"],
+                                      question="Which 1976 Alex Haley book became a TV series?")
+        self.assertIn("Roots", kept5)                            # bracket label removed -> plain answer matches
+        self.assertIn("Roots (book)", kept5)                     # original alias kept too
+        kept6, d6 = data.clean_aliases("Delaware", ["The First State (nickname)"], question="Which US state is The First State?")
+        self.assertNotIn("The First State", kept6)              # a bare form already in the question is dropped too
+        self.assertEqual(d6["in_question"], 1)
         kept4, _ = data.clean_aliases("Eight", ["8"], question="What number on the Beaufort Scale is a gale?")
         self.assertEqual(kept4, ["Eight", "8"])                  # a single digit is never "too short"
         kept3, _ = data.clean_aliases("7", [], question="How many days in a week?")
@@ -209,7 +216,8 @@ class TriviaQA(unittest.TestCase):
             self.assertEqual(audit["excluded_ids_requested"], 3)
             self.assertEqual(audit["excluded_ids_not_in_snapshot"], 1)
             self.assertEqual(audit["excluded_questions_incl_group"], 6)   # 2 IDs x their 3-question answer groups
-            rows = [json.loads(l) for f in sorted((Path(d) / "rq" / "triviaqa_t0").glob("*.jsonl")) for l in open(f)]
+            rows = [json.loads(l) for f in sorted((Path(d) / "rq" / "triviaqa_t0").glob("*.jsonl"))
+                    for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
             ids = {r["question_id"] for r in rows}
             for q in ("tq_00009", "tq_00010", "tq_00011", "tq_00500"):   # tq_00010 and its whole answer group
                 self.assertNotIn(f"triviaqa-{q}", ids)

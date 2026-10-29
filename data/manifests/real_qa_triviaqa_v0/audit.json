@@ -80,10 +80,10 @@
     }
   ],
   "file_sha256": {
-    "locked_test.jsonl": "7986fe74005059bae9bd54e0f91e7282c821dc983b980d2a78ce22ab97d3baac",
-    "pilot.jsonl": "d981e4129f4f3749501e3548c6dea802858b2870c3c51146fcba4d7845e63365",
-    "train_probe.jsonl": "d9b595442d29830a90e12cd8ad72227567fb10ced724b3c02bcd846eaa38a92d",
-    "validation.jsonl": "eba7f581b617249ee2b137aefb52c56001b925b92f06561f46838f3bf459720f"
+    "locked_test.jsonl": "5aba6a81db64de42e3d8609e7a7091590a960003c4556922190df4abebe5dbfe",
+    "pilot.jsonl": "c5f499cb6a24049c3f123f52d12b6264dec34667f46908ac9f3a30b9d08a534c",
+    "train_probe.jsonl": "280b0b4cbc1befaf45d3498b49bf1f314ac5189e55abef31dfb9b87d735c9419",
+    "validation.jsonl": "6f7fd5e618f713c1163b47c0f6b6f1f31d3ec6da0c187487c05b1f1f4f588a8c"
   },
   "source_repo": "mandarjoshi/trivia_qa@0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
   "source_file": "rc.nocontext/validation-00000-of-00001.parquet",
@@ -91,10 +91,10 @@
   "excluded_ids_requested": 300,
   "excluded_ids_not_in_snapshot": 0,
   "excluded_questions_incl_group": 603,
-  "aliases_per_question_mean": 12.29,
+  "aliases_per_question_mean": 12.55,
   "aliases_dropped": {
-    "too_short": 15,
-    "in_question": 812
+    "too_short": 31,
+    "in_question": 995
   },
   "dedup": {
     "snapshot_rows": 17944,

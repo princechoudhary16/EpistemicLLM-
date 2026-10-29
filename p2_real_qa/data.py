@@ -251,7 +251,9 @@ def download_triviaqa_snapshot(path) -> str:
 
 
 def clean_aliases(value, aliases, question="") -> tuple[list, dict]:
-    """Canonical value first, then the other aliases, de-duplicated by their normalised form.
+    """Canonical value first, then the other aliases, de-duplicated by their normalised form. Each alias with a
+    bracketed label also adds its bare form: Wikipedia-style aliases like "Roots (book)" or "Mercury (album)" would
+    otherwise never match a plain answer ("Roots").
 
     Dropped (counted in the audit): aliases that normalise to fewer than MIN_ALIAS_CHARS characters (digits are
     kept: the grader has its own number rules), aliases already
@@ -262,7 +264,13 @@ def clean_aliases(value, aliases, question="") -> tuple[list, dict]:
     nq = normalize(question)
     kept, seen = [], set()
     dropped = {"too_short": 0, "in_question": 0}
-    for i, a in enumerate([value, *aliases]):
+    candidates = []
+    for a in [value, *aliases]:            # "Roots (book)" also yields "Roots"; the canonical value stays first
+        candidates.append(a)
+        bare = re.sub(r"\s*\([^()]*\)", "", str(a)).strip()
+        if bare and bare != str(a).strip():
+            candidates.append(bare)
+    for i, a in enumerate(candidates):
         a = re.sub(r"\s+", " ", str(a).replace(ALIAS_SEP.strip(), " ")).strip()
         n = normalize(a)
         if not n or n in seen:
