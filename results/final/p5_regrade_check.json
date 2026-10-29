@@ -1,0 +1,195 @@
+{
+  "total": {
+    "n": 13200,
+    "diff": 13,
+    "mismatch": 0
+  },
+  "per_file": {
+    "main_v0_lam0.3_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.465,
+      "acc_whole_word": 0.465
+    },
+    "main_v0_lam0.3_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 2,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.445,
+      "acc_whole_word": 0.44166666666666665
+    },
+    "main_v0_lam0.3_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.44,
+      "acc_whole_word": 0.44
+    },
+    "main_v0_lam0_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4866666666666667,
+      "acc_whole_word": 0.4866666666666667
+    },
+    "main_v0_lam0_seed0/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 2,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.48,
+      "acc_whole_word": 0.4766666666666667
+    },
+    "main_v0_lam0_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4816666666666667,
+      "acc_whole_word": 0.4816666666666667
+    },
+    "main_v0_lam0_seed1/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 1,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.485,
+      "acc_whole_word": 0.48333333333333334
+    },
+    "main_v0_lam0_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.47833333333333333,
+      "acc_whole_word": 0.47833333333333333
+    },
+    "main_v0_lam0_seed2/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4583333333333333,
+      "acc_whole_word": 0.4583333333333333
+    },
+    "main_v0_lam100_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 2,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.25166666666666665,
+      "acc_whole_word": 0.24833333333333332
+    },
+    "main_v0_lam10_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4266666666666667,
+      "acc_whole_word": 0.4266666666666667
+    },
+    "main_v0_lam10_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 1,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.415,
+      "acc_whole_word": 0.41333333333333333
+    },
+    "main_v0_lam10_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.44166666666666665,
+      "acc_whole_word": 0.44166666666666665
+    },
+    "main_v0_lam1_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.44666666666666666,
+      "acc_whole_word": 0.44666666666666666
+    },
+    "main_v0_lam1_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 5,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4683333333333333,
+      "acc_whole_word": 0.46
+    },
+    "main_v0_lam1_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.465,
+      "acc_whole_word": 0.465
+    },
+    "main_v0_lam3_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.485,
+      "acc_whole_word": 0.485
+    },
+    "main_v0_lam3_seed0/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.49166666666666664,
+      "acc_whole_word": 0.49166666666666664
+    },
+    "main_v0_lam3_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.43666666666666665,
+      "acc_whole_word": 0.43666666666666665
+    },
+    "main_v0_lam3_seed1/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.46166666666666667,
+      "acc_whole_word": 0.46166666666666667
+    },
+    "main_v0_lam3_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.48,
+      "acc_whole_word": 0.48
+    },
+    "main_v0_lam3_seed2/eval_main_v0_final/predictions.jsonl": {
+      "n": 600,
+      "label_disagreements": 0,
+      "stored_label_mismatch": 0,
+      "acc_substring": 0.4683333333333333,
+      "acc_whole_word": 0.4683333333333333
+    }
+  },
+  "examples": [
+    {
+      "answer": "Vlaengaetha",
+      "reference": "Vlaengaeth",
+      "substring": "correct",
+      "whole_word": "incorrect"
+    },
+    {
+      "answer": "tapestry weavers",
+      "reference": "tapestry weaver",
+      "substring": "correct",
+      "whole_word": "incorrect"
+    },
+    {
+      "answer": "Drouzhakrou",
+      "reference": "Drouzhak",
+      "substring": "correct",
+      "whole_word": "incorrect"
+    },
+    {
+      "answer": "Drouzhakrou",
+      "reference": "Drouzhak",
+      "substring": "correct",
+      "whole_word": "incorrect"
+    },
+    {
+      "answer": "Thonpoudroul",
+      "reference": "Thonpoudro",
+      "substring": "correct",
+      "whole_word": "incorrect"
+    }
+  ]
+}

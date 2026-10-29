@@ -1,0 +1,150 @@
+{
+  "eval_script_version": "p6-eval-v1.1",
+  "baseline": "sft_matched",
+  "summaries": {
+    "base": {
+      "C": 0,
+      "W": 820,
+      "A": 380,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.6833333333333333,
+      "abstention_rate": 0.31666666666666665,
+      "coverage": 0.6833333333333333,
+      "selective_accuracy": 0.0,
+      "selective_risk": 1.0,
+      "aurc": 0.6833333333333333,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0003333333333333334,
+      "n_facts_scored": 1200
+    },
+    "sft": {
+      "C": 65,
+      "W": 1135,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.05416666666666667,
+      "hallucination_rate": 0.9458333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.05416666666666667,
+      "selective_risk": 0.9458333333333333,
+      "aurc": 0.8379353835031802,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.03800000000000001,
+      "n_facts_scored": 1200
+    },
+    "idk": {
+      "C": 0,
+      "W": 0,
+      "A": 1200,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.0,
+      "abstention_rate": 1.0,
+      "coverage": 0.0,
+      "selective_accuracy": null,
+      "selective_risk": null,
+      "aurc": null,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0,
+      "n_facts_scored": 1200
+    },
+    "sft_matched": {
+      "C": 562,
+      "W": 638,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.4683333333333333,
+      "hallucination_rate": 0.5316666666666666,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.4683333333333333,
+      "selective_risk": 0.5316666666666666,
+      "aurc": 0.21270532789913496,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.42316666666666675,
+      "n_facts_scored": 1200
+    },
+    "p5_lam0": {
+      "C": 584,
+      "W": 616,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.4866666666666667,
+      "hallucination_rate": 0.5133333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.4866666666666667,
+      "selective_risk": 0.5133333333333333,
+      "aurc": 0.20021338377498507,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.45883333333333337,
+      "n_facts_scored": 1200
+    },
+    "p5_lam3": {
+      "C": 583,
+      "W": 617,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18465186884085255,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4528333333333332,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {
+    "base_vs_sft_matched": {
+      "estimate": -0.4683333333333333,
+      "ci_low": -0.49416666666666664,
+      "ci_high": -0.44,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "sft_vs_sft_matched": {
+      "estimate": -0.4141666666666667,
+      "ci_low": -0.44168750000000007,
+      "ci_high": -0.38416666666666666,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "idk_vs_sft_matched": {
+      "estimate": -0.4683333333333333,
+      "ci_low": -0.49416666666666664,
+      "ci_high": -0.44,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam0_vs_sft_matched": {
+      "estimate": 0.018333333333333368,
+      "ci_low": 0.0,
+      "ci_high": 0.03833333333333333,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam3_vs_sft_matched": {
+      "estimate": 0.017500000000000016,
+      "ci_low": -0.0016875000000000364,
+      "ci_high": 0.03583333333333333,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    }
+  }
+}

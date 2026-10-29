@@ -1,0 +1,1974 @@
+{
+  "meta": {
+    "version": "main_v0",
+    "boot": 2000,
+    "seed": 0,
+    "levels": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      20
+    ],
+    "inputs": {
+      "sft_matched": {
+        "path": "p1_main_v0_sft_matched.jsonl",
+        "sha256": "7cd8579f375cd23fdc5e9a303f43492269f1f48acb17c494593ac4f73eabe779",
+        "rows": 7200,
+        "grading_versions": [
+          "placeholder_exact_v1"
+        ],
+        "decoding_ids": [
+          "decoding_v1"
+        ],
+        "methods": [
+          "sft_matched"
+        ]
+      },
+      "base": {
+        "path": "results/raw/p1_main_v0_base.jsonl",
+        "sha256": "0b28528d0f5546d42824131172e6c0d43d041e96d6f3d68438614ae3c944d8bf",
+        "rows": 7200,
+        "grading_versions": [
+          "placeholder_exact_v1"
+        ],
+        "decoding_ids": [
+          "decoding_v0"
+        ],
+        "methods": [
+          "base"
+        ]
+      },
+      "sft_weak_recipe": {
+        "path": "results/raw/p1_main_v0_sft.jsonl",
+        "sha256": "e7a6eae07bc0b6a7cd074773bab76663ab3dce1c517b45d503ccdf04ca0fbb61",
+        "rows": 7200,
+        "grading_versions": [
+          "placeholder_exact_v1"
+        ],
+        "decoding_ids": [
+          "decoding_v0"
+        ],
+        "methods": [
+          "sft"
+        ]
+      }
+    },
+    "notes": "sft_matched read from origin/sahana results/raw/p1_main_v0_sft_matched.jsonl (commit 9c26dc7, not yet on main). base and sft_weak_recipe are P6's original runs under decoding_v0 and are superseded for the final comparison.",
+    "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
+  },
+  "results": {
+    "sft_matched": {
+      "exposure": {
+        "0": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 0,
+          "incorrect": 200,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "hallucination": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "mean_K": {
+            "est": 0.002,
+            "lo": 0.0,
+            "hi": 0.006000000000000001
+          },
+          "k_buckets": {
+            "K=0": 99,
+            "inconsistent": 1,
+            "K>=0.8": 0
+          }
+        },
+        "1": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 10,
+          "incorrect": 190,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.05,
+            "lo": 0.015,
+            "hi": 0.09
+          },
+          "hallucination": {
+            "est": 0.95,
+            "lo": 0.91,
+            "hi": 0.985
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.05,
+            "lo": 0.015,
+            "hi": 0.09
+          },
+          "mean_K": {
+            "est": 0.034,
+            "lo": 0.009000000000000001,
+            "hi": 0.066
+          },
+          "k_buckets": {
+            "K=0": 92,
+            "inconsistent": 6,
+            "K>=0.8": 2
+          }
+        },
+        "2": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 53,
+          "incorrect": 147,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.265,
+            "lo": 0.185,
+            "hi": 0.345
+          },
+          "hallucination": {
+            "est": 0.735,
+            "lo": 0.655,
+            "hi": 0.815
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.265,
+            "lo": 0.185,
+            "hi": 0.345
+          },
+          "mean_K": {
+            "est": 0.22399999999999998,
+            "lo": 0.15200000000000002,
+            "hi": 0.293
+          },
+          "k_buckets": {
+            "K=0": 64,
+            "inconsistent": 20,
+            "K>=0.8": 16
+          }
+        },
+        "5": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 143,
+          "incorrect": 57,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.715,
+            "lo": 0.63,
+            "hi": 0.795
+          },
+          "hallucination": {
+            "est": 0.285,
+            "lo": 0.205,
+            "hi": 0.37
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.715,
+            "lo": 0.63,
+            "hi": 0.795
+          },
+          "mean_K": {
+            "est": 0.6089999999999999,
+            "lo": 0.529975,
+            "hi": 0.6850000000000002
+          },
+          "k_buckets": {
+            "K=0": 21,
+            "inconsistent": 27,
+            "K>=0.8": 52
+          }
+        },
+        "10": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 175,
+          "incorrect": 25,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.875,
+            "lo": 0.82,
+            "hi": 0.93
+          },
+          "hallucination": {
+            "est": 0.125,
+            "lo": 0.07,
+            "hi": 0.18
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.875,
+            "lo": 0.82,
+            "hi": 0.93
+          },
+          "mean_K": {
+            "est": 0.792,
+            "lo": 0.7290000000000001,
+            "hi": 0.8540249999999999
+          },
+          "k_buckets": {
+            "K=0": 8,
+            "inconsistent": 20,
+            "K>=0.8": 72
+          }
+        },
+        "20": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 181,
+          "incorrect": 19,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.905,
+            "lo": 0.85,
+            "hi": 0.95
+          },
+          "hallucination": {
+            "est": 0.095,
+            "lo": 0.05,
+            "hi": 0.15
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.905,
+            "lo": 0.85,
+            "hi": 0.95
+          },
+          "mean_K": {
+            "est": 0.878,
+            "lo": 0.823,
+            "hi": 0.9259999999999999
+          },
+          "k_buckets": {
+            "K=0": 2,
+            "inconsistent": 15,
+            "K>=0.8": 83
+          }
+        }
+      },
+      "relation": {
+        "birth_year": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 3,
+            "accuracy": 0.075
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 14,
+            "accuracy": 0.35
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 25,
+            "accuracy": 0.625
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 34,
+            "accuracy": 0.85
+          }
+        },
+        "capital": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 2,
+            "accuracy": 0.05
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 8,
+            "accuracy": 0.2
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 34,
+            "accuracy": 0.85
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 39,
+            "accuracy": 0.975
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 40,
+            "accuracy": 1.0
+          }
+        },
+        "founder": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 10,
+            "accuracy": 0.25
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 33,
+            "accuracy": 0.825
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 37,
+            "accuracy": 0.925
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 37,
+            "accuracy": 0.925
+          }
+        },
+        "headquarters": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 16,
+            "accuracy": 0.4
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 34,
+            "accuracy": 0.85
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 40,
+            "accuracy": 1.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 36,
+            "accuracy": 0.9
+          }
+        },
+        "occupation": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 7,
+            "accuracy": 0.175
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 16,
+            "accuracy": 0.4
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 28,
+            "accuracy": 0.7
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 34,
+            "accuracy": 0.85
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 34,
+            "accuracy": 0.85
+          }
+        }
+      },
+      "split": {
+        "dev": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.06,
+              "lo": 0.01,
+              "hi": 0.13
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.27,
+              "lo": 0.15,
+              "hi": 0.4
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.71,
+              "lo": 0.6,
+              "hi": 0.82
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.86,
+              "lo": 0.77,
+              "hi": 0.94
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.88,
+              "lo": 0.8,
+              "hi": 0.95
+            }
+          }
+        },
+        "final": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.04,
+              "lo": 0.0,
+              "hi": 0.1
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.26,
+              "lo": 0.15,
+              "hi": 0.38
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.72,
+              "lo": 0.59,
+              "hi": 0.83
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.89,
+              "lo": 0.81,
+              "hi": 0.96
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.93,
+              "lo": 0.85,
+              "hi": 0.99
+            }
+          }
+        }
+      },
+      "steps": {
+        "0->1": {
+          "est": 0.05,
+          "lo": 0.015,
+          "hi": 0.09
+        },
+        "1->2": {
+          "est": 0.21500000000000002,
+          "lo": 0.125,
+          "hi": 0.305
+        },
+        "2->5": {
+          "est": 0.44999999999999996,
+          "lo": 0.335,
+          "hi": 0.56
+        },
+        "5->10": {
+          "est": 0.16000000000000003,
+          "lo": 0.05999999999999994,
+          "hi": 0.265
+        },
+        "10->20": {
+          "est": 0.030000000000000027,
+          "lo": -0.04500000000000004,
+          "hi": 0.09999999999999998
+        }
+      },
+      "confidence": {
+        "0": {
+          "mean_conf_correct": null,
+          "n_correct": 0,
+          "mean_conf_incorrect": -0.6025453591908072,
+          "n_incorrect": 200
+        },
+        "1": {
+          "mean_conf_correct": -0.3959953416900438,
+          "n_correct": 10,
+          "mean_conf_incorrect": -0.6335946015058568,
+          "n_incorrect": 190
+        },
+        "2": {
+          "mean_conf_correct": -0.23734720577226845,
+          "n_correct": 53,
+          "mean_conf_incorrect": -0.6128361696168606,
+          "n_incorrect": 147
+        },
+        "5": {
+          "mean_conf_correct": -0.14019962833185448,
+          "n_correct": 143,
+          "mean_conf_incorrect": -0.5618706415901514,
+          "n_incorrect": 57
+        },
+        "10": {
+          "mean_conf_correct": -0.08792152907837986,
+          "n_correct": 175,
+          "mean_conf_incorrect": -0.49693536953172585,
+          "n_incorrect": 25
+        },
+        "20": {
+          "mean_conf_correct": -0.05776577621644443,
+          "n_correct": 181,
+          "mean_conf_incorrect": -0.38625441538665684,
+          "n_incorrect": 19
+        }
+      },
+      "chance_floor": {
+        "birth_year": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            2,
+            200
+          ]
+        }
+      }
+    },
+    "base": {
+      "exposure": {
+        "0": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 0,
+          "incorrect": 194,
+          "abstain": 6,
+          "accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "hallucination": {
+            "est": 0.97,
+            "lo": 0.94,
+            "hi": 0.995
+          },
+          "abstention": {
+            "est": 0.03,
+            "lo": 0.005,
+            "hi": 0.06
+          },
+          "coverage": {
+            "est": 0.97,
+            "lo": 0.94,
+            "hi": 0.995
+          },
+          "selective_accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "mean_K": {
+            "est": 0.001,
+            "lo": 0.0,
+            "hi": 0.004
+          },
+          "k_buckets": {
+            "K=0": 99,
+            "inconsistent": 1,
+            "K>=0.8": 0
+          }
+        },
+        "1": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 0,
+          "incorrect": 191,
+          "abstain": 9,
+          "accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "hallucination": {
+            "est": 0.955,
+            "lo": 0.925,
+            "hi": 0.98
+          },
+          "abstention": {
+            "est": 0.045,
+            "lo": 0.02,
+            "hi": 0.075
+          },
+          "coverage": {
+            "est": 0.955,
+            "lo": 0.925,
+            "hi": 0.98
+          },
+          "selective_accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "mean_K": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "k_buckets": {
+            "K=0": 100,
+            "inconsistent": 0,
+            "K>=0.8": 0
+          }
+        },
+        "2": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 1,
+          "incorrect": 191,
+          "abstain": 8,
+          "accuracy": {
+            "est": 0.005,
+            "lo": 0.0,
+            "hi": 0.015
+          },
+          "hallucination": {
+            "est": 0.955,
+            "lo": 0.915,
+            "hi": 0.985
+          },
+          "abstention": {
+            "est": 0.04,
+            "lo": 0.01,
+            "hi": 0.075
+          },
+          "coverage": {
+            "est": 0.96,
+            "lo": 0.925,
+            "hi": 0.99
+          },
+          "selective_accuracy": {
+            "est": 0.005208333333333333,
+            "lo": 0.0,
+            "hi": 0.015789473684210527
+          },
+          "mean_K": {
+            "est": 0.002,
+            "lo": 0.0,
+            "hi": 0.006000000000000001
+          },
+          "k_buckets": {
+            "K=0": 99,
+            "inconsistent": 1,
+            "K>=0.8": 0
+          }
+        },
+        "5": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 0,
+          "incorrect": 192,
+          "abstain": 8,
+          "accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "hallucination": {
+            "est": 0.96,
+            "lo": 0.93,
+            "hi": 0.985
+          },
+          "abstention": {
+            "est": 0.04,
+            "lo": 0.015,
+            "hi": 0.07
+          },
+          "coverage": {
+            "est": 0.96,
+            "lo": 0.93,
+            "hi": 0.985
+          },
+          "selective_accuracy": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "mean_K": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "k_buckets": {
+            "K=0": 100,
+            "inconsistent": 0,
+            "K>=0.8": 0
+          }
+        },
+        "10": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 1,
+          "incorrect": 191,
+          "abstain": 8,
+          "accuracy": {
+            "est": 0.005,
+            "lo": 0.0,
+            "hi": 0.015
+          },
+          "hallucination": {
+            "est": 0.955,
+            "lo": 0.925,
+            "hi": 0.98
+          },
+          "abstention": {
+            "est": 0.04,
+            "lo": 0.015,
+            "hi": 0.07
+          },
+          "coverage": {
+            "est": 0.96,
+            "lo": 0.93,
+            "hi": 0.985
+          },
+          "selective_accuracy": {
+            "est": 0.005208333333333333,
+            "lo": 0.0,
+            "hi": 0.015957446808510637
+          },
+          "mean_K": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "k_buckets": {
+            "K=0": 100,
+            "inconsistent": 0,
+            "K>=0.8": 0
+          }
+        },
+        "20": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 1,
+          "incorrect": 191,
+          "abstain": 8,
+          "accuracy": {
+            "est": 0.005,
+            "lo": 0.0,
+            "hi": 0.015
+          },
+          "hallucination": {
+            "est": 0.955,
+            "lo": 0.925,
+            "hi": 0.98
+          },
+          "abstention": {
+            "est": 0.04,
+            "lo": 0.015,
+            "hi": 0.065
+          },
+          "coverage": {
+            "est": 0.96,
+            "lo": 0.935,
+            "hi": 0.985
+          },
+          "selective_accuracy": {
+            "est": 0.005208333333333333,
+            "lo": 0.0,
+            "hi": 0.015873015873015872
+          },
+          "mean_K": {
+            "est": 0.001,
+            "lo": 0.0,
+            "hi": 0.0030000000000000005
+          },
+          "k_buckets": {
+            "K=0": 99,
+            "inconsistent": 1,
+            "K>=0.8": 0
+          }
+        }
+      },
+      "relation": {
+        "birth_year": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          }
+        },
+        "capital": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          }
+        },
+        "founder": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          }
+        },
+        "headquarters": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          }
+        },
+        "occupation": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          }
+        }
+      },
+      "split": {
+        "dev": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.01,
+              "lo": 0.0,
+              "hi": 0.03
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          }
+        },
+        "final": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.01,
+              "lo": 0.0,
+              "hi": 0.03
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.01,
+              "lo": 0.0,
+              "hi": 0.03
+            }
+          }
+        }
+      },
+      "steps": {
+        "0->1": {
+          "est": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        },
+        "1->2": {
+          "est": 0.005,
+          "lo": 0.0,
+          "hi": 0.015
+        },
+        "2->5": {
+          "est": -0.005,
+          "lo": -0.015,
+          "hi": 0.0
+        },
+        "5->10": {
+          "est": 0.005,
+          "lo": 0.0,
+          "hi": 0.015
+        },
+        "10->20": {
+          "est": 0.0,
+          "lo": -0.015,
+          "hi": 0.015
+        }
+      },
+      "confidence": {
+        "0": {
+          "mean_conf_correct": null,
+          "n_correct": 0,
+          "mean_conf_incorrect": -0.5814878951311534,
+          "n_incorrect": 194
+        },
+        "1": {
+          "mean_conf_correct": null,
+          "n_correct": 0,
+          "mean_conf_incorrect": -0.5786347382474225,
+          "n_incorrect": 191
+        },
+        "2": {
+          "mean_conf_correct": -0.467291108740028,
+          "n_correct": 1,
+          "mean_conf_incorrect": -0.5979327773312364,
+          "n_incorrect": 191
+        },
+        "5": {
+          "mean_conf_correct": null,
+          "n_correct": 0,
+          "mean_conf_incorrect": -0.5896122038750978,
+          "n_incorrect": 192
+        },
+        "10": {
+          "mean_conf_correct": -0.7811746409783947,
+          "n_correct": 1,
+          "mean_conf_incorrect": -0.6152426952300842,
+          "n_incorrect": 191
+        },
+        "20": {
+          "mean_conf_correct": -1.1753914058208466,
+          "n_correct": 1,
+          "mean_conf_incorrect": -0.6089907986695633,
+          "n_incorrect": 191
+        }
+      },
+      "chance_floor": {
+        "birth_year": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            1,
+            200
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        }
+      }
+    },
+    "sft_weak_recipe": {
+      "exposure": {
+        "0": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 2,
+          "incorrect": 198,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.01,
+            "lo": 0.0,
+            "hi": 0.03
+          },
+          "hallucination": {
+            "est": 0.99,
+            "lo": 0.97,
+            "hi": 1.0
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.01,
+            "lo": 0.0,
+            "hi": 0.03
+          },
+          "mean_K": {
+            "est": 0.012,
+            "lo": 0.0,
+            "hi": 0.028999999999999998
+          },
+          "k_buckets": {
+            "K=0": 97,
+            "inconsistent": 3,
+            "K>=0.8": 0
+          }
+        },
+        "1": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 1,
+          "incorrect": 199,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.005,
+            "lo": 0.0,
+            "hi": 0.015
+          },
+          "hallucination": {
+            "est": 0.995,
+            "lo": 0.985,
+            "hi": 1.0
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.005,
+            "lo": 0.0,
+            "hi": 0.015
+          },
+          "mean_K": {
+            "est": 0.009000000000000001,
+            "lo": 0.0,
+            "hi": 0.019000000000000003
+          },
+          "k_buckets": {
+            "K=0": 96,
+            "inconsistent": 4,
+            "K>=0.8": 0
+          }
+        },
+        "2": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 4,
+          "incorrect": 196,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.02,
+            "lo": 0.0,
+            "hi": 0.045
+          },
+          "hallucination": {
+            "est": 0.98,
+            "lo": 0.955,
+            "hi": 1.0
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.02,
+            "lo": 0.0,
+            "hi": 0.045
+          },
+          "mean_K": {
+            "est": 0.011000000000000001,
+            "lo": 0.0,
+            "hi": 0.025024999999999867
+          },
+          "k_buckets": {
+            "K=0": 97,
+            "inconsistent": 3,
+            "K>=0.8": 0
+          }
+        },
+        "5": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 4,
+          "incorrect": 196,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.02,
+            "lo": 0.0,
+            "hi": 0.045
+          },
+          "hallucination": {
+            "est": 0.98,
+            "lo": 0.955,
+            "hi": 1.0
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.02,
+            "lo": 0.0,
+            "hi": 0.045
+          },
+          "mean_K": {
+            "est": 0.013999999999999999,
+            "lo": 0.0,
+            "hi": 0.036000000000000004
+          },
+          "k_buckets": {
+            "K=0": 97,
+            "inconsistent": 2,
+            "K>=0.8": 1
+          }
+        },
+        "10": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 13,
+          "incorrect": 187,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.065,
+            "lo": 0.025,
+            "hi": 0.11
+          },
+          "hallucination": {
+            "est": 0.935,
+            "lo": 0.89,
+            "hi": 0.975
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.065,
+            "lo": 0.025,
+            "hi": 0.11
+          },
+          "mean_K": {
+            "est": 0.052000000000000005,
+            "lo": 0.022000000000000002,
+            "hi": 0.08600000000000002
+          },
+          "k_buckets": {
+            "K=0": 86,
+            "inconsistent": 12,
+            "K>=0.8": 2
+          }
+        },
+        "20": {
+          "n_facts": 100,
+          "n_questions": 200,
+          "correct": 74,
+          "incorrect": 126,
+          "abstain": 0,
+          "accuracy": {
+            "est": 0.37,
+            "lo": 0.29,
+            "hi": 0.455
+          },
+          "hallucination": {
+            "est": 0.63,
+            "lo": 0.545,
+            "hi": 0.71
+          },
+          "abstention": {
+            "est": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "coverage": {
+            "est": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "selective_accuracy": {
+            "est": 0.37,
+            "lo": 0.29,
+            "hi": 0.455
+          },
+          "mean_K": {
+            "est": 0.265,
+            "lo": 0.203975,
+            "hi": 0.32599999999999996
+          },
+          "k_buckets": {
+            "K=0": 43,
+            "inconsistent": 44,
+            "K>=0.8": 13
+          }
+        }
+      },
+      "relation": {
+        "birth_year": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 2,
+            "accuracy": 0.05
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 5,
+            "accuracy": 0.125
+          }
+        },
+        "capital": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 3,
+            "accuracy": 0.075
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 22,
+            "accuracy": 0.55
+          }
+        },
+        "founder": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 3,
+            "accuracy": 0.075
+          }
+        },
+        "headquarters": {
+          "0": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 4,
+            "accuracy": 0.1
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 23,
+            "accuracy": 0.575
+          }
+        },
+        "occupation": {
+          "0": {
+            "n_questions": 40,
+            "correct": 2,
+            "accuracy": 0.05
+          },
+          "1": {
+            "n_questions": 40,
+            "correct": 1,
+            "accuracy": 0.025
+          },
+          "2": {
+            "n_questions": 40,
+            "correct": 4,
+            "accuracy": 0.1
+          },
+          "5": {
+            "n_questions": 40,
+            "correct": 3,
+            "accuracy": 0.075
+          },
+          "10": {
+            "n_questions": 40,
+            "correct": 4,
+            "accuracy": 0.1
+          },
+          "20": {
+            "n_questions": 40,
+            "correct": 21,
+            "accuracy": 0.525
+          }
+        }
+      },
+      "split": {
+        "dev": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.01,
+              "lo": 0.0,
+              "hi": 0.03
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.03,
+              "lo": 0.0,
+              "hi": 0.08
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.1,
+              "lo": 0.03,
+              "hi": 0.18024999999999863
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.41,
+              "lo": 0.29,
+              "hi": 0.53
+            }
+          }
+        },
+        "final": {
+          "0": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.02,
+              "lo": 0.0,
+              "hi": 0.06
+            }
+          },
+          "1": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "2": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.04,
+              "lo": 0.0,
+              "hi": 0.09
+            }
+          },
+          "5": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.01,
+              "lo": 0.0,
+              "hi": 0.03
+            }
+          },
+          "10": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.03,
+              "lo": 0.0,
+              "hi": 0.08
+            }
+          },
+          "20": {
+            "n_facts": 50,
+            "accuracy": {
+              "est": 0.33,
+              "lo": 0.22,
+              "hi": 0.45
+            }
+          }
+        }
+      },
+      "steps": {
+        "0->1": {
+          "est": -0.005,
+          "lo": -0.03,
+          "hi": 0.015
+        },
+        "1->2": {
+          "est": 0.015,
+          "lo": -0.005000000000000001,
+          "hi": 0.045
+        },
+        "2->5": {
+          "est": 0.0,
+          "lo": -0.034999999999999996,
+          "hi": 0.034999999999999996
+        },
+        "5->10": {
+          "est": 0.045,
+          "lo": -0.004999999999999999,
+          "hi": 0.095
+        },
+        "10->20": {
+          "est": 0.305,
+          "lo": 0.21487499999999998,
+          "hi": 0.395
+        }
+      },
+      "confidence": {
+        "0": {
+          "mean_conf_correct": -0.8324066027998924,
+          "n_correct": 2,
+          "mean_conf_incorrect": -1.2144370642211297,
+          "n_incorrect": 198
+        },
+        "1": {
+          "mean_conf_correct": -1.5774568617343903,
+          "n_correct": 1,
+          "mean_conf_incorrect": -1.268963289815326,
+          "n_incorrect": 199
+        },
+        "2": {
+          "mean_conf_correct": -0.7753080215479713,
+          "n_correct": 4,
+          "mean_conf_incorrect": -1.273275850504552,
+          "n_incorrect": 196
+        },
+        "5": {
+          "mean_conf_correct": -0.6173277848089735,
+          "n_correct": 4,
+          "mean_conf_incorrect": -1.251076117261867,
+          "n_incorrect": 196
+        },
+        "10": {
+          "mean_conf_correct": -0.6831630360035118,
+          "n_correct": 13,
+          "mean_conf_incorrect": -1.2043406308372095,
+          "n_incorrect": 187
+        },
+        "20": {
+          "mean_conf_correct": -0.4534146589255478,
+          "n_correct": 74,
+          "mean_conf_incorrect": -1.174534980944414,
+          "n_incorrect": 126
+        }
+      },
+      "chance_floor": {
+        "birth_year": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "capital": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "founder": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "headquarters": {
+          "greedy": [
+            0,
+            40
+          ],
+          "sampled": [
+            0,
+            200
+          ]
+        },
+        "occupation": {
+          "greedy": [
+            2,
+            40
+          ],
+          "sampled": [
+            12,
+            200
+          ]
+        }
+      }
+    }
+  }
+}
