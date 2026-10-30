@@ -31,7 +31,11 @@ class EvidenceAwareModel(nn.Module):
         pred = self.head(pooled)
 
         l_answer = out.loss
-        l_aux = F.mse_loss(pred, batch["s_target"])
+        mask = batch.get("aux_mask")
+        if mask is None:
+            l_aux = F.mse_loss(pred, batch["s_target"])
+        else:  # masked mean over labelled rows; identical to F.mse_loss when every row is labelled
+            l_aux = (((pred - batch["s_target"]) ** 2) * mask).sum() / mask.sum().clamp(min=1.0)
         total = l_answer + aux_weight * l_aux
         return {
             "loss": total,

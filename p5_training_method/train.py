@@ -12,7 +12,7 @@ import yaml
 
 import random
 
-from data import collate, encode_aux_row, encode_row, load_rows, select_aux_rows
+from data import collate, encode_aux_row, encode_row, load_rows, select_aux_rows, set_aux_label
 from model import build_model, save_checkpoint
 
 HERE = Path(__file__).resolve().parent
@@ -50,6 +50,12 @@ def main():
     ap.add_argument("--aux-zero", default=None,
                     help="answer-masked prompts for 0x facts (P1's aux_zero_prompts.jsonl): extra rows for the head "
                          "only, spread evenly over the steps; no language-model loss")
+    ap.add_argument("--aux-target", choices=["exposure", "k"], default="exposure",
+                    help="head target: s(exposure) (default) or the fact's K from --k-labels (K(q) experiment)")
+    ap.add_argument("--k-labels", default=None, help="JSON written by kq_labels.py (needed for --aux-target k)")
+    ap.add_argument("--aux-label-split", choices=["dev", "final"], default=None,
+                    help="aux loss only on answer-training rows of this split's facts; the other rows add language-model "
+                         "loss only (fact-disjoint labelling)")
     ap.add_argument("--aux-zero-split", choices=["dev", "final"], default=None,
                     help="use only the aux prompts of this split's 0x facts (name-recognition control)")
     ap.add_argument("--limit", type=int, default=None)
@@ -76,10 +82,20 @@ def main():
 
     system_prompt = cfg["system_prompt"]
     rows = load_rows(data_path)[: args.limit]
+    if args.aux_target == "k" and not args.k_labels:
+        raise SystemExit("--aux-target k needs --k-labels")
+    if args.aux_zero and (args.aux_target != "exposure" or args.aux_label_split):
+        raise SystemExit("--aux-zero cannot be combined with the K(q) / fact-disjoint labelling options")
+    k_doc = json.loads(Path(args.k_labels).read_text()) if args.k_labels else None
+    k_labels = k_doc["labels"] if (k_doc and args.aux_target == "k") else None
     examples = [
-        encode_row(tokenizer, system_prompt, r, cfg["data"]["max_seq_len"], cfg["head"]["max_exposure"])
+        set_aux_label(
+            encode_row(tokenizer, system_prompt, r, cfg["data"]["max_seq_len"], cfg["head"]["max_exposure"]),
+            r, args.aux_label_split, k_labels,
+        )
         for r in rows
     ]
+    n_labelled = int(sum(e.get("aux_mask", 1.0) for e in examples))
     bs = cfg["train"]["batch_size"]
     lm_chunks = [examples[i : i + bs] for i in range(0, len(examples), bs)]
 
@@ -115,6 +131,11 @@ def main():
         "aux_zero_sha256": sha256(aux_path) if aux_path else None,
         "n_aux_rows": len(aux_examples),
         "aux_zero_split": args.aux_zero_split,
+        "aux_target": args.aux_target,
+        "k_labels_path": args.k_labels,
+        "k_labels_sha256": sha256(args.k_labels) if args.k_labels else None,
+        "aux_label_split": args.aux_label_split,
+        "n_aux_labelled_rows": n_labelled,
         "n_steps": len(batches),
         "n_trainable_params": sum(p.numel() for p in params),
         "torch": torch.__version__,
@@ -125,7 +146,9 @@ def main():
     (out_dir / "run_config.json").write_text(json.dumps(run_config, indent=2))
     meta = {
         "aux_weight": aux_weight,
-        "target": "log(1+e)/log(1+max_exposure)",
+        "target": ("log(1+e)/log(1+max_exposure)" if args.aux_target == "exposure"
+                   else "K(fact) from teacher labels (correct sampled responses / sampled responses)"),
+        "aux_label_split": args.aux_label_split,
         "head_layer": "last hidden layer, after final norm",
         "pooling": "last prompt token",
         "config": cfg,
@@ -178,10 +201,11 @@ def main():
             b = to_device(b, device)
             pred = model(b, 0.0)["pred"].cpu()
             target = b["s_target"].cpu()
-            sq_err += ((pred - target) ** 2).tolist()
+            labelled = b["aux_mask"].cpu() > 0                      # unlabelled rows have no aux target
+            sq_err += (((pred - target) ** 2)[labelled]).tolist()
             for e, p in zip(b["exposure"].cpu().tolist(), pred.tolist()):
                 by_exposure[e].append(p)
-    s_all = torch.tensor([e["s"] for e in examples + aux_examples])
+    s_all = torch.tensor([e["s"] for e in examples + aux_examples if e.get("aux_mask", 1.0) > 0])
     summary = {
         "wall_seconds": wall,
         "mean_step_seconds": wall / len(batches),
