@@ -52,7 +52,8 @@ under-capacity recipe and are kept for history, not as the real baseline.
 - **Single seed.**
 - **Synthetic facts only.** Real-QA has zero baselines — P2's updated pilot (shared protocol, v4 grader) confirms the block, worse: 99.0% scored "never correct" (up from 96%).
 - **`idk` is a known-broken baseline, left as-is.** 100% abstention — a training-order artifact (30 IDK rows appended unshuffled after 3,800 fact rows). Not retrained; that would mean new training after the Week 5 freeze.
-- **P1's robustness work and P4's calibration work have since merged** (no longer draft branches), and P5 replicated their main finding on a second synthetic world — none of this is folded into the table above yet.
+- **P5's second-world replication is now folded in** (not shown here) — all 5 of their pre-registered criteria hold on an independent synthetic world. See the appendix §5b.
+- **P1's robustness work and P4's calibration work have merged** (no longer draft branches) but aren't rows in this table by design — P6 integrates on P5's checkpoints, not P1/P4's. Indexed with headlines in the appendix §9, including a flag that P1's exposure-curve analysis predates today's grader regrade.
 
 ---
 *Branch `sahana`, commit `9ad58f0`. Shareable version with charts:* https://claude.ai/artifact/DCzTEQmqRcS4n98BiHJzcW

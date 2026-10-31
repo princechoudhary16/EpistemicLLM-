@@ -131,12 +131,16 @@ is the full machine-readable output this table summarizes.
   Their recommendation is to pilot an easier real-QA dataset (TriviaQA/PopQA)
   on the same model; "Decisions requested" A/B/E in
   `reports/model_dataset_decision.md` remain open team decisions.
+- **P5's second-world replication (PR #12)**: now folded in --
+  `reports/p6_week6_reproducibility_appendix.md` §5b. All 5 of P5's
+  pre-registered criteria replicate on `main_w1` (an independent synthetic
+  world), with comfortable margins.
 - **P1's second-world/seed-robustness results** and **P4's
-  calibration-reliability work**: both have since merged into `main` (P1 PR
-  #9, P4 PR #11) and P5's second-world replication (PR #12) confirms their
-  main_v0 findings hold on an independent synthetic world. Not folded into
-  this table/plot -- would need a separate assembly pass; flagged here rather
-  than silently left out.
+  calibration-reliability work**: merged into `main` (P1 PR #9, P4 PR #11).
+  Not table rows here by design (`plan.md` §8 scopes P6's integration point
+  as P5's checkpoints, not P1/P4) -- indexed with headline numbers and a
+  staleness flag (P1's `sft_matched` analysis predates the 2026-10-31
+  regrade) in the appendix's team-wide results index, §9.
 - **P3's XAI integration**: no P3 branch exists in this repository as of this
   writing.
 - **The frozen-representation-head control** (`plan.md` §7's 5th required

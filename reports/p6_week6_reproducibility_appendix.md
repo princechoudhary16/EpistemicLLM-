@@ -99,6 +99,27 @@ with it.** This is a clean negative result for the practical hypothesis and a
 positive one for the narrower mechanistic claim, independently confirmed by
 both P5's own report and P6's evaluator.
 
+## 5b. Robustness: does it hold on a second synthetic world?
+
+Folded in here because it directly extends the same comparison above (same
+`p5_lam0`/`p5_lam3` methods), not a separate deliverable. P1 generated a
+second, independent world (`main_w1` — different invented names, different
+fact-to-exposure assignment, PR #9); P5 pre-registered 5 replication criteria
+*before* running on it (`reports/p5_second_world.md`), then ran the identical
+code, recipe, and λ=3 (chosen on `main_v0` only — no re-tuning) with 3 seeds.
+
+| | main_v0 | main_w1 |
+|---|---|---|
+| accuracy, λ=0 / λ=3 | 47.4% / 47.4% | 46.1% / 45.1% |
+| head AUROC (≥5× vs ≤2×), λ=0 / λ=3 | 0.523 / 0.848 | 0.497 / 0.863 |
+| fact-disjoint probe AUROC: λ=3 / SFT / base | 0.807 / 0.680 / 0.472 | 0.835 / 0.707 / 0.482 |
+| head mis-ranks 0× above 1×/2× (AUROC) | 0.349 | 0.351 |
+
+**All 5 pre-registered criteria replicated**, with comfortable margins (e.g.
+the probe gap's bar was +0.05 AUROC; it landed at +0.13 on `main_v0` and
++0.13 again on `main_w1`). This is the strongest evidence in the whole
+project that §5's finding isn't an artifact of one generated world.
+
 ## 6. One limitation, stated plainly
 
 Every number here comes from a single seed and the synthetic track only — the
@@ -140,22 +161,25 @@ Full provenance table with recipe hyperparameters for each row:
   `repetition_penalty=1.1` was suppressing "I don't know" tokens, confirmed by
   P1's ablation), not noise. `reports/p6_combined_main_v0_table.md`.
 
-## 9. What's explicitly NOT in this appendix
+## 9. Team-wide results index (assembly pass, 2026-10-31)
 
-- Real-QA baselines (blocked, §6 above).
-- P1's second-synthetic-world/seed-robustness results and P4's
-  calibration-reliability work have both since **merged into `main`** (PRs
-  #9, #11) — no longer draft branches, but still not folded into the table
-  or plots above. P5's second-world replication (PR #12) also merged,
-  confirming their main_v0 finding holds on an independent synthetic world
-  (head AUROC 0.863 vs. 0.497 untrained; log-prob still the better
-  abstention signal). P6 does not merge or finish other members' work —
-  this appendix needs one more assembly pass to fold these in before final
-  submission.
-- P3's XAI integration: no P3 branch exists in this repository.
-- Seeds beyond 0 for `p5_lam0`/`p5_lam3` through this exact evaluator (P5's
-  own 3-seed results exist on their internal pipeline, not yet re-run through
-  `compare_methods.py`).
+P5's second-world replication is folded into §5b above since it's the same
+methods P6 already tracks. P1's and P4's work is their own deliverable for
+a different section of the final report, not a row in this accuracy table —
+indexed here instead, per `plan.md` §8's division of labor ("P6 on P5
+checkpoints" is P6's integration point; P1/P4 integrate elsewhere).
+
+| Owner | Deliverable | Headline | Status |
+|---|---|---|---|
+| P1 | Exposure curve, `sft_matched` recipe, `main_v0` (`p1_exposure/analysis/results/main_v0/`) | 0×→20× accuracy: 0.0% → 90.5%, clean monotonic curve, fact-level 95% CIs | ⚠️ computed against `p1_main_v0_sft_matched.jsonl` *before* the 2026-10-31 grader regrade (§3) — their table's own header still says `placeholder_exact_v1`. Numbers will shift slightly; P1 owns re-running their own analysis script against the current file. |
+| P1 | Robustness report (training seeds, second world, wording) (`p1_exposure/analysis/results/robustness/`) | Seed-to-seed spread ≤9.5pp at any exposure level; held-out wording changes accuracy by at most +3.5pp (paired) | Same staleness caveat as above — inputs predate the regrade. |
+| P4 | Confidence/calibration workflow (`confidence_calibration/`) | Infrastructure (code + CLI) merged; no new result run yet beyond the earlier TriviaQA pilot already cited in `reports/p6_week1_for_team.md` | Code-only merge as of this writing — nothing numeric to index yet. |
+| P2 | Real-QA pilot + shared grader (`reports/model_dataset_decision.md`) | 99.0% K=0 on SimpleQA under the shared protocol (confirms, not resolves, the Week 1 blocker) | Grader (`p2_whole_word_v4`) adopted here (§3); dataset decision (A/B/E) still open. |
+| P3 | XAI integration | — | No P3 branch exists in this repository. |
+
+**Also still open:** seeds beyond 0 for `p5_lam0`/`p5_lam3` through this exact
+evaluator (P5's own 3-seed results exist on their internal pipeline, not yet
+re-run through `compare_methods.py`).
 
 ## 10. Slide-ready summary (one slide's worth)
 
