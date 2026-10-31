@@ -5,7 +5,7 @@
   "model": {
     "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
     "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
-    "torch_dtype": "bfloat16"
+    "torch_dtype": "float32"
   },
   "decoding": {
     "prompt_version": "prompt_v0",
@@ -24,8 +24,13 @@
       "n_samples": 5
     }
   },
+  "method": "base",
+  "checkpoint_id": "Qwen/Qwen2.5-0.5B-Instruct-base",
+  "training_seed": null,
+  "adapter": null,
+  "adapter_sha256": {},
   "questions_file": "/Users/Himadri/Documents/NTU/Courses/LLM/LLMProject/EpistemicLLM-/data/real_qa/triviaqa_v0/pilot.jsonl",
-  "questions_sha256": "d981e4129f4f3749501e3548c6dea802858b2870c3c51146fcba4d7845e63365",
+  "questions_sha256": "b75f6b2a95d125d966f12657e3a384bf9b520fcf1760071e09c65f4e7842a0d5",
   "grading_version": "p2_whole_word_v5",
   "environment": {
     "torch": "2.14.1",

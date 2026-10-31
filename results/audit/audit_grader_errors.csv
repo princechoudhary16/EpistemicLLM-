@@ -1,2 +1,1 @@
 ﻿question_id,sample_index,is_greedy,question,reference_answer,model_answer,truncated,auto_outcome,review_status,human_label,human_notes
-triviaqa-qg_3192,sample2,FALSE,What can brown do for you? is the current advertising slogan for what company?,UPS || U P S || Ups tracking || UPS (disambiguation),"Brown can help people with various tasks, but I don't know the specific slogan for the company that's using this phrase.",FALSE,incorrect,flagged:hedged_attempt,abstain,vaguely restates the question and then states I don't know

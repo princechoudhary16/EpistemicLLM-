@@ -73,12 +73,29 @@ def read_sheet_text(path) -> str:
 
 def score(a):
     rows = [r for r in csv.DictReader(read_sheet_text(a.sheet).splitlines()) if r["human_label"].strip()]
-    if a.responses:      # re-score the SAME human labels against a regraded response file (e.g. after a grader fix)
+    if a.responses:      # re-score the SAME human labels against a regraded or regenerated response file
         new = {(r["question_id"], str(r["sample_index"])): r for r in schema.read_jsonl(a.responses)}
+        same, changed = [], []
         for r in rows:
             n = new[(r["question_id"], str(r["sample_index"]))]
+            # a human label only applies to the text it was given for: if the answer was regenerated with
+            # different wording (e.g. a precision change), that row has to be labelled again
+            if " ".join(n["model_answer"].split()) != " ".join(r["model_answer"].split()):
+                changed.append({**r, "model_answer": n["model_answer"], "auto_outcome": n["outcome"],
+                                "review_status": n["review_status"], "human_label": "", "human_notes": ""})
+                continue
             r["auto_outcome"], r["review_status"] = n["outcome"], n["review_status"]
+            same.append(r)
+        rows = same
         print(f"auto outcomes taken from {a.responses} (grading_version {next(iter(new.values()))['grading_version']})")
+        if changed:
+            relabel = Path(a.sheet).with_name(Path(a.sheet).stem + "__relabel.csv")
+            with open(relabel, "w", newline="", encoding="utf-8-sig") as f:
+                w = csv.DictWriter(f, fieldnames=FIELDS)
+                w.writeheader()
+                w.writerows(changed)
+            print(f"{len(changed)} answers changed wording since they were labelled: left out of this score and "
+                  f"written to {relabel}. Label them, paste them into the sheet in place of the old rows, re-run score.")
     bad = [r for r in rows if r["human_label"].strip() not in VALID]
     if bad:
         sys.exit(f"invalid human_label values: {sorted({r['human_label'] for r in bad})}")
