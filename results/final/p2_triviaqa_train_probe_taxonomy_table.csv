@@ -1,8 +1,8 @@
 error_type,n_questions,pct
 inconsistent_guessing,148,29.6
-partial_or_alias_candidate (manual check),128,25.6
+partial_or_alias_candidate (manual check),129,25.8
 unstable_partial_knowledge (0<K<0.8),86,17.2
-reliable (K>=0.8),50,10.0
+reliable (K>=0.8),49,9.8
 unclassified (too few attempts),46,9.2
 consistently_wrong,19,3.8
 refusal,14,2.8

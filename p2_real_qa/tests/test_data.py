@@ -168,6 +168,9 @@ class TriviaQA(unittest.TestCase):
         kept6, d6 = data.clean_aliases("Delaware", ["The First State (nickname)"], question="Which US state is The First State?")
         self.assertNotIn("The First State", kept6)              # a bare form already in the question is dropped too
         self.assertEqual(d6["in_question"], 1)
+        kept7, _ = data.clean_aliases("Joseph Merrick", ["The Elephant Man", "Elephant Man", "John Merrick"],
+                                      question="What was the Elephant Man's real name?")
+        self.assertEqual(kept7, ["Joseph Merrick", "John Merrick"])   # audit find: possessive must not hide the overlap
         kept4, _ = data.clean_aliases("Eight", ["8"], question="What number on the Beaufort Scale is a gale?")
         self.assertEqual(kept4, ["Eight", "8"])                  # a single digit is never "too short"
         kept3, _ = data.clean_aliases("7", [], question="How many days in a week?")

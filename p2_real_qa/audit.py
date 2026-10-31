@@ -49,7 +49,8 @@ def make(a):
             chosen[key(r)] = r
     out = Path(a.out or REPO_ROOT / "results" / "audit" / f"audit_sheet_{Path(a.responses).stem}.csv")
     out.parent.mkdir(parents=True, exist_ok=True)
-    with open(out, "w", newline="", encoding="utf-8") as f:
+    # utf-8-sig adds a byte-order mark so Excel opens accented text correctly ("crème", not "cr√®me")
+    with open(out, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for r in chosen.values():
@@ -59,9 +60,19 @@ def make(a):
     print(f"{len(chosen)} rows -> {out}. Fill human_label (correct/incorrect/abstain) and human_notes, then run `score`.")
 
 
+def read_sheet_text(path) -> str:
+    """Reads a filled-in sheet whatever Excel saved it as: UTF-8 with or without a byte-order mark, or (plain
+    "CSV" on a Mac) Mac Roman. Labels and IDs are ASCII, so they survive either way."""
+    raw = Path(path).read_bytes()
+    try:
+        return raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        print(f"note: {path} is not UTF-8 (saved as plain CSV?); reading it as Mac Roman", file=sys.stderr)
+        return raw.decode("mac_roman")
+
+
 def score(a):
-    with open(a.sheet, encoding="utf-8") as f:
-        rows = [r for r in csv.DictReader(f) if r["human_label"].strip()]
+    rows = [r for r in csv.DictReader(read_sheet_text(a.sheet).splitlines()) if r["human_label"].strip()]
     if a.responses:      # re-score the SAME human labels against a regraded response file (e.g. after a grader fix)
         new = {(r["question_id"], str(r["sample_index"])): r for r in schema.read_jsonl(a.responses)}
         for r in rows:
@@ -81,7 +92,8 @@ def score(a):
         print(f"  {cls:10s} n={len(sub):3d}  human agrees: {sum(r['human_label'].strip() == cls for r in sub) / len(sub):.1%}")
     errs = [r for r in rows if r["human_label"].strip() != r["auto_outcome"]]
     out = Path(a.sheet).with_name("audit_grader_errors.csv")
-    with open(out, "w", newline="", encoding="utf-8") as f:
+    # utf-8-sig adds a byte-order mark so Excel opens accented text correctly ("crème", not "cr√®me")
+    with open(out, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(errs)

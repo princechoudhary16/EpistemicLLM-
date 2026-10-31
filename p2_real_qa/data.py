@@ -262,6 +262,7 @@ def clean_aliases(value, aliases, question="") -> tuple[list, dict]:
     from common.grading import ALIAS_SEP, contains_whole, normalize
 
     nq = normalize(question)
+    nq_bare = normalize(re.sub(r"(?<=\w)['\u2019]s\b", "", str(question)))    # "Elephant Man's" -> "Elephant Man"
     kept, seen = [], set()
     dropped = {"too_short": 0, "in_question": 0}
     candidates = []
@@ -278,7 +279,7 @@ def clean_aliases(value, aliases, question="") -> tuple[list, dict]:
         if i > 0 and len(n) < MIN_ALIAS_CHARS and not n.isdigit():     # "8" for "Eight" is kept
             dropped["too_short"] += 1
             continue
-        if i > 0 and contains_whole(nq, n):
+        if i > 0 and (contains_whole(nq, n) or contains_whole(nq_bare, n)):
             dropped["in_question"] += 1
             continue
         seen.add(n)

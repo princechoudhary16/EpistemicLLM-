@@ -81,8 +81,8 @@
   ],
   "file_sha256": {
     "locked_test.jsonl": "5aba6a81db64de42e3d8609e7a7091590a960003c4556922190df4abebe5dbfe",
-    "pilot.jsonl": "c5f499cb6a24049c3f123f52d12b6264dec34667f46908ac9f3a30b9d08a534c",
-    "train_probe.jsonl": "280b0b4cbc1befaf45d3498b49bf1f314ac5189e55abef31dfb9b87d735c9419",
+    "pilot.jsonl": "b75f6b2a95d125d966f12657e3a384bf9b520fcf1760071e09c65f4e7842a0d5",
+    "train_probe.jsonl": "f73d0074e98078d77ed56d0a574fa63ccc74182eb74b2b6512250e9c5eb0d840",
     "validation.jsonl": "6f7fd5e618f713c1163b47c0f6b6f1f31d3ec6da0c187487c05b1f1f4f588a8c"
   },
   "source_repo": "mandarjoshi/trivia_qa@0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
@@ -94,7 +94,7 @@
   "aliases_per_question_mean": 12.55,
   "aliases_dropped": {
     "too_short": 31,
-    "in_question": 995
+    "in_question": 1021
   },
   "dedup": {
     "snapshot_rows": 17944,
