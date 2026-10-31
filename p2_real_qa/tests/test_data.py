@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 import unittest
 import pandas as pd
 from p2_real_qa import data, validate
@@ -126,6 +128,108 @@ class ValidatorCanFail(unittest.TestCase):
 
     def test_size_fails(self):
         self.assertIn("split_sizes_as_expected", self.failed(self.recs, {"train": 99}))
+
+
+class TriviaQA(unittest.TestCase):
+    """TriviaQA release: alias cleaning, grouping by answer, P4-sample exclusion, end-to-end build."""
+
+    @staticmethod
+    def snapshot_rows(n=1700):
+        # like real TriviaQA: some answers shared by 3 questions (i < 900), the rest answered once
+        def val(i):
+            return f"Answer {i // 3}" if i < 900 else f"Solo {i}"
+        rows = [dict(question_id=f"tq_{i:05d}", question=f"Trivia question number {i}?", value=val(i),
+                     aliases=[val(i), val(i).lower(), "A", f"Alt name {val(i)}"], type="FreeForm")
+                for i in range(n)]
+        rows.append(dict(question_id="tq_dupe", question="Trivia question number 7?", value="Other",  # duplicate text of tq_00007
+                         aliases=["Other"], type="FreeForm"))
+        return rows
+
+    def write(self, d, rows, name="snap.jsonl"):
+        p = Path(d) / name
+        data.write_jsonl(p, rows)
+        return p
+
+    def test_clean_aliases(self):
+        kept, dropped = data.clean_aliases("Paris", ["paris", "PARIS!", "P", "Paris, France", "City of Light", "France || X"],
+                                           question="Which city in France is the capital?")
+        self.assertEqual(kept[0], "Paris")                       # canonical value first
+        self.assertNotIn("P", kept)                              # 1-letter alias dropped
+        self.assertEqual(dropped["too_short"], 1)
+        self.assertEqual(sum(a.lower().startswith("paris") and len(a) <= 6 for a in kept), 1)  # case/punct duplicates merged
+        self.assertTrue(all("||" not in a for a in kept))        # separator never inside an alias
+        kept2, d2 = data.clean_aliases("Seine", ["Seine", "France"], question="Which river flows through France?")
+        self.assertEqual(kept2, ["Seine"])                       # alias already in the question dropped
+        self.assertEqual(d2["in_question"], 1)
+        kept5, _ = data.clean_aliases("Roots: The Saga of an American Family", ["Roots (book)", "Mercury (album)"],
+                                      question="Which 1976 Alex Haley book became a TV series?")
+        self.assertIn("Roots", kept5)                            # bracket label removed -> plain answer matches
+        self.assertIn("Roots (book)", kept5)                     # original alias kept too
+        kept6, d6 = data.clean_aliases("Delaware", ["The First State (nickname)"], question="Which US state is The First State?")
+        self.assertNotIn("The First State", kept6)              # a bare form already in the question is dropped too
+        self.assertEqual(d6["in_question"], 1)
+        kept7, _ = data.clean_aliases("Joseph Merrick", ["The Elephant Man", "Elephant Man", "John Merrick"],
+                                      question="What was the Elephant Man's real name?")
+        self.assertEqual(kept7, ["Joseph Merrick", "John Merrick"])   # audit find: possessive must not hide the overlap
+        kept4, _ = data.clean_aliases("Eight", ["8"], question="What number on the Beaufort Scale is a gale?")
+        self.assertEqual(kept4, ["Eight", "8"])                  # a single digit is never "too short"
+        kept3, _ = data.clean_aliases("7", [], question="How many days in a week?")
+        self.assertEqual(kept3, ["7"])                           # a short canonical value is always kept
+
+    def test_reference_answer_is_gradable(self):
+        from common import grading
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            df, _ = data.load_triviaqa_snapshot(self.write(d, self.snapshot_rows(30)))
+        r = df.iloc[0]
+        self.assertIn(" || ", r.answer)
+        self.assertEqual(grading.grade("I think it is Alt name Answer 0.", r.answer, r.problem)[0], "correct")
+        self.assertEqual(grading.grade("A", r.answer, r.problem)[0], "incorrect")   # the dropped 1-letter alias earns nothing
+
+    def test_repeated_question_ids_kept_once(self):
+        import tempfile
+        rows = self.snapshot_rows(30)
+        rows += [dict(rows[0]), dict(rows[1], question="A reworded copy?")]      # rc files repeat IDs
+        with tempfile.TemporaryDirectory() as d:
+            df, audit = data.load_triviaqa_snapshot(self.write(d, rows))
+        self.assertTrue(df.question_id.is_unique)
+        self.assertEqual(df.set_index("question_id").problem["tq_00001"], rows[1]["question"])   # first copy wins
+        self.assertEqual(audit["dedup"]["repeated_rows_dropped"], 2)
+        self.assertEqual(audit["dedup"]["repeated_rows_with_different_content"], 1)
+
+    def test_group_by_answer_and_duplicate_text(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            df, _ = data.load_triviaqa_snapshot(self.write(d, self.snapshot_rows(30)))
+        g = df.set_index("question_id").group_id
+        self.assertEqual(g["tq_00000"], g["tq_00002"])           # same answer -> same group
+        self.assertNotEqual(g["tq_00000"], g["tq_00003"])
+        self.assertEqual(g["tq_00007"], g["tq_dupe"])            # same question text -> merged into one group
+
+    def test_build_end_to_end_excludes_p4_sample(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            snap = self.write(d, self.snapshot_rows())
+            p4 = self.write(d, [{"question_id": "triviaqa-tq_00010"}, {"question_id": "triviaqa-tq_00500"},
+                                {"question_id": "triviaqa-not_in_snapshot"}], "p4.jsonl")
+            audit = data.build_triviaqa(snap, "t0", exclude_file=p4, data_root=Path(d) / "rq", manifest_root=Path(d) / "m")
+            self.assertTrue(all(c["ok"] for c in audit["checks"]), audit["checks"])
+            self.assertEqual(audit["questions_per_split"],
+                             {"pilot": 200, "train_probe": 500, "validation": 200, "locked_test": 300})
+            self.assertEqual(audit["excluded_ids_requested"], 3)
+            self.assertEqual(audit["excluded_ids_not_in_snapshot"], 1)
+            self.assertEqual(audit["excluded_questions_incl_group"], 6)   # 2 IDs x their 3-question answer groups
+            rows = [json.loads(l) for f in sorted((Path(d) / "rq" / "triviaqa_t0").glob("*.jsonl"))
+                    for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
+            ids = {r["question_id"] for r in rows}
+            for q in ("tq_00009", "tq_00010", "tq_00011", "tq_00500"):   # tq_00010 and its whole answer group
+                self.assertNotIn(f"triviaqa-{q}", ids)
+            r = rows[0]
+            self.assertTrue(r["question_id"].startswith("triviaqa-"))
+            self.assertEqual(r["source_dataset"], "triviaqa")
+            self.assertEqual(r["reference_answer"], " || ".join(r["aliases"]))
+            again = data.build_triviaqa(snap, "t0", exclude_file=p4, data_root=Path(d) / "rq2", manifest_root=Path(d) / "m2")
+            self.assertEqual(audit["file_sha256"], again["file_sha256"])   # deterministic
 
 
 if __name__ == "__main__":

@@ -25,3 +25,4 @@ results/p3/**/probes/*.joblib
 
 # data/
 *_smoke*
+results/raw/bf16_old/

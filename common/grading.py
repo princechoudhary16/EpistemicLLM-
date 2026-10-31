@@ -12,7 +12,7 @@ Contract with the rest of the repo
 import re
 import unicodedata
 
-GRADING_VERSION = "p2_whole_word_v4"
+GRADING_VERSION = "p2_whole_word_v5"
 ALIAS_SEP = " || "
 UNANSWERABLE = "__unanswerable__"
 
@@ -115,6 +115,42 @@ def names_candidate(model_answer, question) -> bool:
     return False
 
 
+# Words that describe a CATEGORY or the model's own uncertainty, never a specific answer. A hedge built only from
+# these and words of the question ("X was a trade or profession, but I don't know which one.") is an abstention.
+# Keep this list short and generic: a specific word ("potter", "musician") must never be added, or a real
+# hallucination would be hidden. Extend only from audited rows.
+GENERIC_WORDS = set("""
+    trade profession business industry guild occupation job person entity individual name undisclosed
+    specific particular exact precise type kind one which answer question context information more
+    additional without provide direct details detail method practiced practised fictional fiction
+    science setting city place location not rather certain
+""".split())
+_CLAUSE = re.compile(r"[.!?;,]+|\b(?:but|however|though|although)\b", re.IGNORECASE)
+
+
+def generic_hedge(model_answer, question, refs) -> bool:
+    """True if the response says "I don't know" and everything else is generic: no number, name or content word
+    beyond the question's own words and GENERIC_WORDS (docstring of GENERIC_WORDS). A stated reference never counts."""
+    if not question:
+        return False
+    na = normalize(model_answer)
+    if any(contains_whole(na, r) for r in refs):
+        return False                    # the reference is stated: let normal scoring credit it
+    if names_candidate(model_answer, question):
+        return False                    # a capitalised word the question does not have
+    qtoks = set(normalize(question).split())
+    words = []
+    for clause in _CLAUSE.split(str(model_answer)):
+        nc = normalize(clause or "")
+        for p in ABSTAIN_PATTERNS + ("i cant", "i can not"):
+            nc = re.sub(rf"(?<![a-z0-9]){re.escape(p)}(?![a-z0-9])", " ", nc)
+        words += nc.split()
+    content = [w for w in words if w not in FILLER and w not in _STOP]
+    if any(w.isdigit() and w not in qtoks for w in content):
+        return False                    # commits to a number
+    return all(w in qtoks or w in GENERIC_WORDS for w in content)
+
+
 # ---------------------------------------------------------------- correctness
 _NUM = re.compile(r"(?<![a-z0-9])\d+(?![a-z0-9])")
 _STOP = set("a an the of in on at to and or for by with from as is was were are be been his her their its "
@@ -138,7 +174,7 @@ def all_mentions_negated(norm_answer: str, ref: str) -> bool:
 
 def grade(model_answer, reference_answer, question: str = ""):
     """Returns (outcome, flag). flag in {"", "hedged_attempt", "numeric_ambiguous", "ref_partial_overlap",
-    "idk_restates_question", "negated_reference", "empty_response"} and is only an audit hint -- it never changes `outcome` except where stated."""
+    "idk_restates_question", "idk_generic_hedge", "negated_reference", "empty_response"} and is only an audit hint -- it never changes `outcome` except where stated."""
     if model_answer is None or not str(model_answer).strip():
         return "invalid", "empty_response"            # technical failure; metrics.py excludes it from N
     na = normalize(model_answer)
@@ -152,6 +188,8 @@ def grade(model_answer, reference_answer, question: str = ""):
     refs = split_references(reference_answer)
     if hedged and not (HEDGE_WORDS & set(na.split())) and idk_restates_question(model_answer, question, refs):
         return "abstain", "idk_restates_question"
+    if hedged and generic_hedge(model_answer, question, refs):
+        return "abstain", "idk_generic_hedge"
     flag = "hedged_attempt" if hedged else ""
     q_nums = set(_NUM.findall(normalize(question)))
     a_nums = [n for n in _NUM.findall(na) if n not in q_nums]       # numbers the MODEL introduced
