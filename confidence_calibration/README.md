@@ -20,6 +20,8 @@ Implements the confidence/calibration track (P4 in `plan.md`). It asks one quest
 | `consistency.py` | per-question sample agreement, cluster statistics, knowledge score |
 | `metrics.py` | behaviour metrics, AUROC/AUPRC, bootstrap intervals |
 | `report.py` | per-run report (`report.md`, `report.json`, `signals.csv`) |
+| `calibration.py` | train-only probability mapping, validation selection, locked-test evaluation |
+| `calibration_report.py` | calibration tables and dependency-free SVG figures |
 | `jobs/tc2_eval.sbatch` | SLURM job for the TC2 GPU cluster |
 
 ## Signal definitions (`signals-v0`)
@@ -78,6 +80,33 @@ python -m confidence_calibration score --responses graded.jsonl --output scored.
 python -m confidence_calibration report --responses scored.jsonl --output-dir results/raw/confidence_calibration/<name>
 ```
 
+**Fit and evaluate correctness probabilities** from a single run's graded, scored responses:
+
+```bash
+python -m confidence_calibration calibrate \
+    --responses results/raw/confidence_calibration/<name>/responses.jsonl \
+    --output-dir results/raw/confidence_calibration/<name>/calibration
+```
+
+This fits one-dimensional Platt scaling separately for each available signal using only the training
+split. It selects the headline signal by validation Brier score and selects each signal's abstention
+threshold on validation for the requested coverage (default 80%). The locked test is used once for
+the final Brier/ECE, reliability diagram, confident-hallucination and risk/coverage results. The
+output contains `calibration.json`, `calibration_report.md`, `calibrated_predictions.jsonl`,
+`reliability_diagram.svg` and `risk_coverage.svg`; SVG output requires no plotting dependency.
+It also reports locked-test AUROC/AUPRC and cluster-bootstrap intervals alongside Brier/ECE, and
+adds descriptive calibration slices by exposure level or independent sampled knowledge score when
+those labels exist.
+
+Supported explicit split names are `cal_train` / `cal_val` / `cal_test`,
+`train_probe` / `validation` / `locked_test`, or `train` / `val` / `test`. For P1's `dev` / `final`
+convention, the command deterministically assigns development **facts** 70/30 to train/validation
+and keeps `final` locked as test. If a fact has multiple evaluation paraphrases, they stay together.
+The command rejects missing/unsupported split labels, cross-split fact/question IDs, mixed runs,
+or a training split without both correct and incorrect attempted answers. Abstentions and invalid
+outputs are excluded from correctness-probability fitting, but remain in the behavior and coverage
+denominators. The saved probability rows preserve question/fact IDs and split labels for integration.
+
 **Rebuild the TriviaQA sample** (committed; seed 0, pinned dataset revision):
 
 ```bash
@@ -85,6 +114,8 @@ python -m confidence_calibration build-dataset
 ```
 
 - Any question JSONL with `question_id`, `question` and `reference_answer` works; `aliases` is optional.
+- Calibration accepts only response JSONL with explicit split labels and requires graded outcomes,
+  greedy/sample markers, and the confidence signals being evaluated.
 - `run` writes `responses.jsonl`, `questions.jsonl`, `report.md`, `report.json`, `signals.csv` and `run_config.json` to `results/raw/confidence_calibration/<run_id>/`.
 - A healthy run reports `greedy_argmax_match_rate` ≈ 1.0 and `generation_logprob_max_abs_gap` ≈ 0. bf16 on CUDA may show small gaps.
 

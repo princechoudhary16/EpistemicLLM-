@@ -341,14 +341,15 @@ def generate_batched(model, tok, prompts, gen_kwargs, max_new_tokens, batch_size
     return texts
 
 
-def evaluate(model, tok, questions, decoding, args, device):
+def evaluate(model, tok, questions, decoding, args, device, n_samples=None):
+    n_samples = args.n_samples if n_samples is None else n_samples
     prompts = [tok.apply_chat_template(
         [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": q["question"]}],
         tokenize=False, add_generation_prompt=True) for q in questions]
     dec = DECODINGS[decoding]
     gens = [(True, 0, generate_batched(model, tok, prompts, dec["greedy"], args.max_new_tokens,
                                        args.gen_batch, None, device))]
-    for s in range(1, args.n_samples + 1):
+    for s in range(1, n_samples + 1):
         gens.append((False, s, generate_batched(model, tok, prompts, dec["sampled"], args.max_new_tokens,
                                                 args.gen_batch, args.seed + 1000 * s, device)))
     rows = []
@@ -393,6 +394,10 @@ def main(argv=None):
     ap.add_argument("--gen-batch", type=int, default=48)
     ap.add_argument("--model-id", default=MODEL_ID)
     ap.add_argument("--revision", default=PINNED_REVISION)
+    ap.add_argument("--extra-evals", default="",
+                    help="comma list of eval files relative to the version dir, e.g. robustness/eval_heldout.jsonl")
+    ap.add_argument("--extra-samples", type=int, default=0,
+                    help="sampled responses per question on the extra eval files (0 = greedy only)")
     ap.add_argument("--smoke", action="store_true", help="tiny end-to-end check")
     args = ap.parse_args(argv)
 
@@ -406,16 +411,18 @@ def main(argv=None):
     idk_variants = [v for v in args.idk_variants.split(",") if v]
     idk_recipes = [r for r in args.idk_recipes.split(",") if r]
     for r in recipes + idk_recipes:
-        if r not in RECIPES:
-            sys.exit(f"unknown recipe {r!r}; choose from {sorted(RECIPES)}")
+        if r not in RECIPES and r != "base":
+            sys.exit(f"unknown recipe {r!r}; choose from {sorted(RECIPES) + ['base']}")
     for d in decodings:
         if d not in DECODINGS:
             sys.exit(f"unknown decoding {d!r}; choose from {sorted(DECODINGS)}")
 
     data = Path(args.data_dir) / args.version
     train, evals, idk = (read_jsonl(data / f) for f in ("train.jsonl", "eval.jsonl", "idk_train.jsonl"))
+    extra_sets = {Path(e).stem: read_jsonl(data / e) for e in args.extra_evals.split(",") if e}
     if args.smoke:
         train, evals, idk = train[:48], evals[:16], idk[:30]
+        extra_sets = {k: v[:16] for k, v in extra_sets.items()}
         recipes, idk_recipes, idk_variants = recipes[:1] + ["mine"], ["p6"], ["end"]
         args.n_samples, args.max_new_tokens, args.gen_batch = 2, 24, 8
     out_dir = Path(args.out_dir or f"out_{args.version}")
@@ -441,24 +448,46 @@ def main(argv=None):
     t_start = time.time()
     for recipe_name, variant in plan:
         run = recipe_name if variant is None else f"{recipe_name}-idk_{variant}"
-        todo = [d for d in decodings if not response_path(out_dir, run, d).exists()]
+        def done(d):
+            return response_path(out_dir, run, d).exists() and all(
+                response_path(out_dir / "extra" / name, run, d).exists() for name in extra_sets)
+
+        todo = [d for d in decodings if not done(d)]
         if not todo:
             log(f"[{run}] already done, skipping")
             continue
-        log(f"[{run}] training")
         t0 = time.time()
-        examples = order_examples(train, idk, variant, args.seed)
-        model, _ = train_adapter(tok, examples, RECIPES[recipe_name], dtype, args, device)
+        if recipe_name == "base":
+            log(f"[{run}] untrained base model (no training)")
+            model = load_base(args.model_id, args.revision, dtype, device)
+            model.eval()
+        else:
+            log(f"[{run}] training")
+            examples = order_examples(train, idk, variant, args.seed)
+            model, _ = train_adapter(tok, examples, RECIPES[recipe_name], dtype, args, device)
         for d in todo:
-            log(f"[{run}] evaluating, decoding={d}")
-            rows = evaluate(model, tok, evals, d, args, device)
-            write_jsonl(response_path(out_dir, run, d), rows)
-            g = _cwa([r for r in rows if r["is_greedy"]])
-            log(f"[{run}|{d}] greedy correct/wrong/abstain = {g}")
+            if not response_path(out_dir, run, d).exists():
+                log(f"[{run}] evaluating, decoding={d}")
+                rows = evaluate(model, tok, evals, d, args, device)
+                write_jsonl(response_path(out_dir, run, d), rows)
+                log(f"[{run}|{d}] greedy correct/wrong/abstain = {_cwa([r for r in rows if r['is_greedy']])}")
+            for name, questions in extra_sets.items():
+                path = response_path(out_dir / "extra" / name, run, d)
+                if path.exists():
+                    continue
+                path.parent.mkdir(parents=True, exist_ok=True)
+                log(f"[{run}] evaluating extra set {name}, decoding={d}")
+                rows = evaluate(model, tok, questions, d, args, device, n_samples=args.extra_samples)
+                write_jsonl(path, rows)
+                log(f"[{run}|{d}|{name}] greedy correct/wrong/abstain = {_cwa([r for r in rows if r['is_greedy']])}")
         free(model)
         write_outputs(out_dir)
+        for name in extra_sets:
+            write_outputs(out_dir / "extra" / name)
         log(f"[{run}] done in {time.time() - t0:.0f}s (total {time.time() - t_start:.0f}s)")
     write_outputs(out_dir)
+    for name in extra_sets:
+        write_outputs(out_dir / "extra" / name)
     log(f"finished; see {out_dir / 'summary.md'}")
 
 

@@ -48,7 +48,22 @@ byte-identical files (sha256s are in `audit.json`).
 3. **Dev and final facts use different eval wordings** (val vs test), so a dev-to-final gap can partly reflect wording.
 4. **5 relations, not 6:** 120 pilot facts split evenly only for 5 (or 4, 10...). Add a relation in `relations.py` if you want more, keeping `n-facts` divisible.
 
-## Not done yet (needs the model)
+## Where the rest of P1 lives
 
-- Audit of accidental correct answers by the untouched Qwen2.5-0.5B on 0x questions (chance successes).
-- Sanity SFT run on the pilot corpus; depends on P6's shared training setup.
+| Folder | What it is |
+|---|---|
+| `colab/` | First pilot fine-tune and evaluation (self-contained Colab notebook) |
+| `ablation/` | Decoding defaults x SFT recipe x IDK ordering; `run_ablation.py` is the training and evaluation harness, with a SLURM script and a Colab notebook builder |
+| `analysis/` | Exposure tables and figures with fact-level intervals, and the Week 4 robustness report |
+| `robustness/` | Held-out and swapped question wordings (`paraphrase_sets.py`) |
+| `aux_prompts.py` | Answer-masked training-wording prompts for the 0x facts, for a head that needs 0x examples (written to `data/synthetic/<v>/zero_prompts/`) |
+
+Second world for the robustness check: `python -m p1_exposure.generate --n-facts 600 --seed 1 --version main_w1`
+(different invented names and a different fact-to-exposure assignment; nothing shared with `main_v0`).
+Extra wordings for any version: `python -m p1_exposure.robustness.paraphrase_sets --version main_v0`,
+written to `data/synthetic/<v>/robustness/` and never mixed into `eval.jsonl`.
+
+Auxiliary 0x prompts for any version: `python -m p1_exposure.aux_prompts --version main_v0`. One row per 0x fact and
+training wording (4 per fact), with no completion and no answer in the row; checks confirm no answer text appears in a
+prompt and no 0x name appears in `train.jsonl` or `idk_train.jsonl`. Use them with no language-model loss. They name the
+0x entities, so a head trained on them has seen those names (never their answers).

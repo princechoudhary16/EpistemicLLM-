@@ -1,0 +1,88 @@
+{
+  "dataset_version": "simpleqa-v0",
+  "snapshot_file": "simpleqa_snapshot_2026-09-28.csv",
+  "snapshot_sha256": "feee3f7e7db3617e94e8fcf1977b756ec420ef8568f4e0fcbbe0e92e9d5fc032",
+  "n_snapshot_rows": 4326,
+  "pilot_seed": 20260928,
+  "main_split_seed": 20261004,
+  "questions_per_split": {
+    "pilot": 200,
+    "train_probe": 500,
+    "validation": 200,
+    "locked_test": 300
+  },
+  "groups_per_split": {
+    "pilot": 197,
+    "train_probe": 392,
+    "validation": 159,
+    "locked_test": 237
+  },
+  "answer_type_per_split": {
+    "pilot": {
+      "Date": 74,
+      "Other": 41,
+      "Number": 35,
+      "Person": 34,
+      "Place": 16
+    },
+    "train_probe": {
+      "Date": 167,
+      "Person": 125,
+      "Other": 83,
+      "Number": 74,
+      "Place": 51
+    },
+    "validation": {
+      "Date": 78,
+      "Person": 50,
+      "Other": 36,
+      "Place": 20,
+      "Number": 16
+    },
+    "locked_test": {
+      "Date": 94,
+      "Other": 75,
+      "Person": 55,
+      "Number": 53,
+      "Place": 23
+    }
+  },
+  "checks": [
+    {
+      "name": "required_fields_present",
+      "ok": true,
+      "detail": "0 missing/empty (first: [])"
+    },
+    {
+      "name": "question_ids_unique_across_splits",
+      "ok": true,
+      "detail": "duplicates: []"
+    },
+    {
+      "name": "split_field_matches_file",
+      "ok": true,
+      "detail": "mismatches: []"
+    },
+    {
+      "name": "no_group_shared_across_splits",
+      "ok": true,
+      "detail": "shared groups: {}"
+    },
+    {
+      "name": "no_question_text_shared_across_splits",
+      "ok": true,
+      "detail": "0 question strings in >1 split"
+    },
+    {
+      "name": "split_sizes_as_expected",
+      "ok": true,
+      "detail": "(actual, expected) mismatches: {}"
+    }
+  ],
+  "file_sha256": {
+    "locked_test.jsonl": "cf77cf30c168a9a3a5b2427cad24a585e7ba44a811d6d340f41bebc1353e5916",
+    "pilot.jsonl": "7e7a234e90711e58ab0f79216a24bb83bdf53f3e072c513a44eef1ee31a788b9",
+    "train_probe.jsonl": "d190dae35a77595634709ffc4bbba48bc91d32e178a629fc11725f1d1bf986f6",
+    "validation.jsonl": "894b2d111d4fa19ba7c33228439a265a6fe8d5929c000bee76262cd95adefd32"
+  }
+}
