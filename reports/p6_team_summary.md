@@ -55,5 +55,19 @@ under-capacity recipe and are kept for history, not as the real baseline.
 - **P5's second-world replication is now folded in** (not shown here) — all 5 of their pre-registered criteria hold on an independent synthetic world. See the appendix §5b.
 - **P1's robustness work and P4's calibration work have merged** (no longer draft branches) but aren't rows in this table by design — P6 integrates on P5's checkpoints, not P1/P4's. Indexed with headlines in the appendix §9, including a flag that P1's exposure-curve analysis predates today's grader regrade.
 
+## P6 status, Weeks 1–6
+
+Every P6-owned deliverable per `plan.md` §8 is complete: environment/metrics
+(W1), pilot baselines (W2), canonical runs + evaluator (W3), fairness freeze
+(W4), master table + plot + manifest (W5), reproducibility appendix (W6).
+
+**Still genuinely open — not P6's to close alone:**
+- Week 2's "reserve training slots / run queue agreed" — never formally happened as a team conversation.
+- Real-QA track — blocked on Decisions A/B/E (dataset, model size, split-freezing) in `reports/model_dataset_decision.md`.
+- Decision D — aligning IDK's abstention rule with P2's — not yet acted on.
+- The frozen-representation-head control (`plan.md` §7, 5th required comparison) — only partially covered by P5's own report, not independently re-verified.
+- `plan.md` §8's whole-team task — joint intro/conclusion, full report review, rehearsal — hasn't started as far as this branch shows.
+- Seeds beyond 0 for `p5_lam0`/`p5_lam3` through `compare_methods.py`.
+
 ---
-*Branch `sahana`, commit `9ad58f0`. Shareable version with charts:* https://claude.ai/artifact/DCzTEQmqRcS4n98BiHJzcW
+*Branch `sahana`, commit `bbeddf7`. Shareable version with charts:* https://claude.ai/artifact/DCzTEQmqRcS4n98BiHJzcW
