@@ -1,0 +1,17 @@
+question_id,question,reference_answer,K,n_abstain,consistency,mean_avg_logprob,error_type
+sqa-03079,Which honor did Harry Belafonte receive in 1989?,The Kennedy Center Honors,0.0,2,1.0,-0.06835519220505697,unsupported_confident_answer
+sqa-01286,What year was the post of Secretary General of NATO established?,1952.,0.0,0,1.0,-0.1252601423228043,unsupported_confident_answer
+sqa-02991,What element has the electron configuration [Ar]4s2 3d10 4p1?,Gallium,0.0,0,0.7333333333333333,-0.18955877752223618,unsupported_confident_answer
+sqa-02701,What's the title of Section 4.3.2 in the paper 'Generating semantic maps through multidimensional scaling: linguistic applications and theory'?,MDS and formal paradigms,0.0,0,1.0,-0.21644677028927378,unsupported_confident_answer
+sqa-02256,"The Jallianwala Bagh is recounted in which episode of Granada TV's 1984 series ""The Jewel in the Crown""?",Seventh,0.0,0,0.5199999999999999,-0.22008880208337214,unsupported_confident_answer
+sqa-02086,In what year did John Lennon and Yoko Ono donate their psychedelic Rolls-Royce to the Cooper Hewitt Museum?,1977,0.0,0,1.0,-0.389889775598931,consistently_wrong
+sqa-04192,The Miners' Union Hall in British Columbia was designed by an architect practicing in which American city?,Los Angeles,0.0,0,1.0,-0.34026680795806896,consistently_wrong
+sqa-03186,In which city did pianist David Eugene Tudor set up India’s first electronic music studio?,Ahmedabad.,0.0,0,0.6,-0.9134813865025839,consistently_wrong
+sqa-01489,"In the TV series Modern Family, in Season 4, Episode 23, which sport is Lily competing in?",Gymnastics,0.0,0,0.5,-0.8814104533681434,consistently_wrong
+sqa-00051,In what year was John Williams inducted into the Classical Music Hall of Fame?,2004.,0.0,0,0.0,-0.3946181610801432,inconsistent_guessing
+sqa-00176,In what year did computer scientist Dana Angluin join the faculty at Yale University?,1979,0.0,0,0.0,-0.22637826993571558,inconsistent_guessing
+sqa-00248,"What year was the municipality of Carolina del Príncipe, Antioquia, Colombia, founded?",1787,0.0,0,0.0,-0.8013288100542268,inconsistent_guessing
+sqa-00266,In which year was Srinagar declared a UNESCO Creative City?,2021,0.0,0,0.0,-0.4062301677313826,inconsistent_guessing
+sqa-00271,"Who plays Emmanuel Adamu in Season 2 of ""The Bear""?",Robert Townsend,0.0,2,0.0,-0.9197525678425912,inconsistent_guessing
+sqa-03322,"What language is represented in Figure 1 of the text ""New Avenues and Challenges in Semantic Map Research""?",English,0.4,3,,-0.9601488709449768,unstable_partial_knowledge (0<K<0.8)
+sqa-04312,In what year did Baleka Mbete become the Deputy President of South Africa post-apartheid?,2008,0.2,0,0.0,-0.16247176651308395,unstable_partial_knowledge (0<K<0.8)
