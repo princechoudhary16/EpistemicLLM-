@@ -14,11 +14,11 @@
     ],
     "inputs": {
       "base": {
-        "path": "results/raw/p1_main_v0_base.jsonl",
-        "sha256": "424d880d0e10029d70ffb0577393287cc25baa6835024eaeeba898bdbc8dafff",
+        "path": "results/raw/p1_main_v0_base__p2_whole_word_v5.jsonl",
+        "sha256": "33c6c32c726c66c88c81a0b5a9672d050cb103d6bb146b17f0024b8172f3c00a",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -28,11 +28,11 @@
         ]
       },
       "sft": {
-        "path": "results/raw/p1_main_v0_sft.jsonl",
-        "sha256": "9181944754d32a26956337df5974f1025c422956e1e6d97f011af615092e59a5",
+        "path": "results/raw/p1_main_v0_sft__p2_whole_word_v5.jsonl",
+        "sha256": "3cbcacac989df79ca8ef2cab480a1b33fc892b02987cf3f553c41dcd85533d5d",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -42,11 +42,11 @@
         ]
       },
       "idk": {
-        "path": "results/raw/p1_main_v0_idk.jsonl",
-        "sha256": "9287ab34478c75616c7bd9a4fe2366b079dd2004db219bf9949c9a0f506a9fc9",
+        "path": "results/raw/p1_main_v0_idk__p2_whole_word_v5.jsonl",
+        "sha256": "af5e644a030565947daf16ef2f21f12e5ce552f51c4b6ef29389fdad96f39cb4",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -56,11 +56,11 @@
         ]
       },
       "sft_matched": {
-        "path": "results/raw/p1_main_v0_sft_matched.jsonl",
-        "sha256": "e1d92b057ced40b15a6f6372b81d82419aa105efa989c201f0b9fe4e7a85c444",
+        "path": "results/raw/p1_main_v0_sft_matched__p2_whole_word_v5.jsonl",
+        "sha256": "c75dc99905e0c005b260d0560ef30752151cc6583bffca2d2698eef9462a09a9",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -70,11 +70,11 @@
         ]
       },
       "p5_lam0": {
-        "path": "results/raw/p5_main_v0_lam0_seed0.jsonl",
-        "sha256": "e724ec13b16163851608277c4d9854d5d93ac397355e4a6af1b85a0289151e5d",
+        "path": "results/raw/p5_main_v0_lam0_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "7ae9300587fe3c50550190e4a38a01be93253d692f0d7b5955cd9f7a3486cd48",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -84,11 +84,11 @@
         ]
       },
       "p5_lam3": {
-        "path": "results/raw/p5_main_v0_lam3_seed0.jsonl",
-        "sha256": "28db9d37a74ed8acf1db617039d2cf3ed8f4fdd8b018d0daccf1994658f87268",
+        "path": "results/raw/p5_main_v0_lam3_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "091ada020dc646de826fc66794baabe0c765ee7cd7a208de9813ef7085d02103",
         "rows": 7200,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -98,7 +98,7 @@
         ]
       }
     },
-    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split all, 6 methods on identical main_v0 questions",
+    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split all, 6 methods, shared grader p2_whole_word_v5 (regraded with p2_real_qa.regrade)",
     "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
   },
   "results": {
@@ -941,9 +941,9 @@
             "hi": 0.115
           },
           "mean_K": {
-            "est": 0.044,
-            "lo": 0.021,
-            "hi": 0.07200000000000001
+            "est": 0.045,
+            "lo": 0.022000000000000002,
+            "hi": 0.073
           },
           "k_buckets": {
             "K=0": 82,
@@ -2052,9 +2052,9 @@
             "hi": 0.09
           },
           "mean_K": {
-            "est": 0.034,
+            "est": 0.033,
             "lo": 0.009000000000000001,
-            "hi": 0.068
+            "hi": 0.067
           },
           "k_buckets": {
             "K=0": 92,
@@ -2107,18 +2107,18 @@
         "5": {
           "n_facts": 100,
           "n_questions": 200,
-          "correct": 143,
-          "incorrect": 57,
+          "correct": 141,
+          "incorrect": 59,
           "abstain": 0,
           "accuracy": {
-            "est": 0.715,
-            "lo": 0.63,
-            "hi": 0.795
+            "est": 0.705,
+            "lo": 0.62,
+            "hi": 0.79
           },
           "hallucination": {
-            "est": 0.285,
-            "lo": 0.205,
-            "hi": 0.37
+            "est": 0.295,
+            "lo": 0.21,
+            "hi": 0.38
           },
           "abstention": {
             "est": 0.0,
@@ -2131,19 +2131,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.715,
-            "lo": 0.63,
-            "hi": 0.795
+            "est": 0.705,
+            "lo": 0.62,
+            "hi": 0.79
           },
           "mean_K": {
-            "est": 0.6089999999999999,
-            "lo": 0.5270000000000001,
-            "hi": 0.689
+            "est": 0.603,
+            "lo": 0.521,
+            "hi": 0.68
           },
           "k_buckets": {
             "K=0": 21,
-            "inconsistent": 27,
-            "K>=0.8": 52
+            "inconsistent": 28,
+            "K>=0.8": 51
           }
         },
         "10": {
@@ -2178,14 +2178,14 @@
             "hi": 0.93
           },
           "mean_K": {
-            "est": 0.792,
-            "lo": 0.7239750000000001,
-            "hi": 0.856
+            "est": 0.789,
+            "lo": 0.7210000000000001,
+            "hi": 0.8520000000000002
           },
           "k_buckets": {
             "K=0": 8,
-            "inconsistent": 20,
-            "K>=0.8": 72
+            "inconsistent": 21,
+            "K>=0.8": 71
           }
         },
         "20": {
@@ -2346,8 +2346,8 @@
           },
           "5": {
             "n_questions": 40,
-            "correct": 34,
-            "accuracy": 0.85
+            "correct": 32,
+            "accuracy": 0.8
           },
           "10": {
             "n_questions": 40,
@@ -2472,9 +2472,9 @@
           "5": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.72,
-              "lo": 0.5997500000000001,
-              "hi": 0.84
+              "est": 0.7,
+              "lo": 0.57,
+              "hi": 0.82
             }
           },
           "10": {
@@ -2507,14 +2507,14 @@
           "hi": 0.31
         },
         "2->5": {
-          "est": 0.44999999999999996,
-          "lo": 0.33,
-          "hi": 0.5601250000000005
+          "est": 0.43999999999999995,
+          "lo": 0.32,
+          "hi": 0.5549999999999999
         },
         "5->10": {
-          "est": 0.16000000000000003,
-          "lo": 0.05999999999999994,
-          "hi": 0.26
+          "est": 0.17000000000000004,
+          "lo": 0.06500000000000006,
+          "hi": 0.275
         },
         "10->20": {
           "est": 0.030000000000000027,
@@ -2542,10 +2542,10 @@
           "n_incorrect": 147
         },
         "5": {
-          "mean_conf_correct": -0.14019962833185448,
-          "n_correct": 143,
-          "mean_conf_incorrect": -0.5618706415901514,
-          "n_incorrect": 57
+          "mean_conf_correct": -0.13908289051222328,
+          "n_correct": 141,
+          "mean_conf_incorrect": -0.5502455230486498,
+          "n_incorrect": 59
         },
         "10": {
           "mean_conf_correct": -0.08792152907837986,
@@ -2689,31 +2689,31 @@
             "hi": 0.14
           },
           "mean_K": {
-            "est": 0.08199999999999999,
-            "lo": 0.03900000000000001,
-            "hi": 0.131
+            "est": 0.081,
+            "lo": 0.03897500000000001,
+            "hi": 0.13
           },
           "k_buckets": {
-            "K=0": 84,
-            "inconsistent": 11,
+            "K=0": 85,
+            "inconsistent": 10,
             "K>=0.8": 5
           }
         },
         "2": {
           "n_facts": 100,
           "n_questions": 200,
-          "correct": 51,
-          "incorrect": 149,
+          "correct": 49,
+          "incorrect": 151,
           "abstain": 0,
           "accuracy": {
-            "est": 0.255,
-            "lo": 0.175,
-            "hi": 0.34
+            "est": 0.245,
+            "lo": 0.165,
+            "hi": 0.33
           },
           "hallucination": {
-            "est": 0.745,
-            "lo": 0.66,
-            "hi": 0.825
+            "est": 0.755,
+            "lo": 0.67,
+            "hi": 0.835
           },
           "abstention": {
             "est": 0.0,
@@ -2726,18 +2726,18 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.255,
-            "lo": 0.175,
-            "hi": 0.34
+            "est": 0.245,
+            "lo": 0.165,
+            "hi": 0.33
           },
           "mean_K": {
-            "est": 0.215,
-            "lo": 0.14800000000000002,
-            "hi": 0.28300000000000003
+            "est": 0.21199999999999997,
+            "lo": 0.14400000000000002,
+            "hi": 0.279
           },
           "k_buckets": {
-            "K=0": 63,
-            "inconsistent": 24,
+            "K=0": 64,
+            "inconsistent": 23,
             "K>=0.8": 13
           }
         },
@@ -2773,14 +2773,14 @@
             "hi": 0.825
           },
           "mean_K": {
-            "est": 0.6700000000000002,
-            "lo": 0.5910000000000001,
-            "hi": 0.7460000000000001
+            "est": 0.667,
+            "lo": 0.588,
+            "hi": 0.7440000000000001
           },
           "k_buckets": {
             "K=0": 14,
-            "inconsistent": 27,
-            "K>=0.8": 59
+            "inconsistent": 28,
+            "K>=0.8": 58
           }
         },
         "10": {
@@ -2815,9 +2815,9 @@
             "hi": 0.95
           },
           "mean_K": {
-            "est": 0.8500000000000001,
-            "lo": 0.7880000000000001,
-            "hi": 0.905
+            "est": 0.848,
+            "lo": 0.787,
+            "hi": 0.903
           },
           "k_buckets": {
             "K=0": 8,
@@ -2978,8 +2978,8 @@
           },
           "2": {
             "n_questions": 40,
-            "correct": 16,
-            "accuracy": 0.4
+            "correct": 14,
+            "accuracy": 0.35
           },
           "5": {
             "n_questions": 40,
@@ -3101,9 +3101,9 @@
           "2": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.27,
-              "lo": 0.15,
-              "hi": 0.4
+              "est": 0.25,
+              "lo": 0.14,
+              "hi": 0.37
             }
           },
           "5": {
@@ -3139,14 +3139,14 @@
           "hi": 0.14
         },
         "1->2": {
-          "est": 0.16999999999999998,
-          "lo": 0.075,
-          "hi": 0.27
+          "est": 0.15999999999999998,
+          "lo": 0.065,
+          "hi": 0.26
         },
         "2->5": {
-          "est": 0.49,
-          "lo": 0.37499999999999994,
-          "hi": 0.605
+          "est": 0.5,
+          "lo": 0.385,
+          "hi": 0.615
         },
         "5->10": {
           "est": 0.15000000000000002,
@@ -3173,10 +3173,10 @@
           "n_incorrect": 183
         },
         "2": {
-          "mean_conf_correct": -0.3032125688723007,
-          "n_correct": 51,
-          "mean_conf_incorrect": -0.6132676217981974,
-          "n_incorrect": 149
+          "mean_conf_correct": -0.30044932992623624,
+          "n_correct": 49,
+          "mean_conf_incorrect": -0.610057612543266,
+          "n_incorrect": 151
         },
         "5": {
           "mean_conf_correct": -0.12533492414352748,
@@ -3368,13 +3368,13 @@
             "hi": 0.285
           },
           "mean_K": {
-            "est": 0.17900000000000002,
-            "lo": 0.11600000000000002,
-            "hi": 0.24600000000000002
+            "est": 0.17600000000000002,
+            "lo": 0.113,
+            "hi": 0.243
           },
           "k_buckets": {
-            "K=0": 69,
-            "inconsistent": 20,
+            "K=0": 70,
+            "inconsistent": 19,
             "K>=0.8": 11
           }
         },
@@ -3494,9 +3494,9 @@
             "hi": 0.99
           },
           "mean_K": {
-            "est": 0.955,
-            "lo": 0.9109999999999999,
-            "hi": 0.9890000000000001
+            "est": 0.9530000000000001,
+            "lo": 0.909,
+            "hi": 0.987
           },
           "k_buckets": {
             "K=0": 4,

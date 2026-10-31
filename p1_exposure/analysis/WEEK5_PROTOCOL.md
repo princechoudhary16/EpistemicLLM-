@@ -18,6 +18,11 @@ for joint analyses." This file fixes the reporting choices so they cannot drift 
    Confidence versus exposure uses each response file's `confidence_score` (average log-probability).
 4. **Grading:** the grader recorded in each response file (`placeholder_exact_v1`). Regrading with the
    shared v3 grader moved accuracy by at most 0.1 points on P1 data, so it is not applied here.
+   **Amendment 2026-10-31:** the team's decision 2 makes the shared grader `p2_whole_word_v5` the one
+   grader for every final number, so all six response files were regraded with it
+   (`python -m p2_real_qa.regrade`) and the tables rebuilt. This is the only change to the protocol. The decision to
+   regrade was taken before any regraded table was produced (only the counts of changed rows, at most 13 of
+   7,200 per file, had been seen); this note was written after the tables.
 5. **No choice above changes after the final tables exist.** A defect found later is logged and every
    affected method is rerun the same way.
 

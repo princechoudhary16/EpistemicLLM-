@@ -110,7 +110,7 @@ sft_matched,founder,20,20,18,0.9
 sft_matched,headquarters,0,20,0,0.0
 sft_matched,headquarters,1,20,1,0.05
 sft_matched,headquarters,2,20,6,0.3
-sft_matched,headquarters,5,20,14,0.7
+sft_matched,headquarters,5,20,12,0.6
 sft_matched,headquarters,10,20,20,1.0
 sft_matched,headquarters,20,20,18,0.9
 sft_matched,occupation,0,20,0,0.0
@@ -139,7 +139,7 @@ p5_lam0,founder,10,20,20,1.0
 p5_lam0,founder,20,20,18,0.9
 p5_lam0,headquarters,0,20,0,0.0
 p5_lam0,headquarters,1,20,0,0.0
-p5_lam0,headquarters,2,20,8,0.4
+p5_lam0,headquarters,2,20,6,0.3
 p5_lam0,headquarters,5,20,14,0.7
 p5_lam0,headquarters,10,20,17,0.85
 p5_lam0,headquarters,20,20,18,0.9

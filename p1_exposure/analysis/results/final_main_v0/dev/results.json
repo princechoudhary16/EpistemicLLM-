@@ -14,11 +14,11 @@
     ],
     "inputs": {
       "base": {
-        "path": "results/raw/p1_main_v0_base.jsonl",
-        "sha256": "424d880d0e10029d70ffb0577393287cc25baa6835024eaeeba898bdbc8dafff",
+        "path": "results/raw/p1_main_v0_base__p2_whole_word_v5.jsonl",
+        "sha256": "33c6c32c726c66c88c81a0b5a9672d050cb103d6bb146b17f0024b8172f3c00a",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -28,11 +28,11 @@
         ]
       },
       "sft": {
-        "path": "results/raw/p1_main_v0_sft.jsonl",
-        "sha256": "9181944754d32a26956337df5974f1025c422956e1e6d97f011af615092e59a5",
+        "path": "results/raw/p1_main_v0_sft__p2_whole_word_v5.jsonl",
+        "sha256": "3cbcacac989df79ca8ef2cab480a1b33fc892b02987cf3f553c41dcd85533d5d",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -42,11 +42,11 @@
         ]
       },
       "idk": {
-        "path": "results/raw/p1_main_v0_idk.jsonl",
-        "sha256": "9287ab34478c75616c7bd9a4fe2366b079dd2004db219bf9949c9a0f506a9fc9",
+        "path": "results/raw/p1_main_v0_idk__p2_whole_word_v5.jsonl",
+        "sha256": "af5e644a030565947daf16ef2f21f12e5ce552f51c4b6ef29389fdad96f39cb4",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -56,11 +56,11 @@
         ]
       },
       "sft_matched": {
-        "path": "results/raw/p1_main_v0_sft_matched.jsonl",
-        "sha256": "e1d92b057ced40b15a6f6372b81d82419aa105efa989c201f0b9fe4e7a85c444",
+        "path": "results/raw/p1_main_v0_sft_matched__p2_whole_word_v5.jsonl",
+        "sha256": "c75dc99905e0c005b260d0560ef30752151cc6583bffca2d2698eef9462a09a9",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -70,11 +70,11 @@
         ]
       },
       "p5_lam0": {
-        "path": "results/raw/p5_main_v0_lam0_seed0.jsonl",
-        "sha256": "e724ec13b16163851608277c4d9854d5d93ac397355e4a6af1b85a0289151e5d",
+        "path": "results/raw/p5_main_v0_lam0_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "7ae9300587fe3c50550190e4a38a01be93253d692f0d7b5955cd9f7a3486cd48",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -84,11 +84,11 @@
         ]
       },
       "p5_lam3": {
-        "path": "results/raw/p5_main_v0_lam3_seed0.jsonl",
-        "sha256": "28db9d37a74ed8acf1db617039d2cf3ed8f4fdd8b018d0daccf1994658f87268",
+        "path": "results/raw/p5_main_v0_lam3_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "091ada020dc646de826fc66794baabe0c765ee7cd7a208de9813ef7085d02103",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -98,7 +98,7 @@
         ]
       }
     },
-    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split dev, 6 methods on identical main_v0 questions",
+    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split dev, 6 methods, shared grader p2_whole_word_v5 (regraded with p2_real_qa.regrade)",
     "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
   },
   "results": {
@@ -891,9 +891,9 @@
             "hi": 0.16
           },
           "mean_K": {
-            "est": 0.068,
-            "lo": 0.024000000000000004,
-            "hi": 0.12
+            "est": 0.07,
+            "lo": 0.026000000000000002,
+            "hi": 0.12399999999999999
           },
           "k_buckets": {
             "K=0": 39,
@@ -1902,9 +1902,9 @@
             "hi": 0.12
           },
           "mean_K": {
-            "est": 0.036000000000000004,
+            "est": 0.034,
             "lo": 0.004,
-            "hi": 0.08199999999999999
+            "hi": 0.07800000000000001
           },
           "k_buckets": {
             "K=0": 45,
@@ -2028,14 +2028,14 @@
             "hi": 0.94
           },
           "mean_K": {
-            "est": 0.7260000000000001,
-            "lo": 0.6239999999999999,
-            "hi": 0.8220000000000001
+            "est": 0.72,
+            "lo": 0.618,
+            "hi": 0.8160000000000001
           },
           "k_buckets": {
             "K=0": 6,
-            "inconsistent": 13,
-            "K>=0.8": 31
+            "inconsistent": 14,
+            "K>=0.8": 30
           }
         },
         "20": {
@@ -2573,14 +2573,14 @@
             "hi": 0.9
           },
           "mean_K": {
-            "est": 0.726,
-            "lo": 0.618,
-            "hi": 0.826
+            "est": 0.72,
+            "lo": 0.6139499999999999,
+            "hi": 0.8180500000000003
           },
           "k_buckets": {
             "K=0": 6,
-            "inconsistent": 10,
-            "K>=0.8": 34
+            "inconsistent": 11,
+            "K>=0.8": 33
           }
         },
         "10": {
@@ -2615,9 +2615,9 @@
             "hi": 0.97
           },
           "mean_K": {
-            "est": 0.8580000000000001,
-            "lo": 0.7759999999999999,
-            "hi": 0.9280500000000004
+            "est": 0.8540000000000001,
+            "lo": 0.77,
+            "hi": 0.924
           },
           "k_buckets": {
             "K=0": 3,
@@ -3118,13 +3118,13 @@
             "hi": 0.25
           },
           "mean_K": {
-            "est": 0.14,
-            "lo": 0.068,
-            "hi": 0.22399999999999998
+            "est": 0.138,
+            "lo": 0.066,
+            "hi": 0.22200000000000003
           },
           "k_buckets": {
-            "K=0": 34,
-            "inconsistent": 12,
+            "K=0": 35,
+            "inconsistent": 11,
             "K>=0.8": 4
           }
         },
@@ -3244,9 +3244,9 @@
             "hi": 1.0
           },
           "mean_K": {
-            "est": 0.97,
-            "lo": 0.92,
-            "hi": 1.0
+            "est": 0.966,
+            "lo": 0.9159999999999999,
+            "hi": 0.998
           },
           "k_buckets": {
             "K=0": 1,

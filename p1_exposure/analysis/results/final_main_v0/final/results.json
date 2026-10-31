@@ -14,11 +14,11 @@
     ],
     "inputs": {
       "base": {
-        "path": "results/raw/p1_main_v0_base.jsonl",
-        "sha256": "424d880d0e10029d70ffb0577393287cc25baa6835024eaeeba898bdbc8dafff",
+        "path": "results/raw/p1_main_v0_base__p2_whole_word_v5.jsonl",
+        "sha256": "33c6c32c726c66c88c81a0b5a9672d050cb103d6bb146b17f0024b8172f3c00a",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -28,11 +28,11 @@
         ]
       },
       "sft": {
-        "path": "results/raw/p1_main_v0_sft.jsonl",
-        "sha256": "9181944754d32a26956337df5974f1025c422956e1e6d97f011af615092e59a5",
+        "path": "results/raw/p1_main_v0_sft__p2_whole_word_v5.jsonl",
+        "sha256": "3cbcacac989df79ca8ef2cab480a1b33fc892b02987cf3f553c41dcd85533d5d",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -42,11 +42,11 @@
         ]
       },
       "idk": {
-        "path": "results/raw/p1_main_v0_idk.jsonl",
-        "sha256": "9287ab34478c75616c7bd9a4fe2366b079dd2004db219bf9949c9a0f506a9fc9",
+        "path": "results/raw/p1_main_v0_idk__p2_whole_word_v5.jsonl",
+        "sha256": "af5e644a030565947daf16ef2f21f12e5ce552f51c4b6ef29389fdad96f39cb4",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -56,11 +56,11 @@
         ]
       },
       "sft_matched": {
-        "path": "results/raw/p1_main_v0_sft_matched.jsonl",
-        "sha256": "e1d92b057ced40b15a6f6372b81d82419aa105efa989c201f0b9fe4e7a85c444",
+        "path": "results/raw/p1_main_v0_sft_matched__p2_whole_word_v5.jsonl",
+        "sha256": "c75dc99905e0c005b260d0560ef30752151cc6583bffca2d2698eef9462a09a9",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -70,11 +70,11 @@
         ]
       },
       "p5_lam0": {
-        "path": "results/raw/p5_main_v0_lam0_seed0.jsonl",
-        "sha256": "e724ec13b16163851608277c4d9854d5d93ac397355e4a6af1b85a0289151e5d",
+        "path": "results/raw/p5_main_v0_lam0_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "7ae9300587fe3c50550190e4a38a01be93253d692f0d7b5955cd9f7a3486cd48",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -84,11 +84,11 @@
         ]
       },
       "p5_lam3": {
-        "path": "results/raw/p5_main_v0_lam3_seed0.jsonl",
-        "sha256": "28db9d37a74ed8acf1db617039d2cf3ed8f4fdd8b018d0daccf1994658f87268",
+        "path": "results/raw/p5_main_v0_lam3_seed0__p2_whole_word_v5.jsonl",
+        "sha256": "091ada020dc646de826fc66794baabe0c765ee7cd7a208de9813ef7085d02103",
         "rows": 3600,
         "grading_versions": [
-          "placeholder_exact_v1"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "decoding_v1"
@@ -98,7 +98,7 @@
         ]
       }
     },
-    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split final, 6 methods on identical main_v0 questions",
+    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split final, 6 methods, shared grader p2_whole_word_v5 (regraded with p2_real_qa.regrade)",
     "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
   },
   "results": {
@@ -1957,18 +1957,18 @@
         "5": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 72,
-          "incorrect": 28,
+          "correct": 70,
+          "incorrect": 30,
           "abstain": 0,
           "accuracy": {
-            "est": 0.72,
-            "lo": 0.6,
-            "hi": 0.84
+            "est": 0.7,
+            "lo": 0.58,
+            "hi": 0.82
           },
           "hallucination": {
-            "est": 0.28,
-            "lo": 0.16,
-            "hi": 0.4
+            "est": 0.3,
+            "lo": 0.18,
+            "hi": 0.42
           },
           "abstention": {
             "est": 0.0,
@@ -1981,19 +1981,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.72,
-            "lo": 0.6,
-            "hi": 0.84
+            "est": 0.7,
+            "lo": 0.58,
+            "hi": 0.82
           },
           "mean_K": {
-            "est": 0.584,
-            "lo": 0.462,
-            "hi": 0.7079999999999999
+            "est": 0.572,
+            "lo": 0.446,
+            "hi": 0.696
           },
           "k_buckets": {
             "K=0": 14,
-            "inconsistent": 9,
-            "K>=0.8": 27
+            "inconsistent": 10,
+            "K>=0.8": 26
           }
         },
         "10": {
@@ -2196,8 +2196,8 @@
           },
           "5": {
             "n_questions": 20,
-            "correct": 14,
-            "accuracy": 0.7
+            "correct": 12,
+            "accuracy": 0.6
           },
           "10": {
             "n_questions": 20,
@@ -2272,9 +2272,9 @@
           "5": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.72,
-              "lo": 0.6,
-              "hi": 0.84
+              "est": 0.7,
+              "lo": 0.57,
+              "hi": 0.82
             }
           },
           "10": {
@@ -2307,14 +2307,14 @@
           "hi": 0.35
         },
         "2->5": {
-          "est": 0.45999999999999996,
-          "lo": 0.29,
-          "hi": 0.63
+          "est": 0.43999999999999995,
+          "lo": 0.26999999999999996,
+          "hi": 0.6100000000000001
         },
         "5->10": {
-          "est": 0.17000000000000004,
-          "lo": 0.020000000000000018,
-          "hi": 0.30999999999999994
+          "est": 0.19000000000000006,
+          "lo": 0.040000000000000036,
+          "hi": 0.33000000000000007
         },
         "10->20": {
           "est": 0.040000000000000036,
@@ -2342,10 +2342,10 @@
           "n_incorrect": 74
         },
         "5": {
-          "mean_conf_correct": -0.12952443275982795,
-          "n_correct": 72,
-          "mean_conf_incorrect": -0.5542897520746932,
-          "n_incorrect": 28
+          "mean_conf_correct": -0.12696999813537005,
+          "n_correct": 70,
+          "mean_conf_incorrect": -0.5319324115774374,
+          "n_incorrect": 30
         },
         "10": {
           "mean_conf_correct": -0.060799449767005964,
@@ -2489,31 +2489,31 @@
             "hi": 0.14
           },
           "mean_K": {
-            "est": 0.07200000000000001,
-            "lo": 0.02,
+            "est": 0.07,
+            "lo": 0.018000000000000002,
             "hi": 0.138
           },
           "k_buckets": {
-            "K=0": 43,
-            "inconsistent": 5,
+            "K=0": 44,
+            "inconsistent": 4,
             "K>=0.8": 2
           }
         },
         "2": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 27,
-          "incorrect": 73,
+          "correct": 25,
+          "incorrect": 75,
           "abstain": 0,
           "accuracy": {
-            "est": 0.27,
-            "lo": 0.15,
-            "hi": 0.4
+            "est": 0.25,
+            "lo": 0.1397500000000001,
+            "hi": 0.37
           },
           "hallucination": {
-            "est": 0.73,
-            "lo": 0.6,
-            "hi": 0.85
+            "est": 0.75,
+            "lo": 0.63,
+            "hi": 0.8602500000000008
           },
           "abstention": {
             "est": 0.0,
@@ -2526,18 +2526,18 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.27,
-            "lo": 0.15,
-            "hi": 0.4
+            "est": 0.25,
+            "lo": 0.1397500000000001,
+            "hi": 0.37
           },
           "mean_K": {
-            "est": 0.23199999999999998,
-            "lo": 0.132,
-            "hi": 0.342
+            "est": 0.226,
+            "lo": 0.126,
+            "hi": 0.336
           },
           "k_buckets": {
-            "K=0": 32,
-            "inconsistent": 9,
+            "K=0": 33,
+            "inconsistent": 8,
             "K>=0.8": 9
           }
         },
@@ -2778,8 +2778,8 @@
           },
           "2": {
             "n_questions": 20,
-            "correct": 8,
-            "accuracy": 0.4
+            "correct": 6,
+            "accuracy": 0.3
           },
           "5": {
             "n_questions": 20,
@@ -2851,9 +2851,9 @@
           "2": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.27,
-              "lo": 0.15,
-              "hi": 0.39
+              "est": 0.25,
+              "lo": 0.14,
+              "hi": 0.37
             }
           },
           "5": {
@@ -2889,14 +2889,14 @@
           "hi": 0.14
         },
         "1->2": {
-          "est": 0.2,
-          "lo": 0.06000000000000001,
-          "hi": 0.34
+          "est": 0.18,
+          "lo": 0.04999999999999999,
+          "hi": 0.31000000000000005
         },
         "2->5": {
-          "est": 0.41000000000000003,
-          "lo": 0.22999999999999993,
-          "hi": 0.5800000000000001
+          "est": 0.43000000000000005,
+          "lo": 0.25,
+          "hi": 0.6
         },
         "5->10": {
           "est": 0.20999999999999996,
@@ -2923,10 +2923,10 @@
           "n_incorrect": 93
         },
         "2": {
-          "mean_conf_correct": -0.21179315772476326,
-          "n_correct": 27,
-          "mean_conf_incorrect": -0.576455774544093,
-          "n_incorrect": 73
+          "mean_conf_correct": -0.19906365649867386,
+          "n_correct": 25,
+          "mean_conf_incorrect": -0.5709746051709408,
+          "n_incorrect": 75
         },
         "5": {
           "mean_conf_correct": -0.13743277904851026,
@@ -3118,9 +3118,9 @@
             "hi": 0.38
           },
           "mean_K": {
-            "est": 0.218,
-            "lo": 0.122,
-            "hi": 0.32799999999999996
+            "est": 0.214,
+            "lo": 0.11800000000000001,
+            "hi": 0.322
           },
           "k_buckets": {
             "K=0": 35,

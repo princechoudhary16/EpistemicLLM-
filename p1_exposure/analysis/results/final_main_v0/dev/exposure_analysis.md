@@ -15,12 +15,12 @@ questions. A fact's K pools all its sampled responses; facts are bucketed as *K=
 
 ## Inputs
 
-- `base`: `results/raw/p1_main_v0_base.jsonl` (3600 rows, sha256 `424d880d0e10`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
-- `sft`: `results/raw/p1_main_v0_sft.jsonl` (3600 rows, sha256 `9181944754d3`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
-- `idk`: `results/raw/p1_main_v0_idk.jsonl` (3600 rows, sha256 `9287ab34478c`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
-- `sft_matched`: `results/raw/p1_main_v0_sft_matched.jsonl` (3600 rows, sha256 `e1d92b057ced`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
-- `p5_lam0`: `results/raw/p5_main_v0_lam0_seed0.jsonl` (3600 rows, sha256 `e724ec13b161`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
-- `p5_lam3`: `results/raw/p5_main_v0_lam3_seed0.jsonl` (3600 rows, sha256 `28db9d37a74e`, grading ['placeholder_exact_v1'], decoding ['decoding_v1'])
+- `base`: `results/raw/p1_main_v0_base__p2_whole_word_v5.jsonl` (3600 rows, sha256 `33c6c32c726c`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
+- `sft`: `results/raw/p1_main_v0_sft__p2_whole_word_v5.jsonl` (3600 rows, sha256 `3cbcacac989d`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
+- `idk`: `results/raw/p1_main_v0_idk__p2_whole_word_v5.jsonl` (3600 rows, sha256 `af5e644a0305`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
+- `sft_matched`: `results/raw/p1_main_v0_sft_matched__p2_whole_word_v5.jsonl` (3600 rows, sha256 `c75dc99905e0`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
+- `p5_lam0`: `results/raw/p5_main_v0_lam0_seed0__p2_whole_word_v5.jsonl` (3600 rows, sha256 `7ae9300587fe`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
+- `p5_lam3`: `results/raw/p5_main_v0_lam3_seed0__p2_whole_word_v5.jsonl` (3600 rows, sha256 `091ada020dc6`, grading ['p2_whole_word_v5'], decoding ['decoding_v1'])
 
 Dataset `main_v0`, dev facts only (validation wording); bootstrap draws 4000, seed 0.
 
@@ -92,7 +92,7 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | 1x | 100 (50) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.01 [0.00, 0.02] | 48 / 2 / 0 |
 | 2x | 100 (50) | 1.0% [0.0%, 3.0%] | 99.0% [97.0%, 100.0%] | 0.0% | 100.0% | 1.0% | 0.01 [0.00, 0.02] | 47 / 3 / 0 |
 | 5x | 100 (50) | 2.0% [0.0%, 6.0%] | 98.0% [94.0%, 100.0%] | 0.0% | 100.0% | 2.0% | 0.01 [0.00, 0.04] | 47 / 3 / 0 |
-| 10x | 100 (50) | 9.0% [3.0%, 16.0%] | 91.0% [84.0%, 97.0%] | 0.0% | 100.0% | 9.0% | 0.07 [0.02, 0.12] | 39 / 11 / 0 |
+| 10x | 100 (50) | 9.0% [3.0%, 16.0%] | 91.0% [84.0%, 97.0%] | 0.0% | 100.0% | 9.0% | 0.07 [0.03, 0.12] | 39 / 11 / 0 |
 | 20x | 100 (50) | 28.0% [17.0%, 39.0%] | 72.0% [61.0%, 83.0%] | 0.0% | 100.0% | 28.0% | 0.17 [0.10, 0.25] | 28 / 19 / 3 |
 
 Change in accuracy between adjacent exposure levels (where the curve is steepest):
@@ -198,10 +198,10 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | Exposure | Questions (facts) | Accuracy [95% CI] | Hallucination [95% CI] | Abstention | Coverage | Selective accuracy | Mean K [95% CI] | Facts K=0 / inconsistent / K>=0.8 |
 |---|---|---|---|---|---|---|---|---|
 | 0x | 100 (50) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.00 [0.00, 0.00] | 50 / 0 / 0 |
-| 1x | 100 (50) | 6.0% [1.0%, 12.0%] | 94.0% [88.0%, 99.0%] | 0.0% | 100.0% | 6.0% | 0.04 [0.00, 0.08] | 45 / 4 / 1 |
+| 1x | 100 (50) | 6.0% [1.0%, 12.0%] | 94.0% [88.0%, 99.0%] | 0.0% | 100.0% | 6.0% | 0.03 [0.00, 0.08] | 45 / 4 / 1 |
 | 2x | 100 (50) | 27.0% [16.0%, 39.0%] | 73.0% [61.0%, 84.0%] | 0.0% | 100.0% | 27.0% | 0.24 [0.15, 0.34] | 31 / 11 / 8 |
 | 5x | 100 (50) | 71.0% [59.0%, 82.0%] | 29.0% [18.0%, 41.0%] | 0.0% | 100.0% | 71.0% | 0.63 [0.53, 0.74] | 7 / 18 / 25 |
-| 10x | 100 (50) | 86.0% [77.0%, 94.0%] | 14.0% [6.0%, 23.0%] | 0.0% | 100.0% | 86.0% | 0.73 [0.62, 0.82] | 6 / 13 / 31 |
+| 10x | 100 (50) | 86.0% [77.0%, 94.0%] | 14.0% [6.0%, 23.0%] | 0.0% | 100.0% | 86.0% | 0.72 [0.62, 0.82] | 6 / 14 / 30 |
 | 20x | 100 (50) | 88.0% [80.0%, 95.0%] | 12.0% [5.0%, 20.0%] | 0.0% | 100.0% | 88.0% | 0.87 [0.79, 0.94] | 1 / 8 / 41 |
 
 Change in accuracy between adjacent exposure levels (where the curve is steepest):
@@ -260,8 +260,8 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | 0x | 100 (50) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.00 [0.00, 0.00] | 50 / 0 / 0 |
 | 1x | 100 (50) | 10.0% [3.0%, 19.0%] | 90.0% [81.0%, 97.0%] | 0.0% | 100.0% | 10.0% | 0.09 [0.03, 0.17] | 41 / 6 / 3 |
 | 2x | 100 (50) | 24.0% [13.0%, 35.0%] | 76.0% [65.0%, 87.0%] | 0.0% | 100.0% | 24.0% | 0.20 [0.12, 0.28] | 31 / 15 / 4 |
-| 5x | 100 (50) | 81.0% [70.0%, 90.0%] | 19.0% [10.0%, 30.0%] | 0.0% | 100.0% | 81.0% | 0.73 [0.62, 0.83] | 6 / 10 / 34 |
-| 10x | 100 (50) | 90.0% [82.0%, 97.0%] | 10.0% [3.0%, 18.0%] | 0.0% | 100.0% | 90.0% | 0.86 [0.78, 0.93] | 3 / 7 / 40 |
+| 5x | 100 (50) | 81.0% [70.0%, 90.0%] | 19.0% [10.0%, 30.0%] | 0.0% | 100.0% | 81.0% | 0.72 [0.61, 0.82] | 6 / 11 / 33 |
+| 10x | 100 (50) | 90.0% [82.0%, 97.0%] | 10.0% [3.0%, 18.0%] | 0.0% | 100.0% | 90.0% | 0.85 [0.77, 0.92] | 3 / 7 / 40 |
 | 20x | 100 (50) | 92.0% [84.0%, 98.0%] | 8.0% [2.0%, 16.0%] | 0.0% | 100.0% | 92.0% | 0.91 [0.83, 0.97] | 3 / 2 / 45 |
 
 Change in accuracy between adjacent exposure levels (where the curve is steepest):
@@ -319,7 +319,7 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 |---|---|---|---|---|---|---|---|---|
 | 0x | 100 (50) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.00 [0.00, 0.01] | 49 / 1 / 0 |
 | 1x | 100 (50) | 6.0% [1.0%, 12.0%] | 94.0% [88.0%, 99.0%] | 0.0% | 100.0% | 6.0% | 0.04 [0.01, 0.06] | 41 / 9 / 0 |
-| 2x | 100 (50) | 15.0% [6.0%, 25.0%] | 85.0% [75.0%, 94.0%] | 0.0% | 100.0% | 15.0% | 0.14 [0.07, 0.22] | 34 / 12 / 4 |
+| 2x | 100 (50) | 15.0% [6.0%, 25.0%] | 85.0% [75.0%, 94.0%] | 0.0% | 100.0% | 15.0% | 0.14 [0.07, 0.22] | 35 / 11 / 4 |
 | 5x | 100 (50) | 80.0% [69.0%, 90.0%] | 20.0% [10.0%, 31.0%] | 0.0% | 100.0% | 80.0% | 0.70 [0.60, 0.80] | 6 / 12 / 32 |
 | 10x | 100 (50) | 92.0% [85.0%, 98.0%] | 8.0% [2.0%, 15.0%] | 0.0% | 100.0% | 92.0% | 0.86 [0.79, 0.92] | 1 / 8 / 41 |
 | 20x | 100 (50) | 97.0% [92.0%, 100.0%] | 3.0% [0.0%, 8.0%] | 0.0% | 100.0% | 97.0% | 0.97 [0.92, 1.00] | 1 / 1 / 48 |
