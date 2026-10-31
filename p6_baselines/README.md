@@ -123,14 +123,16 @@ python -m p1_exposure.validate data/synthetic/main_v0
 ## Key results
 
 See `reports/p6_week5_master_table.md` for the frozen master table and plots.
-Headline: `sft_matched` (46.8%), `p5_lam0` (48.7%), `p5_lam3` (48.6%) are
+Headline: `sft_matched` (46.7%), `p5_lam0` (48.5%), `p5_lam3` (48.6%) are
 statistically indistinguishable from each other, and all three clearly beat
 `base` (0.0%) and the under-capacity original `sft`/`idk` recipe.
 
 ## Known, documented limitations (not fixed, intentionally)
 
-- Grading is `placeholder_exact_v1` (P6's own text-match grader), not P2's —
-  every number in this project is provisional pending that.
+- Grading is `p2_whole_word_v4` (P2's shared grader, applied 2026-10-31),
+  not the earlier `placeholder_exact_v1` the first few weeks used — regrading
+  changed 12-13 of 7,200 rows per file, moving every reported number by at
+  most ~0.2 percentage points.
 - `idk` is a known-degenerate result (100% abstention, a training-order
   artifact P1's ablation traced precisely) — left as-is, not retrained, since
   fixing it would mean introducing new training after the Week 5 freeze.

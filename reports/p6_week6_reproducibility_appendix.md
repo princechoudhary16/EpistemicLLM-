@@ -10,6 +10,15 @@ Weeks 1–5 into one submission-ready appendix. It does not introduce new
 experiments — per §8's own rule for the final two weeks, this stage is about
 consistency and rehearsal, not new results.
 
+**Updated 2026-10-31:** regraded with P2's shared `p2_whole_word_v4` grader
+(`common/grading.py`), replacing the earlier placeholder — see §3 and §4.
+P2's updated real-QA pilot (merged, PR #7) also confirms the real-QA track
+remains blocked (99.0% K=0 under the shared protocol, harder than the
+earlier 96%); P1's second-world/robustness work and P4's calibration work
+have since merged (PRs #9, #11) and P5 replicated their main finding on a
+second synthetic world (PR #12) — none of this is folded into the table
+below yet, flagged in §9.
+
 ---
 
 ## 1. What P6 is, in one paragraph
@@ -46,7 +55,7 @@ made during Weeks 1–5. Full command set for every downstream step:
 | Model | `Qwen/Qwen2.5-0.5B-Instruct` @ `7ae557604adf67be50417f59c2c2f167def9a775` |
 | Decoding | `decoding_v1` — 1 greedy + 5 sampled, T=0.7, top-p=0.9, top_k=0, repetition_penalty=1.0, 64 max new tokens |
 | Prompt | `prompt_v0` (`configs/decoding.yaml`) |
-| Grading | `placeholder_exact_v1` (`common/evaluate.py`) — **provisional, not P2's grader** |
+| Grading | `p2_whole_word_v4` (`common/grading.py`) — P2's shared grader, applied 2026-10-31 |
 | Evaluator | `p6-eval-v1.1` (`p6_baselines/compare_methods.py`) |
 | Packages | torch 2.13.0 (CUDA 12.8), transformers 4.57.6, peft 0.21.0, accelerate 1.15.0, datasets 5.0.1, Python 3.11 |
 | Compute | NTU CCDS GPU Cluster TC2, 1x NVIDIA A40 per job, QoS `normal` (10 CPU/30G mem/1 GPU/6h/2 concurrent jobs) |
@@ -58,12 +67,12 @@ made during Weeks 1–5. Full command set for every downstream step:
 | base (untouched) | 0.0% | 68.3% | 31.7% | 68.3% | 0.683 |
 | sft (under-capacity recipe, history only) | 5.4% | 94.6% | 0.0% | 100% | 0.838 |
 | idk (under-capacity recipe, known degenerate) | 0.0% | 0.0% | 100% | 0.0% | n/a |
-| **sft_matched** (standard-SFT reference) | **46.8%** | 53.2% | 0.0% | 100% | 0.213 |
-| **p5_lam0** (P5's pipeline, λ=0) | **48.7%** | 51.3% | 0.0% | 100% | 0.200 |
+| **sft_matched** (standard-SFT reference) | **46.7%** | 53.3% | 0.0% | 100% | 0.214 |
+| **p5_lam0** (P5's pipeline, λ=0) | **48.5%** | 51.5% | 0.0% | 100% | 0.201 |
 | **p5_lam3** (P5's proposed method) | **48.6%** | 51.4% | 0.0% | 100% | 0.185 |
 
 Paired accuracy diffs vs. `sft_matched` (question-cluster bootstrap, 95% CI, n=1000):
-p5_lam0 +1.8pp [0.0, +3.8]; p5_lam3 +1.8pp [−0.2, +3.6]; sft −41.4pp [−44.2, −38.4]; idk −46.8pp [−49.4, −44.0].
+p5_lam0 +1.8pp [0.0, +3.8]; p5_lam3 +1.9pp [0.0, +3.8]; sft −41.3pp [−44.0, −38.3]; idk −46.7pp [−49.2, −43.9].
 
 Full table, bootstrap output, and both risk-coverage plots:
 `reports/p6_week5_master_table.md`, `results/final/baseline_comparison_main_v0_combined.json`,
@@ -72,7 +81,7 @@ Full table, bootstrap output, and both risk-coverage plots:
 **Caption, exactly as it should appear in the final report:**
 > Figure/Table X. Greedy accuracy, hallucination rate, and selective-risk AURC
 > for six methods on `main_v0` (600 synthetic facts, 1,200 held-out questions,
-> single seed, `decoding_v1`, placeholder grader). `sft_matched` uses P1's
+> single seed, `decoding_v1`, P2's `p2_whole_word_v4` grader). `sft_matched` uses P1's
 > published LoRA recipe (r=16, all 7 linear layers, batch 4) for training
 > parity with P5's evidence-aware method; the original P6 recipe (`sft`/`idk`,
 > r=8, 2 layers) is shown for history only and was found under-capacity
@@ -92,12 +101,12 @@ both P5's own report and P6's evaluator.
 
 ## 6. One limitation, stated plainly
 
-Every number here comes from a single seed, a placeholder grader (not P2's),
-and the synthetic track only — the real-QA track has produced zero baselines
-because the team's model/dataset decision is still open
-(`reports/model_dataset_decision.md`: 96% of SimpleQA pilot questions scored
-"never correct"). Nothing in this appendix should be read as a claim about
-real-world factual QA.
+Every number here comes from a single seed and the synthetic track only — the
+real-QA track has produced zero baselines because the team's model/dataset
+decision is still open (`reports/model_dataset_decision.md`: P2's updated
+pilot, shared protocol and grader, found 99.0% of SimpleQA questions score
+"never correct" — confirmed, not resolved). Nothing in this appendix should
+be read as a claim about real-world factual QA.
 
 ## 7. Provenance — every number traces to a run
 
@@ -114,9 +123,12 @@ Full provenance table with recipe hyperparameters for each row:
 
 ## 8. Known, intentionally-unfixed issues (documented so nothing is silently assumed resolved)
 
-- **A grading bug was found and fixed** (apostrophe-stripping mismatch silently
-  misgraded every "I don't know" as "incorrect") — already corrected before
-  any number above was computed; full story in `reports/p6_week2_4_results.md` §4.
+- **Grading was upgraded mid-project, twice.** P6's own apostrophe-stripping
+  bug (fixed Week 2) misgraded "I don't know" as "incorrect"; the whole
+  pipeline then moved from P6's placeholder grader to P2's shared,
+  audited `p2_whole_word_v4` (decision C, 2026-10-31) once it existed. Full
+  story: `reports/p6_week2_4_results.md` §4; regrade diffs are in
+  `reports/p6_week5_master_table.md`'s 2026-10-31 update note.
 - **`idk` is a known-degenerate baseline** (100% abstention, a training-order
   artifact: 30 IDK examples appended unshuffled after 3,800 fact presentations,
   so the final gradient steps are all refusals — P1's ablation). Left as-is;
@@ -132,11 +144,14 @@ Full provenance table with recipe hyperparameters for each row:
 
 - Real-QA baselines (blocked, §6 above).
 - P1's second-synthetic-world/seed-robustness results and P4's
-  calibration-reliability work: both exist on unmerged branches
-  (`p1/exposure-analysis`, `feat/p4-calibration-reliability`) as of this
-  writing. P6 does not merge or finish other members' branches —
-  if these land on `main` before submission, this appendix needs one more
-  assembly pass to fold them in.
+  calibration-reliability work have both since **merged into `main`** (PRs
+  #9, #11) — no longer draft branches, but still not folded into the table
+  or plots above. P5's second-world replication (PR #12) also merged,
+  confirming their main_v0 finding holds on an independent synthetic world
+  (head AUROC 0.863 vs. 0.497 untrained; log-prob still the better
+  abstention signal). P6 does not merge or finish other members' work —
+  this appendix needs one more assembly pass to fold these in before final
+  submission.
 - P3's XAI integration: no P3 branch exists in this repository.
 - Seeds beyond 0 for `p5_lam0`/`p5_lam3` through this exact evaluator (P5's
   own 3-seed results exist on their internal pipeline, not yet re-run through
@@ -157,4 +172,4 @@ is better; log-probability wins.
 `p5_lam0`, `p5_lam3` overlap almost exactly; `base` and the under-capacity
 original recipe sit clearly above (worse).
 
-**One limitation:** single seed, placeholder grader, synthetic facts only.
+**One limitation:** single seed, synthetic facts only.

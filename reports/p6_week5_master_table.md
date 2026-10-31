@@ -5,6 +5,15 @@ identical evaluator; bootstrap comparisons; resolve missing/mismatched IDs."
 Acceptance: "Master table and risk-coverage plot; reproduction manifest links
 every number to a run."
 
+**Updated 2026-10-31: regraded with P2's `p2_whole_word_v4` grader**
+(`common/grading.py`), replacing the `placeholder_exact_v1` grader used when
+this table was first frozen. Decision C in P2's `model_dataset_decision.md`
+("Decisions requested") asked P6 to approve and apply the shared grader; done
+here. Only 12-13 of 7,200 rows per file changed outcome (a handful more for
+`base`); every number below moved by at most ~0.2 percentage points, and every
+conclusion is unchanged. Old grading_version `placeholder_exact_v1` numbers are
+superseded by the ones below; see git history for the prior version.
+
 **Scope note up front:** this covers the synthetic track (`main_v0`) only —
 the only track with a complete, non-blocked result set across the team right
 now. The real-QA track is still blocked on the model/dataset decision (P2's
@@ -22,8 +31,8 @@ merge or finish other members' branches.
 | base (untouched) | 0.0% | 68.3% | 31.7% | 68.3% | 0.683 |
 | sft (P6 original recipe) | 5.4% | 94.6% | 0.0% | 100% | 0.838 |
 | idk (P6 original recipe) | 0.0% | 0.0% | 100% | 0.0% | n/a |
-| **sft_matched** (matched recipe, P6 runner) | **46.8%** | 53.2% | 0.0% | 100% | 0.213 |
-| **p5_lam0** (matched recipe, P5 runner) | **48.7%** | 51.3% | 0.0% | 100% | 0.200 |
+| **sft_matched** (matched recipe, P6 runner) | **46.7%** | 53.3% | 0.0% | 100% | 0.214 |
+| **p5_lam0** (matched recipe, P5 runner) | **48.5%** | 51.5% | 0.0% | 100% | 0.201 |
 | **p5_lam3** (evidence-aware, P5's proposed method) | **48.6%** | 51.4% | 0.0% | 100% | 0.185 |
 
 Paired accuracy diffs vs. `sft_matched` (question-cluster bootstrap, 95% CI, n_boot=1000):
@@ -31,9 +40,9 @@ Paired accuracy diffs vs. `sft_matched` (question-cluster bootstrap, 95% CI, n_b
 | Comparison | Estimate | 95% CI |
 |---|---:|---|
 | p5_lam0 vs sft_matched | +1.8pp | [0.0, +3.8] |
-| p5_lam3 vs sft_matched | +1.8pp | [-0.2, +3.6] |
-| sft vs sft_matched | -41.4pp | [-44.2, -38.4] |
-| idk vs sft_matched | -46.8pp | [-49.4, -44.0] |
+| p5_lam3 vs sft_matched | +1.9pp | [0.0, +3.8] |
+| sft vs sft_matched | -41.3pp | [-44.0, -38.3] |
+| idk vs sft_matched | -46.7pp | [-49.2, -43.9] |
 
 **Which is "the" standard-SFT reference?** `sft_matched`, not the original
 `sft`. The original recipe (r=8, q_proj+v_proj only, batch 1) was found during
@@ -80,8 +89,8 @@ Every number above traces to one of these runs. All used the pinned model
 `Qwen/Qwen2.5-0.5B-Instruct` @ `7ae557604adf67be50417f59c2c2f167def9a775`,
 decoding config `decoding_v1` (`configs/decoding.yaml`: 1 greedy + 5 sampled,
 T=0.7, top-p=0.9, top_k=0, repetition_penalty=1.0, 64 max new tokens),
-grading `placeholder_exact_v1` (`common/evaluate.py`) -- **not P2's grader,
-every number below is provisional pending that**.
+grading `p2_whole_word_v4` (`common/grading.py`) -- **P2's shared grader,
+approved and applied 2026-10-31 (decision C)**.
 
 | Method | Command | Recipe | Seed | Cluster job | Output file | Commit |
 |---|---|---|---|---|---|---|
@@ -117,12 +126,17 @@ is the full machine-readable output this table summarizes.
 
 ## 4. What's NOT in this freeze (missing/pending, not silently assumed done)
 
-- **Real-QA baselines**: blocked on the model/dataset decision.
-- **P1's second-world/seed-robustness results**: on `p1/exposure-analysis`,
-  not merged.
-- **P4's frozen calibrators/matched-coverage analysis**: on
-  `feat/p4-calibration-reliability`, not merged, and P4's acceptance
-  criterion says this should be "passed to P6" -- nothing has been yet.
+- **Real-QA baselines**: still blocked. P2's updated pilot (shared protocol,
+  v4 grader) confirms the same finding, harder: 99.0% K=0 (up from 96%).
+  Their recommendation is to pilot an easier real-QA dataset (TriviaQA/PopQA)
+  on the same model; "Decisions requested" A/B/E in
+  `reports/model_dataset_decision.md` remain open team decisions.
+- **P1's second-world/seed-robustness results** and **P4's
+  calibration-reliability work**: both have since merged into `main` (P1 PR
+  #9, P4 PR #11) and P5's second-world replication (PR #12) confirms their
+  main_v0 findings hold on an independent synthetic world. Not folded into
+  this table/plot -- would need a separate assembly pass; flagged here rather
+  than silently left out.
 - **P3's XAI integration**: no P3 branch exists in this repository as of this
   writing.
 - **The frozen-representation-head control** (`plan.md` §7's 5th required
