@@ -1,0 +1,64 @@
+{
+  "reviewer": "assistant_independent_review",
+  "review_status": "provisional_not_human_or_team_audited",
+  "predictions_sha256": "a781c52002236036c36d83814afebe9c8bc6f27d13abdd1906a637ca3d29237f",
+  "reviewed_rows": 600,
+  "method": "Compared every answer to its synthetic reference. Exact matches retained as correct. Distinct fictional person/place names and years were checked against the canonical reference and retained as incorrect when they differed. For occupation prompts, accepted the explicitly listed trade/activity forms when they identify the same occupation. The single truncated output remains invalid. No outside-world fact checking was used because the entities and facts are fictional.",
+  "corrections": [
+    {
+      "question_id": "F0485-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; violin making names the same trade as violin maker."
+    },
+    {
+      "question_id": "F0510-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; bookbinding names the same trade as bookbinder."
+    },
+    {
+      "question_id": "F0515-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; violin making names the same trade as violin maker."
+    },
+    {
+      "question_id": "F0516-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; herbalism names the same practice as herbalist."
+    },
+    {
+      "question_id": "F0520-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; glassblowing names the same trade as glassblower."
+    },
+    {
+      "question_id": "F0523-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; beekeeping names the same trade as beekeeper."
+    },
+    {
+      "question_id": "F0527-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; salt trading names the same trade as salt merchant."
+    },
+    {
+      "question_id": "F0540-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; bookbinding names the same trade as bookbinder."
+    },
+    {
+      "question_id": "F0545-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; violin making names the same trade as violin maker."
+    },
+    {
+      "question_id": "F0573-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; cartography names the same trade as cartographer."
+    },
+    {
+      "question_id": "F0580-q1",
+      "outcome": "correct",
+      "reason": "The question asks for the trade practiced; glassblowing names the same trade as glassblower."
+    }
+  ]
+}
