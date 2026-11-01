@@ -19,11 +19,14 @@ import yaml
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(HERE))
 
+from common import grading  # noqa: E402
 from common.evaluate import run_eval  # noqa: E402
 from common.metrics import knowledge_scores  # noqa: E402
 from common.model import ModelRunner  # noqa: E402
 from common.schema import read_jsonl, write_jsonl  # noqa: E402
+from precision import require_float32  # noqa: E402
 
 
 def compute_k(rows):
@@ -63,6 +66,7 @@ def main():
 
     ds = args.dataset_version
     model_cfg, dec_cfg = load_yaml("model.yaml"), load_yaml("decoding.yaml")
+    dtype = require_float32(model_cfg["torch_dtype"], "kq_labels")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     data_dir = REPO / "data" / "synthetic" / ds
     heldout_path = data_dir / "robustness" / "eval_heldout.jsonl"
@@ -77,6 +81,7 @@ def main():
                          torch_dtype=model_cfg["torch_dtype"], device=device)
     rows = run_eval(runner, questions, dec_cfg, model_cfg, f"kq_teacher_{teacher_run}", "kq_teacher",
                     f"{ds}_kq_teacher_heldout", seed=0, training_seed=args.teacher_seed)
+    grading.regrade_rows(rows)    # run_eval's grader is a placeholder; the team grades every number with common/grading.py
     out_dir = REPO / args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     write_jsonl(rows, out_dir / f"p5_kq_teacher_{ds}_heldout.jsonl")
@@ -92,6 +97,7 @@ def main():
         "heldout_file_sha256": hashlib.sha256(heldout_path.read_bytes()).hexdigest(),
         "decoding_config_id": dec_cfg["decoding_config_id"],
         "prompt_version": dec_cfg["prompt_version"],
+        "dtype": dtype,
         "grading_version": rows[0]["grading_version"],
         "k_definition": "common.metrics.knowledge_scores: correct sampled responses / sampled responses, greedy excluded",
         "n_sampled_responses_per_fact": 10,

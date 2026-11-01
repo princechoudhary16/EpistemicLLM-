@@ -8,6 +8,7 @@ from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from head import EvidenceHead
+from precision import require_float32
 
 DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16}
 
@@ -47,6 +48,7 @@ class EvidenceAwareModel(nn.Module):
 
 def build_model(cfg, device, checkpoint_dir=None, trainable=True):
     m = cfg["model"]
+    require_float32(m["dtype"], "build_model")
     tokenizer = AutoTokenizer.from_pretrained(m["id"], revision=m["revision"])
     base = AutoModelForCausalLM.from_pretrained(m["id"], revision=m["revision"], dtype=DTYPES[m["dtype"]]).to(device)
 
