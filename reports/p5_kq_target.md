@@ -136,9 +136,21 @@ What changes and what does not:
   `dtype` and `grading_version`. The dev stage is rerun on the new labels and **that** run is the dev result. The superseded bf16 run is reported
   beside it, so a reader can see whether the verdict depends on label precision. This is a correction of a setup error, not a second try at a failed
   test: nothing about the criteria, designs or thresholds is touched, and the new dev verdict is reported whichever way it falls.
-- **Proposed second arm (not yet adopted):** P1's K per fact for `main_v0` (`p1_exposure/analysis/results/k_labels/main_v0_float32_seed0/`, float32,
-  v5, 4 training wordings x 5 samples, P1's own matched-recipe model) is the target named in team decision 4. If run, it is an extra arm labelled "team-spec
-  labels", under the same criteria and masks, `main_v0` only (P1 has no `main_w1` file). It cannot replace the primary arm after results are seen.
+- **Second arm, adopted 1 Nov 2026 (before any run): "team-spec labels".** The K target named in team decision 4 is P1's K per fact for `main_v0`
+  (`p1_exposure/analysis/results/k_labels/main_v0_float32_seed0/`: float32, grader v5, the 4 training wordings x 5 samples = 20 per fact, from P1's own
+  float32 run of the matched recipe, seed 0; P6's `sft_matched` was not yet available). It is run as an extra arm, never a replacement:
+  - **Labels:** `p5_training_method/p1_labels.py` checks P1's file against `facts.jsonl` (600 facts, same exposure and split, K in [0, 1], 20 samples,
+    float32, v5) and writes `results/final/p5_kq_labels_main_v0_p1.json`; nothing is recomputed. K is P1's, so it is measured on training wordings,
+    where the primary arm uses held-out wordings; the two arms therefore differ in model, wordings and sample count, and a difference between them
+    cannot be attributed to any one of these.
+  - **Design:** the same masks and the same fact-disjoint scheme as the primary arm: `pfinal` (labels on final facts, scored on dev) and `pdev`
+    (labels on dev facts, scored on final), 3 seeds, lambda 3. The matched s(e) controls are the primary arm's `efinal` / `edev` runs, not retrained.
+  - **Criteria:** A and B exactly as above, scored by `kq_criteria.py --arm p1`, `main_v0` only (P1 has no `main_w1` file). The dev stage is run first and
+    its verdict recorded here before the final stage, as for the primary arm.
+  - **Reading rule:** both arms are reported whatever they show. The primary arm stays the headline; the P1 arm is a robustness check on how K is
+    measured, and cannot be promoted after the results are seen. One caution carried from P1's own README: with training-wording K the head could memorise
+    a fact's K instead of reading evidence; the fact-disjoint masks are the control for that, and any gain at 0x is read with the name-recognition caveat
+    from `reports/p5_aux_zero_novel.md`.
 
 ## Results
 _Final-stage result pending._

@@ -28,6 +28,12 @@ export TOKENIZERS_PARALLELISM=false
 #   <ds>_lam3kdev_seed<S>    target K(fact), labels on DEV facts   -> scored on final
 #   <ds>_lam3edev_seed<S>    target s(e)    , labels on DEV facts   -> scored on final    (matched control)
 # Needs results/final/p5_kq_labels_<ds>.json from p5_kq_labels.sbatch.
+#
+# ARM=p1 (second arm, reports/p5_kq_target.md Amendment 1; main_v0 only): same masks and criteria, but the K target is P1's
+# K per fact (python p5_training_method/p1_labels.py -> results/final/p5_kq_labels_main_v0_p1.json).  Trains only
+#   <ds>_lam3pfinal_seed<S>  P1's K, labels on FINAL facts -> scored on dev
+#   <ds>_lam3pdev_seed<S>    P1's K, labels on DEV facts   -> scored on final
+# and reuses the matched s(e) controls (efinal / edev) from the default arm, which must already exist.
 #   STAGE=dev   (default)  trains all four sets, scores the final-labelled ones on dev
 #   STAGE=final            scores the dev-labelled ones on final; run only after the dev verdict is recorded in the report
 # Usage:  DATA_DIR=data/synthetic/main_v0 sbatch p5_training_method/jobs/p5_kq.sbatch
@@ -35,14 +41,28 @@ DATA_DIR="${DATA_DIR:?Set DATA_DIR, e.g. data/synthetic/main_v0}"
 DSET="$(basename "$DATA_DIR")"
 SEEDS="${SEEDS:-0 1 2}"
 STAGE="${STAGE:-dev}"
-LABELS="results/final/p5_kq_labels_${DSET}.json"
-[ -f "$LABELS" ] || { echo "missing $LABELS (run p5_kq_labels.sbatch first)"; exit 1; }
+ARM="${ARM:-own}"
+case "$ARM" in
+  own) LABELS="results/final/p5_kq_labels_${DSET}.json"
+       # tag : aux target : label split
+       SETS="kfinal:k:final efinal:exposure:final kdev:k:dev edev:exposure:dev"
+       DEV_TAGS="kfinal efinal"; FINAL_TAGS="kdev edev"
+       HINT="run p5_kq_labels.sbatch first" ;;
+  p1)  [ "$DSET" = "main_v0" ] || { echo "ARM=p1 exists for main_v0 only (P1 made no K file for $DSET)"; exit 1; }
+       LABELS="results/final/p5_kq_labels_${DSET}_p1.json"
+       SETS="pfinal:k:final pdev:k:dev"
+       DEV_TAGS="pfinal"; FINAL_TAGS="pdev"
+       HINT="run: python p5_training_method/p1_labels.py"
+       for c in efinal edev; do   # the matched controls come from the default arm
+         [ -d "results/raw/p5/${DSET}_lam3${c}_seed0/checkpoint" ] || { echo "missing control ${DSET}_lam3${c} (run the default arm first)"; exit 1; }
+       done ;;
+  *) echo "unknown ARM=$ARM (use own or p1)"; exit 1 ;;
+esac
+[ -f "$LABELS" ] || { echo "missing $LABELS ($HINT)"; exit 1; }
 
-# tag : aux target : label split
-SETS="kfinal:k:final efinal:exposure:final kdev:k:dev edev:exposure:dev"
 case "$STAGE" in
-  dev)   SCORE=dev;   SCORED_TAGS="kfinal efinal"; FINAL_FLAGS="" ;;
-  final) SCORE=final; SCORED_TAGS="kdev edev";     FINAL_FLAGS="--allow-final" ;;
+  dev)   SCORE=dev;   SCORED_TAGS="$DEV_TAGS";   FINAL_FLAGS="" ;;
+  final) SCORE=final; SCORED_TAGS="$FINAL_TAGS"; FINAL_FLAGS="--allow-final" ;;
   *) echo "unknown STAGE=$STAGE (use dev or final)"; exit 1 ;;
 esac
 

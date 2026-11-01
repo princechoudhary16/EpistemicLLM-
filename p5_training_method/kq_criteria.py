@@ -4,6 +4,8 @@ On the scored split S (dev: sets labelled on final facts; final: sets labelled o
   A  AUROC(head predicts the student's correct answers): K-head minus matched s(e)-head >= 0.03
   B  AURC of the K-head within 0.03 of the AURC using the same student's own average log-probability
   C  reported: head-vs-teacher-K Spearman on the scored facts; the all-labelled s(e) lambda=3 baseline; accuracy
+--arm p1 scores the second arm (heads trained on P1's K, main_v0 only; tags pfinal/pdev) with the same criteria against
+the same matched s(e) control (efinal/edev) and writes results/final/p5_kq_criteria_<split>_p1.json.
 AURC = P6's risk-coverage area (lower is better), computed with the copies of P6's functions in abstain_eval.py.
 """
 import argparse
@@ -42,15 +44,21 @@ def per_seed_metrics(rows, labels):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--split", choices=["dev", "final"], default="dev")
-    ap.add_argument("--worlds", nargs="+", default=["main_v0", "main_w1"])
+    ap.add_argument("--arm", choices=["own", "p1"], default="own", help="label source of the K head (own = this branch's teacher)")
+    ap.add_argument("--worlds", nargs="+", default=None, help="default: both worlds (own arm), main_v0 (p1 arm)")
     ap.add_argument("--root", default="results/raw/p5")
     ap.add_argument("--out", default=None)
     args = ap.parse_args()
 
-    k_tag, e_tag = ("kfinal", "efinal") if args.split == "dev" else ("kdev", "edev")
+    prefix = "k" if args.arm == "own" else "p"
+    k_tag, e_tag = ((prefix + "final", "efinal") if args.split == "dev" else (prefix + "dev", "edev"))
+    worlds = args.worlds or (["main_v0", "main_w1"] if args.arm == "own" else ["main_v0"])
+    if args.arm == "p1" and worlds != ["main_v0"]:
+        raise SystemExit("the p1 arm exists for main_v0 only")
     result, verdicts = {}, []
-    for world in args.worlds:
-        labels = json.loads((Path("results/final") / f"p5_kq_labels_{world}.json").read_text())["labels"]
+    for world in worlds:
+        suffix = "" if args.arm == "own" else "_p1"
+        labels = json.loads((Path("results/final") / f"p5_kq_labels_{world}{suffix}.json").read_text())["labels"]
         by = {c: load_scores(scores_file(world, args.split, t)) for c, t in
               (("k", k_tag), ("e", e_tag), ("baseline", "baseline"))}
         seeds = sorted(set.intersection(*(set(v) for v in by.values())))
@@ -66,7 +74,7 @@ def main():
         row["criteria"] = {"A": a_diff >= 0.03, "B": b_gap <= 0.03}
         result[world] = row
         verdicts.append(row["criteria"])
-        print(f"=== {world}, scored on {args.split} (facts the head had no label for); seeds {seeds}")
+        print(f"=== {world}, arm {args.arm}, scored on {args.split} (facts the head had no label for); seeds {seeds}")
         print(f"{'':30}{'K head':>16}{'s(e) head (matched)':>22}{'s(e), all labelled':>22}")
         for key, label in (("auroc_correct", "AUROC predicts correct"), ("aurc_head", "AURC head (lower=better)"),
                            ("aurc_logprob", "AURC own log-prob"), ("spearman_vs_teacher_k", "Spearman vs teacher K"),
@@ -78,7 +86,7 @@ def main():
         ok = all(all(v.values()) for v in verdicts)
         print(f"\nDev verdict (A and B in every world): {'ALL PASS' if ok else 'NOT ALL PASS'}")
         result["dev_all_pass"] = ok
-    out = Path(args.out or f"results/final/p5_kq_criteria_{args.split}.json")
+    out = Path(args.out or f"results/final/p5_kq_criteria_{args.split}{'' if args.arm == 'own' else '_p1'}.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2))
 
