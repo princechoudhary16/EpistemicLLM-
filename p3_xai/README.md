@@ -1,8 +1,8 @@
-# P3: Week 1 hidden-state and probe pipeline
+# P3: hidden-state and probe pipeline
 
-**Completed:** a real 100-question SimpleQA run with `Qwen/Qwen2.5-0.5B-Instruct`, four prompt-only representations per question, saved/reloaded logistic probes, and an explicit report of insufficient positive validation labels. Read the [Week 1 report](../reports/p3_week1.md) first.
+**Implemented:** hidden-state extraction and grouped probes for the pinned Qwen model. Earlier SimpleQA and synthetic runs are exploratory; use the shared TriviaQA procedure below for comparable P3 results.
 
-This is a development smoke experiment. Its labels and prompt are provisional because P2's audited data and P6's shared runner were not present. It does not replace their team-wide pilot, estimate repeated-generation knowledge scores, or establish that any layer detects knowledge.
+Probes estimate what is decodable from prompt representations. They do not show that a representation causes model behavior. The TriviaQA workflow uses P2's frozen train/validation sets and labels graded by `common/grading.py` v5; the locked test is never loaded.
 
 ## What is implemented
 
@@ -10,7 +10,7 @@ This is a development smoke experiment. Its labels and prompt are provisional be
 |---|---|
 | `download.py` | Download pinned public assets; verify SHA-256 checksums |
 | `prepare.py` | Select 100 unique SimpleQA questions with seed 42 before model inference |
-| `extract.py` | Load frozen Qwen with an optional PEFT LoRA adapter, capture four pooled prompt states, generate greedy responses, save provisional labels |
+| `extract.py` | Load frozen Qwen with an optional PEFT LoRA adapter, capture four pooled prompt states, generate greedy responses, label with the shared grader |
 | `apply_reviews.py` | Apply explicit corrections tied to the exact original response file |
 | `probe.py` | Join labels by ID, split by group, fit and reload probes, write metrics and validation scores |
 | `bootstrap_probe.py` | Compute fact-cluster percentile intervals for a frozen validation probe; no probe refitting or model selection |
@@ -121,6 +121,37 @@ For the existing run, one obvious false negative is recorded in `data/p3/week1_l
 | `reports/p3_week1.md` | Completion checklist, actual observations, and next-week handoffs |
 
 P2 should audit the response labels and provide richer label diversity. P6 should review the provisional prompt/model configuration for alignment with shared runs. Re-extract if the model, prompt, or questions change; re-fit only if labels change for the same responses. P4 can consume the ID-linked validation scores once label quality is sufficient.
+
+## P3 on shared TriviaQA labels
+
+The team decision is float32 for training and evaluation, matching `configs/model.yaml`. The P3 configs below use float32 and the shared `prompt_v0`.
+
+P2's base-model train and validation responses and K-label files are already in the repository. For `sft_matched`, first generate responses using the adapter supplied by P6, then export labels:
+
+```bash
+python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split train_probe \
+  --adapter .cache/p3/sft_matched_main_v0_adapter --method sft_matched --training-seed 0
+python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split validation \
+  --adapter .cache/p3/sft_matched_main_v0_adapter --method sft_matched --training-seed 0
+python -m p2_real_qa.export_labels --responses results/raw/p2_triviaqa_v0_train_probe_sft_matched.jsonl
+python -m p2_real_qa.export_labels --responses results/raw/p2_triviaqa_v0_validation_sft_matched.jsonl
+```
+
+Assemble the frozen questions and grader-v5 labels, extract prompt states in float32, then fit on P2's 500 `train_probe` questions and evaluate on its 200 `validation` questions:
+
+```bash
+python -m p3_xai.prepare_triviaqa --method base --output-dir results/p3/triviaqa_v0_base_inputs
+python -m p3_xai.extract --config configs/p3_triviaqa_v0_base.json
+python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_base_features \
+  --labels results/p3/triviaqa_v0_base_inputs/labels.jsonl
+
+python -m p3_xai.prepare_triviaqa --method sft_matched --output-dir results/p3/triviaqa_v0_sft_matched_inputs
+python -m p3_xai.extract --config configs/p3_triviaqa_v0_sft_matched.json
+python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_sft_matched_features \
+  --labels results/p3/triviaqa_v0_sft_matched_inputs/labels.jsonl
+```
+
+The preparation step rejects mismatched question IDs, split assignments, run IDs, model revisions, prompts, or grader versions. The probe checks the train/validation group boundary. Do not run this workflow on `locked_test`.
 
 ## P3 development on P1 synthetic data
 

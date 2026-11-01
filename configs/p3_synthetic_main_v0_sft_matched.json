@@ -14,7 +14,7 @@
   "depth_fractions": [0.25, 0.5, 0.75, 1.0],
   "pooling": "last_nonpadding_prompt_token",
   "device": "auto",
-  "dtype": "bfloat16",
+  "dtype": "float32",
   "batch_size": 1,
   "max_prompt_tokens": 512,
   "max_new_tokens": 64,

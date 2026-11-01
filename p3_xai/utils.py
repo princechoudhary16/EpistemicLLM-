@@ -6,6 +6,8 @@ import re
 import unicodedata
 from pathlib import Path
 
+from common import grading
+
 
 def sha256_file(path):
     digest = hashlib.sha256()
@@ -37,18 +39,12 @@ def normalize_answer(text):
     return re.sub(r"\s+", " ", text).strip(' \t\r\n.\"“”')
 
 
-def provisional_grade(answer, reference):
-    """Conservative exact match ONLY: all labels remain provisional, not benchmark grades."""
-    answer_norm = normalize_answer(answer)
-    if not answer_norm:
-        return {"outcome": "invalid", "correct": None, "review_status": "needs_review"}
-    if answer_norm == normalize_answer(reference):
-        outcome = "correct"
-    elif answer_norm in {"i don't know", "i do not know", "unknown", "i’m not sure", "i'm not sure"}:
-        outcome = "abstain"
-    else:
-        outcome = "incorrect"
-    return {"outcome": outcome, "correct": int(outcome == "correct"), "review_status": "provisional_auto"}
+def provisional_grade(answer, reference, question=""):
+    """Use the project's shared grader for every P3 correctness label."""
+    outcome, grading_version, review_status = grading.grade_fields(answer, reference, question)
+    correct = {"correct": 1, "incorrect": 0, "abstain": 0, "invalid": None}[outcome]
+    return {"outcome": outcome, "correct": correct, "review_status": review_status,
+            "grading_version": grading_version}
 
 
 def validate_questions(rows):
@@ -60,8 +56,8 @@ def validate_questions(rows):
     for row in rows:
         if not row.get("question", "").strip() or not row.get("group_id"):
             raise ValueError("Every question needs nonempty question and group_id fields")
-        if row.get("split") not in {"development", "dev"}:
-            raise ValueError("P3 extraction accepts development/dev questions only; locked/final data is forbidden")
+        if row.get("split") not in {"development", "dev", "train_probe", "validation"}:
+            raise ValueError("P3 extraction accepts development, train_probe, and validation rows only")
     # Identical normalized prompts must share a group even if they have different IDs.
     groups = {}
     for row in rows:

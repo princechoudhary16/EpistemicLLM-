@@ -13,6 +13,7 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
+from common import grading
 from .utils import provisional_grade, read_jsonl, sha256_file, validate_questions, write_json, write_jsonl
 
 
@@ -145,7 +146,7 @@ def main():
         "layer_convention": "One-based decoder depth; final depth includes final RMSNorm; matches HF hidden_states[depth]",
         "pooling": cfg["pooling"], "feature_source": "Prompt only, including assistant generation prefix; no reference or generated answer",
         "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": cfg["max_new_tokens"]},
-        "label_status": "provisional exact-match labels for pipeline verification, not audited correctness",
+        "label_status": f"P3-generated labels use common grader {grading.GRADING_VERSION}; P2 labels can be supplied to the probe",
         "environment": {"python": platform.python_version(), "platform": platform.platform(),
                         **{p: importlib.metadata.version(p) for p in ["torch", "transformers", "numpy", "scikit-learn"]},
                         **({"peft": importlib.metadata.version("peft")} if adapter_path else {})},
@@ -182,9 +183,10 @@ def main():
         eos_ids = [eos_ids] if isinstance(eos_ids, int) else (eos_ids or [])
         for row, answer, tokens, length in zip(batch, answers, continuations.tolist(), lengths):
             truncated = not any(token in eos_ids for token in tokens)
-            grade = provisional_grade(answer, row["reference_answer"])
+            grade = provisional_grade(answer, row["reference_answer"], row["question"])
             if truncated:
-                grade = {"outcome": "invalid", "correct": None, "review_status": "needs_review_truncated"}
+                grade = {"outcome": "invalid", "correct": None, "review_status": "needs_review_truncated",
+                         "grading_version": grade["grading_version"]}
             record = {
                 **row, "run_id": output.name, "model_id": cfg["model_id"],
                 "model_revision": cfg["model_revision"],
@@ -192,14 +194,14 @@ def main():
                 "method": cfg.get("method", "base"), "training_seed": cfg.get("training_seed"),
                 "generation_seed": cfg["seed"],
                 "is_greedy": True, "sample_index": 0, "prompt_version": cfg["prompt_version"],
-                "model_answer": answer, **grade, "grading_version": "p3-exact-match-v1",
+                "model_answer": answer, **grade,
                 "truncated": truncated, "prompt_tokens": length,
                 "batch_seconds": elapsed, "batch_size": len(batch),
             }
             predictions.append(record)
             labels.append({"question_id": row["question_id"], "correct": grade["correct"],
                            "outcome": grade["outcome"], "review_status": grade["review_status"],
-                           "grading_version": "p3-exact-match-v1", "run_id": output.name,
+                           "grading_version": grade["grading_version"], "run_id": output.name,
                            "model_revision": cfg["model_revision"], "prompt_version": cfg["prompt_version"]})
         write_jsonl(output / "predictions.jsonl", predictions)
         write_jsonl(output / "labels.jsonl", labels)

@@ -1,5 +1,7 @@
 # Base vs SFT representation comparison
 
+**Historical exploratory artifact:** this comparison was produced in bfloat16 and predates the team's float32 decision. Do not use it as a final comparison; rerun after producing float32 features for both checkpoints.
+
 - Base run: `results/p3/synthetic_main_v0_base_prompt_v0_bf16_comparison` (BF16 inference).
 - SFT run: `results/p3/synthetic_main_v0_sft_matched_seed0` (BF16 inference; matched adapter).
 - Same pinned model revision, shared prompt, 600 question IDs, group assignments, layer depths, pooling, batch size, and inference dtype.

@@ -26,12 +26,18 @@ def align_labels(question_ids, labels, manifest):
         raise ValueError("Labels and feature question IDs must match exactly")
     by_id = {r["question_id"]: r for r in labels}
     ordered = [by_id[q] for q in question_ids]
+    cfg = manifest["config"]
+    allowed_run_ids = set(cfg.get("expected_label_run_ids", [manifest["run_id"]]))
+    required_grading_version = cfg.get("required_grading_version")
     for row in ordered:
-        for field, expected in [("run_id", manifest["run_id"]),
-                                ("model_revision", manifest["model_revision"]),
-                                ("prompt_version", manifest["config"]["prompt_version"])]:
+        for field, expected in [("model_revision", manifest["model_revision"]),
+                                ("prompt_version", cfg["prompt_version"])]:
             if row.get(field) != expected:
                 raise ValueError(f"Label {row['question_id']} has mismatched {field}")
+        if row.get("run_id") not in allowed_run_ids:
+            raise ValueError(f"Label {row['question_id']} has unexpected run_id {row.get('run_id')!r}")
+        if required_grading_version and row.get("grading_version") != required_grading_version:
+            raise ValueError(f"Label {row['question_id']} has mismatched grading_version")
         if row.get("correct") not in (0, 1, None):
             raise ValueError("correct must be 0, 1, or null")
         expected_label = {"correct": 1, "incorrect": 0, "abstain": 0, "invalid": None}
@@ -48,6 +54,20 @@ def grouped_split(groups, seed, validation_fraction):
     if set(groups[train]) & set(groups[validation]):
         raise ValueError("Group leakage across train/validation")
     return train, validation
+
+
+def select_split(groups, labels, cfg):
+    split_names = {row.get("split") for row in labels}
+    if split_names == {"train_probe", "validation"}:
+        train = np.asarray([i for i, row in enumerate(labels) if row["split"] == "train_probe"], dtype=int)
+        validation = np.asarray([i for i, row in enumerate(labels) if row["split"] == "validation"], dtype=int)
+        if not len(train) or not len(validation):
+            raise ValueError("Shared train_probe and validation splits must both be non-empty")
+        if set(groups[train]) & set(groups[validation]):
+            raise ValueError("Shared train_probe/validation splits contain overlapping groups")
+        return train, validation, "P2 frozen train_probe/validation; group overlap checked"
+    train, validation = grouped_split(groups, cfg["seed"], cfg["validation_fraction"])
+    return train, validation, "GroupShuffleSplit; one draw; labels not used"
 
 
 def class_counts(y):
@@ -101,22 +121,23 @@ def run(run_dir, labels_path=None, output_dir=None):
     y = align_labels(ids, labels, manifest)
     cfg = manifest["config"]
     # Split BEFORE filtering null labels and without stratifying/retrying based on outcomes.
-    all_train, all_validation = grouped_split(groups, cfg["seed"], cfg["validation_fraction"])
+    all_train, all_validation, split_method = select_split(groups, labels, cfg)
     train = all_train[y[all_train] >= 0]
     validation = all_validation[y[all_validation] >= 0]
     output_dir.mkdir(parents=True, exist_ok=True)
     write_json(output_dir / "split.json", {
-        "seed": cfg["seed"], "method": "GroupShuffleSplit; one draw; labels not used",
+        "seed": cfg["seed"], "method": split_method,
         "training_ids": ids[all_train].tolist(), "validation_ids": ids[all_validation].tolist(),
         "excluded_unlabeled_ids": ids[y < 0].tolist(),
-        "group_overlap": [], "scope": "development smoke holdout, NOT final test",
+        "group_overlap": [], "scope": "development data; locked test excluded",
     })
     report = {
-        "status": "Week 1 pipeline verification only; provisional labels are not benchmark correctness",
+        "status": "Probe results on supplied labels; interpret in light of label provenance",
         "run_id": manifest["run_id"], "labels_sha256": sha256_file(labels_path),
         "features_sha256": manifest["feature_file_sha256"],
         "label_review_statuses": sorted({r.get("review_status", "unspecified") for r in labels}),
-        "target": "Greedy answer correctness; default labels are normalized exact-match proxies",
+        "target": "Greedy answer correctness under the grader recorded on each label",
+        "grading_versions": sorted({r.get("grading_version", "unspecified") for r in labels}),
         "train_counts": class_counts(y[train]), "validation_counts": class_counts(y[validation]),
         "excluded_unlabeled": int((y < 0).sum()),
         "hyperparameters": {"C": cfg["probe_C"], "class_weight": "balanced", "max_iter": 2000,
@@ -157,8 +178,8 @@ def run(run_dir, labels_path=None, output_dir=None):
         writer = csv.DictWriter(stream, fieldnames=["question_id", "probe", "correct_label", "probability"])
         writer.writeheader()
         writer.writerows(prediction_rows)
-    lines = ["# P3 Week 1 probe smoke results", "",
-             "**Pipeline verification only. Do not interpret these provisional-label scores as research findings.**", "",
+    lines = ["# P3 probe results", "",
+             f"**Label grading versions:** {', '.join(report['grading_versions'])}", "",
              f"Training labels: {report['train_counts']}; validation labels: {report['validation_counts']}.", "",
              f"Unlabeled/invalid responses excluded from probe fitting: {report['excluded_unlabeled']}.", "",
              "| Representation | Accuracy | Balanced accuracy | AUROC | AUPRC | Status |",
@@ -169,7 +190,7 @@ def run(run_dir, labels_path=None, output_dir=None):
         lines.append(f"| {name} | {' | '.join(values)} | {metric['status']} |")
     lines.extend(["", "No layer or regularization search was performed. AUROC/AUPRC are N/A if validation has only one class.", "",
                   "Features contain prompt information only. Standardization uses training rows only; question groups never cross the split.", "",
-                  "Default nonmatches may include semantically correct answers. P2 auditing and substantially more positive examples are needed before knowledge-state claims.", ""])
+                  "Probe scores describe information decodable from the measured representation; they do not establish a cause of model behavior.", ""])
     (output_dir / "report.md").write_text("\n".join(lines))
     print(json.dumps(report, indent=2))
     return report

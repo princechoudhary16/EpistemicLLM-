@@ -1,7 +1,7 @@
 # P3 synthetic dev probe run
 
 **Date:** 21 October 2026  
-**Status:** Base-checkpoint and matched-SFT extractions completed. The SFT probe fits on both classes and shows a promising mid-layer signal, but its exact-match labels remain provisional and need review.
+**Status:** Historical exploratory results only. The matched-SFT extraction used bfloat16 and P3 exact-match labels; the team later selected float32 and shared grader v5. Do not cite these metrics as final evidence. Re-run using `p3_xai/README.md` and the shared TriviaQA splits.
 
 ## Run
 
