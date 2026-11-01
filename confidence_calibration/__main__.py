@@ -4,6 +4,7 @@
   run            generate -> grade -> score -> report for a question file (one model load)
   score          add confidence signals to another producer's graded responses
   report         rebuild the report for a scored response file
+  calibrate      fit leakage-safe probability maps and evaluate frozen thresholds
 """
 
 import argparse
@@ -100,6 +101,18 @@ def cmd_report(args):
     _log(write_report(report, output_dir, args.title or output_dir.name))
 
 
+def cmd_calibrate(args):
+    from .calibration import evaluate_calibration
+    from .calibration_report import write_calibration_report
+
+    summary, predictions = evaluate_calibration(
+        read_jsonl(args.responses), seed=args.seed, target_coverage=args.target_coverage,
+    )
+    output_dir = Path(args.output_dir)
+    _log(write_calibration_report(summary, predictions, output_dir, args.title or output_dir.name))
+    _log(f"calibration artifacts -> {output_dir}")
+
+
 def main():
     parser = argparse.ArgumentParser(prog="python -m confidence_calibration", description=__doc__.split("\n")[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -142,6 +155,16 @@ def main():
     p.add_argument("--output-dir", required=True)
     p.add_argument("--title")
     p.set_defaults(func=cmd_report)
+
+    p = commands.add_parser("calibrate", help="fit and evaluate confidence calibration on explicit data splits")
+    p.add_argument("--responses", required=True, help="graded and scored response JSONL for one run")
+    p.add_argument("--output-dir", required=True)
+    p.add_argument("--title", help="report title (defaults to the output directory name)")
+    p.add_argument("--seed", type=int, default=0,
+                   help="seed used only when deriving train/validation groups from dev/final data")
+    p.add_argument("--target-coverage", type=float, default=0.8,
+                   help="validation coverage operating point for selecting confidence thresholds")
+    p.set_defaults(func=cmd_calibrate)
 
     args = parser.parse_args()
     args.func(args)
