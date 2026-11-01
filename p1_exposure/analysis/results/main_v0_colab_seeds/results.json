@@ -1,6 +1,7 @@
 {
   "meta": {
     "version": "main_v0",
+    "split": "all",
     "boot": 2000,
     "seed": 0,
     "levels": [
@@ -14,10 +15,10 @@
     "inputs": {
       "matched_seed0": {
         "path": "responses__mine__frozen.jsonl",
-        "sha256": "c77c80cc6537d2f713fc3a4530481fa1cb15c522c2a9b90fa31c996ecee1fd69",
+        "sha256": "5ee908acd2f9fc8b47fd23ffba1389cdb8843d1ad632e28011b0e6d0426dcb09",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -26,10 +27,10 @@
       },
       "matched_seed1": {
         "path": "responses__mine__frozen.jsonl",
-        "sha256": "10887bf659a8b82fd2eba83599c80ded82bfae37f883d69c449ac0d7e71c4d81",
+        "sha256": "ed633a47d8b207c64cc04c8a131307600684825e410153b86965302dac473d03",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -38,10 +39,10 @@
       },
       "matched_seed2": {
         "path": "responses__mine__frozen.jsonl",
-        "sha256": "696cef9d4fd7fe058de12f74348d99b9b36e9b896fe7b8b334ed8da862b5d291",
+        "sha256": "09c39976bf701b537e52de29291df0aa2c82583d2e4e2ba8a9cc1e6eac3687e8",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -50,10 +51,10 @@
       },
       "base_decoding_v1": {
         "path": "responses__base__frozen.jsonl",
-        "sha256": "fdd05fcfa726ac83dc853c1a8621f52553c70f7d12ce2cfce0517fa4988192ea",
+        "sha256": "782498270771bd96696c49892b2dc9ab7ca2e98ebd0cf602162b891d55aea43c",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -61,7 +62,7 @@
         "methods": []
       }
     },
-    "notes": "Colab T4 runs of p1_exposure/ablation/run_ablation.py with decoding_v1-equivalent settings (top_k 0, repetition_penalty 1.0); matched recipe r16 alpha32 dropout0.05 all 7 linear layers batch 4 lr 2e-4, one epoch. Training seeds 0, 1, 2. base_decoding_v1 is the untrained model under the same decoding.",
+    "notes": "Colab T4 float32 runs of p1_exposure/ablation/run_ablation.py with decoding_v1-equivalent settings (top_k 0, repetition_penalty 1.0); matched recipe r16 alpha32 dropout0.05 all 7 linear layers batch 4 lr 2e-4, one epoch. Training seeds 0, 1, 2. base_decoding_v1 is the untrained model under the same decoding. Responses regraded with p2_whole_word_v5 (p1_exposure.analysis.regrade_colab).",
     "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
   },
   "results": {
@@ -183,9 +184,9 @@
             "hi": 0.31
           },
           "mean_K": {
-            "est": 0.196,
-            "lo": 0.131975,
-            "hi": 0.26299999999999996
+            "est": 0.19400000000000003,
+            "lo": 0.13097499999999998,
+            "hi": 0.259
           },
           "k_buckets": {
             "K=0": 64,
@@ -741,31 +742,31 @@
             "hi": 0.115
           },
           "mean_K": {
-            "est": 0.051,
-            "lo": 0.026000000000000002,
-            "hi": 0.079
+            "est": 0.04699999999999999,
+            "lo": 0.023000000000000003,
+            "hi": 0.07400000000000001
           },
           "k_buckets": {
-            "K=0": 81,
-            "inconsistent": 18,
+            "K=0": 82,
+            "inconsistent": 17,
             "K>=0.8": 1
           }
         },
         "2": {
           "n_facts": 100,
           "n_questions": 200,
-          "correct": 56,
-          "incorrect": 144,
+          "correct": 55,
+          "incorrect": 145,
           "abstain": 0,
           "accuracy": {
-            "est": 0.28,
-            "lo": 0.2,
-            "hi": 0.365
+            "est": 0.275,
+            "lo": 0.195,
+            "hi": 0.3551249999999993
           },
           "hallucination": {
-            "est": 0.72,
-            "lo": 0.635,
-            "hi": 0.8
+            "est": 0.725,
+            "lo": 0.644875,
+            "hi": 0.805
           },
           "abstention": {
             "est": 0.0,
@@ -778,19 +779,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.28,
-            "lo": 0.2,
-            "hi": 0.365
+            "est": 0.275,
+            "lo": 0.195,
+            "hi": 0.3551249999999993
           },
           "mean_K": {
-            "est": 0.25,
-            "lo": 0.17800000000000002,
-            "hi": 0.3270249999999999
+            "est": 0.247,
+            "lo": 0.175,
+            "hi": 0.322
           },
           "k_buckets": {
             "K=0": 59,
-            "inconsistent": 21,
-            "K>=0.8": 20
+            "inconsistent": 22,
+            "K>=0.8": 19
           }
         },
         "5": {
@@ -909,9 +910,9 @@
             "hi": 0.98
           },
           "mean_K": {
-            "est": 0.9330000000000002,
-            "lo": 0.892,
-            "hi": 0.9670000000000001
+            "est": 0.932,
+            "lo": 0.8909999999999999,
+            "hi": 0.966
           },
           "k_buckets": {
             "K=0": 2,
@@ -1030,8 +1031,8 @@
           },
           "2": {
             "n_questions": 40,
-            "correct": 17,
-            "accuracy": 0.425
+            "correct": 16,
+            "accuracy": 0.4
           },
           "5": {
             "n_questions": 40,
@@ -1153,9 +1154,9 @@
           "2": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.26,
-              "lo": 0.15,
-              "hi": 0.38
+              "est": 0.25,
+              "lo": 0.14,
+              "hi": 0.37
             }
           },
           "5": {
@@ -1191,14 +1192,14 @@
           "hi": 0.115
         },
         "1->2": {
-          "est": 0.21000000000000002,
-          "lo": 0.12,
-          "hi": 0.305
+          "est": 0.20500000000000002,
+          "lo": 0.11499999999999999,
+          "hi": 0.29512499999999936
         },
         "2->5": {
-          "est": 0.41999999999999993,
-          "lo": 0.30000000000000004,
-          "hi": 0.535
+          "est": 0.42499999999999993,
+          "lo": 0.30500000000000005,
+          "hi": 0.54
         },
         "5->10": {
           "est": 0.18000000000000005,
@@ -1354,18 +1355,18 @@
         "2": {
           "n_facts": 100,
           "n_questions": 200,
-          "correct": 61,
-          "incorrect": 139,
+          "correct": 57,
+          "incorrect": 143,
           "abstain": 0,
           "accuracy": {
-            "est": 0.305,
-            "lo": 0.22,
-            "hi": 0.395
+            "est": 0.285,
+            "lo": 0.205,
+            "hi": 0.375
           },
           "hallucination": {
-            "est": 0.695,
-            "lo": 0.605,
-            "hi": 0.78
+            "est": 0.715,
+            "lo": 0.625,
+            "hi": 0.795
           },
           "abstention": {
             "est": 0.0,
@@ -1378,19 +1379,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.305,
-            "lo": 0.22,
-            "hi": 0.395
+            "est": 0.285,
+            "lo": 0.205,
+            "hi": 0.375
           },
           "mean_K": {
-            "est": 0.27399999999999997,
-            "lo": 0.196,
-            "hi": 0.358
+            "est": 0.257,
+            "lo": 0.18100000000000002,
+            "hi": 0.34
           },
           "k_buckets": {
             "K=0": 63,
-            "inconsistent": 14,
-            "K>=0.8": 23
+            "inconsistent": 16,
+            "K>=0.8": 21
           }
         },
         "5": {
@@ -1425,9 +1426,9 @@
             "hi": 0.765
           },
           "mean_K": {
-            "est": 0.64,
-            "lo": 0.5599749999999999,
-            "hi": 0.7219999999999999
+            "est": 0.639,
+            "lo": 0.558,
+            "hi": 0.7210249999999998
           },
           "k_buckets": {
             "K=0": 18,
@@ -1467,9 +1468,9 @@
             "hi": 0.94
           },
           "mean_K": {
-            "est": 0.8590000000000001,
-            "lo": 0.805975,
-            "hi": 0.9079999999999999
+            "est": 0.858,
+            "lo": 0.804,
+            "hi": 0.9069999999999999
           },
           "k_buckets": {
             "K=0": 2,
@@ -1598,8 +1599,8 @@
           },
           "2": {
             "n_questions": 40,
-            "correct": 9,
-            "accuracy": 0.225
+            "correct": 7,
+            "accuracy": 0.175
           },
           "5": {
             "n_questions": 40,
@@ -1630,8 +1631,8 @@
           },
           "2": {
             "n_questions": 40,
-            "correct": 16,
-            "accuracy": 0.4
+            "correct": 14,
+            "accuracy": 0.35
           },
           "5": {
             "n_questions": 40,
@@ -1753,9 +1754,9 @@
           "2": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.34,
-              "lo": 0.22,
-              "hi": 0.46
+              "est": 0.3,
+              "lo": 0.18,
+              "hi": 0.42
             }
           },
           "5": {
@@ -1791,14 +1792,14 @@
           "hi": 0.12499999999999999
         },
         "1->2": {
-          "est": 0.22999999999999998,
-          "lo": 0.13,
-          "hi": 0.33
+          "est": 0.20999999999999996,
+          "lo": 0.11499999999999999,
+          "hi": 0.31
         },
         "2->5": {
-          "est": 0.37000000000000005,
-          "lo": 0.245,
-          "hi": 0.5
+          "est": 0.39000000000000007,
+          "lo": 0.26499999999999996,
+          "hi": 0.515
         },
         "5->10": {
           "est": 0.21499999999999997,

@@ -15,17 +15,17 @@ questions. A fact's K pools all its sampled responses; facts are bucketed as *K=
 
 ## Inputs
 
-- `matched_seed0`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `d7e08f03277b`, grading ['not recorded'], decoding ['not recorded'])
-- `base_decoding_v1`: `responses__base__frozen.jsonl` (7200 rows, sha256 `3f78312fd5ba`, grading ['not recorded'], decoding ['not recorded'])
+- `matched_seed0`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `4085a279c4b4`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
+- `base_decoding_v1`: `responses__base__frozen.jsonl` (7200 rows, sha256 `5d843c78f735`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
 
-Dataset `main_w1`; bootstrap draws 2000, seed 0.
+Dataset `main_w1`, all facts (dev and final); bootstrap draws 2000, seed 0.
 
 ## matched_seed0: behaviour by exposure level
 
 | Exposure | Questions (facts) | Accuracy [95% CI] | Hallucination [95% CI] | Abstention | Coverage | Selective accuracy | Mean K [95% CI] | Facts K=0 / inconsistent / K>=0.8 |
 |---|---|---|---|---|---|---|---|---|
 | 0x | 200 (100) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.01 [0.00, 0.01] | 96 / 4 / 0 |
-| 1x | 200 (100) | 7.5% [3.0%, 13.0%] | 92.5% [87.0%, 97.0%] | 0.0% | 100.0% | 7.5% | 0.05 [0.02, 0.09] | 88 / 8 / 4 |
+| 1x | 200 (100) | 7.5% [3.0%, 13.0%] | 92.5% [87.0%, 97.0%] | 0.0% | 100.0% | 7.5% | 0.05 [0.02, 0.09] | 88 / 9 / 3 |
 | 2x | 200 (100) | 14.5% [8.5%, 21.5%] | 85.5% [78.5%, 91.5%] | 0.0% | 100.0% | 14.5% | 0.16 [0.11, 0.22] | 63 / 29 / 8 |
 | 5x | 200 (100) | 65.5% [56.5%, 74.5%] | 34.5% [25.5%, 43.5%] | 0.0% | 100.0% | 65.5% | 0.56 [0.48, 0.63] | 16 / 42 / 42 |
 | 10x | 200 (100) | 91.5% [86.0%, 96.5%] | 8.5% [3.5%, 14.0%] | 0.0% | 100.0% | 91.5% | 0.85 [0.79, 0.90] | 7 / 11 / 82 |
@@ -77,7 +77,7 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | 0x | 200 (100) | 0.0% [0.0%, 0.0%] | 65.5% [56.5%, 74.0%] | 34.5% | 65.5% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
 | 1x | 200 (100) | 0.0% [0.0%, 0.0%] | 68.0% [59.5%, 76.0%] | 32.0% | 68.0% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
 | 2x | 200 (100) | 0.0% [0.0%, 0.0%] | 67.5% [59.5%, 76.0%] | 32.5% | 67.5% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
-| 5x | 200 (100) | 0.0% [0.0%, 0.0%] | 64.5% [56.0%, 72.5%] | 35.5% | 64.5% | 0.0% | 0.00 [0.00, 0.00] | 99 / 1 / 0 |
+| 5x | 200 (100) | 0.0% [0.0%, 0.0%] | 64.5% [56.0%, 72.5%] | 35.5% | 64.5% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
 | 10x | 200 (100) | 0.0% [0.0%, 0.0%] | 66.0% [57.5%, 74.0%] | 34.0% | 66.0% | 0.0% | 0.00 [0.00, 0.00] | 99 / 1 / 0 |
 | 20x | 200 (100) | 0.0% [0.0%, 0.0%] | 65.5% [57.5%, 73.5%] | 34.5% | 65.5% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
 
