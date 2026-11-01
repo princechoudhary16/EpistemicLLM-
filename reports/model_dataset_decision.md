@@ -1,7 +1,7 @@
-# Model/Dataset Decision — Qwen2.5-0.5B-Instruct + SimpleQA
+# Model/Dataset Decision — Qwen2.5-0.5B-Instruct: SimpleQA → TriviaQA
 
 **Owner:** P2
-**Status:** All 3 warning thresholds triggered — team decision required (see "Decisions requested")
+**Status:** SimpleQA triggered all 3 warning thresholds. The TriviaQA replacement pilot passes all 3 (section "TriviaQA replacement pilot"). **Decided on 31 Oct: TriviaQA is the real-QA dataset; SimpleQA is kept as a negative-result baseline; v5 is the shared grader; float32 throughout.**
 
 ## Pilot setup (shared protocol)
 
@@ -12,7 +12,7 @@
 | Dataset | SimpleQA snapshot `simpleqa_snapshot_2026-09-28.csv`, 4,326 questions |
 | Pilot | 200 questions, seed 20260928 (identical questions to the first pilot); question file sha256 `7e7a234e…788b9` |
 | Generations | 1,200 (6 per question), via `common.model.ModelRunner` + `common.evaluate.run_eval`, ~13 min |
-| Grader | `common/grading.py`, version `p2_whole_word_v4` (whole-word matching, numeric guard, full-answer abstention, negation guard, wrong-candidate guard) |
+| Grader | `common/grading.py`, version `p2_whole_word_v5` (whole-word matching, numeric guard, full-answer abstention, negation guard, wrong-candidate guard, generic-hedge abstention) |
 | Seeds | greedy = 0; sample *i* = *i* (shared protocol: seed + i + 1) |
 
 ## K(q) distribution (K = fraction of the 5 sampled responses graded correct)
@@ -74,6 +74,7 @@ Neither is evidence of a partially-known fact, so even the 2 "inconsistent" ques
 - K is unaffected by the v3 change (it counts only correct responses); coverage and hallucination numbers move by 2 rows.
 - **v4 (PR review fixes):** (1) a reference mention with a negator in the 3 words before it ("It is not Paris, it is Rome.") is no longer credited (`negated_reference`); (2) the "IDK restating the question" rule no longer applies when another sentence names a candidate (a capitalised word not in the question), so "The medal went to John Smith. I don't know who won…" is a hallucination, not an abstention. Regression tests for both are in `p2_real_qa/tests/test_grading.py`.
 - **v4 effect on this run:** the negation guard changes 0 of 1,200 rows. The candidate guard changes 1: `sqa-00334` (sample 3) goes back to incorrect, because "the Sun" in its generic first sentence counts as a candidate. This is accepted on purpose: hiding a hallucination as an abstention is the worse error for this project. Audit agreement under v4 is **95/96** (the one disagreement is that row). K, the K buckets and the taxonomy are unchanged; sampled hallucination 79.3% → 79.4%.
+- **v5:** a hedge built only from category words and the question's own words ("X was a trade or profession, but I don't know which one.") is an abstention (`idk_generic_hedge`); one that names a specific answer ("an Egyptian musician, but I don't know…", "folding and carving I don't know") stays incorrect. Found by regrading P1's synthetic base-model file: of 13 rows the placeholder grader called abstentions and v4 called incorrect, v5 makes 7 abstentions and keeps 6 incorrect. Changes 0 of the 1,200 SimpleQA pilot rows, so every number in this report is unchanged.
 
 ## How this differs from the first pilot
 
@@ -103,13 +104,121 @@ Proposed handling:
 3. **Optional side check:** SimpleQA pilot on a 1.5B model via `--model-yaml` (not yet run). Expectation: still low, since SimpleQA was built adversarially against strong models — a hypothesis, not a measurement.
 4. **Primary controlled experiments stay on P1's synthetic exposure data** (reported by P1 as 18% inconsistent in a Colab pilot, graded with the grader in use at the time; to be confirmed after regrading with the shared grader); real QA becomes the transfer/validation arm.
 
-## Decisions requested
+## TriviaQA replacement pilot
 
-| # | Decision | Owner(s) |
+Same model, prompt, decoding and grader as SimpleQA; only the dataset changes. **All TriviaQA numbers below are float32** (team decision of 31 Oct; the earlier bfloat16 runs are superseded and kept only in git history).
+
+| Item | Value |
+|---|---|
+| Dataset | TriviaQA `rc.nocontext` validation, `mandarjoshi/trivia_qa@0f7faf33` (the pin P4 uses), snapshot `data/raw/triviaqa_rc_nocontext_validation_0f7faf33.jsonl` |
+| Release | `data/real_qa/triviaqa_v0/` built by `python -m p2_real_qa.data --source triviaqa --version v0`; all 7 integrity checks pass (`data/manifests/real_qa_triviaqa_v0/audit.json`) |
+| Unique questions | 9,960 (the rc file lists 7,984 questions twice, once per evidence source; the first copy is kept, 2 copies differed slightly) |
+| Splits | pilot 200, train_probe 500, validation 200, locked_test 300; grouped by canonical answer, so questions with the same answer never straddle splits |
+| P4 overlap | P4's 300 calibration questions, and the 303 that share an answer with one, are excluded from every split (check `excluded_ids_absent`) |
+| Answers | about 12.5 aliases per question, joined with ` \|\| `. Bracketed labels also add a bare form ("Roots (book)" → "Roots"). Dropped: 1,021 aliases already written in the question, also after removing a possessive "'s" (e.g. "Maurice Cole" for Kenny Everett, "The Elephant Man" for "the Elephant Man's real name": restating the question must not earn credit) and 31 one-letter aliases; digits are kept |
+| Model / precision | `Qwen/Qwen2.5-0.5B-Instruct` @ `7ae55760`, **float32**, Apple MPS (recorded in each `.meta.json`) |
+| Prompt / decoding / grader | `prompt_v0` (zero-shot, the shared prompt) / `decoding_v1` / `p2_whole_word_v5` |
+| Responses | `results/raw/p2_triviaqa_v0_pilot_base.jsonl`, graded at generation time with the final aliases |
+
+**Warning thresholds: all 3 pass.**
+
+| Threshold | SimpleQA | TriviaQA | Passes? |
+|---|---|---|---|
+| < 90% of questions with K = 0 | 99.0% | 70.5% (141) | Yes |
+| ≥ 20 questions with 0 < K < 1 | 2 | 46 (35 strictly below 0.8) | Yes |
+| ≥ 20 questions with K ≥ 0.8 | 0 | 24 | Yes |
+
+**Behaviour (shared `common.metrics`).**
+
+| | Greedy (200) | Sampled (1,000) |
 |---|---|---|
-| A | Real-QA dataset to pilot next (and acceptance rule above) | all |
-| B | Whether the real-QA arm may use a different model size than 0.5B | all, P6 |
-| C | Approve `common/grading.py` (v4) as the shared grader; regrade any final results that used the placeholder | P6, P1 |
-| D | Abstention definition (incl. "IDK restating the question") — same rule for P6's IDK baseline | P6, P2 |
-| E | Freeze or defer the group-aware SimpleQA splits (depends on A) | P3, P2 |
-| F | Question ID convention `sqa-00004` and consistency/confidence rules for the taxonomy | P3, P4 |
+| Correct / Wrong / Abstain | 41 / 140 / 19 | 177 / 729 / 94 |
+| Accuracy | 20.5% | 17.7% |
+| Hallucination rate (W/N) | 70.0% | 72.9% |
+| Abstention rate | 9.5% | 9.4% |
+| Coverage | 90.5% | 90.6% |
+| Selective accuracy | 22.7% | 19.5% |
+
+**Hallucination falls steadily with K** (sampled responses, by question bucket):
+
+| Correct out of 5 | Questions | Hallucination | Abstention |
+|---|---|---|---|
+| 0/5 | 141 | 90.1% | 9.9% |
+| 1/5 | 16 | 63.8% | 16.2% |
+| 2/5 | 5 | 52.0% | 8.0% |
+| 3/5 | 14 | 34.3% | 5.7% |
+| 4/5 | 11 | 10.9% | 9.1% |
+| 5/5 | 13 | 0.0% | 0.0% |
+
+The real-world curve has the same shape as P1's synthetic exposure curve: gradual, with no single threshold. On questions it never answers correctly, the model still answers 90.1% of the time.
+
+**Error taxonomy (200 questions; same heuristics as above).** inconsistent guessing 62 · partial/alias candidate 45 · unstable partial knowledge 35 · reliable (K ≥ 0.8) 24 · unclassified 12 · consistently wrong 10 · refusal 7 · unsupported confident answer 5.
+
+**Grading spot-check.** All 66 questions flagged `ref_partial_overlap` in the first pilot were read: nearly all are genuine wrong answers sharing a word with the reference ("Obama" for Lincoln, "Hackney" for Whitechapel, "Apollo 11" for Apollo 17). The one systematic miss (bracketed aliases) is fixed above. The stratified audit on the main set follows below.
+
+**Limitations.** Known questions are scarce (24 of 200 here, 77 of 700 in the main set below). The pilot uses the shared zero-shot prompt; P4's few-shot TriviaQA run is not directly comparable. One annotator.
+
+## TriviaQA main development set and grading audit
+
+Same model (float32), prompt, decoding and grader (`p2_whole_word_v5`), final aliases. Responses: `results/raw/p2_triviaqa_v0_{train_probe,validation}_base.jsonl`; tables and figures: `results/final/p2_triviaqa_train_probe_*`.
+
+**K labels handed to P3 and P4** (`results/features/p2_triviaqa_v0_{train_probe,validation}_k_labels.jsonl`, written by `p2_real_qa/export_labels.py`):
+
+| Split | Questions | Unknown (K = 0) | Partial (0 < K < 0.8) | Known (K ≥ 0.8) |
+|---|---|---|---|---|
+| train_probe | 500 | 364 | 87 | 49 |
+| validation | 200 | 132 | 40 | 28 |
+| Total | 700 | 496 (70.9%) | 127 | 77 |
+
+**Behaviour.**
+
+| | train_probe greedy | train_probe sampled | validation greedy | validation sampled |
+|---|---|---|---|---|
+| Correct / Wrong / Abstain | 88 / 378 / 34 | 380 / 1,937 / 183 | 47 / 135 / 18 | 199 / 720 / 81 |
+| Accuracy | 17.6% | 15.2% | 23.5% | 19.9% |
+| Hallucination rate (W/N) | 75.6% | 77.5% | 67.5% | 72.0% |
+| Abstention rate | 6.8% | 7.3% | 9.0% | 8.1% |
+| Coverage | 93.2% | 92.7% | 91.0% | 91.9% |
+| Selective accuracy | 18.9% | 16.4% | 25.8% | 21.7% |
+
+**The pilot's main finding replicates on 500 new questions** (train_probe, sampled responses):
+
+| Correct out of 5 | Questions | Hallucination | Abstention |
+|---|---|---|---|
+| 0/5 | 364 | 91.2% | 8.8% |
+| 1/5 | 44 | 74.1% | 5.9% |
+| 2/5 | 22 | 57.3% | 2.7% |
+| 3/5 | 21 | 37.1% | 2.9% |
+| 4/5 | 16 | 16.2% | 3.8% |
+| 5/5 | 33 | 0.0% | 0.0% |
+
+**Error taxonomy (train_probe, 500 questions).** inconsistent guessing 145 · partial/alias candidate 134 · unstable partial knowledge 87 · reliable 49 · unclassified 46 · consistently wrong 16 · refusal 14 · unsupported confident answer 9.
+
+**Grading audit.** 142 train_probe rows, stratified by predicted class (`python -m p2_real_qa.audit make --n-correct 40 --n-weak 40 --n-control 30`), labelled by one annotator; sheet: `results/audit/audit_sheet_p2_triviaqa_v0_train_probe_base.csv`.
+
+| Predicted | Rows | Human agrees |
+|---|---|---|
+| correct | 38 | 100% |
+| incorrect | 74 | 100% |
+| abstain | 30 | 100% |
+| All | 142 | **142 / 142** |
+
+How it got there:
+- **First pass (bfloat16 answers): 140 / 142.** One real bug: "The real name of the Elephant Man was William Henry Biggs" was credited because "The Elephant Man" was an alias and the question says "Elephant Man's". Aliases are now also checked against the question with possessives removed (6 train_probe rows and 1 pilot row changed, all wrong names). The other disagreement was a vague hedge ("Brown can help people with various tasks, but I don't know the specific slogan…") graded incorrect rather than abstain.
+- **After the float32 rerun:** 10 audited answers changed wording, so their old labels no longer applied (`audit score --responses` now detects this and writes them to `…__relabel.csv`). They were labelled again: all 10 are wrong answers, and the grader agrees on all 10. The vague-hedge row became a plain wrong answer under float32.
+- **Known limitation, still true:** v5 can count a vague refusal with filler words as incorrect instead of abstain (the error is in the safe direction: counted as a hallucination, not hidden). It no longer appears in this sample.
+- **Not estimated:** grader recall (the sample is stratified by predicted class), and agreement between annotators (one annotator).
+
+## Decisions
+
+Team meeting, 31 Oct 2026 (the full team plan is in the shared "Remaining Work and Order" doc).
+
+| # | Decision | Outcome |
+|---|---|---|
+| A | Real-QA dataset | **Decided: TriviaQA (`triviaqa_v0`)**; SimpleQA kept as a negative-result baseline |
+| B | Model size for the real-QA arm | Same 0.5B model throughout (not revisited) |
+| C | Shared grader | **Decided: `common/grading.py` v5** for every final number |
+| D | Abstention definition (incl. "IDK restating the question") — same rule for P6's IDK baseline | Follows from C: v5's abstention rules |
+| E | Freeze the TriviaQA splits | **Decided: pilot, train_probe and validation frozen.** The locked test is still an open question for the 5 Nov meeting |
+| F | Question ID convention (`sqa-00004`, `triviaqa-bb_1357` = P4's IDs) and the K-label file format (`p2_real_qa/export_labels.py`) | Proposed; confirm on 5 Nov |
+| — | Precision | **Decided: float32** for all training and evaluation (`configs/model.yaml`) |

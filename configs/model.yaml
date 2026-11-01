@@ -3,4 +3,12 @@
 # before changing it, and regenerate all model-dependent outputs if it changes.
 model_id: Qwen/Qwen2.5-0.5B-Instruct
 revision: 7ae557604adf67be50417f59c2c2f167def9a775
-torch_dtype: bfloat16
+# Precision: float32 for ALL training and evaluation (team decision, 2026-10-31; was bfloat16).
+# Code that reads this file picks it up automatically (P2 generate_responses, P5 export_responses,
+# P6 run_matched_sft / run_canonical_baselines / generate_base). Code with its own setting must match it:
+#   P1  run_ablation.py: pass --dtype float32 (default "auto" can pick bfloat16 on newer GPUs)
+#   P3  configs/p3_*.json: set "dtype": "float32"
+#   P4  confidence_calibration/modeling.py load_model(): use torch.float32 on CUDA too (currently bfloat16)
+#   P5  p5_training_method/config.yaml: dtype: float32 (already)
+# Results produced in bfloat16 are not comparable with float32 ones: rerun before reporting them.
+torch_dtype: float32

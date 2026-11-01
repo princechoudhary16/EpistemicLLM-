@@ -1,0 +1,81 @@
+{
+  "status": "Week 1 pipeline verification only; provisional labels are not benchmark correctness",
+  "run_id": "synthetic_main_v0_sft_matched_seed0",
+  "labels_sha256": "d33af0587ea4a07bf2ffd7c9b7de838a4495e3bd588b502e706886ff488fbdaa",
+  "features_sha256": "3782b536b5adbc03f2eded0423b7d62c90c4b758286ded5dd654b985d99d8ee2",
+  "label_review_statuses": [
+    "assistant_reviewed_provisional",
+    "needs_review_truncated",
+    "provisional_auto"
+  ],
+  "target": "Greedy answer correctness; default labels are normalized exact-match proxies",
+  "train_counts": {
+    "not_correct": 250,
+    "correct": 199
+  },
+  "validation_counts": {
+    "not_correct": 79,
+    "correct": 71
+  },
+  "excluded_unlabeled": 1,
+  "hyperparameters": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "threshold": 0.5,
+    "scaling": "StandardScaler fitted on training only"
+  },
+  "models": {
+    "layer_6": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.5466666666666666,
+      "balanced_accuracy": 0.5460866464610448,
+      "auroc": 0.5894098769834195,
+      "auprc": 0.5826806981540497,
+      "reload_verified": true
+    },
+    "layer_12": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.5466666666666666,
+      "balanced_accuracy": 0.5453735068639687,
+      "auroc": 0.6061686575147085,
+      "auprc": 0.6492417366450414,
+      "reload_verified": true
+    },
+    "layer_18": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.7466666666666667,
+      "balanced_accuracy": 0.7445177393474772,
+      "auroc": 0.7634159386699946,
+      "auprc": 0.7559904633704192,
+      "reload_verified": true
+    },
+    "layer_24": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.6333333333333333,
+      "balanced_accuracy": 0.6297914066678553,
+      "auroc": 0.6387947940809414,
+      "auprc": 0.6018485118094891,
+      "reload_verified": true
+    },
+    "prompt_length_baseline": {
+      "status": "fitted",
+      "feature_dimensions": 1,
+      "accuracy": 0.49333333333333335,
+      "balanced_accuracy": 0.49402745587448743,
+      "auroc": 0.5255838830451062,
+      "auprc": 0.5041145856056383,
+      "reload_verified": true
+    }
+  },
+  "majority_baseline": {
+    "accuracy": 0.5266666666666666,
+    "balanced_accuracy": 0.5,
+    "auroc": 0.5,
+    "auprc": 0.47333333333333333
+  }
+}

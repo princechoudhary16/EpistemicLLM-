@@ -1,2 +1,1 @@
-question_id,sample_index,is_greedy,question,reference_answer,model_answer,truncated,auto_outcome,review_status,human_label,human_notes
-sqa-00334,sample3,FALSE,Who won the Eddington Medal in 1993?,Leon Mestel,The Eddington Medal was awarded to a person who has made a significant contribution to the study of the Sun. I don't know who won the Eddington Medal in 1993.,FALSE,incorrect,flagged:hedged_attempt,abstain,"first sentence is generic, followed by ""I don�t know {answer}"""
+﻿question_id,sample_index,is_greedy,question,reference_answer,model_answer,truncated,auto_outcome,review_status,human_label,human_notes
