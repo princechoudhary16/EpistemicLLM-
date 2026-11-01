@@ -3,8 +3,11 @@
     ablation    run_ablation.py plus the pilot_v0 / main_v0 data embedded as a base64 zip
     robustness  run_ablation.py plus the generator code only; the notebook regenerates both synthetic
                 worlds and checks every file's sha256 against the repo copy
+    k           K per fact for P5: trains the matched recipe in float32 on main_v0, samples the training-
+                wording questions and grades them with the shared grader (shipped with the notebook)
 
     python -m p1_exposure.ablation.make_colab_notebook --profile robustness --repo-root . --out P1_robustness_colab.ipynb
+    python -m p1_exposure.ablation.make_colab_notebook --profile k --repo-root . --out P1_k_labels_colab.ipynb
     python -m p1_exposure.ablation.make_colab_notebook --data-dir data/synthetic --out P1_ablation_colab.ipynb
 """
 
@@ -23,6 +26,10 @@ ROBUSTNESS_CODE = ["p1_exposure/__init__.py", "p1_exposure/generate.py", "p1_exp
                    "p1_exposure/relations.py", "p1_exposure/validate.py",
                    "p1_exposure/robustness/__init__.py", "p1_exposure/robustness/paraphrase_sets.py"]
 WORLDS = {"main_v0": 0, "main_w1": 1}
+K_CODE = ["p1_exposure/__init__.py", "p1_exposure/generate.py", "p1_exposure/names.py", "p1_exposure/relations.py",
+          "p1_exposure/validate.py", "p1_exposure/k_labels.py", "p1_exposure/ablation/__init__.py",
+          "p1_exposure/ablation/run_ablation.py", "common/__init__.py", "common/grading.py"]
+K_HASHED = ("train.jsonl", "eval.jsonl", "idk_train.jsonl", "facts.jsonl")
 HASHED = ("train.jsonl", "eval.jsonl", "idk_train.jsonl", "facts.jsonl",
           "robustness/eval_heldout.jsonl", "robustness/eval_swapped.jsonl")
 
@@ -137,15 +144,63 @@ def build_robustness(repo_root):
     ])
 
 
+def build_k(repo_root):
+    repo_root = Path(repo_root)
+    expected = {}
+    for f in K_HASHED:
+        # normalize CRLF: a Windows checkout stores tracked files with CRLF, the generator and Linux write LF
+        raw = (repo_root / "data" / "synthetic" / "main_v0" / f).read_bytes().replace(bytes([13, 10]), bytes([10]))
+        expected[f"main_v0/{f}"] = hashlib.sha256(raw).hexdigest()
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for rel in K_CODE:
+            z.write(repo_root / rel, rel)
+        z.writestr("expected_hashes.json", json.dumps(expected, indent=1))
+    payload = base64.b64encode(buf.getvalue()).decode("ascii")
+    unpack = "\n".join([
+        "#@title Unpack code, regenerate main_v0, verify hashes",
+        "import base64, hashlib, io, json, subprocess, zipfile",
+        "from pathlib import Path",
+        f"PAYLOAD = '{payload}'",
+        "root = Path('/content/ablation')",
+        "zipfile.ZipFile(io.BytesIO(base64.b64decode(PAYLOAD))).extractall(root)",
+        "gen = ['python', '-m', 'p1_exposure.generate', '--n-facts', '600', '--seed', '0', '--version', 'main_v0',",
+        "       '--data-dir', 'data/synthetic', '--manifest-dir', 'data/manifests']",
+        "subprocess.run(gen, cwd=root, check=True, capture_output=True)",
+        "expected = json.loads((root / 'expected_hashes.json').read_text())",
+        "bad = [k for k, h in expected.items()",
+        "       if hashlib.sha256((root / 'data/synthetic' / k).read_bytes()).hexdigest() != h]",
+        "print('files checked:', len(expected), '| mismatching:', bad)",
+        "assert not bad, 'regenerated data differs from the repo copy'",
+    ])
+    cd = "!cd /content/ablation && python -m p1_exposure.k_labels --version main_v0 "
+    return notebook([
+        markdown("# P1: K per fact for P5 (plan decision 4)\n\n"
+                 "Runtime > Change runtime type > T4 GPU, then Runtime > Run all (about 30 minutes). Trains the "
+                 "matched recipe (`mine`: r16, alpha 32, dropout 0.05, all 7 linear layers, batch 4, lr 2e-4, one "
+                 "epoch) in float32 on main_v0, samples 5 answers to each of the 4 training wordings of every fact "
+                 "(decoding_v1 settings), and grades with the shared grader shipped in this notebook. "
+                 "Download `p1_k_labels_results.zip`."),
+        code("!pip install -q -U torchao transformers peft accelerate"),
+        code(unpack, form=True),
+        code("# Smoke test: 12 facts, tiny training, a couple of minutes\n"
+             + cd + "--out-dir out_smoke --limit-facts 12 --train-limit 40 --n-samples 2 --max-new-tokens 16 --gen-batch 8"),
+        code(cd + "--out-dir out_k_main_v0 --dtype float32 --save-adapter out_k_main_v0/adapter"),
+        code("!cat /content/ablation/out_k_main_v0/k_meta.json"),
+        code("!cd /content/ablation && zip -qr /content/p1_k_labels_results.zip out_k_main_v0 && ls -la /content/p1_k_labels_results.zip"),
+    ])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("--profile", choices=["ablation", "robustness"], default="ablation")
+    ap.add_argument("--profile", choices=["ablation", "robustness", "k"], default="ablation")
     ap.add_argument("--data-dir", default="data/synthetic")
     ap.add_argument("--versions", default="pilot_v0,main_v0")
     ap.add_argument("--repo-root", default=".")
     ap.add_argument("--out", default="P1_ablation_colab.ipynb")
     a = ap.parse_args()
     nb = (build_robustness(a.repo_root) if a.profile == "robustness"
+          else build_k(a.repo_root) if a.profile == "k"
           else build(a.data_dir, [v for v in a.versions.split(",") if v]))
     Path(a.out).write_text(json.dumps(nb, indent=1), encoding="utf-8", newline="\n")
     print(f"wrote {a.out} ({Path(a.out).stat().st_size:,} bytes, {len(nb['cells'])} cells)")

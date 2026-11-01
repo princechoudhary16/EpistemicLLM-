@@ -15,12 +15,12 @@ questions. A fact's K pools all its sampled responses; facts are bucketed as *K=
 
 ## Inputs
 
-- `matched_seed0`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `c77c80cc6537`, grading ['not recorded'], decoding ['not recorded'])
-- `matched_seed1`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `10887bf659a8`, grading ['not recorded'], decoding ['not recorded'])
-- `matched_seed2`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `696cef9d4fd7`, grading ['not recorded'], decoding ['not recorded'])
-- `base_decoding_v1`: `responses__base__frozen.jsonl` (7200 rows, sha256 `fdd05fcfa726`, grading ['not recorded'], decoding ['not recorded'])
+- `matched_seed0`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `5ee908acd2f9`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
+- `matched_seed1`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `ed633a47d8b2`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
+- `matched_seed2`: `responses__mine__frozen.jsonl` (7200 rows, sha256 `09c39976bf70`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
+- `base_decoding_v1`: `responses__base__frozen.jsonl` (7200 rows, sha256 `782498270771`, grading ['p2_whole_word_v5'], decoding ['not recorded'])
 
-Dataset `main_v0`; bootstrap draws 2000, seed 0.
+Dataset `main_v0`, all facts (dev and final); bootstrap draws 2000, seed 0.
 
 ## matched_seed0: behaviour by exposure level
 
@@ -28,7 +28,7 @@ Dataset `main_v0`; bootstrap draws 2000, seed 0.
 |---|---|---|---|---|---|---|---|---|
 | 0x | 200 (100) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.00 [0.00, 0.01] | 99 / 1 / 0 |
 | 1x | 200 (100) | 6.5% [2.5%, 11.5%] | 93.5% [88.5%, 97.5%] | 0.0% | 100.0% | 6.5% | 0.06 [0.03, 0.09] | 83 / 14 / 3 |
-| 2x | 200 (100) | 23.0% [15.0%, 31.0%] | 77.0% [69.0%, 85.0%] | 0.0% | 100.0% | 23.0% | 0.20 [0.13, 0.26] | 64 / 24 / 12 |
+| 2x | 200 (100) | 23.0% [15.0%, 31.0%] | 77.0% [69.0%, 85.0%] | 0.0% | 100.0% | 23.0% | 0.19 [0.13, 0.26] | 64 / 24 / 12 |
 | 5x | 200 (100) | 62.5% [54.0%, 71.0%] | 37.5% [29.0%, 46.0%] | 0.0% | 100.0% | 62.5% | 0.59 [0.51, 0.66] | 21 / 29 / 50 |
 | 10x | 200 (100) | 79.5% [72.0%, 86.5%] | 20.5% [13.5%, 28.0%] | 0.0% | 100.0% | 79.5% | 0.77 [0.69, 0.83] | 8 / 24 / 68 |
 | 20x | 200 (100) | 96.0% [92.0%, 99.0%] | 4.0% [1.0%, 8.0%] | 0.0% | 100.0% | 96.0% | 0.94 [0.90, 0.97] | 2 / 5 / 93 |
@@ -77,8 +77,8 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | Exposure | Questions (facts) | Accuracy [95% CI] | Hallucination [95% CI] | Abstention | Coverage | Selective accuracy | Mean K [95% CI] | Facts K=0 / inconsistent / K>=0.8 |
 |---|---|---|---|---|---|---|---|---|
 | 0x | 200 (100) | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 0.0% | 100.0% | 0.0% | 0.00 [0.00, 0.00] | 100 / 0 / 0 |
-| 1x | 200 (100) | 7.0% [3.0%, 11.5%] | 93.0% [88.5%, 97.0%] | 0.0% | 100.0% | 7.0% | 0.05 [0.03, 0.08] | 81 / 18 / 1 |
-| 2x | 200 (100) | 28.0% [20.0%, 36.5%] | 72.0% [63.5%, 80.0%] | 0.0% | 100.0% | 28.0% | 0.25 [0.18, 0.33] | 59 / 21 / 20 |
+| 1x | 200 (100) | 7.0% [3.0%, 11.5%] | 93.0% [88.5%, 97.0%] | 0.0% | 100.0% | 7.0% | 0.05 [0.02, 0.07] | 82 / 17 / 1 |
+| 2x | 200 (100) | 27.5% [19.5%, 35.5%] | 72.5% [64.5%, 80.5%] | 0.0% | 100.0% | 27.5% | 0.25 [0.17, 0.32] | 59 / 22 / 19 |
 | 5x | 200 (100) | 70.0% [61.5%, 78.0%] | 30.0% [22.0%, 38.5%] | 0.0% | 100.0% | 70.0% | 0.65 [0.57, 0.72] | 17 / 27 / 56 |
 | 10x | 200 (100) | 88.0% [82.5%, 93.0%] | 12.0% [7.0%, 17.5%] | 0.0% | 100.0% | 88.0% | 0.83 [0.78, 0.89] | 3 / 22 / 75 |
 | 20x | 200 (100) | 94.5% [90.5%, 98.0%] | 5.5% [2.0%, 9.5%] | 0.0% | 100.0% | 94.5% | 0.93 [0.89, 0.97] | 2 / 8 / 90 |
@@ -88,8 +88,8 @@ Change in accuracy between adjacent exposure levels (where the curve is steepest
 | Step | Change [95% CI] |
 |---|---|
 | 0x to 1x | +7.0 pts [+3.0, +11.5] |
-| 1x to 2x | +21.0 pts [+12.0, +30.5] |
-| 2x to 5x | +42.0 pts [+30.0, +53.5] |
+| 1x to 2x | +20.5 pts [+11.5, +29.5] |
+| 2x to 5x | +42.5 pts [+30.5, +54.0] |
 | 5x to 10x | +18.0 pts [+8.5, +27.5] |
 | 10x to 20x | +6.5 pts [+0.0, +13.0] |
 
@@ -100,7 +100,7 @@ Change in accuracy between adjacent exposure levels (where the curve is steepest
 | birth_year | 0.0% (40) | 2.5% (40) | 10.0% (40) | 52.5% (40) | 85.0% (40) | 92.5% (40) |
 | capital | 0.0% (40) | 7.5% (40) | 25.0% (40) | 80.0% (40) | 87.5% (40) | 95.0% (40) |
 | founder | 0.0% (40) | 0.0% (40) | 10.0% (40) | 60.0% (40) | 90.0% (40) | 97.5% (40) |
-| headquarters | 0.0% (40) | 2.5% (40) | 42.5% (40) | 85.0% (40) | 92.5% (40) | 95.0% (40) |
+| headquarters | 0.0% (40) | 2.5% (40) | 40.0% (40) | 85.0% (40) | 92.5% (40) | 95.0% (40) |
 | occupation | 0.0% (40) | 22.5% (40) | 52.5% (40) | 72.5% (40) | 85.0% (40) | 92.5% (40) |
 
 ### matched_seed1: dev facts (validation wording) vs final facts (test wording)
@@ -110,7 +110,7 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | Split | 0x | 1x | 2x | 5x | 10x | 20x |
 |---|---|---|---|---|---|---|
 | dev | 0.0% [0.0%, 0.0%] | 7.0% [2.0%, 13.0%] | 30.0% [18.0%, 42.0%] | 70.0% [58.0%, 81.0%] | 86.0% [79.0%, 93.0%] | 92.0% [85.0%, 97.0%] |
-| final | 0.0% [0.0%, 0.0%] | 7.0% [2.0%, 14.0%] | 26.0% [15.0%, 38.0%] | 70.0% [57.0%, 82.0%] | 90.0% [81.0%, 97.0%] | 97.0% [92.0%, 100.0%] |
+| final | 0.0% [0.0%, 0.0%] | 7.0% [2.0%, 14.0%] | 25.0% [14.0%, 37.0%] | 70.0% [57.0%, 82.0%] | 90.0% [81.0%, 97.0%] | 97.0% [92.0%, 100.0%] |
 
 ### matched_seed1: chance floor (correct answers at 0x, where the model has seen nothing)
 
@@ -128,9 +128,9 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 |---|---|---|---|---|---|---|---|---|
 | 0x | 200 (100) | 1.0% [0.0%, 3.0%] | 99.0% [97.0%, 100.0%] | 0.0% | 100.0% | 1.0% | 0.00 [0.00, 0.01] | 98 / 2 / 0 |
 | 1x | 200 (100) | 7.5% [3.0%, 13.0%] | 92.5% [87.0%, 97.0%] | 0.0% | 100.0% | 7.5% | 0.06 [0.03, 0.11] | 86 / 10 / 4 |
-| 2x | 200 (100) | 30.5% [22.0%, 39.5%] | 69.5% [60.5%, 78.0%] | 0.0% | 100.0% | 30.5% | 0.27 [0.20, 0.36] | 63 / 14 / 23 |
+| 2x | 200 (100) | 28.5% [20.5%, 37.5%] | 71.5% [62.5%, 79.5%] | 0.0% | 100.0% | 28.5% | 0.26 [0.18, 0.34] | 63 / 16 / 21 |
 | 5x | 200 (100) | 67.5% [58.5%, 76.5%] | 32.5% [23.5%, 41.5%] | 0.0% | 100.0% | 67.5% | 0.64 [0.56, 0.72] | 18 / 28 / 54 |
-| 10x | 200 (100) | 89.0% [83.0%, 94.0%] | 11.0% [6.0%, 17.0%] | 0.0% | 100.0% | 89.0% | 0.86 [0.81, 0.91] | 2 / 18 / 80 |
+| 10x | 200 (100) | 89.0% [83.0%, 94.0%] | 11.0% [6.0%, 17.0%] | 0.0% | 100.0% | 89.0% | 0.86 [0.80, 0.91] | 2 / 18 / 80 |
 | 20x | 200 (100) | 96.5% [92.5%, 99.5%] | 3.5% [0.5%, 7.5%] | 0.0% | 100.0% | 96.5% | 0.96 [0.92, 0.99] | 2 / 2 / 96 |
 
 Change in accuracy between adjacent exposure levels (where the curve is steepest):
@@ -138,8 +138,8 @@ Change in accuracy between adjacent exposure levels (where the curve is steepest
 | Step | Change [95% CI] |
 |---|---|
 | 0x to 1x | +6.5 pts [+1.5, +12.5] |
-| 1x to 2x | +23.0 pts [+13.0, +33.0] |
-| 2x to 5x | +37.0 pts [+24.5, +50.0] |
+| 1x to 2x | +21.0 pts [+11.5, +31.0] |
+| 2x to 5x | +39.0 pts [+26.5, +51.5] |
 | 5x to 10x | +21.5 pts [+11.0, +32.0] |
 | 10x to 20x | +7.5 pts [+1.0, +14.0] |
 
@@ -149,8 +149,8 @@ Change in accuracy between adjacent exposure levels (where the curve is steepest
 |---|---|---|---|---|---|---|
 | birth_year | 5.0% (40) | 0.0% (40) | 7.5% (40) | 42.5% (40) | 85.0% (40) | 95.0% (40) |
 | capital | 0.0% (40) | 7.5% (40) | 20.0% (40) | 75.0% (40) | 95.0% (40) | 100.0% (40) |
-| founder | 0.0% (40) | 0.0% (40) | 22.5% (40) | 65.0% (40) | 95.0% (40) | 100.0% (40) |
-| headquarters | 0.0% (40) | 5.0% (40) | 40.0% (40) | 75.0% (40) | 92.5% (40) | 90.0% (40) |
+| founder | 0.0% (40) | 0.0% (40) | 17.5% (40) | 65.0% (40) | 95.0% (40) | 100.0% (40) |
+| headquarters | 0.0% (40) | 5.0% (40) | 35.0% (40) | 75.0% (40) | 92.5% (40) | 90.0% (40) |
 | occupation | 0.0% (40) | 25.0% (40) | 62.5% (40) | 80.0% (40) | 77.5% (40) | 97.5% (40) |
 
 ### matched_seed2: dev facts (validation wording) vs final facts (test wording)
@@ -160,7 +160,7 @@ Dev and final differ in both the facts and the question wording, so this is a jo
 | Split | 0x | 1x | 2x | 5x | 10x | 20x |
 |---|---|---|---|---|---|---|
 | dev | 2.0% [0.0%, 6.0%] | 6.0% [0.0%, 14.0%] | 27.0% [16.0%, 39.0%] | 71.0% [59.0%, 82.0%] | 88.0% [80.0%, 95.0%] | 96.0% [90.0%, 100.0%] |
-| final | 0.0% [0.0%, 0.0%] | 9.0% [2.0%, 17.0%] | 34.0% [22.0%, 46.0%] | 64.0% [51.0%, 77.0%] | 90.0% [82.0%, 97.0%] | 97.0% [92.0%, 100.0%] |
+| final | 0.0% [0.0%, 0.0%] | 9.0% [2.0%, 17.0%] | 30.0% [18.0%, 42.0%] | 64.0% [51.0%, 77.0%] | 90.0% [82.0%, 97.0%] | 97.0% [92.0%, 100.0%] |
 
 ### matched_seed2: chance floor (correct answers at 0x, where the model has seen nothing)
 

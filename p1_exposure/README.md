@@ -56,6 +56,7 @@ byte-identical files (sha256s are in `audit.json`).
 | `ablation/` | Decoding defaults x SFT recipe x IDK ordering; `run_ablation.py` is the training and evaluation harness, with a SLURM script and a Colab notebook builder |
 | `analysis/` | Exposure tables and figures with fact-level intervals, and the Week 4 robustness report |
 | `robustness/` | Held-out and swapped question wordings (`paraphrase_sets.py`) |
+| `k_labels.py` | K per fact (share of sampled answers that are correct on the training wordings) for P5's K(q) target; results in `analysis/results/k_labels/` |
 | `aux_prompts.py` | Answer-masked training-wording prompts for the 0x facts, for a head that needs 0x examples (written to `data/synthetic/<v>/zero_prompts/`) |
 
 Second world for the robustness check: `python -m p1_exposure.generate --n-facts 600 --seed 1 --version main_w1`
