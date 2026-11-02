@@ -199,7 +199,8 @@ def main():
                 "batch_seconds": elapsed, "batch_size": len(batch),
             }
             predictions.append(record)
-            labels.append({"question_id": row["question_id"], "correct": grade["correct"],
+            labels.append({"question_id": row["question_id"], "split": row.get("split"),
+                           "correct": grade["correct"],
                            "outcome": grade["outcome"], "review_status": grade["review_status"],
                            "grading_version": grade["grading_version"], "run_id": output.name,
                            "model_revision": cfg["model_revision"], "prompt_version": cfg["prompt_version"]})

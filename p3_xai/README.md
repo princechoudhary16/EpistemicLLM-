@@ -122,36 +122,25 @@ For the existing run, one obvious false negative is recorded in `data/p3/week1_l
 
 P2 should audit the response labels and provide richer label diversity. P6 should review the provisional prompt/model configuration for alignment with shared runs. Re-extract if the model, prompt, or questions change; re-fit only if labels change for the same responses. P4 can consume the ID-linked validation scores once label quality is sufficient.
 
-## P3 on shared TriviaQA labels
+## P3 on shared TriviaQA splits
 
-The team decision is float32 for training and evaluation, matching `configs/model.yaml`. The P3 configs below use float32 and the shared `prompt_v0`.
+The team decision is float32 for training and evaluation, matching `configs/model.yaml`. These configs use the shared `prompt_v0`, P2's frozen `train_probe`/`validation` question files, and never load `locked_test`.
 
-P2's base-model train and validation responses and K-label files are already in the repository. For `sft_matched`, first generate responses using the adapter supplied by P6, then export labels:
-
-```bash
-python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split train_probe \
-  --adapter .cache/p3/sft_matched_main_v0_adapter --method sft_matched --training-seed 0
-python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split validation \
-  --adapter .cache/p3/sft_matched_main_v0_adapter --method sft_matched --training-seed 0
-python -m p2_real_qa.export_labels --responses results/raw/p2_triviaqa_v0_train_probe_sft_matched.jsonl
-python -m p2_real_qa.export_labels --responses results/raw/p2_triviaqa_v0_validation_sft_matched.jsonl
-```
-
-Assemble the frozen questions and grader-v5 labels, extract prompt states in float32, then fit on P2's 500 `train_probe` questions and evaluate on its 200 `validation` questions:
+The extraction writes one greedy answer and grades it with `common/grading.py` v5. Use the labels from that same extraction when fitting the probe so answers and prompt features come from the same inference runtime:
 
 ```bash
 python -m p3_xai.prepare_triviaqa --method base --output-dir results/p3/triviaqa_v0_base_inputs
 python -m p3_xai.extract --config configs/p3_triviaqa_v0_base.json
-python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_base_features \
-  --labels results/p3/triviaqa_v0_base_inputs/labels.jsonl
+python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_base_features
 
-python -m p3_xai.prepare_triviaqa --method sft_matched --output-dir results/p3/triviaqa_v0_sft_matched_inputs
+# Set adapter_path in the config to the P6-supplied float32 sft_matched adapter.
 python -m p3_xai.extract --config configs/p3_triviaqa_v0_sft_matched.json
-python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_sft_matched_features \
-  --labels results/p3/triviaqa_v0_sft_matched_inputs/labels.jsonl
+python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_sft_matched_features
 ```
 
-The preparation step rejects mismatched question IDs, split assignments, run IDs, model revisions, prompts, or grader versions. The probe checks the train/validation group boundary. Do not run this workflow on `locked_test`.
+Install the pinned P3 environment with `python -m pip install -r p3_xai/requirements-lock.txt`. Copy P6's float32 adapter to `.cache/p3/sft_matched_main_v0_adapter` or update `adapter_path` in the SFT config. The tested runtime is PyTorch 2.14.1, Transformers 5.20.0, PEFT 0.21.2, Accelerate 1.15.0, and Datasets 5.1.0.
+
+The probe consumes the frozen 500/200 split labels emitted by extraction and verifies there is no group overlap. Although P2's recorded package versions match, P3 and P2 differ on 455/700 answer strings and 78/700 graded outcomes. Keep each probe paired with labels from the same extraction; do not treat these runs as direct reproductions of P2's response metrics until the remaining generation differences are understood. The current exploratory results and discrepancy are recorded in [the TriviaQA probe report](../reports/p3_triviaqa_probe.md).
 
 ## P3 development on P1 synthetic data
 
