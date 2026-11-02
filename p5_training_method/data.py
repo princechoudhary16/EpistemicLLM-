@@ -54,7 +54,7 @@ def encode_aux_row(tokenizer, system_prompt, row, max_seq_len, max_exposure=20):
     """Answer-masked prompt (P1's zero-exposure prompts) for the auxiliary head only.
 
     No answer tokens exist and every label is -100, so the row adds nothing to the language-model loss;
-    it only supplies a head example whose target is s(exposure) (0 for exposure 0).
+    it only supplies a head example whose target is s(exposure) (0 for exposure 0)
     """
     if row.get("answer_masked") is not True or any(k in row for k in ("completion", "answer", "reference_answer")):
         raise ValueError(f"{row.get('aux_id')} is not an answer-masked prompt; refusing to use it")
