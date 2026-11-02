@@ -31,12 +31,17 @@ class PoolingTests(unittest.TestCase):
         inputs = {"input_ids": torch.tensor([[0, 0, 3, 4], [2, 3, 4, 5]]),
                   "attention_mask": torch.tensor([[0, 0, 1, 1], [1, 1, 1, 1]])}
         depths = [1, 2, 3, 4]
-        actual = extract_pooled(model, inputs, depths)
         with torch.inference_mode():
             expected = model.model(**inputs, output_hidden_states=True, use_cache=False).hidden_states
+        # Transformers 5 may install its own persistent hooks while producing
+        # hidden_states. Extraction must leave those pre-existing hooks intact
+        # and remove only the hooks it registered.
+        hooks_before = [tuple(module._forward_hooks.keys()) for module in model.modules()]
+        actual = extract_pooled(model, inputs, depths)
         for depth in depths:
             np.testing.assert_allclose(actual[depth], expected[depth][:, -1].numpy(), rtol=1e-5, atol=1e-6)
-        self.assertTrue(all(not module._forward_hooks for module in model.modules()))
+        hooks_after = [tuple(module._forward_hooks.keys()) for module in model.modules()]
+        self.assertEqual(hooks_after, hooks_before)
 
 
 class LabelTests(unittest.TestCase):

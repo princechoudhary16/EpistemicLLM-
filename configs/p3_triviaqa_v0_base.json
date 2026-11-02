@@ -9,7 +9,6 @@
   "seed": 0,
   "system_prompt": "Answer the question with a short, direct factual answer and nothing else. If you do not know the answer, say \"I don't know.\" instead of guessing.\n",
   "prompt_version": "prompt_v0",
-  "expected_label_run_ids": ["p2_triviaqa_v0_train_probe_base", "p2_triviaqa_v0_validation_base"],
   "required_grading_version": "p2_whole_word_v5",
   "depth_fractions": [0.25, 0.5, 0.75, 1.0],
   "pooling": "last_nonpadding_prompt_token",
