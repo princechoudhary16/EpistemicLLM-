@@ -28,6 +28,7 @@ from pathlib import Path
 
 MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
 PINNED_REVISION = "7ae557604adf67be50417f59c2c2f167def9a775"
+DEFAULT_DTYPE = "float32"   # configs/model.yaml; "auto" would pick bfloat16 on GPUs of compute capability 8 or higher
 
 # Mirrors configs/decoding.yaml prompt_v0 (P6). YAML folded style keeps one trailing newline.
 SYSTEM_PROMPT = (
@@ -377,7 +378,7 @@ def free(model):
 # Driver
 # ----------------------------------------------------------------------------------------
 
-def main(argv=None):
+def build_parser():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--data-dir", default="data/synthetic")
     ap.add_argument("--version", default="pilot_v0")
@@ -386,7 +387,8 @@ def main(argv=None):
     ap.add_argument("--decodings", default="inherit,frozen")
     ap.add_argument("--idk-variants", default="", help="comma list of: end, shuffled")
     ap.add_argument("--idk-recipes", default="p6,mine")
-    ap.add_argument("--dtype", default="auto", choices=["auto", "float32", "bfloat16"])
+    ap.add_argument("--dtype", default=DEFAULT_DTYPE, choices=["auto", "float32", "bfloat16"],
+                    help="team decision 2026-10-31 (configs/model.yaml): float32 for all training and evaluation")
     ap.add_argument("--lr", type=float, default=2e-4)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--n-samples", type=int, default=5)
@@ -399,7 +401,11 @@ def main(argv=None):
     ap.add_argument("--extra-samples", type=int, default=0,
                     help="sampled responses per question on the extra eval files (0 = greedy only)")
     ap.add_argument("--smoke", action="store_true", help="tiny end-to-end check")
-    args = ap.parse_args(argv)
+    return ap
+
+
+def main(argv=None):
+    args = build_parser().parse_args(argv)
 
     import torch
     from transformers import AutoTokenizer

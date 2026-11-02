@@ -1,6 +1,7 @@
 {
   "meta": {
     "version": "main_w1",
+    "split": "all",
     "boot": 2000,
     "seed": 0,
     "levels": [
@@ -14,10 +15,10 @@
     "inputs": {
       "matched_seed0": {
         "path": "responses__mine__frozen.jsonl",
-        "sha256": "d7e08f03277b199ab8b02a96fc3359afc8faad6bc21e05a747ad829a9a8d56d7",
+        "sha256": "4085a279c4b40db5b5981189890539934d8cd76386f10a0ae60aaed4c7e899d9",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -26,10 +27,10 @@
       },
       "base_decoding_v1": {
         "path": "responses__base__frozen.jsonl",
-        "sha256": "3f78312fd5ba40dbdc0958db2e7eb95bf9cefa8a24e3eee8aaf54571ef69f296",
+        "sha256": "5d843c78f73530cca11eb23295d70eb844fa5dd32704b13c7f86a13c5c9c07f6",
         "rows": 7200,
         "grading_versions": [
-          "not recorded"
+          "p2_whole_word_v5"
         ],
         "decoding_ids": [
           "not recorded"
@@ -37,8 +38,8 @@
         "methods": []
       }
     },
-    "notes": "Second synthetic world (generator seed 1). Same Colab run settings as main_v0_colab_seeds, training seed 0.",
-    "eval_sha256": "594742566a91fba3dbe45a344165d7e8a14a66e302a55403d52812451eeead1c"
+    "notes": "Second synthetic world (generator seed 1). Same Colab float32 run settings as main_v0_colab_seeds, training seed 0. Responses regraded with p2_whole_word_v5.",
+    "eval_sha256": "a501efad966829362858fb01ffb345c3dbd9a8b5bc25678edfd50af461a19a46"
   },
   "results": {
     "matched_seed0": {
@@ -117,14 +118,14 @@
             "hi": 0.13
           },
           "mean_K": {
-            "est": 0.054000000000000006,
-            "lo": 0.021,
-            "hi": 0.094
+            "est": 0.053000000000000005,
+            "lo": 0.02,
+            "hi": 0.09300000000000001
           },
           "k_buckets": {
             "K=0": 88,
-            "inconsistent": 8,
-            "K>=0.8": 4
+            "inconsistent": 9,
+            "K>=0.8": 3
           }
         },
         "2": {
@@ -801,13 +802,13 @@
             "hi": 0.0
           },
           "mean_K": {
-            "est": 0.001,
+            "est": 0.0,
             "lo": 0.0,
-            "hi": 0.0030000000000000005
+            "hi": 0.0
           },
           "k_buckets": {
-            "K=0": 99,
-            "inconsistent": 1,
+            "K=0": 100,
+            "inconsistent": 0,
             "K>=0.8": 0
           }
         },

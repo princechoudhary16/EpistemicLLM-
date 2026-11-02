@@ -144,5 +144,14 @@ class SummarizeTests(unittest.TestCase):
         self.assertIn("Chance floor", md)
 
 
+class DtypeDefaultTests(unittest.TestCase):
+    def test_default_precision_is_float32(self):
+        self.assertEqual(ra.DEFAULT_DTYPE, "float32")
+        self.assertEqual(ra.build_parser().parse_args([]).dtype, "float32")
+
+    def test_bfloat16_can_still_be_requested_explicitly(self):
+        self.assertEqual(ra.build_parser().parse_args(["--dtype", "bfloat16"]).dtype, "bfloat16")
+
+
 if __name__ == "__main__":
     unittest.main()

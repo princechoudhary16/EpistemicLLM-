@@ -1,0 +1,101 @@
+{
+  "version": "main_v0",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "dtype": "torch.float32",
+  "device": "cuda",
+  "torch": "2.11.0+cu130",
+  "decoding": "frozen (decoding_v1 equivalent: top_k 0, repetition_penalty 1.0, temperature 0.7, top_p 0.9)",
+  "n_samples_per_template": 5,
+  "templates_per_fact": 4,
+  "adapter": {
+    "kind": "trained_here",
+    "recipe": "mine",
+    "seed": 0,
+    "lr": 0.0002,
+    "train_rows": 3800,
+    "saved_to": "out_k_main_v0/adapter",
+    "sha256": "d1942e8148c245cd205b94d811f57eb4b02f4b7cb5e6876b6d3207ae67b99202"
+  },
+  "grading_version": "p2_whole_word_v5",
+  "grader_sha256": "d51e813084f1c91393fbf691793c7681f092363c462cb28893cfad01245ed873",
+  "facts_sha256": "128a1e5a46fe17b3538d310c9e99f476b3f5e7b0c56a20ec07a0149b63c72b24",
+  "train_sha256": "419864e1dbcacebceddbfdeb803ca38bb9fde47ee2f658ee0c694df4fc2a222a",
+  "k_per_fact_sha256": "79f971f5aa39d0320281be3a74b11be8ba9614474888fbb344d5d8918f62539c",
+  "by_exposure": {
+    "0": {
+      "facts": 100,
+      "mean_k": 0.001,
+      "k0": 99,
+      "k_ge_0.8": 0
+    },
+    "1": {
+      "facts": 100,
+      "mean_k": 0.062,
+      "k0": 84,
+      "k_ge_0.8": 1
+    },
+    "2": {
+      "facts": 100,
+      "mean_k": 0.1995,
+      "k0": 57,
+      "k_ge_0.8": 10
+    },
+    "5": {
+      "facts": 100,
+      "mean_k": 0.614,
+      "k0": 19,
+      "k_ge_0.8": 53
+    },
+    "10": {
+      "facts": 100,
+      "mean_k": 0.8005,
+      "k0": 5,
+      "k_ge_0.8": 74
+    },
+    "20": {
+      "facts": 100,
+      "mean_k": 0.945,
+      "k0": 2,
+      "k_ge_0.8": 95
+    }
+  },
+  "checks": [
+    {
+      "name": "one_row_per_fact",
+      "ok": true,
+      "detail": "600 rows for 600 facts"
+    },
+    {
+      "name": "exposure_and_split_match_fact_table",
+      "ok": true,
+      "detail": "0 rows differ"
+    },
+    {
+      "name": "k_in_unit_interval",
+      "ok": true,
+      "detail": "0 facts without a valid K"
+    },
+    {
+      "name": "same_sample_count_for_every_fact",
+      "ok": true,
+      "detail": "(templates, samples per template) seen: [(4, 5)]"
+    },
+    {
+      "name": "no_answer_or_text_in_rows",
+      "ok": true,
+      "detail": "0 rows carry an answer or response field"
+    },
+    {
+      "name": "is_trained_matches_exposure",
+      "ok": true,
+      "detail": "0 rows"
+    },
+    {
+      "name": "graded_with_expected_grader",
+      "ok": true,
+      "detail": "versions seen: ['p2_whole_word_v5']"
+    }
+  ],
+  "seconds": 696
+}

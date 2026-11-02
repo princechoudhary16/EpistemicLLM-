@@ -1,0 +1,27 @@
+{
+  "method": "nonparametric percentile bootstrap resampling fact groups with replacement",
+  "seed": 20261024,
+  "requested_replicates": 5000,
+  "valid_two_class_replicates": 5000,
+  "skipped_single_class_replicates": 0,
+  "validation_fact_groups": 75,
+  "confidence_level": 0.95,
+  "interval_note": "Percentile interval over valid two-class replicates; exploratory because labels are provisional.",
+  "metrics": {
+    "auroc": {
+      "lower": 0.6572758417025346,
+      "upper": 0.8633983370157653
+    },
+    "auprc": {
+      "lower": 0.6109771164155163,
+      "upper": 0.8770009966538256
+    }
+  },
+  "run_id": "synthetic_main_v0_sft_matched_seed0",
+  "probe": "layer_18",
+  "target": "assistant-reviewed provisional greedy exact-match correctness",
+  "n_validation_questions": 150,
+  "n_validation_correct": 71,
+  "n_validation_not_correct": 79,
+  "n_validation_groups": 75
+}

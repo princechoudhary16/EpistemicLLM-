@@ -13,8 +13,8 @@ facts are compared under two wordings, and the interval is on the per-fact diffe
 
 Run `mine` (matched recipe unless stated), decoding `frozen`, 4000 bootstrap draws, seed 0.
 
-- `main_v0` inputs: `out_v0_s0/responses__mine__frozen.jsonl` (sha256 `c77c80cc6537`), `out_v0_s1/responses__mine__frozen.jsonl` (sha256 `10887bf659a8`), `out_v0_s2/responses__mine__frozen.jsonl` (sha256 `696cef9d4fd7`)
-- `main_w1` inputs: `out_w1_s0/responses__mine__frozen.jsonl` (sha256 `d7e08f03277b`)
+- `main_v0` inputs: `out_v0_s0/responses__mine__frozen.jsonl` (sha256 `5ee908acd2f9`), `out_v0_s1/responses__mine__frozen.jsonl` (sha256 `ed633a47d8b2`), `out_v0_s2/responses__mine__frozen.jsonl` (sha256 `09c39976bf70`)
+- `main_w1` inputs: `out_w1_s0/responses__mine__frozen.jsonl` (sha256 `4085a279c4b4`)
 
 ## World `main_v0`: training seeds (3 seeds)
 
@@ -22,7 +22,7 @@ Run `mine` (matched recipe unless stated), decoding `frozen`, 4000 bootstrap dra
 |---|---|---|---|---|---|
 | 0x | 0.0% | 0.0% | 1.0% | 0.3% [0.0%, 1.0%] | 1.0 pts |
 | 1x | 6.5% | 7.0% | 7.5% | 7.0% [3.5%, 11.3%] | 1.0 pts |
-| 2x | 23.0% | 28.0% | 30.5% | 27.2% [20.0%, 34.5%] | 7.5 pts |
+| 2x | 23.0% | 27.5% | 28.5% | 26.3% [19.3%, 33.5%] | 5.5 pts |
 | 5x | 62.5% | 70.0% | 67.5% | 66.7% [59.7%, 73.3%] | 7.5 pts |
 | 10x | 79.5% | 88.0% | 89.0% | 85.5% [81.3%, 89.5%] | 9.5 pts |
 | 20x | 96.0% | 94.5% | 96.5% | 95.7% [92.7%, 98.2%] | 2.0 pts |
@@ -33,13 +33,13 @@ Run `mine` (matched recipe unless stated), decoding `frozen`, 4000 bootstrap dra
 |---|---|---|---|
 | 0x | 0.3% | 0.2% | -0.2 pts [-0.5, +0.0] |
 | 1x | 7.0% | 7.8% | +0.8 pts [-1.0, +3.0] |
-| 2x | 27.2% | 28.5% | +1.3 pts [-0.3, +3.2] |
+| 2x | 26.3% | 27.7% | +1.3 pts [-0.3, +3.2] |
 | 5x | 66.7% | 69.8% | +3.2 pts [+0.8, +5.5] |
 | 10x | 85.5% | 89.0% | +3.5 pts [+1.2, +6.2] |
 | 20x | 95.7% | 95.7% | -0.0 pts [-1.0, +0.8] |
-| all facts at 2x and above | 68.8% | 70.8% | +2.0 pts [+1.0, +3.0] |
+| all facts at 2x and above | 68.5% | 70.5% | +2.0 pts [+1.0, +3.0] |
 | dev facts at 2x and above (n=200) | 68.4% | 71.7% | +3.2 pts [+1.7, +5.0] |
-| final facts at 2x and above (n=200) | 69.1% | 69.8% | +0.8 pts [-0.3, +1.8] |
+| final facts at 2x and above (n=200) | 68.7% | 69.4% | +0.8 pts [-0.3, +1.8] |
 
 ### `main_v0`: swapped wording vs standard wording (paired by fact, averaged over seeds)
 
@@ -47,13 +47,13 @@ Run `mine` (matched recipe unless stated), decoding `frozen`, 4000 bootstrap dra
 |---|---|---|---|
 | 0x | 0.3% | 0.3% | +0.0 pts [+0.0, +0.0] |
 | 1x | 7.0% | 6.7% | -0.3 pts [-2.3, +1.7] |
-| 2x | 27.2% | 26.5% | -0.7 pts [-3.0, +1.5] |
-| 5x | 66.7% | 68.0% | +1.3 pts [-1.5, +4.3] |
-| 10x | 85.5% | 87.5% | +2.0 pts [-0.5, +5.0] |
+| 2x | 26.3% | 25.3% | -1.0 pts [-3.3, +1.3] |
+| 5x | 66.7% | 67.8% | +1.2 pts [-1.8, +4.3] |
+| 10x | 85.5% | 87.2% | +1.7 pts [-1.0, +4.7] |
 | 20x | 95.7% | 94.7% | -1.0 pts [-2.3, +0.3] |
-| all facts at 2x and above | 68.8% | 69.2% | +0.4 pts [-0.8, +1.6] |
-| dev facts at 2x and above (n=200) | 68.4% | 70.8% | +2.3 pts [+0.5, +4.2] |
-| final facts at 2x and above (n=200) | 69.1% | 67.6% | -1.5 pts [-2.9, -0.1] |
+| all facts at 2x and above | 68.5% | 68.8% | +0.2 pts [-1.0, +1.5] |
+| dev facts at 2x and above (n=200) | 68.4% | 70.7% | +2.2 pts [+0.4, +4.2] |
+| final facts at 2x and above (n=200) | 68.7% | 66.8% | -1.8 pts [-3.4, -0.3] |
 
 ## World `main_w1`: training seeds (1 seeds)
 
@@ -100,7 +100,7 @@ Run `mine` (matched recipe unless stated), decoding `frozen`, 4000 bootstrap dra
 |---|---|---|---|
 | 0x | 0.3% | 0.0% | -0.3 pts [-1.0, +0.0] |
 | 1x | 7.0% | 7.5% | +0.5 pts [-5.8, +6.8] |
-| 2x | 27.2% | 14.5% | -12.7 pts [-22.8, -2.7] |
+| 2x | 26.3% | 14.5% | -11.8 pts [-21.8, -1.8] |
 | 5x | 66.7% | 65.5% | -1.2 pts [-12.3, +10.7] |
 | 10x | 85.5% | 91.5% | +6.0 pts [-1.0, +12.3] |
 | 20x | 95.7% | 97.5% | +1.8 pts [-2.3, +5.7] |
