@@ -1,5 +1,9 @@
 # K per fact for P5 (main_v0, float32, training seed 0)
 
+> **Superseded for P5's use:** `../main_v0_float32_p6_adapter/` has K from P6's float32 `sft_matched` adapter, which
+> is the source the plan names. This file (my own run of the same recipe) is kept as a second, independent run for
+> checking how much K varies between training runs; the comparison is in that folder's README.
+
 `k_per_fact.jsonl` has one row per fact (600). It is the target P5 needs for the K(q) version (team decision 4,
 2026-10-31): how often the standard fine-tuned model actually gets a fact right, instead of how many times the
 fact was shown.
