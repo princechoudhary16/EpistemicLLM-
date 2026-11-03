@@ -1,0 +1,121 @@
+{
+  "version": "main_v0",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "dtype": "torch.float32",
+  "device": "cuda",
+  "torch": "2.11.0+cu130",
+  "decoding": "frozen (decoding_v1 equivalent: top_k 0, repetition_penalty 1.0, temperature 0.7, top_p 0.9)",
+  "n_samples_per_template": 5,
+  "templates_per_fact": 4,
+  "adapter": {
+    "kind": "loaded",
+    "path": "/content/shared_adapter",
+    "weights_file": "adapter_model.safetensors",
+    "weights_sha256": "6ed089468ba45df2a3f6b05cd5e34a0c25b0f83e965d482dc6d255e37d3fc8db",
+    "weights_bytes": 35237104,
+    "tensors": 336,
+    "tensor_dtypes": {
+      "F32": 336
+    },
+    "parameters": 8798208,
+    "lora": {
+      "base_model_name_or_path": "Qwen/Qwen2.5-0.5B-Instruct",
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "peft_version": "0.21.0",
+      "task_type": "CAUSAL_LM",
+      "target_modules": [
+        "down_proj",
+        "gate_proj",
+        "k_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj",
+        "v_proj"
+      ]
+    }
+  },
+  "grading_version": "p2_whole_word_v5",
+  "grader_sha256": "d51e813084f1c91393fbf691793c7681f092363c462cb28893cfad01245ed873",
+  "facts_sha256": "128a1e5a46fe17b3538d310c9e99f476b3f5e7b0c56a20ec07a0149b63c72b24",
+  "train_sha256": "419864e1dbcacebceddbfdeb803ca38bb9fde47ee2f658ee0c694df4fc2a222a",
+  "k_per_fact_sha256": "a8d69353b2497f887c839a938834abc2ccc9efb8278c79f67bfa0946bc914c36",
+  "by_exposure": {
+    "0": {
+      "facts": 100,
+      "mean_k": 0.0045,
+      "k0": 98,
+      "k_ge_0.8": 0
+    },
+    "1": {
+      "facts": 100,
+      "mean_k": 0.079,
+      "k0": 79,
+      "k_ge_0.8": 4
+    },
+    "2": {
+      "facts": 100,
+      "mean_k": 0.243,
+      "k0": 60,
+      "k_ge_0.8": 17
+    },
+    "5": {
+      "facts": 100,
+      "mean_k": 0.7415,
+      "k0": 12,
+      "k_ge_0.8": 71
+    },
+    "10": {
+      "facts": 100,
+      "mean_k": 0.856,
+      "k0": 5,
+      "k_ge_0.8": 80
+    },
+    "20": {
+      "facts": 100,
+      "mean_k": 0.961,
+      "k0": 0,
+      "k_ge_0.8": 94
+    }
+  },
+  "checks": [
+    {
+      "name": "one_row_per_fact",
+      "ok": true,
+      "detail": "600 rows for 600 facts"
+    },
+    {
+      "name": "exposure_and_split_match_fact_table",
+      "ok": true,
+      "detail": "0 rows differ"
+    },
+    {
+      "name": "k_in_unit_interval",
+      "ok": true,
+      "detail": "0 facts without a valid K"
+    },
+    {
+      "name": "same_sample_count_for_every_fact",
+      "ok": true,
+      "detail": "(templates, samples per template) seen: [(4, 5)]"
+    },
+    {
+      "name": "no_answer_or_text_in_rows",
+      "ok": true,
+      "detail": "0 rows carry an answer or response field"
+    },
+    {
+      "name": "is_trained_matches_exposure",
+      "ok": true,
+      "detail": "0 rows"
+    },
+    {
+      "name": "graded_with_expected_grader",
+      "ok": true,
+      "detail": "versions seen: ['p2_whole_word_v5']"
+    }
+  ],
+  "seconds": 471
+}

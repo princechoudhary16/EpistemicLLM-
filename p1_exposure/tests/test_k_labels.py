@@ -104,5 +104,79 @@ class NotebookProfileTests(unittest.TestCase):
         self.assertTrue(any("--limit-facts 12" in s for s in sources))
 
 
+def write_adapter(directory, dtype="F32"):
+    """A minimal valid adapter folder: a safetensors file with two tensors plus adapter_config.json."""
+    import json
+    import struct
+    directory.mkdir(parents=True, exist_ok=True)
+    header = {"__metadata__": {"format": "pt"},
+              "a.lora_A.weight": {"dtype": dtype, "shape": [2, 3], "data_offsets": [0, 24]},
+              "a.lora_B.weight": {"dtype": dtype, "shape": [3, 2], "data_offsets": [24, 48]}}
+    raw = json.dumps(header).encode("utf-8")
+    (directory / "adapter_model.safetensors").write_bytes(struct.pack("<Q", len(raw)) + raw + bytes(range(48)))
+    (directory / "adapter_config.json").write_text(json.dumps({
+        "base_model_name_or_path": "Qwen/Qwen2.5-0.5B-Instruct", "r": 16, "lora_alpha": 32, "lora_dropout": 0.05,
+        "peft_version": "0.21.0", "task_type": "CAUSAL_LM", "target_modules": ["v_proj", "q_proj"]}), encoding="utf-8")
+
+
+class AdapterTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.root = Path(cls._tmp.name)
+        write_adapter(cls.root / "adapter")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._tmp.cleanup()
+
+    def test_describe_adapter_reads_dtype_counts_and_lora_settings(self):
+        d = kl.describe_adapter(self.root / "adapter")
+        self.assertEqual((d["tensors"], d["parameters"], d["tensor_dtypes"]), (2, 12, {"F32": 2}))
+        self.assertEqual((d["lora"]["r"], d["lora"]["lora_alpha"], d["lora"]["target_modules"]),
+                         (16, 32, ["q_proj", "v_proj"]))
+        self.assertEqual(len(d["weights_sha256"]), 64)
+
+    def test_a_bfloat16_adapter_is_visible_in_the_description(self):
+        write_adapter(self.root / "bf16", dtype="BF16")
+        self.assertEqual(kl.describe_adapter(self.root / "bf16")["tensor_dtypes"], {"BF16": 2})
+
+    def test_split_adapter_parts_rebuild_the_file(self):
+        from p1_exposure.ablation import make_colab_notebook as mk
+        parts = mk.split_adapter(self.root / "adapter", self.root / "parts", part_bytes=50)
+        self.assertGreater(len(parts), 1)
+        rebuilt = b"".join(p.read_bytes() for p in sorted(parts))
+        self.assertEqual(rebuilt, (self.root / "adapter" / "adapter_model.safetensors").read_bytes())
+
+    def _run_assemble_cell(self, content_dir):
+        from p1_exposure.ablation import make_colab_notebook as mk
+        nb = mk.build_k(Path(__file__).resolve().parents[2], self.root / "adapter")
+        src = next("".join(c["source"]) for c in nb["cells"] if "".join(c["source"]).startswith("#@title Assemble"))
+        exec(compile(src.replace("/content", str(content_dir).replace("\\", "/")), "assemble", "exec"), {})
+
+    def test_assemble_cell_accepts_the_right_parts_and_rejects_a_missing_one(self):
+        from p1_exposure.ablation import make_colab_notebook as mk
+        good = self.root / "colab_good"
+        good.mkdir()
+        for p in mk.split_adapter(self.root / "adapter", good, part_bytes=50):
+            pass
+        self._run_assemble_cell(good)
+        self.assertTrue((good / "shared_adapter" / "adapter_config.json").exists())
+        bad = self.root / "colab_bad"
+        bad.mkdir()
+        parts = mk.split_adapter(self.root / "adapter", bad, part_bytes=50)
+        parts[-1].unlink()
+        with self.assertRaises(AssertionError):
+            self._run_assemble_cell(bad)
+
+    def test_adapter_notebook_does_not_train_and_loads_the_shared_adapter(self):
+        from p1_exposure.ablation import make_colab_notebook as mk
+        nb = mk.build_k(Path(__file__).resolve().parents[2], self.root / "adapter")
+        sources = ["".join(c["source"]) for c in nb["cells"]]
+        full = next(s for s in sources if "out_k_shared --dtype float32" in s)
+        self.assertIn("--adapter /content/shared_adapter", full)
+        self.assertFalse(any("--save-adapter" in s for s in sources))
+
+
 if __name__ == "__main__":
     unittest.main()
