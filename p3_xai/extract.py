@@ -11,9 +11,10 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+from transformers import set_seed
 
 from common import grading
+from common.model import ModelRunner
 from .utils import provisional_grade, read_jsonl, sha256_file, validate_questions, write_json, write_jsonl
 
 
@@ -83,8 +84,12 @@ def main():
     parser.add_argument("--limit", type=int, help="Tiny smoke subset, preserving original selection order")
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--device", choices=["cpu", "mps", "cuda", "auto"])
+    parser.add_argument("--adapter-path", type=Path,
+                        help="Override the adapter path in the config (for local P6 weights)")
     args = parser.parse_args()
     cfg = json.loads(args.config.read_text())
+    if args.adapter_path is not None:
+        cfg["adapter_path"] = str(args.adapter_path)
     if cfg["pooling"] != "last_nonpadding_prompt_token":
         raise ValueError("Only last_nonpadding_prompt_token pooling is implemented")
     if cfg["batch_size"] < 1 or cfg["max_new_tokens"] < 1:
@@ -105,13 +110,6 @@ def main():
     start = time.perf_counter()
     model_path = cfg["local_model_path"]
     print(f"Loading {cfg['model_id']} at {cfg['model_revision']} on {device}", flush=True)
-    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True, padding_side="left")
-    if tokenizer.pad_token_id is None:
-        tokenizer.pad_token = tokenizer.eos_token
-    base_model = AutoModelForCausalLM.from_pretrained(
-        model_path, local_files_only=True, dtype=getattr(torch, cfg["dtype"]),
-        attn_implementation="eager",
-    ).to(device)
     adapter_path = cfg.get("adapter_path")
     adapter_hashes = {}
     if adapter_path:
@@ -122,12 +120,16 @@ def main():
             from peft import PeftModel
         except ImportError as exc:
             raise RuntimeError("Loading this checkpoint requires PEFT; install the project's PEFT dependency") from exc
-        model = PeftModel.from_pretrained(base_model, str(adapter_dir), is_trainable=False)
         for path in sorted(p for p in adapter_dir.rglob("*") if p.is_file()):
             adapter_hashes[str(path.relative_to(adapter_dir))] = sha256_file(path)
-    else:
-        model = base_model
-    model = model.to(device).eval()
+    runner = ModelRunner(
+        model_id=str(model_path), revision=None, adapter_path=adapter_path,
+        torch_dtype=cfg["dtype"], device=device,
+    )
+    tokenizer, model = runner.tokenizer, runner.model
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    model.eval()
     model.requires_grad_(False)
     depths = layer_depths(model.config.num_hidden_layers, cfg["depth_fractions"])
     manifest = {
@@ -145,7 +147,9 @@ def main():
         "hidden_size": model.config.hidden_size, "feature_dtype": "float32",
         "layer_convention": "One-based decoder depth; final depth includes final RMSNorm; matches HF hidden_states[depth]",
         "pooling": cfg["pooling"], "feature_source": "Prompt only, including assistant generation prefix; no reference or generated answer",
-        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": cfg["max_new_tokens"]},
+        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": cfg["max_new_tokens"],
+                     "top_k": cfg.get("top_k", 0),
+                     "repetition_penalty": cfg.get("repetition_penalty", 1.0)},
         "label_status": f"P3-generated labels use common grader {grading.GRADING_VERSION}; P2 labels can be supplied to the probe",
         "environment": {"python": platform.python_version(), "platform": platform.platform(),
                         **{p: importlib.metadata.version(p) for p in ["torch", "transformers", "numpy", "scikit-learn"]},
@@ -170,19 +174,15 @@ def main():
         pooled = extract_pooled(model, inputs, depths)
         for depth in depths:
             features[depth].append(pooled[depth])
-        with torch.inference_mode():
-            generated = model.generate(
-                **inputs, do_sample=False, num_beams=1, max_new_tokens=cfg["max_new_tokens"],
-                pad_token_id=tokenizer.pad_token_id, use_cache=True,
-                temperature=None, top_p=None, top_k=None,
-            )
+        generations = [runner.generate_one(
+            row["question"], cfg["system_prompt"], cfg["max_new_tokens"], do_sample=False,
+            seed=cfg["seed"], top_k=cfg.get("top_k", 0),
+            repetition_penalty=cfg.get("repetition_penalty", 1.0),
+        ) for row in batch]
         elapsed = time.perf_counter() - batch_start
-        continuations = generated[:, inputs.input_ids.shape[1]:].cpu()
-        answers = tokenizer.batch_decode(continuations, skip_special_tokens=True)
-        eos_ids = model.generation_config.eos_token_id
-        eos_ids = [eos_ids] if isinstance(eos_ids, int) else (eos_ids or [])
-        for row, answer, tokens, length in zip(batch, answers, continuations.tolist(), lengths):
-            truncated = not any(token in eos_ids for token in tokens)
+        for row, generation, length in zip(batch, generations, lengths):
+            answer = generation["text"]
+            truncated = generation["truncated"]
             grade = provisional_grade(answer, row["reference_answer"], row["question"])
             if truncated:
                 grade = {"outcome": "invalid", "correct": None, "review_status": "needs_review_truncated",

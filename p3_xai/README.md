@@ -140,7 +140,7 @@ python -m p3_xai.probe --run-dir results/p3/triviaqa_v0_sft_matched_features
 
 Install the pinned P3 environment with `python -m pip install -r p3_xai/requirements-lock.txt`. Copy P6's float32 adapter to `.cache/p3/sft_matched_main_v0_adapter` or update `adapter_path` in the SFT config. The tested runtime is PyTorch 2.14.1, Transformers 5.20.0, PEFT 0.21.2, Accelerate 1.15.0, and Datasets 5.1.0.
 
-The probe consumes the frozen 500/200 split labels emitted by extraction and verifies there is no group overlap. Although P2's recorded package versions match, P3 and P2 differ on 455/700 answer strings and 78/700 graded outcomes. Keep each probe paired with labels from the same extraction; do not treat these runs as direct reproductions of P2's response metrics until the remaining generation differences are understood. The current exploratory results and discrepancy are recorded in [the TriviaQA probe report](../reports/p3_triviaqa_probe.md).
+P3 uses the shared `common.model.ModelRunner` for greedy answer generation, with `top_k=0` and `repetition_penalty=1.0` from the P2 decoding configuration. On the frozen 700 base questions, P3's generated answer strings match P2's saved greedy strings exactly. Two truncated responses have different outcome fields: P3 marks them invalid for review, while P2's raw response rows retain graded outcomes even though `truncated=true`. The current exploratory results are recorded in [the TriviaQA probe report](../reports/p3_triviaqa_probe.md).
 
 ## P3 development on P1 synthetic data
 
@@ -153,18 +153,20 @@ The SimpleQA pilot has too few positive correctness labels to support a useful p
   --run-dir results/p3/synthetic_main_v0_base_prompt_v0
 ```
 
-For the matched SFT representation, copy the complete P1/Sahana adapter directory to `.cache/p3/sft_matched_main_v0_adapter`, install the same compatible `peft` version used by P6 in `.venv-p3`, then run:
+For the matched SFT representation, use Sahana's float32 seed-0 adapter. P3 generation uses the shared `ModelRunner` with `top_k=0` and `repetition_penalty=1.0`. Run on the 600 dev questions only, with a fresh output directory:
 
 ```bash
-.venv-p3/bin/python -m p3_xai.extract \
-  --config configs/p3_synthetic_main_v0_sft_matched.json
-.venv-p3/bin/python -m p3_xai.probe \
-  --run-dir results/p3/synthetic_main_v0_sft_matched_seed0
+.venv-p3-aligned/bin/python -m p3_xai.extract \
+  --config configs/p3_synthetic_main_v0_sft_matched.json \
+  --adapter-path new_weights \
+  --output-dir results/p3/synthetic_main_v0_sft_matched_seed0_float32_modelrunner
+.venv-p3-aligned/bin/python -m p3_xai.probe \
+  --run-dir results/p3/synthetic_main_v0_sft_matched_seed0_float32_modelrunner
 ```
 
-The adapter reads only `split=dev` rows from P1's `data/synthetic/main_v0/eval.jsonl`, preserves question/fact IDs and exposure levels, and uses `fact_id` as the probe grouping key so alternate templates cannot cross the grouped holdout. The extraction validator accepts `development` and `dev` rows and rejects every other split, including P1's `final` rows. The loader checksums adapter files and records the checkpoint ID, method, and training seed. The run's generated answers are graded with P3's conservative exact-match proxy; report these labels as provisional until regraded against the team's approved shared grader. Probe performance remains decodability evidence, not causal evidence about model internals.
+The prepared input reads only `split=dev` rows from P1's `data/synthetic/main_v0/eval.jsonl`, preserves question/fact IDs and exposure levels, and uses `fact_id` as the probe grouping key so alternate templates cannot cross the grouped holdout. The extractor rejects every other split, including P1's `final` rows. It records adapter hashes and grades its generated answers with the shared v5 grader. Probe performance remains decodability evidence, not causal evidence about model internals.
 
-The shared-`prompt_v0` synthetic dev run is documented in [the run report](../reports/p3_synthetic_dev_probe.md). It extracted all 600 questions, but found zero correct greedy labels and skipped probe fitting because the labels contained one class. The next useful target is repeated-response `K(q)` or a more informative checkpoint; the skipped fit is not evidence that a probe failed.
+The float32 SFT run and its exploratory probe metrics are documented in [the matched-SFT report](../reports/p3_synthetic_sft_matched_float32.md). The earlier base-only synthetic dev run is documented in [the historical run report](../reports/p3_synthetic_dev_probe.md); it found no correct greedy labels and could not fit a probe.
 
 ### Fact-cluster uncertainty for the exploratory SFT probe
 

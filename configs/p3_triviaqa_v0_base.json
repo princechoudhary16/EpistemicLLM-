@@ -17,6 +17,8 @@
   "batch_size": 1,
   "max_prompt_tokens": 512,
   "max_new_tokens": 64,
+  "top_k": 0,
+  "repetition_penalty": 1.0,
   "cpu_threads": 4,
   "probe_C": 1.0,
   "validation_fraction": 0.25
