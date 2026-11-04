@@ -34,6 +34,9 @@ export TOKENIZERS_PARALLELISM=false
 #   <ds>_lam3pfinal_seed<S>  P1's K, labels on FINAL facts -> scored on dev
 #   <ds>_lam3pdev_seed<S>    P1's K, labels on DEV facts   -> scored on final
 # and reuses the matched s(e) controls (efinal / edev) from the default arm, which must already exist.
+# ARM=p6 (third arm, reports/p5_kq_target.md Amendment 3; main_v0 only): the same, with P1's K computed from P6's float32 sft_matched
+# adapter (python p5_training_method/p1_labels.py --source p6_adapter -> results/final/p5_kq_labels_main_v0_p6.json). Trains only
+#   <ds>_lam3sfinal_seed<S>  labels on FINAL facts -> scored on dev      <ds>_lam3sdev_seed<S>  labels on DEV facts -> scored on final
 #   STAGE=dev   (default)  trains all four sets, scores the final-labelled ones on dev
 #   STAGE=final            scores the dev-labelled ones on final; run only after the dev verdict is recorded in the report
 # Usage:  DATA_DIR=data/synthetic/main_v0 sbatch p5_training_method/jobs/p5_kq.sbatch
@@ -48,15 +51,16 @@ case "$ARM" in
        SETS="kfinal:k:final efinal:exposure:final kdev:k:dev edev:exposure:dev"
        DEV_TAGS="kfinal efinal"; FINAL_TAGS="kdev edev"
        HINT="run p5_kq_labels.sbatch first" ;;
-  p1)  [ "$DSET" = "main_v0" ] || { echo "ARM=p1 exists for main_v0 only (P1 made no K file for $DSET)"; exit 1; }
-       LABELS="results/final/p5_kq_labels_${DSET}_p1.json"
-       SETS="pfinal:k:final pdev:k:dev"
-       DEV_TAGS="pfinal"; FINAL_TAGS="pdev"
-       HINT="run: python p5_training_method/p1_labels.py"
+  p1|p6) [ "$DSET" = "main_v0" ] || { echo "ARM=$ARM exists for main_v0 only (P1 made no K file for $DSET)"; exit 1; }
+       T=$([ "$ARM" = p1 ] && echo p || echo s)         # student tag prefix: pfinal/pdev (p1), sfinal/sdev (p6)
+       LABELS="results/final/p5_kq_labels_${DSET}_${ARM}.json"
+       SETS="${T}final:k:final ${T}dev:k:dev"
+       DEV_TAGS="${T}final"; FINAL_TAGS="${T}dev"
+       HINT="run: python p5_training_method/p1_labels.py [--source p6_adapter]"
        for c in efinal edev; do   # the matched controls come from the default arm
          [ -d "results/raw/p5/${DSET}_lam3${c}_seed0/checkpoint" ] || { echo "missing control ${DSET}_lam3${c} (run the default arm first)"; exit 1; }
        done ;;
-  *) echo "unknown ARM=$ARM (use own or p1)"; exit 1 ;;
+  *) echo "unknown ARM=$ARM (use own, p1 or p6)"; exit 1 ;;
 esac
 [ -f "$LABELS" ] || { echo "missing $LABELS ($HINT)"; exit 1; }
 

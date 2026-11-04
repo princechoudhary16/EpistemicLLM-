@@ -6,6 +6,7 @@ it checks P1's file against the data and rewrites it as {"labels": {fact_id: K},
 kq_labels.py writes, so `train.py --aux-target k --k-labels <this file>` works unchanged.
 
     python p5_training_method/p1_labels.py            # -> results/final/p5_kq_labels_main_v0_p1.json
+    python p5_training_method/p1_labels.py --source p6_adapter    # P1's K from P6's float32 sft_matched adapter -> ..._p6.json
 """
 import argparse
 import hashlib
@@ -15,7 +16,24 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-P1_DIR = REPO / "p1_exposure" / "analysis" / "results" / "k_labels" / "main_v0_float32_seed0"
+K_DIR = REPO / "p1_exposure" / "analysis" / "results" / "k_labels"
+P1_DIR = K_DIR / "main_v0_float32_seed0"
+P6_DIR = K_DIR / "main_v0_float32_p6_adapter"
+
+# the two K files P1 made for P5: label-file suffix, and what the provenance block says about each
+SOURCES = {
+    "p1_run": {
+        "dir": P1_DIR, "suffix": "p1",
+        "source": "P1 (p1_exposure/k_labels.py), not recomputed here",
+        "teacher": "P1's own float32 run of the matched recipe, training seed 0 (not P6's sft_matched)",
+    },
+    "p6_adapter": {
+        "dir": P6_DIR, "suffix": "p6",
+        "source": "P1 (p1_exposure/k_labels.py) run on P6's shared adapter, not recomputed here",
+        "teacher": "P6's float32 sft_matched adapter, shared 3 Nov 2026 (the source the plan names); its training seed and data "
+                   "order are not recorded in the files and are for P6 to confirm",
+    },
+}
 
 
 def read_jsonl(path):
@@ -51,12 +69,17 @@ def sha256(path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--p1-dir", default=str(P1_DIR))
+    ap.add_argument("--source", choices=sorted(SOURCES), default="p1_run",
+                    help="p1_run: P1's own run of the recipe (default); p6_adapter: K from P6's sft_matched adapter")
+    ap.add_argument("--p1-dir", default=None, help="override the folder of the chosen source")
     ap.add_argument("--facts", default=str(REPO / "data" / "synthetic" / "main_v0" / "facts.jsonl"))
-    ap.add_argument("--out", default=str(REPO / "results" / "final" / "p5_kq_labels_main_v0_p1.json"))
+    ap.add_argument("--out", default=None)
     args = ap.parse_args()
+    src = SOURCES[args.source]
+    if args.out is None:
+        args.out = str(REPO / "results" / "final" / f"p5_kq_labels_main_v0_{src['suffix']}.json")
 
-    p1_dir = Path(args.p1_dir)
+    p1_dir = Path(args.p1_dir or src["dir"])
     k_file, meta_file = p1_dir / "k_per_fact.jsonl", p1_dir / "k_meta.json"
     meta = json.loads(meta_file.read_text(encoding="utf-8"))
     try:
@@ -65,8 +88,9 @@ def main():
         sys.exit(f"P1 labels rejected: {e}")
     doc = {
         "dataset": "main_v0",
-        "source": "P1 (p1_exposure/k_labels.py), not recomputed here",
-        "teacher": "P1's own float32 run of the matched recipe, training seed 0 (not P6's sft_matched)",
+        "source": src["source"],
+        "teacher": src["teacher"],
+        "adapter_sha256": (meta.get("adapter") or {}).get("weights_sha256"),
         "labelled_questions": "the 4 training wordings of each fact (not eval.jsonl, not held-out wordings)",
         "n_sampled_responses_per_fact": 20,
         "dtype": "float32",

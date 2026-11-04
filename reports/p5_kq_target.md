@@ -302,3 +302,19 @@ followed by `kq_criteria.py`. Criteria, thresholds and designs are those of the 
 No K(q) verdict changed: every A and B value moved by at most 0.002, and all twelve criteria still fail. The Spearman columns do not depend on grading and did not change.
 The v5 values above replace the earlier ones as the result; the earlier ones, and the pre-regrade result files, are kept (git history for the K(q) files, and
 `results/superseded_containment_grader_final/` on the cluster for all of `results/final`). The v5 summaries of the sweep, abstention and aux-zero reports are separate and follow in their own reports.
+
+## Amendment 3 (4 Nov 2026; written before any run of this arm): third arm on K from P6's `sft_matched` adapter
+The team plan names the K source: "the float32 `sft_matched` model" (decision 4, and Phase 2 of the work order). The two arms run so far do not use it: the primary arm uses this branch's own
+teacher (λ=0, seed 0, held-out wordings) and the P1 arm uses P1's own float32 run of the recipe (`main_v0_float32_seed0`), which P1's README now marks "superseded for P5's use". P1 has since
+published K from P6's adapter (`p1_exposure/analysis/results/k_labels/main_v0_float32_p6_adapter/`). This arm tests exactly that source, so the negative result can be stated for the labels the plan names.
+- **Labels:** `p1_labels.py --source p6_adapter` checks P1's file against `facts.jsonl` (600 facts, same exposure and split, K in [0, 1], 20 samples per fact = 4 training wordings × 5, float32, v5) and writes
+  `results/final/p5_kq_labels_main_v0_p6.json` with the adapter's weights hash; nothing is recomputed. Mean K by exposure 0 / 1 / 2 / 5 / 10 / 20: 0.004 / 0.079 / 0.243 / 0.742 / 0.856 / 0.961
+  (higher than the P1 own-run labels at every level). P1 reports that the two runs' K agree on bucket for 83% of facts and that the part of K beyond the exposure level correlates only 0.62 between them.
+- **Provenance limit:** the adapter's own files do not say which data, seed, data order or code produced it (its README is the empty PEFT template). Matching the recipe (main_v0 `train.jsonl`, seed 0, one epoch, lr 2e-4, batch 4) is P6's to confirm.
+  K is also one run of one model, and K differs between runs; a second K file from another seed would be needed to separate that from the target's effect. Not available.
+- **Design:** the same masks and fact-disjoint scheme: `sfinal` (labels on final facts, scored on dev) and `sdev` (labels on dev facts, scored on final), λ = 3, 3 seeds, `main_v0` only (P1 made no such file for
+  `main_w1`). The matched s(e) controls are the primary arm's `efinal` / `edev`, not retrained. `p5_kq.sbatch` with `ARM=p6`; criteria via `kq_criteria.py --arm p6`.
+- **Criteria:** A and B exactly as in the protocol (K − matched s(e) AUROC ≥ +0.03; K-head AURC within 0.03 of the student's own log-prob AURC). Scoring uses the v5 grader on both the labels and the students' answers
+  (`eval_head.py` now grades with v5). Dev stage first, its verdict recorded and committed here, then the final stage once.
+- **Reading rule:** reported whatever it shows. The primary arm stays the headline and this arm cannot replace it after the results are seen. Expectation, written now: it will agree with the other two arms. A pass of both A and B here
+  would be a new finding and would need a second K file and a second look before it is believed.
