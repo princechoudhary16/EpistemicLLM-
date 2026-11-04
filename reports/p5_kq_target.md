@@ -270,3 +270,17 @@ and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` an
 
 **Consequence for the P5 recipe.** The K(q) target is a negative result and is not adopted: the headline recipe keeps `s(e)` with λ = 3, and the model's average
 log-prob remains the better abstention signal (see `reports/p5_aux_zero.md` and the earlier abstention results). The K(q) item in team decision 4 is therefore closed for P5 with this report.
+
+## Amendment 2 (4 Nov 2026; written before the regrade is applied): scored-side grading moves to v5
+The scored side of every P5 result (which of a model's own answers count as correct) was graded by `eval_head.py`'s substring grader, not by the shared v5
+grader (see the grader scope note above). This applies to the K(q) results here and equally to the sweep, abstention, probe-control and aux-zero reports.
+- **What is re-scored:** the same saved answers, nothing is generated or retrained. `p5_training_method/regrade_v5.py` rewrites each `predictions.jsonl` with the
+  v5 label (originals kept as `predictions_containment.jsonl`); `eval_head.py` now grades with v5 for any future run.
+- **Measured before applying (dry run, 102 prediction files, 60,480 answers):** 48 labels change (0.079%), all `correct` → `incorrect`, none involve abstentions;
+  the largest accuracy shift in any one file is −0.83 points. The cases are longer words that contain the reference ("pottery" for "potter",
+  "Drouzhakrou" for "Drouzhak"), which v5 does not accept.
+- **Re-run after applying:** `probe_controls.py` and the criteria scripts for every experiment (K(q) own and P1 arms, aux-zero, aux-zero novel-name control,
+  sweep, abstention). The criteria, thresholds, designs and the one-shot rule are untouched. The final-split scoring is re-scored once as a grader
+  correction, not as a new test run.
+- **Reporting rule:** each verdict is reported under v5, with the previous substring-graded value beside it, and any verdict that changes is said to have changed.
+  The v5 numbers replace the old ones as the result; the old ones stay as the record.
