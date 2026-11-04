@@ -90,11 +90,11 @@ Dev gives the same pattern for the head (≥5× vs 0× 0.826, ≥5× vs 1×/2× 
 - At the bottom of the scale the head is **systematically wrong**: it scores never-trained 0× facts *higher* than
   1×/2× facts (mean head score 0.66 at 0× vs 0.60 and 0.59 at 1× and 2×; AUROC 0.35, well below chance), so it
   abstains less on completely unknown facts than on barely-seen ones (section 3.4). The log-prob signals are at chance
-  there (0.49–0.50). Likely cause (a hypothesis, untested): the head never sees a 0× example, so it has no
-  reason to place "no evidence" inputs at the low end. The fix was tested with P1's answer-masked 0× prompts as
-  head-only rows (`reports/p5_aux_zero.md`): it works on the ranking (AUROC 0.35 → 0.86–0.90) but with a mixed verdict
-  (a possible accuracy cost in `main_v0`, the head still a worse abstention signal than log-prob, and the head now
-  having seen the 0× names).
+  there (0.49–0.50). Hypothesised cause: the head never sees a 0× example, so it has no
+  reason to place "no evidence" inputs at the low end. This was tested with P1's answer-masked 0× prompts as
+  head-only rows (`reports/p5_aux_zero.md`): the ranking improved for the 0× names the head was shown, but a matched
+  control (`reports/p5_aux_zero_novel.md`) found no improvement for 0× names it had never seen (AUROC 0.30–0.39,
+  the baseline level). So the flaw stands: the head memorised the names instead of learning to recognise unknown entities.
 
 ### 3.3 Control: does the auxiliary loss make the evidence signal readable? (fact-disjoint probes)
 

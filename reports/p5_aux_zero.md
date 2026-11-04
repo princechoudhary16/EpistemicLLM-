@@ -122,8 +122,12 @@ Behaviour at the two ends, head abstention rate at penalty 1 (before → with 0�
 moderately exposed facts, where the model is right about 65% of the time).
 
 ## Verdict
-- **The targeted flaw is fixed.** The head now ranks never-trained 0× facts below 1×/2× facts (AUROC 0.35 → 0.86–0.90) and
-  the headline AUROC rises (0.85 → 0.93, 0.86 → 0.95), consistently in both worlds, both splits, and larger than the seed spread.
+- **The AUROC rose, but the name-recognition control shows it was memorised names, not a fix.** The head ranks the
+  0× facts it was shown below 1×/2× facts (AUROC 0.35 → 0.86–0.90) and the headline AUROC rises (0.85 → 0.93,
+  0.86 → 0.95), consistently in both worlds and both splits. But `reports/p5_aux_zero_novel.md` (matched design, pre-stated
+  criteria, dev then final, both worlds) found that a head trained without the scored 0× names stays at the baseline
+  (1×/2× vs 0× AUROC 0.30–0.39), while a head that saw them with the same amount of supervision reaches 0.85–0.93.
+  The ranking flaw for genuinely unfamiliar entities is therefore **not fixed** by these prompts.
 - **The pre-stated dev verdict is NOT ALL PASS** (criterion c in `main_v0`), and the final split shows the same pattern.
   The accuracy cost in `main_v0` is −2.1 (dev) and −3.2 (final) points; the two splits are scored on the same 3 trained
   models, so they are not independent confirmations, the seed spread is 3–4 points, and `main_w1` shows no cost (+0.6).
@@ -133,10 +137,7 @@ moderately exposed facts, where the model is right about 65% of the time).
   model's own log-prob in both worlds at both penalties (e.g. 0.241 vs 0.364 and 0.287 vs 0.374 at penalty 1).
   In `main_v0` the 0× prompts also slightly worsen the model's own log-prob signal (AURC 0.202 → 0.224), in line
   with its lower accuracy there.
-- **Open question that limits the headline gain.** The head has now seen the 0× entity names, so the AUROC
-  jump may partly be name recognition rather than "unknown entity". This experiment cannot separate the two. The
-  test that can: train with the aux prompts of the dev facts only and score the 0× facts of the final split (names
-  the head has never seen).
-- **Status:** an ablation with a mixed verdict, not a change to the main method. The main results in
+- **Status:** a negative result, with its control. The 0× prompts do not teach the head to recognise unknown entities. The main results in
   `reports/p5_evidence_aware_training.md` and `reports/p5_second_world.md` are unchanged.
+
 

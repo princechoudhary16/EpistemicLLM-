@@ -38,6 +38,28 @@ def max_diff(a, b):
 
 
 @unittest.skipUnless(AUX_PATH.exists(), "P1's zero-exposure prompts are not present")
+class SelectAuxRows(unittest.TestCase):
+    """The name-recognition control trains with one split's 0x prompts and scores the other split's 0x facts."""
+
+    def test_split_selection_is_fact_and_name_disjoint(self):
+        from data import select_aux_rows
+        rows = load_rows(AUX_PATH)
+        dev, final = select_aux_rows(rows, "dev"), select_aux_rows(rows, "final")
+        self.assertEqual(len(dev) + len(final), len(rows))
+        self.assertTrue(all(r["split"] == "dev" for r in dev) and all(r["split"] == "final" for r in final))
+        self.assertFalse({r["fact_id"] for r in dev} & {r["fact_id"] for r in final})
+        subjects = {f["fact_id"]: f["subject"] for f in load_rows(AUX_PATH.parents[1] / "facts.jsonl")}
+        self.assertFalse({subjects[r["fact_id"]] for r in dev} & {subjects[r["fact_id"]] for r in final})
+
+    def test_none_keeps_everything_and_empty_selection_raises(self):
+        from data import select_aux_rows
+        rows = load_rows(AUX_PATH)
+        self.assertEqual(select_aux_rows(rows, None), rows)
+        with self.assertRaises(ValueError):
+            select_aux_rows([r for r in rows if r["split"] == "dev"], "final")
+
+
+@unittest.skipUnless(AUX_PATH.exists(), "P1's zero-exposure prompts are not present")
 class AuxZero(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

@@ -36,6 +36,20 @@ def encode_row(tokenizer, system_prompt, row, max_seq_len, max_exposure=20):
     }
 
 
+def select_aux_rows(rows, split=None):
+    """Keep only the aux prompts of one split's facts (dev or final); None keeps all.
+
+    Used by the name-recognition control: train with one split's 0x prompts and score the other split's 0x facts,
+    whose names the head has then never seen.
+    """
+    if split is None:
+        return rows
+    kept = [r for r in rows if r["split"] == split]
+    if not kept:
+        raise ValueError(f"no aux rows with split={split!r}")
+    return kept
+
+
 def encode_aux_row(tokenizer, system_prompt, row, max_seq_len, max_exposure=20):
     """Answer-masked prompt (P1's zero-exposure prompts) for the auxiliary head only.
 

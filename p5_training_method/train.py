@@ -12,7 +12,7 @@ import yaml
 
 import random
 
-from data import collate, encode_aux_row, encode_row, load_rows
+from data import collate, encode_aux_row, encode_row, load_rows, select_aux_rows
 from model import build_model, save_checkpoint
 
 HERE = Path(__file__).resolve().parent
@@ -50,6 +50,8 @@ def main():
     ap.add_argument("--aux-zero", default=None,
                     help="answer-masked prompts for 0x facts (P1's aux_zero_prompts.jsonl): extra rows for the head "
                          "only, spread evenly over the steps; no language-model loss")
+    ap.add_argument("--aux-zero-split", choices=["dev", "final"], default=None,
+                    help="use only the aux prompts of this split's 0x facts (name-recognition control)")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--save-every", type=int, default=0)
     ap.add_argument("--log-every", type=int, default=10)
@@ -86,7 +88,7 @@ def main():
     # wordings are not adjacent. Rows without any label add nothing to the language-model loss.
     aux_examples, aux_path = [], Path(args.aux_zero) if args.aux_zero else None
     if aux_path is not None:
-        aux_rows = load_rows(aux_path)
+        aux_rows = select_aux_rows(load_rows(aux_path), args.aux_zero_split)
         random.Random(cfg["train"]["seed"]).shuffle(aux_rows)
         aux_examples = [
             encode_aux_row(tokenizer, system_prompt, r, cfg["data"]["max_seq_len"], cfg["head"]["max_exposure"])
@@ -112,6 +114,7 @@ def main():
         "aux_zero_path": str(aux_path) if aux_path else None,
         "aux_zero_sha256": sha256(aux_path) if aux_path else None,
         "n_aux_rows": len(aux_examples),
+        "aux_zero_split": args.aux_zero_split,
         "n_steps": len(batches),
         "n_trainable_params": sum(p.numel() for p in params),
         "torch": torch.__version__,
