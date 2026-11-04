@@ -49,7 +49,7 @@ matched_seed1,founder,10,40,36,0.9
 matched_seed1,founder,20,40,39,0.975
 matched_seed1,headquarters,0,40,0,0.0
 matched_seed1,headquarters,1,40,1,0.025
-matched_seed1,headquarters,2,40,17,0.425
+matched_seed1,headquarters,2,40,16,0.4
 matched_seed1,headquarters,5,40,34,0.85
 matched_seed1,headquarters,10,40,37,0.925
 matched_seed1,headquarters,20,40,38,0.95
@@ -73,13 +73,13 @@ matched_seed2,capital,10,40,38,0.95
 matched_seed2,capital,20,40,40,1.0
 matched_seed2,founder,0,40,0,0.0
 matched_seed2,founder,1,40,0,0.0
-matched_seed2,founder,2,40,9,0.225
+matched_seed2,founder,2,40,7,0.175
 matched_seed2,founder,5,40,26,0.65
 matched_seed2,founder,10,40,38,0.95
 matched_seed2,founder,20,40,40,1.0
 matched_seed2,headquarters,0,40,0,0.0
 matched_seed2,headquarters,1,40,2,0.05
-matched_seed2,headquarters,2,40,16,0.4
+matched_seed2,headquarters,2,40,14,0.35
 matched_seed2,headquarters,5,40,30,0.75
 matched_seed2,headquarters,10,40,37,0.925
 matched_seed2,headquarters,20,40,36,0.9

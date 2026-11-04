@@ -1,0 +1,38 @@
+{
+  "run_id": "p2_pilot_base",
+  "device": "mps",
+  "seed": 0,
+  "model": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "torch_dtype": "bfloat16"
+  },
+  "decoding": {
+    "prompt_version": "prompt_v0",
+    "decoding_config_id": "decoding_v1",
+    "system_prompt": "Answer the question with a short, direct factual answer and nothing else. If you do not know the answer, say \"I don't know.\" instead of guessing.\n",
+    "max_new_tokens": 64,
+    "top_k": 0,
+    "repetition_penalty": 1.0,
+    "greedy": {
+      "do_sample": false
+    },
+    "sampled": {
+      "do_sample": true,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "n_samples": 5
+    }
+  },
+  "questions_file": "/Users/Himadri/Documents/NTU/Courses/LLM/LLMProject/EpistemicLLM-/data/real_qa/simpleqa_v0/pilot.jsonl",
+  "questions_sha256": "7e7a234e90711e58ab0f79216a24bb83bdf53f3e072c513a44eef1ee31a788b9",
+  "grading_version": "p2_whole_word_v2",
+  "environment": {
+    "torch": "2.14.1",
+    "transformers": "5.20.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": "5.1.0",
+    "cuda_available": false
+  }
+}

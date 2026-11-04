@@ -3,8 +3,11 @@
     ablation    run_ablation.py plus the pilot_v0 / main_v0 data embedded as a base64 zip
     robustness  run_ablation.py plus the generator code only; the notebook regenerates both synthetic
                 worlds and checks every file's sha256 against the repo copy
+    k           K per fact for P5: trains the matched recipe in float32 on main_v0, samples the training-
+                wording questions and grades them with the shared grader (shipped with the notebook)
 
     python -m p1_exposure.ablation.make_colab_notebook --profile robustness --repo-root . --out P1_robustness_colab.ipynb
+    python -m p1_exposure.ablation.make_colab_notebook --profile k --repo-root . --out P1_k_labels_colab.ipynb
     python -m p1_exposure.ablation.make_colab_notebook --data-dir data/synthetic --out P1_ablation_colab.ipynb
 """
 
@@ -23,6 +26,10 @@ ROBUSTNESS_CODE = ["p1_exposure/__init__.py", "p1_exposure/generate.py", "p1_exp
                    "p1_exposure/relations.py", "p1_exposure/validate.py",
                    "p1_exposure/robustness/__init__.py", "p1_exposure/robustness/paraphrase_sets.py"]
 WORLDS = {"main_v0": 0, "main_w1": 1}
+K_CODE = ["p1_exposure/__init__.py", "p1_exposure/generate.py", "p1_exposure/names.py", "p1_exposure/relations.py",
+          "p1_exposure/validate.py", "p1_exposure/k_labels.py", "p1_exposure/ablation/__init__.py",
+          "p1_exposure/ablation/run_ablation.py", "common/__init__.py", "common/grading.py"]
+K_HASHED = ("train.jsonl", "eval.jsonl", "idk_train.jsonl", "facts.jsonl")
 HASHED = ("train.jsonl", "eval.jsonl", "idk_train.jsonl", "facts.jsonl",
           "robustness/eval_heldout.jsonl", "robustness/eval_swapped.jsonl")
 
@@ -137,15 +144,122 @@ def build_robustness(repo_root):
     ])
 
 
+def split_adapter(adapter_dir, out_dir, part_bytes=8_000_000):
+    """Split adapter_model.safetensors into parts small enough to upload one at a time (the upload tool takes at
+    most 10 MB per call). Returns the part paths; `cat` them in order to rebuild the file."""
+    data = (Path(adapter_dir) / "adapter_model.safetensors").read_bytes()
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    parts = []
+    for i in range(0, len(data), part_bytes):
+        p = out_dir / f"adapter_part_{i // part_bytes:02d}"
+        p.write_bytes(data[i:i + part_bytes])
+        parts.append(p)
+    return parts
+
+
+def _assemble_cell(adapter_dir):
+    adapter_dir = Path(adapter_dir)
+    digest = hashlib.sha256((adapter_dir / "adapter_model.safetensors").read_bytes()).hexdigest()
+    config = (adapter_dir / "adapter_config.json").read_text(encoding="utf-8")
+    return "\n".join([
+        "#@title Assemble the adapter from the uploaded parts and verify its hash",
+        "import glob, hashlib",
+        "from pathlib import Path",
+        f"CONFIG = {config!r}",
+        f"EXPECTED = '{digest}'",
+        "d = Path('/content/shared_adapter'); d.mkdir(exist_ok=True)",
+        "parts = sorted(glob.glob('/content/adapter_part_*'))",
+        "data = b''.join(Path(p).read_bytes() for p in parts)",
+        "(d / 'adapter_model.safetensors').write_bytes(data)",
+        "(d / 'adapter_config.json').write_text(CONFIG, encoding='utf-8')",
+        "h = hashlib.sha256(data).hexdigest()",
+        "print(len(parts), 'parts,', len(data), 'bytes, sha256', h)",
+        "assert h == EXPECTED, 'uploaded parts do not rebuild the shared adapter'",
+    ])
+
+
+def build_k(repo_root, adapter_dir=None):
+    repo_root = Path(repo_root)
+    expected = {}
+    for f in K_HASHED:
+        # normalize CRLF: a Windows checkout stores tracked files with CRLF, the generator and Linux write LF
+        raw = (repo_root / "data" / "synthetic" / "main_v0" / f).read_bytes().replace(bytes([13, 10]), bytes([10]))
+        expected[f"main_v0/{f}"] = hashlib.sha256(raw).hexdigest()
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for rel in K_CODE:
+            z.write(repo_root / rel, rel)
+        z.writestr("expected_hashes.json", json.dumps(expected, indent=1))
+    payload = base64.b64encode(buf.getvalue()).decode("ascii")
+    unpack = "\n".join([
+        "#@title Unpack code, regenerate main_v0, verify hashes",
+        "import base64, hashlib, io, json, subprocess, zipfile",
+        "from pathlib import Path",
+        f"PAYLOAD = '{payload}'",
+        "root = Path('/content/ablation')",
+        "zipfile.ZipFile(io.BytesIO(base64.b64decode(PAYLOAD))).extractall(root)",
+        "gen = ['python', '-m', 'p1_exposure.generate', '--n-facts', '600', '--seed', '0', '--version', 'main_v0',",
+        "       '--data-dir', 'data/synthetic', '--manifest-dir', 'data/manifests']",
+        "subprocess.run(gen, cwd=root, check=True, capture_output=True)",
+        "expected = json.loads((root / 'expected_hashes.json').read_text())",
+        "bad = [k for k, h in expected.items()",
+        "       if hashlib.sha256((root / 'data/synthetic' / k).read_bytes()).hexdigest() != h]",
+        "print('files checked:', len(expected), '| mismatching:', bad)",
+        "assert not bad, 'regenerated data differs from the repo copy'",
+    ])
+    cd = "!cd /content/ablation && python -m p1_exposure.k_labels --version main_v0 "
+    if adapter_dir:
+        return notebook([
+            markdown("# P1: K per fact from a shared float32 adapter (plan decision 4)\n\n"
+                     "Upload the adapter parts (`adapter_part_*`, from `split_adapter` in "
+                     "`p1_exposure/ablation/make_colab_notebook.py`) to /content through the Files panel, then "
+                     "Runtime > Run all (about 15 minutes on a T4). No training happens: the adapter is loaded, "
+                     "5 answers are sampled for each of the 4 training wordings of every main_v0 fact "
+                     "(decoding_v1 settings) and graded with the shared grader shipped in this notebook."),
+            code("!pip install -q -U torchao transformers peft accelerate"),
+            code(unpack, form=True),
+            code(_assemble_cell(adapter_dir), form=True),
+            code("# Smoke test: 12 facts, a couple of minutes\n"
+                 + cd + "--out-dir out_smoke --adapter /content/shared_adapter --limit-facts 12 "
+                 "--n-samples 2 --max-new-tokens 16 --gen-batch 8"),
+            code(cd + "--out-dir out_k_shared --dtype float32 --adapter /content/shared_adapter"),
+            code("!cat /content/ablation/out_k_shared/k_meta.json"),
+            code("!cd /content/ablation && zip -qr /content/p1_k_shared_results.zip out_k_shared "
+                 "&& ls -la /content/p1_k_shared_results.zip"),
+        ])
+    return notebook([
+        markdown("# P1: K per fact for P5 (plan decision 4)\n\n"
+                 "Runtime > Change runtime type > T4 GPU, then Runtime > Run all (about 30 minutes). Trains the "
+                 "matched recipe (`mine`: r16, alpha 32, dropout 0.05, all 7 linear layers, batch 4, lr 2e-4, one "
+                 "epoch) in float32 on main_v0, samples 5 answers to each of the 4 training wordings of every fact "
+                 "(decoding_v1 settings), and grades with the shared grader shipped in this notebook. "
+                 "Download `p1_k_labels_results.zip`."),
+        code("!pip install -q -U torchao transformers peft accelerate"),
+        code(unpack, form=True),
+        code("# Smoke test: 12 facts, tiny training, a couple of minutes\n"
+             + cd + "--out-dir out_smoke --limit-facts 12 --train-limit 40 --n-samples 2 --max-new-tokens 16 --gen-batch 8"),
+        code(cd + "--out-dir out_k_main_v0 --dtype float32 --save-adapter out_k_main_v0/adapter"),
+        code("!cat /content/ablation/out_k_main_v0/k_meta.json"),
+        code("!cd /content/ablation && zip -qr /content/p1_k_labels_results.zip out_k_main_v0 && ls -la /content/p1_k_labels_results.zip"),
+    ])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("--profile", choices=["ablation", "robustness"], default="ablation")
+    ap.add_argument("--profile", choices=["ablation", "robustness", "k"], default="ablation")
     ap.add_argument("--data-dir", default="data/synthetic")
     ap.add_argument("--versions", default="pilot_v0,main_v0")
     ap.add_argument("--repo-root", default=".")
     ap.add_argument("--out", default="P1_ablation_colab.ipynb")
+    ap.add_argument("--adapter-dir", help="profile k only: sample from this adapter instead of training one")
+    ap.add_argument("--split-to", help="with --adapter-dir: also write the upload parts of the adapter here")
     a = ap.parse_args()
+    if a.adapter_dir and a.split_to:
+        for p in split_adapter(a.adapter_dir, a.split_to):
+            print(f"part {p} ({p.stat().st_size:,} bytes)")
     nb = (build_robustness(a.repo_root) if a.profile == "robustness"
+          else build_k(a.repo_root, a.adapter_dir) if a.profile == "k"
           else build(a.data_dir, [v for v in a.versions.split(",") if v]))
     Path(a.out).write_text(json.dumps(nb, indent=1), encoding="utf-8", newline="\n")
     print(f"wrote {a.out} ({Path(a.out).stat().st_size:,} bytes, {len(nb['cells'])} cells)")

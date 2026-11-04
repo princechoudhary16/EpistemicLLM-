@@ -1,0 +1,80 @@
+{
+  "status": "Week 1 pipeline verification only; provisional labels are not benchmark correctness",
+  "run_id": "week1",
+  "labels_sha256": "5012f88156b52bc1e01dd336e5c4806153c93605a1d82f0adf43fb56f196cf6e",
+  "features_sha256": "5b4d6faec13d2a689ffe35b283ceecfc23ddf6a8a1e6318ef3cdcd9abdceb969",
+  "label_review_statuses": [
+    "needs_review_truncated",
+    "provisional_auto"
+  ],
+  "target": "Greedy answer correctness; default labels are normalized exact-match proxies",
+  "train_counts": {
+    "not_correct": 73,
+    "correct": 1
+  },
+  "validation_counts": {
+    "not_correct": 25,
+    "correct": 0
+  },
+  "excluded_unlabeled": 1,
+  "hyperparameters": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "threshold": 0.5,
+    "scaling": "StandardScaler fitted on training only"
+  },
+  "models": {
+    "layer_6": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_12": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_18": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.96,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_24": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.96,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "prompt_length_baseline": {
+      "status": "fitted",
+      "feature_dimensions": 1,
+      "accuracy": 0.84,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    }
+  },
+  "majority_baseline": {
+    "accuracy": 1.0,
+    "balanced_accuracy": null,
+    "auroc": null,
+    "auprc": null
+  }
+}

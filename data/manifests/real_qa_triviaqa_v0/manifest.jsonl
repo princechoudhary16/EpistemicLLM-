@@ -1,0 +1,1200 @@
+{"question_id": "triviaqa-bb_1357", "split": "pilot", "group_id": "ans:mercury"}
+{"question_id": "triviaqa-bb_1551", "split": "pilot", "group_id": "ans:uranus"}
+{"question_id": "triviaqa-bb_1767", "split": "pilot", "group_id": "ans:offering"}
+{"question_id": "triviaqa-bb_2616", "split": "pilot", "group_id": "ans:solar power"}
+{"question_id": "triviaqa-bb_3332", "split": "pilot", "group_id": "ans:vertical"}
+{"question_id": "triviaqa-bb_3448", "split": "pilot", "group_id": "ans:neutralizing"}
+{"question_id": "triviaqa-bb_3640", "split": "pilot", "group_id": "ans:power cut"}
+{"question_id": "triviaqa-bb_3778", "split": "pilot", "group_id": "ans:a minor"}
+{"question_id": "triviaqa-bb_3795", "split": "pilot", "group_id": "ans:homo sapiens"}
+{"question_id": "triviaqa-bb_4137", "split": "pilot", "group_id": "ans:executive jets"}
+{"question_id": "triviaqa-bb_5443", "split": "pilot", "group_id": "ans:black rod"}
+{"question_id": "triviaqa-bb_67", "split": "pilot", "group_id": "ans:devon"}
+{"question_id": "triviaqa-bb_716", "split": "pilot", "group_id": "ans:rudolph nureyev"}
+{"question_id": "triviaqa-bb_7161", "split": "pilot", "group_id": "ans:samovar"}
+{"question_id": "triviaqa-bb_7396", "split": "pilot", "group_id": "ans:channelle hayes"}
+{"question_id": "triviaqa-bb_77", "split": "pilot", "group_id": "ans:tree"}
+{"question_id": "triviaqa-bb_7976", "split": "pilot", "group_id": "ans:e"}
+{"question_id": "triviaqa-bb_8625", "split": "pilot", "group_id": "ans:facebook"}
+{"question_id": "triviaqa-bb_9184", "split": "pilot", "group_id": "ans:musical scales"}
+{"question_id": "triviaqa-bb_9448", "split": "pilot", "group_id": "ans:six"}
+{"question_id": "triviaqa-bt_179", "split": "pilot", "group_id": "ans:fatima whitbread"}
+{"question_id": "triviaqa-bt_1847", "split": "pilot", "group_id": "ans:christopher walken"}
+{"question_id": "triviaqa-bt_2325", "split": "pilot", "group_id": "ans:the ouse"}
+{"question_id": "triviaqa-bt_3044", "split": "pilot", "group_id": "ans:supertramp"}
+{"question_id": "triviaqa-bt_4088", "split": "pilot", "group_id": "ans:paul keating"}
+{"question_id": "triviaqa-bt_4096", "split": "pilot", "group_id": "ans:a tale of two cities"}
+{"question_id": "triviaqa-dpql_1113", "split": "pilot", "group_id": "ans:the wicker man"}
+{"question_id": "triviaqa-dpql_1994", "split": "pilot", "group_id": "ans:neptune"}
+{"question_id": "triviaqa-dpql_2064", "split": "pilot", "group_id": "ans:a dye"}
+{"question_id": "triviaqa-dpql_2681", "split": "pilot", "group_id": "ans:piccadilly"}
+{"question_id": "triviaqa-dpql_3496", "split": "pilot", "group_id": "ans:salt"}
+{"question_id": "triviaqa-dpql_3601", "split": "pilot", "group_id": "ans:rory underwood"}
+{"question_id": "triviaqa-dpql_3845", "split": "pilot", "group_id": "ans:jeremy thorpe"}
+{"question_id": "triviaqa-dpql_4711", "split": "pilot", "group_id": "ans:green card"}
+{"question_id": "triviaqa-dpql_5268", "split": "pilot", "group_id": "ans:mercury"}
+{"question_id": "triviaqa-dpql_5807", "split": "pilot", "group_id": "ans:p e"}
+{"question_id": "triviaqa-dpql_5912", "split": "pilot", "group_id": "ans:rugby"}
+{"question_id": "triviaqa-jp_1034", "split": "pilot", "group_id": "ans:carmen"}
+{"question_id": "triviaqa-jp_1238", "split": "pilot", "group_id": "ans:sigmund freud"}
+{"question_id": "triviaqa-jp_1922", "split": "pilot", "group_id": "ans:tigris"}
+{"question_id": "triviaqa-jp_2183", "split": "pilot", "group_id": "ans:furniture"}
+{"question_id": "triviaqa-jp_2212", "split": "pilot", "group_id": "ans:tomb raider"}
+{"question_id": "triviaqa-jp_2283", "split": "pilot", "group_id": "ans:xxxii"}
+{"question_id": "triviaqa-jp_2336", "split": "pilot", "group_id": "ans:secret service"}
+{"question_id": "triviaqa-jp_3970", "split": "pilot", "group_id": "ans:canada"}
+{"question_id": "triviaqa-jp_466", "split": "pilot", "group_id": "ans:charles dickens"}
+{"question_id": "triviaqa-jp_630", "split": "pilot", "group_id": "ans:luke skywalker"}
+{"question_id": "triviaqa-odql_10410", "split": "pilot", "group_id": "ans:brindisi"}
+{"question_id": "triviaqa-odql_10739", "split": "pilot", "group_id": "ans:fermanagh"}
+{"question_id": "triviaqa-odql_10748", "split": "pilot", "group_id": "ans:margaret court"}
+{"question_id": "triviaqa-odql_11681", "split": "pilot", "group_id": "ans:james doohan"}
+{"question_id": "triviaqa-odql_11810", "split": "pilot", "group_id": "ans:the streets"}
+{"question_id": "triviaqa-odql_12322", "split": "pilot", "group_id": "ans:gerald ford"}
+{"question_id": "triviaqa-odql_12507", "split": "pilot", "group_id": "ans:typhon"}
+{"question_id": "triviaqa-odql_13209", "split": "pilot", "group_id": "ans:gdansk"}
+{"question_id": "triviaqa-odql_13821", "split": "pilot", "group_id": "ans:edward vii"}
+{"question_id": "triviaqa-odql_14724", "split": "pilot", "group_id": "ans:matalan"}
+{"question_id": "triviaqa-odql_15045", "split": "pilot", "group_id": "ans:the apples of the hesperides"}
+{"question_id": "triviaqa-odql_1565", "split": "pilot", "group_id": "ans:virginia"}
+{"question_id": "triviaqa-odql_2768", "split": "pilot", "group_id": "ans:monsters vs aliens"}
+{"question_id": "triviaqa-odql_2889", "split": "pilot", "group_id": "ans:titan"}
+{"question_id": "triviaqa-odql_3223", "split": "pilot", "group_id": "ans:joseph smith"}
+{"question_id": "triviaqa-odql_3474", "split": "pilot", "group_id": "ans:pears soap"}
+{"question_id": "triviaqa-odql_4631", "split": "pilot", "group_id": "ans:ron howard"}
+{"question_id": "triviaqa-odql_4777", "split": "pilot", "group_id": "ans:drop the dead donkey"}
+{"question_id": "triviaqa-odql_4800", "split": "pilot", "group_id": "ans:canada 1988"}
+{"question_id": "triviaqa-odql_7503", "split": "pilot", "group_id": "ans:abraham lincoln"}
+{"question_id": "triviaqa-odql_7706", "split": "pilot", "group_id": "ans:dalziel pascoe"}
+{"question_id": "triviaqa-odql_9411", "split": "pilot", "group_id": "ans:antelope"}
+{"question_id": "triviaqa-odql_9592", "split": "pilot", "group_id": "ans:cornell"}
+{"question_id": "triviaqa-qb_2344", "split": "pilot", "group_id": "ans:switzerland"}
+{"question_id": "triviaqa-qb_2546", "split": "pilot", "group_id": "ans:720"}
+{"question_id": "triviaqa-qb_3225", "split": "pilot", "group_id": "ans:getafix"}
+{"question_id": "triviaqa-qb_3320", "split": "pilot", "group_id": "ans:harold abrahams and eric liddell"}
+{"question_id": "triviaqa-qb_3379", "split": "pilot", "group_id": "ans:worcester"}
+{"question_id": "triviaqa-qb_3523", "split": "pilot", "group_id": "ans:radon"}
+{"question_id": "triviaqa-qb_4053", "split": "pilot", "group_id": "ans:22"}
+{"question_id": "triviaqa-qb_4284", "split": "pilot", "group_id": "ans:jubilee line"}
+{"question_id": "triviaqa-qb_483", "split": "pilot", "group_id": "ans:1970"}
+{"question_id": "triviaqa-qb_495", "split": "pilot", "group_id": "ans:mauretania"}
+{"question_id": "triviaqa-qb_5371", "split": "pilot", "group_id": "ans:gwyneth paltrow"}
+{"question_id": "triviaqa-qb_6013", "split": "pilot", "group_id": "ans:lady gaga"}
+{"question_id": "triviaqa-qb_6562", "split": "pilot", "group_id": "ans:november"}
+{"question_id": "triviaqa-qb_8277", "split": "pilot", "group_id": "ans:british airways"}
+{"question_id": "triviaqa-qb_9619", "split": "pilot", "group_id": "ans:ferdinand marcos"}
+{"question_id": "triviaqa-qf_1044", "split": "pilot", "group_id": "ans:1919"}
+{"question_id": "triviaqa-qf_2020", "split": "pilot", "group_id": "ans:back to the future"}
+{"question_id": "triviaqa-qf_3627", "split": "pilot", "group_id": "ans:val doonican"}
+{"question_id": "triviaqa-qf_478", "split": "pilot", "group_id": "ans:james cameron"}
+{"question_id": "triviaqa-qg_1015", "split": "pilot", "group_id": "ans:rms titanic"}
+{"question_id": "triviaqa-qg_2648", "split": "pilot", "group_id": "ans:roots the saga of an american family"}
+{"question_id": "triviaqa-qg_2661", "split": "pilot", "group_id": "ans:david berkowitz"}
+{"question_id": "triviaqa-qg_293", "split": "pilot", "group_id": "ans:bo and luke duke"}
+{"question_id": "triviaqa-qg_2966", "split": "pilot", "group_id": "ans:ted kennedy"}
+{"question_id": "triviaqa-qg_3181", "split": "pilot", "group_id": "ans:the tank"}
+{"question_id": "triviaqa-qg_3884", "split": "pilot", "group_id": "ans:king county executive"}
+{"question_id": "triviaqa-qg_435", "split": "pilot", "group_id": "ans:tennis"}
+{"question_id": "triviaqa-qg_4571", "split": "pilot", "group_id": "ans:minute maid"}
+{"question_id": "triviaqa-qg_46", "split": "pilot", "group_id": "ans:the world is not enough"}
+{"question_id": "triviaqa-qg_581", "split": "pilot", "group_id": "ans:calcium"}
+{"question_id": "triviaqa-qw_11363", "split": "pilot", "group_id": "ans:punch to the body"}
+{"question_id": "triviaqa-qw_11743", "split": "pilot", "group_id": "ans:hernando cortes"}
+{"question_id": "triviaqa-qw_11870", "split": "pilot", "group_id": "ans:park lane"}
+{"question_id": "triviaqa-qw_12269", "split": "pilot", "group_id": "ans:the adventures of asterix"}
+{"question_id": "triviaqa-qw_1246", "split": "pilot", "group_id": "ans:navel"}
+{"question_id": "triviaqa-qw_13617", "split": "pilot", "group_id": "ans:george i"}
+{"question_id": "triviaqa-qw_13663", "split": "pilot", "group_id": "ans:bantermeisters"}
+{"question_id": "triviaqa-qw_14016", "split": "pilot", "group_id": "ans:gluten"}
+{"question_id": "triviaqa-qw_1421", "split": "pilot", "group_id": "ans:new zealand"}
+{"question_id": "triviaqa-qw_14403", "split": "pilot", "group_id": "ans:halloween"}
+{"question_id": "triviaqa-qw_14959", "split": "pilot", "group_id": "ans:caracas"}
+{"question_id": "triviaqa-qw_15164", "split": "pilot", "group_id": "ans:bolivia"}
+{"question_id": "triviaqa-qw_16332", "split": "pilot", "group_id": "ans:leonardo dicaprio"}
+{"question_id": "triviaqa-qw_3080", "split": "pilot", "group_id": "ans:myanmar"}
+{"question_id": "triviaqa-qw_3591", "split": "pilot", "group_id": "ans:water clock"}
+{"question_id": "triviaqa-qw_4266", "split": "pilot", "group_id": "ans:auctioneering"}
+{"question_id": "triviaqa-qw_4395", "split": "pilot", "group_id": "ans:phil spector"}
+{"question_id": "triviaqa-qw_4875", "split": "pilot", "group_id": "ans:5"}
+{"question_id": "triviaqa-qw_5712", "split": "pilot", "group_id": "ans:8000"}
+{"question_id": "triviaqa-qw_6822", "split": "pilot", "group_id": "ans:imola"}
+{"question_id": "triviaqa-qw_7287", "split": "pilot", "group_id": "ans:robert green"}
+{"question_id": "triviaqa-qw_7866", "split": "pilot", "group_id": "ans:tartan"}
+{"question_id": "triviaqa-qw_7939", "split": "pilot", "group_id": "ans:genoa"}
+{"question_id": "triviaqa-qw_8478", "split": "pilot", "group_id": "ans:sikh"}
+{"question_id": "triviaqa-qw_8577", "split": "pilot", "group_id": "ans:2010"}
+{"question_id": "triviaqa-qw_881", "split": "pilot", "group_id": "ans:kansas"}
+{"question_id": "triviaqa-qw_9352", "split": "pilot", "group_id": "ans:jarrah"}
+{"question_id": "triviaqa-qz_196", "split": "pilot", "group_id": "ans:28"}
+{"question_id": "triviaqa-qz_2999", "split": "pilot", "group_id": "ans:1936"}
+{"question_id": "triviaqa-qz_3557", "split": "pilot", "group_id": "ans:caroline aherne"}
+{"question_id": "triviaqa-qz_3895", "split": "pilot", "group_id": "ans:4"}
+{"question_id": "triviaqa-qz_4450", "split": "pilot", "group_id": "ans:jodie foster"}
+{"question_id": "triviaqa-qz_4945", "split": "pilot", "group_id": "ans:allan donald"}
+{"question_id": "triviaqa-qz_5270", "split": "pilot", "group_id": "ans:marine one"}
+{"question_id": "triviaqa-qz_608", "split": "pilot", "group_id": "ans:thailand"}
+{"question_id": "triviaqa-sfq_11368", "split": "pilot", "group_id": "ans:7"}
+{"question_id": "triviaqa-sfq_1244", "split": "pilot", "group_id": "ans:ligament"}
+{"question_id": "triviaqa-sfq_13175", "split": "pilot", "group_id": "ans:norwich school"}
+{"question_id": "triviaqa-sfq_13456", "split": "pilot", "group_id": "ans:doncaster rovers"}
+{"question_id": "triviaqa-sfq_14787", "split": "pilot", "group_id": "ans:whitechapel"}
+{"question_id": "triviaqa-sfq_14806", "split": "pilot", "group_id": "ans:gower"}
+{"question_id": "triviaqa-sfq_14898", "split": "pilot", "group_id": "ans:a journey"}
+{"question_id": "triviaqa-sfq_15186", "split": "pilot", "group_id": "ans:a horse"}
+{"question_id": "triviaqa-sfq_15770", "split": "pilot", "group_id": "ans:ivan owen"}
+{"question_id": "triviaqa-sfq_1626", "split": "pilot", "group_id": "ans:millais"}
+{"question_id": "triviaqa-sfq_16509", "split": "pilot", "group_id": "ans:wyoming"}
+{"question_id": "triviaqa-sfq_1652", "split": "pilot", "group_id": "ans:william conrad"}
+{"question_id": "triviaqa-sfq_16558", "split": "pilot", "group_id": "ans:a prison"}
+{"question_id": "triviaqa-sfq_1735", "split": "pilot", "group_id": "ans:1471 1528"}
+{"question_id": "triviaqa-sfq_17514", "split": "pilot", "group_id": "ans:lancashire"}
+{"question_id": "triviaqa-sfq_17926", "split": "pilot", "group_id": "ans:benny hill"}
+{"question_id": "triviaqa-sfq_18606", "split": "pilot", "group_id": "ans:hitchhikers guide to the galaxy"}
+{"question_id": "triviaqa-sfq_18850", "split": "pilot", "group_id": "ans:ben watson"}
+{"question_id": "triviaqa-sfq_19406", "split": "pilot", "group_id": "ans:robert galbraith"}
+{"question_id": "triviaqa-sfq_20082", "split": "pilot", "group_id": "ans:volkswagen"}
+{"question_id": "triviaqa-sfq_20306", "split": "pilot", "group_id": "ans:12"}
+{"question_id": "triviaqa-sfq_20324", "split": "pilot", "group_id": "ans:bayern munich"}
+{"question_id": "triviaqa-sfq_20635", "split": "pilot", "group_id": "ans:pineapple"}
+{"question_id": "triviaqa-sfq_2085", "split": "pilot", "group_id": "ans:tartare"}
+{"question_id": "triviaqa-sfq_21334", "split": "pilot", "group_id": "ans:the thumb"}
+{"question_id": "triviaqa-sfq_21768", "split": "pilot", "group_id": "ans:rivers"}
+{"question_id": "triviaqa-sfq_22012", "split": "pilot", "group_id": "ans:peach"}
+{"question_id": "triviaqa-sfq_22144", "split": "pilot", "group_id": "ans:giuseppe verdi"}
+{"question_id": "triviaqa-sfq_24078", "split": "pilot", "group_id": "ans:rats"}
+{"question_id": "triviaqa-sfq_24950", "split": "pilot", "group_id": "ans:john nash"}
+{"question_id": "triviaqa-sfq_25245", "split": "pilot", "group_id": "ans:a tittle"}
+{"question_id": "triviaqa-sfq_25498", "split": "pilot", "group_id": "ans:chrysler"}
+{"question_id": "triviaqa-sfq_2550", "split": "pilot", "group_id": "ans:joseph stalin"}
+{"question_id": "triviaqa-sfq_3490", "split": "pilot", "group_id": "ans:leeds"}
+{"question_id": "triviaqa-sfq_3826", "split": "pilot", "group_id": "ans:dalziel and pascoe"}
+{"question_id": "triviaqa-sfq_4618", "split": "pilot", "group_id": "ans:cuckoo"}
+{"question_id": "triviaqa-sfq_4907", "split": "pilot", "group_id": "ans:joseph marie jacquard"}
+{"question_id": "triviaqa-sfq_4963", "split": "pilot", "group_id": "ans:vestigial"}
+{"question_id": "triviaqa-sfq_6754", "split": "pilot", "group_id": "ans:fast eddie felson"}
+{"question_id": "triviaqa-sfq_6767", "split": "pilot", "group_id": "ans:jesse"}
+{"question_id": "triviaqa-sfq_876", "split": "pilot", "group_id": "ans:armpit"}
+{"question_id": "triviaqa-sfq_8812", "split": "pilot", "group_id": "ans:capricorn"}
+{"question_id": "triviaqa-sfq_886", "split": "pilot", "group_id": "ans:lyon"}
+{"question_id": "triviaqa-sfq_8949", "split": "pilot", "group_id": "ans:carberry"}
+{"question_id": "triviaqa-sfq_9341", "split": "pilot", "group_id": "ans:red hot poker"}
+{"question_id": "triviaqa-tb_221", "split": "pilot", "group_id": "ans:caryatid"}
+{"question_id": "triviaqa-tc_1152", "split": "pilot", "group_id": "ans:george"}
+{"question_id": "triviaqa-tc_1340", "split": "pilot", "group_id": "ans:new zealand"}
+{"question_id": "triviaqa-tc_1938", "split": "pilot", "group_id": "ans:south africa"}
+{"question_id": "triviaqa-tc_2218", "split": "pilot", "group_id": "ans:apollo 17"}
+{"question_id": "triviaqa-tc_3130", "split": "pilot", "group_id": "ans:the local galaxy"}
+{"question_id": "triviaqa-wh_1581", "split": "pilot", "group_id": "ans:loreal"}
+{"question_id": "triviaqa-wh_1868", "split": "pilot", "group_id": "ans:butch cassidy and the sundance kid"}
+{"question_id": "triviaqa-wh_2395", "split": "pilot", "group_id": "ans:ellesmere port"}
+{"question_id": "triviaqa-wh_261", "split": "pilot", "group_id": "ans:oliver mellors"}
+{"question_id": "triviaqa-wh_2809", "split": "pilot", "group_id": "ans:gazpacho"}
+{"question_id": "triviaqa-wh_2999", "split": "pilot", "group_id": "ans:krypton"}
+{"question_id": "triviaqa-wh_3778", "split": "pilot", "group_id": "ans:enigma"}
+{"question_id": "triviaqa-wh_3810", "split": "pilot", "group_id": "ans:bigfoot"}
+{"question_id": "triviaqa-wh_3853", "split": "pilot", "group_id": "ans:matilda"}
+{"question_id": "triviaqa-wh_3956", "split": "pilot", "group_id": "ans:anosmia"}
+{"question_id": "triviaqa-wh_4002", "split": "pilot", "group_id": "ans:gotcha"}
+{"question_id": "triviaqa-wh_4167", "split": "pilot", "group_id": "ans:hay fever"}
+{"question_id": "triviaqa-wh_4295", "split": "pilot", "group_id": "ans:polish"}
+{"question_id": "triviaqa-wh_86", "split": "pilot", "group_id": "ans:chemnitz"}
+{"question_id": "triviaqa-bb_1010", "split": "train_probe", "group_id": "ans:staines"}
+{"question_id": "triviaqa-bb_121", "split": "train_probe", "group_id": "ans:second"}
+{"question_id": "triviaqa-bb_1257", "split": "train_probe", "group_id": "ans:ship"}
+{"question_id": "triviaqa-bb_1549", "split": "train_probe", "group_id": "ans:suez canal"}
+{"question_id": "triviaqa-bb_2117", "split": "train_probe", "group_id": "ans:las vegas"}
+{"question_id": "triviaqa-bb_2238", "split": "train_probe", "group_id": "ans:basque independence"}
+{"question_id": "triviaqa-bb_2636", "split": "train_probe", "group_id": "ans:montreal"}
+{"question_id": "triviaqa-bb_2764", "split": "train_probe", "group_id": "ans:horses"}
+{"question_id": "triviaqa-bb_2807", "split": "train_probe", "group_id": "ans:bb"}
+{"question_id": "triviaqa-bb_3235", "split": "train_probe", "group_id": "ans:social environment"}
+{"question_id": "triviaqa-bb_3250", "split": "train_probe", "group_id": "ans:lsd"}
+{"question_id": "triviaqa-bb_3440", "split": "train_probe", "group_id": "ans:the blessed"}
+{"question_id": "triviaqa-bb_3592", "split": "train_probe", "group_id": "ans:messenger"}
+{"question_id": "triviaqa-bb_362", "split": "train_probe", "group_id": "ans:montreal"}
+{"question_id": "triviaqa-bb_3847", "split": "train_probe", "group_id": "ans:cow"}
+{"question_id": "triviaqa-bb_4342", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-bb_4415", "split": "train_probe", "group_id": "ans:1"}
+{"question_id": "triviaqa-bb_4543", "split": "train_probe", "group_id": "ans:hospital"}
+{"question_id": "triviaqa-bb_4965", "split": "train_probe", "group_id": "ans:petronas towers"}
+{"question_id": "triviaqa-bb_5116", "split": "train_probe", "group_id": "ans:split"}
+{"question_id": "triviaqa-bb_5340", "split": "train_probe", "group_id": "ans:brawn"}
+{"question_id": "triviaqa-bb_5892", "split": "train_probe", "group_id": "ans:i"}
+{"question_id": "triviaqa-bb_5986", "split": "train_probe", "group_id": "ans:integrity"}
+{"question_id": "triviaqa-bb_6292", "split": "train_probe", "group_id": "ans:stories"}
+{"question_id": "triviaqa-bb_6487", "split": "train_probe", "group_id": "ans:flowers"}
+{"question_id": "triviaqa-bb_6520", "split": "train_probe", "group_id": "ans:inflation"}
+{"question_id": "triviaqa-bb_6777", "split": "train_probe", "group_id": "ans:elements"}
+{"question_id": "triviaqa-bb_6881", "split": "train_probe", "group_id": "ans:carbon"}
+{"question_id": "triviaqa-bb_7054", "split": "train_probe", "group_id": "ans:womens football games"}
+{"question_id": "triviaqa-bb_7096", "split": "train_probe", "group_id": "ans:fianna fail"}
+{"question_id": "triviaqa-bb_7263", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-bb_7518", "split": "train_probe", "group_id": "ans:montpelier"}
+{"question_id": "triviaqa-bb_7966", "split": "train_probe", "group_id": "ans:rick wakeman"}
+{"question_id": "triviaqa-bb_8079", "split": "train_probe", "group_id": "ans:carbon"}
+{"question_id": "triviaqa-bb_8203", "split": "train_probe", "group_id": "ans:grimaldi"}
+{"question_id": "triviaqa-bb_8401", "split": "train_probe", "group_id": "ans:barings"}
+{"question_id": "triviaqa-bb_8507", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-bb_8732", "split": "train_probe", "group_id": "ans:moldova"}
+{"question_id": "triviaqa-bb_896", "split": "train_probe", "group_id": "ans:tuberculosis"}
+{"question_id": "triviaqa-bb_9098", "split": "train_probe", "group_id": "ans:inertia"}
+{"question_id": "triviaqa-bb_9301", "split": "train_probe", "group_id": "ans:peter the first"}
+{"question_id": "triviaqa-bb_9380", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-bb_968", "split": "train_probe", "group_id": "ans:julian assange"}
+{"question_id": "triviaqa-bt_116", "split": "train_probe", "group_id": "ans:1215"}
+{"question_id": "triviaqa-bt_1218", "split": "train_probe", "group_id": "ans:axes"}
+{"question_id": "triviaqa-bt_1356", "split": "train_probe", "group_id": "ans:nine of diamonds"}
+{"question_id": "triviaqa-bt_1383", "split": "train_probe", "group_id": "ans:everest"}
+{"question_id": "triviaqa-bt_1690", "split": "train_probe", "group_id": "ans:roy keane"}
+{"question_id": "triviaqa-bt_1963", "split": "train_probe", "group_id": "ans:the fifth"}
+{"question_id": "triviaqa-bt_2403", "split": "train_probe", "group_id": "ans:jack mills"}
+{"question_id": "triviaqa-bt_2409", "split": "train_probe", "group_id": "ans:king baudouin stadium"}
+{"question_id": "triviaqa-bt_2434", "split": "train_probe", "group_id": "ans:kosovo"}
+{"question_id": "triviaqa-bt_2590", "split": "train_probe", "group_id": "ans:madonna"}
+{"question_id": "triviaqa-bt_2623", "split": "train_probe", "group_id": "ans:fathers day"}
+{"question_id": "triviaqa-bt_269", "split": "train_probe", "group_id": "ans:citizen smith"}
+{"question_id": "triviaqa-bt_2749", "split": "train_probe", "group_id": "ans:bill tarmey"}
+{"question_id": "triviaqa-bt_2991", "split": "train_probe", "group_id": "ans:acton"}
+{"question_id": "triviaqa-bt_3406", "split": "train_probe", "group_id": "ans:valentine dyall"}
+{"question_id": "triviaqa-bt_3438", "split": "train_probe", "group_id": "ans:the kennel club"}
+{"question_id": "triviaqa-bt_3990", "split": "train_probe", "group_id": "ans:john constable"}
+{"question_id": "triviaqa-bt_4055", "split": "train_probe", "group_id": "ans:r"}
+{"question_id": "triviaqa-bt_4087", "split": "train_probe", "group_id": "ans:flowers"}
+{"question_id": "triviaqa-bt_4322", "split": "train_probe", "group_id": "ans:aardvark"}
+{"question_id": "triviaqa-bt_45", "split": "train_probe", "group_id": "ans:carnaby street"}
+{"question_id": "triviaqa-bt_805", "split": "train_probe", "group_id": "ans:zoe ball"}
+{"question_id": "triviaqa-dpql_1068", "split": "train_probe", "group_id": "ans:las vegas"}
+{"question_id": "triviaqa-dpql_1111", "split": "train_probe", "group_id": "ans:whisky galore"}
+{"question_id": "triviaqa-dpql_125", "split": "train_probe", "group_id": "ans:derby"}
+{"question_id": "triviaqa-dpql_1428", "split": "train_probe", "group_id": "ans:carbon"}
+{"question_id": "triviaqa-dpql_1631", "split": "train_probe", "group_id": "ans:lost in translation"}
+{"question_id": "triviaqa-dpql_205", "split": "train_probe", "group_id": "ans:datsun"}
+{"question_id": "triviaqa-dpql_2140", "split": "train_probe", "group_id": "ans:edward heath"}
+{"question_id": "triviaqa-dpql_2327", "split": "train_probe", "group_id": "ans:finance"}
+{"question_id": "triviaqa-dpql_2572", "split": "train_probe", "group_id": "ans:the beatles"}
+{"question_id": "triviaqa-dpql_2986", "split": "train_probe", "group_id": "ans:1927"}
+{"question_id": "triviaqa-dpql_3424", "split": "train_probe", "group_id": "ans:john pertwee"}
+{"question_id": "triviaqa-dpql_3631", "split": "train_probe", "group_id": "ans:appian way"}
+{"question_id": "triviaqa-dpql_3793", "split": "train_probe", "group_id": "ans:jumpin jack flash"}
+{"question_id": "triviaqa-dpql_381", "split": "train_probe", "group_id": "ans:ibm"}
+{"question_id": "triviaqa-dpql_3818", "split": "train_probe", "group_id": "ans:funchal"}
+{"question_id": "triviaqa-dpql_4610", "split": "train_probe", "group_id": "ans:messenger"}
+{"question_id": "triviaqa-dpql_4627", "split": "train_probe", "group_id": "ans:john wesley harding"}
+{"question_id": "triviaqa-dpql_4814", "split": "train_probe", "group_id": "ans:ontario"}
+{"question_id": "triviaqa-dpql_4895", "split": "train_probe", "group_id": "ans:philippines"}
+{"question_id": "triviaqa-dpql_5057", "split": "train_probe", "group_id": "ans:floating"}
+{"question_id": "triviaqa-dpql_5115", "split": "train_probe", "group_id": "ans:the great gatsby"}
+{"question_id": "triviaqa-dpql_5491", "split": "train_probe", "group_id": "ans:una stubbs"}
+{"question_id": "triviaqa-dpql_5680", "split": "train_probe", "group_id": "ans:iona"}
+{"question_id": "triviaqa-dpql_5706", "split": "train_probe", "group_id": "ans:madrid"}
+{"question_id": "triviaqa-dpql_5824", "split": "train_probe", "group_id": "ans:youll be a man my son"}
+{"question_id": "triviaqa-dpql_5914", "split": "train_probe", "group_id": "ans:vespa"}
+{"question_id": "triviaqa-dpql_6083", "split": "train_probe", "group_id": "ans:le corbusier"}
+{"question_id": "triviaqa-dpql_6223", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-dpql_6343", "split": "train_probe", "group_id": "ans:holly golightly"}
+{"question_id": "triviaqa-dpql_654", "split": "train_probe", "group_id": "ans:war and peace"}
+{"question_id": "triviaqa-dpql_962", "split": "train_probe", "group_id": "ans:janet and john"}
+{"question_id": "triviaqa-jp_1011", "split": "train_probe", "group_id": "ans:bones"}
+{"question_id": "triviaqa-jp_1391", "split": "train_probe", "group_id": "ans:platypus"}
+{"question_id": "triviaqa-jp_1393", "split": "train_probe", "group_id": "ans:minecraft"}
+{"question_id": "triviaqa-jp_159", "split": "train_probe", "group_id": "ans:normandy"}
+{"question_id": "triviaqa-jp_1898", "split": "train_probe", "group_id": "ans:nasdaq"}
+{"question_id": "triviaqa-jp_2054", "split": "train_probe", "group_id": "ans:the daily bugle"}
+{"question_id": "triviaqa-jp_2203", "split": "train_probe", "group_id": "ans:checkers"}
+{"question_id": "triviaqa-jp_2292", "split": "train_probe", "group_id": "ans:facets"}
+{"question_id": "triviaqa-jp_2463", "split": "train_probe", "group_id": "ans:portuguese"}
+{"question_id": "triviaqa-jp_2518", "split": "train_probe", "group_id": "ans:10001"}
+{"question_id": "triviaqa-jp_2645", "split": "train_probe", "group_id": "ans:emerald city"}
+{"question_id": "triviaqa-jp_2989", "split": "train_probe", "group_id": "ans:dr dolittle"}
+{"question_id": "triviaqa-jp_3307", "split": "train_probe", "group_id": "ans:genus"}
+{"question_id": "triviaqa-jp_3898", "split": "train_probe", "group_id": "ans:indus valley"}
+{"question_id": "triviaqa-jp_4355", "split": "train_probe", "group_id": "ans:nasdaq"}
+{"question_id": "triviaqa-jp_553", "split": "train_probe", "group_id": "ans:chechnya"}
+{"question_id": "triviaqa-odql_1001", "split": "train_probe", "group_id": "ans:alison moyet"}
+{"question_id": "triviaqa-odql_10039", "split": "train_probe", "group_id": "ans:belgrade"}
+{"question_id": "triviaqa-odql_10070", "split": "train_probe", "group_id": "ans:bruce alexander"}
+{"question_id": "triviaqa-odql_10483", "split": "train_probe", "group_id": "ans:doris lessing"}
+{"question_id": "triviaqa-odql_10612", "split": "train_probe", "group_id": "ans:jay z"}
+{"question_id": "triviaqa-odql_10829", "split": "train_probe", "group_id": "ans:chatsworth"}
+{"question_id": "triviaqa-odql_10869", "split": "train_probe", "group_id": "ans:derby"}
+{"question_id": "triviaqa-odql_11292", "split": "train_probe", "group_id": "ans:anthony eden"}
+{"question_id": "triviaqa-odql_11507", "split": "train_probe", "group_id": "ans:vince cable"}
+{"question_id": "triviaqa-odql_11582", "split": "train_probe", "group_id": "ans:ecuador"}
+{"question_id": "triviaqa-odql_1190", "split": "train_probe", "group_id": "ans:botswana"}
+{"question_id": "triviaqa-odql_11948", "split": "train_probe", "group_id": "ans:1947"}
+{"question_id": "triviaqa-odql_12016", "split": "train_probe", "group_id": "ans:rue"}
+{"question_id": "triviaqa-odql_12081", "split": "train_probe", "group_id": "ans:mildred pierce"}
+{"question_id": "triviaqa-odql_12227", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-odql_12312", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-odql_12328", "split": "train_probe", "group_id": "ans:moscow"}
+{"question_id": "triviaqa-odql_12351", "split": "train_probe", "group_id": "ans:kiel canal"}
+{"question_id": "triviaqa-odql_12482", "split": "train_probe", "group_id": "ans:philippines"}
+{"question_id": "triviaqa-odql_12535", "split": "train_probe", "group_id": "ans:modest mussorgsky"}
+{"question_id": "triviaqa-odql_12669", "split": "train_probe", "group_id": "ans:moldova"}
+{"question_id": "triviaqa-odql_13", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-odql_1304", "split": "train_probe", "group_id": "ans:molluscs"}
+{"question_id": "triviaqa-odql_13137", "split": "train_probe", "group_id": "ans:the go between"}
+{"question_id": "triviaqa-odql_13140", "split": "train_probe", "group_id": "ans:carousel"}
+{"question_id": "triviaqa-odql_13273", "split": "train_probe", "group_id": "ans:gallbladder"}
+{"question_id": "triviaqa-odql_13281", "split": "train_probe", "group_id": "ans:annie walker"}
+{"question_id": "triviaqa-odql_13428", "split": "train_probe", "group_id": "ans:romania"}
+{"question_id": "triviaqa-odql_13485", "split": "train_probe", "group_id": "ans:kia"}
+{"question_id": "triviaqa-odql_13538", "split": "train_probe", "group_id": "ans:thrift"}
+{"question_id": "triviaqa-odql_14040", "split": "train_probe", "group_id": "ans:wet wet wet"}
+{"question_id": "triviaqa-odql_14185", "split": "train_probe", "group_id": "ans:ming"}
+{"question_id": "triviaqa-odql_14247", "split": "train_probe", "group_id": "ans:1883"}
+{"question_id": "triviaqa-odql_14427", "split": "train_probe", "group_id": "ans:the orange prize"}
+{"question_id": "triviaqa-odql_14474", "split": "train_probe", "group_id": "ans:wolverhampton wanderers"}
+{"question_id": "triviaqa-odql_14838", "split": "train_probe", "group_id": "ans:wednesday"}
+{"question_id": "triviaqa-odql_1598", "split": "train_probe", "group_id": "ans:francois mitterand"}
+{"question_id": "triviaqa-odql_2154", "split": "train_probe", "group_id": "ans:sparks"}
+{"question_id": "triviaqa-odql_2221", "split": "train_probe", "group_id": "ans:woolton pie"}
+{"question_id": "triviaqa-odql_2233", "split": "train_probe", "group_id": "ans:emmy awards"}
+{"question_id": "triviaqa-odql_2466", "split": "train_probe", "group_id": "ans:sedgefield"}
+{"question_id": "triviaqa-odql_2789", "split": "train_probe", "group_id": "ans:cast"}
+{"question_id": "triviaqa-odql_2895", "split": "train_probe", "group_id": "ans:kudu"}
+{"question_id": "triviaqa-odql_2904", "split": "train_probe", "group_id": "ans:tzatziki"}
+{"question_id": "triviaqa-odql_3438", "split": "train_probe", "group_id": "ans:radiohead"}
+{"question_id": "triviaqa-odql_3484", "split": "train_probe", "group_id": "ans:throw momma from the train"}
+{"question_id": "triviaqa-odql_3714", "split": "train_probe", "group_id": "ans:the grand duke"}
+{"question_id": "triviaqa-odql_3868", "split": "train_probe", "group_id": "ans:katy perry"}
+{"question_id": "triviaqa-odql_3970", "split": "train_probe", "group_id": "ans:the reform club"}
+{"question_id": "triviaqa-odql_4044", "split": "train_probe", "group_id": "ans:madonna"}
+{"question_id": "triviaqa-odql_4084", "split": "train_probe", "group_id": "ans:wuthering heights"}
+{"question_id": "triviaqa-odql_4141", "split": "train_probe", "group_id": "ans:danae"}
+{"question_id": "triviaqa-odql_4393", "split": "train_probe", "group_id": "ans:the nutcracker suite"}
+{"question_id": "triviaqa-odql_4402", "split": "train_probe", "group_id": "ans:nauru"}
+{"question_id": "triviaqa-odql_4409", "split": "train_probe", "group_id": "ans:rev"}
+{"question_id": "triviaqa-odql_4931", "split": "train_probe", "group_id": "ans:rhodes"}
+{"question_id": "triviaqa-odql_5186", "split": "train_probe", "group_id": "ans:m11"}
+{"question_id": "triviaqa-odql_5370", "split": "train_probe", "group_id": "ans:a mole"}
+{"question_id": "triviaqa-odql_5622", "split": "train_probe", "group_id": "ans:tinie tempah"}
+{"question_id": "triviaqa-odql_5798", "split": "train_probe", "group_id": "ans:mansard"}
+{"question_id": "triviaqa-odql_5884", "split": "train_probe", "group_id": "ans:mozambique channel"}
+{"question_id": "triviaqa-odql_594", "split": "train_probe", "group_id": "ans:1947"}
+{"question_id": "triviaqa-odql_6311", "split": "train_probe", "group_id": "ans:holography"}
+{"question_id": "triviaqa-odql_6477", "split": "train_probe", "group_id": "ans:hilary swank"}
+{"question_id": "triviaqa-odql_6512", "split": "train_probe", "group_id": "ans:hood"}
+{"question_id": "triviaqa-odql_6789", "split": "train_probe", "group_id": "ans:brandling"}
+{"question_id": "triviaqa-odql_6828", "split": "train_probe", "group_id": "ans:u s s missouri"}
+{"question_id": "triviaqa-odql_6909", "split": "train_probe", "group_id": "ans:carousel"}
+{"question_id": "triviaqa-odql_723", "split": "train_probe", "group_id": "ans:seaweed"}
+{"question_id": "triviaqa-odql_7825", "split": "train_probe", "group_id": "ans:glockenspiel"}
+{"question_id": "triviaqa-odql_7949", "split": "train_probe", "group_id": "ans:kiel canal"}
+{"question_id": "triviaqa-odql_8089", "split": "train_probe", "group_id": "ans:ellice islands"}
+{"question_id": "triviaqa-odql_8144", "split": "train_probe", "group_id": "ans:julius caesar"}
+{"question_id": "triviaqa-odql_8198", "split": "train_probe", "group_id": "ans:l p hartley"}
+{"question_id": "triviaqa-odql_8307", "split": "train_probe", "group_id": "ans:pompey"}
+{"question_id": "triviaqa-odql_8763", "split": "train_probe", "group_id": "ans:botswana"}
+{"question_id": "triviaqa-odql_8942", "split": "train_probe", "group_id": "ans:gerrymandering"}
+{"question_id": "triviaqa-odql_919", "split": "train_probe", "group_id": "ans:m a s h"}
+{"question_id": "triviaqa-odql_9835", "split": "train_probe", "group_id": "ans:bhutan"}
+{"question_id": "triviaqa-odql_9956", "split": "train_probe", "group_id": "ans:harold holt"}
+{"question_id": "triviaqa-qb_1683", "split": "train_probe", "group_id": "ans:prince william"}
+{"question_id": "triviaqa-qb_1762", "split": "train_probe", "group_id": "ans:excrement"}
+{"question_id": "triviaqa-qb_1944", "split": "train_probe", "group_id": "ans:ecuador"}
+{"question_id": "triviaqa-qb_2016", "split": "train_probe", "group_id": "ans:m a s h"}
+{"question_id": "triviaqa-qb_2071", "split": "train_probe", "group_id": "ans:tobacco"}
+{"question_id": "triviaqa-qb_2199", "split": "train_probe", "group_id": "ans:death"}
+{"question_id": "triviaqa-qb_2279", "split": "train_probe", "group_id": "ans:ghee"}
+{"question_id": "triviaqa-qb_2764", "split": "train_probe", "group_id": "ans:madrid"}
+{"question_id": "triviaqa-qb_2869", "split": "train_probe", "group_id": "ans:bertha mason"}
+{"question_id": "triviaqa-qb_2935", "split": "train_probe", "group_id": "ans:seaweed"}
+{"question_id": "triviaqa-qb_3056", "split": "train_probe", "group_id": "ans:150"}
+{"question_id": "triviaqa-qb_3068", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-qb_3129", "split": "train_probe", "group_id": "ans:custard"}
+{"question_id": "triviaqa-qb_3466", "split": "train_probe", "group_id": "ans:phi"}
+{"question_id": "triviaqa-qb_3740", "split": "train_probe", "group_id": "ans:edward heath"}
+{"question_id": "triviaqa-qb_38", "split": "train_probe", "group_id": "ans:wilma flintstone"}
+{"question_id": "triviaqa-qb_3821", "split": "train_probe", "group_id": "ans:john mcenroe"}
+{"question_id": "triviaqa-qb_388", "split": "train_probe", "group_id": "ans:maria bueno"}
+{"question_id": "triviaqa-qb_4235", "split": "train_probe", "group_id": "ans:bulls eye"}
+{"question_id": "triviaqa-qb_4427", "split": "train_probe", "group_id": "ans:joseph and the amazing technicolour dreamcoat"}
+{"question_id": "triviaqa-qb_4569", "split": "train_probe", "group_id": "ans:ash wednesday"}
+{"question_id": "triviaqa-qb_4673", "split": "train_probe", "group_id": "ans:150"}
+{"question_id": "triviaqa-qb_4776", "split": "train_probe", "group_id": "ans:katy perry"}
+{"question_id": "triviaqa-qb_5271", "split": "train_probe", "group_id": "ans:moscow"}
+{"question_id": "triviaqa-qb_5520", "split": "train_probe", "group_id": "ans:frankenstein victor"}
+{"question_id": "triviaqa-qb_5590", "split": "train_probe", "group_id": "ans:lenin"}
+{"question_id": "triviaqa-qb_5598", "split": "train_probe", "group_id": "ans:bones"}
+{"question_id": "triviaqa-qb_5688", "split": "train_probe", "group_id": "ans:radiohead"}
+{"question_id": "triviaqa-qb_574", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-qb_5784", "split": "train_probe", "group_id": "ans:missouri"}
+{"question_id": "triviaqa-qb_6068", "split": "train_probe", "group_id": "ans:cow"}
+{"question_id": "triviaqa-qb_6535", "split": "train_probe", "group_id": "ans:twenty one"}
+{"question_id": "triviaqa-qb_7085", "split": "train_probe", "group_id": "ans:basketball"}
+{"question_id": "triviaqa-qb_7238", "split": "train_probe", "group_id": "ans:moscow"}
+{"question_id": "triviaqa-qb_738", "split": "train_probe", "group_id": "ans:gabriel farenheit"}
+{"question_id": "triviaqa-qb_7894", "split": "train_probe", "group_id": "ans:9"}
+{"question_id": "triviaqa-qb_7937", "split": "train_probe", "group_id": "ans:andrew bonar law"}
+{"question_id": "triviaqa-qb_8024", "split": "train_probe", "group_id": "ans:the sarah siddons award"}
+{"question_id": "triviaqa-qb_8043", "split": "train_probe", "group_id": "ans:heston blumenthal"}
+{"question_id": "triviaqa-qb_8058", "split": "train_probe", "group_id": "ans:othello syndrome"}
+{"question_id": "triviaqa-qb_8090", "split": "train_probe", "group_id": "ans:shetland"}
+{"question_id": "triviaqa-qb_8762", "split": "train_probe", "group_id": "ans:mind the gap"}
+{"question_id": "triviaqa-qb_8808", "split": "train_probe", "group_id": "ans:las vegas"}
+{"question_id": "triviaqa-qb_9149", "split": "train_probe", "group_id": "ans:gregory peck"}
+{"question_id": "triviaqa-qb_9492", "split": "train_probe", "group_id": "ans:phil mickelson"}
+{"question_id": "triviaqa-qf_1138", "split": "train_probe", "group_id": "ans:montreal"}
+{"question_id": "triviaqa-qf_1617", "split": "train_probe", "group_id": "ans:mary decker"}
+{"question_id": "triviaqa-qf_1634", "split": "train_probe", "group_id": "ans:the beatles"}
+{"question_id": "triviaqa-qf_1667", "split": "train_probe", "group_id": "ans:the sahara desert"}
+{"question_id": "triviaqa-qf_3000", "split": "train_probe", "group_id": "ans:john virgo"}
+{"question_id": "triviaqa-qf_3017", "split": "train_probe", "group_id": "ans:the moons a balloon"}
+{"question_id": "triviaqa-qf_3029", "split": "train_probe", "group_id": "ans:sir thomas beecham"}
+{"question_id": "triviaqa-qf_383", "split": "train_probe", "group_id": "ans:basketball"}
+{"question_id": "triviaqa-qf_944", "split": "train_probe", "group_id": "ans:basketball"}
+{"question_id": "triviaqa-qf_958", "split": "train_probe", "group_id": "ans:james buster douglas"}
+{"question_id": "triviaqa-qg_1914", "split": "train_probe", "group_id": "ans:george orwell"}
+{"question_id": "triviaqa-qg_2021", "split": "train_probe", "group_id": "ans:george orwell"}
+{"question_id": "triviaqa-qg_233", "split": "train_probe", "group_id": "ans:basketball"}
+{"question_id": "triviaqa-qg_3192", "split": "train_probe", "group_id": "ans:ups"}
+{"question_id": "triviaqa-qg_3394", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-qg_3477", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-qg_3753", "split": "train_probe", "group_id": "ans:the muffin man"}
+{"question_id": "triviaqa-qg_4458", "split": "train_probe", "group_id": "ans:an even break"}
+{"question_id": "triviaqa-qg_482", "split": "train_probe", "group_id": "ans:cupid"}
+{"question_id": "triviaqa-qg_547", "split": "train_probe", "group_id": "ans:costco"}
+{"question_id": "triviaqa-qg_659", "split": "train_probe", "group_id": "ans:idaho montana and wyoming"}
+{"question_id": "triviaqa-qg_785", "split": "train_probe", "group_id": "ans:ted turner"}
+{"question_id": "triviaqa-qg_952", "split": "train_probe", "group_id": "ans:sneezy"}
+{"question_id": "triviaqa-qw_10155", "split": "train_probe", "group_id": "ans:vertical axis"}
+{"question_id": "triviaqa-qw_1016", "split": "train_probe", "group_id": "ans:hydrocyanic acid"}
+{"question_id": "triviaqa-qw_10645", "split": "train_probe", "group_id": "ans:alan turing"}
+{"question_id": "triviaqa-qw_11093", "split": "train_probe", "group_id": "ans:iggy pop"}
+{"question_id": "triviaqa-qw_11437", "split": "train_probe", "group_id": "ans:jumpin jack flash"}
+{"question_id": "triviaqa-qw_11460", "split": "train_probe", "group_id": "ans:aircraft carrier"}
+{"question_id": "triviaqa-qw_11567", "split": "train_probe", "group_id": "ans:the goodies"}
+{"question_id": "triviaqa-qw_11650", "split": "train_probe", "group_id": "ans:between australia and new guinea"}
+{"question_id": "triviaqa-qw_1182", "split": "train_probe", "group_id": "ans:right angled"}
+{"question_id": "triviaqa-qw_12057", "split": "train_probe", "group_id": "ans:1987"}
+{"question_id": "triviaqa-qw_12138", "split": "train_probe", "group_id": "ans:australian open"}
+{"question_id": "triviaqa-qw_12556", "split": "train_probe", "group_id": "ans:andrew bonar law"}
+{"question_id": "triviaqa-qw_12732", "split": "train_probe", "group_id": "ans:1975"}
+{"question_id": "triviaqa-qw_12770", "split": "train_probe", "group_id": "ans:ming"}
+{"question_id": "triviaqa-qw_13734", "split": "train_probe", "group_id": "ans:1980"}
+{"question_id": "triviaqa-qw_13959", "split": "train_probe", "group_id": "ans:republic of madagascar"}
+{"question_id": "triviaqa-qw_14082", "split": "train_probe", "group_id": "ans:womens pole vault"}
+{"question_id": "triviaqa-qw_14545", "split": "train_probe", "group_id": "ans:tapioca"}
+{"question_id": "triviaqa-qw_14659", "split": "train_probe", "group_id": "ans:sandie shaw"}
+{"question_id": "triviaqa-qw_14687", "split": "train_probe", "group_id": "ans:trousseau"}
+{"question_id": "triviaqa-qw_14729", "split": "train_probe", "group_id": "ans:lew zealand"}
+{"question_id": "triviaqa-qw_14790", "split": "train_probe", "group_id": "ans:rip van winkle"}
+{"question_id": "triviaqa-qw_14845", "split": "train_probe", "group_id": "ans:film"}
+{"question_id": "triviaqa-qw_1524", "split": "train_probe", "group_id": "ans:the great gatsby"}
+{"question_id": "triviaqa-qw_15307", "split": "train_probe", "group_id": "ans:wuthering heights"}
+{"question_id": "triviaqa-qw_16235", "split": "train_probe", "group_id": "ans:malta"}
+{"question_id": "triviaqa-qw_16513", "split": "train_probe", "group_id": "ans:fosse way"}
+{"question_id": "triviaqa-qw_16693", "split": "train_probe", "group_id": "ans:1861"}
+{"question_id": "triviaqa-qw_1812", "split": "train_probe", "group_id": "ans:inflation"}
+{"question_id": "triviaqa-qw_1914", "split": "train_probe", "group_id": "ans:gulf stream"}
+{"question_id": "triviaqa-qw_2149", "split": "train_probe", "group_id": "ans:the seven wonders of the ancient world"}
+{"question_id": "triviaqa-qw_2493", "split": "train_probe", "group_id": "ans:special figures figure skating"}
+{"question_id": "triviaqa-qw_2544", "split": "train_probe", "group_id": "ans:albedo"}
+{"question_id": "triviaqa-qw_3144", "split": "train_probe", "group_id": "ans:pearl jam"}
+{"question_id": "triviaqa-qw_3257", "split": "train_probe", "group_id": "ans:horsehead"}
+{"question_id": "triviaqa-qw_3465", "split": "train_probe", "group_id": "ans:boiling point"}
+{"question_id": "triviaqa-qw_351", "split": "train_probe", "group_id": "ans:1927"}
+{"question_id": "triviaqa-qw_3582", "split": "train_probe", "group_id": "ans:river severn"}
+{"question_id": "triviaqa-qw_3596", "split": "train_probe", "group_id": "ans:aintree"}
+{"question_id": "triviaqa-qw_3826", "split": "train_probe", "group_id": "ans:gold rings"}
+{"question_id": "triviaqa-qw_385", "split": "train_probe", "group_id": "ans:asia minor"}
+{"question_id": "triviaqa-qw_4069", "split": "train_probe", "group_id": "ans:prince albert"}
+{"question_id": "triviaqa-qw_4121", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-qw_4232", "split": "train_probe", "group_id": "ans:peter sellers"}
+{"question_id": "triviaqa-qw_4625", "split": "train_probe", "group_id": "ans:vitreous humour"}
+{"question_id": "triviaqa-qw_4882", "split": "train_probe", "group_id": "ans:40 days"}
+{"question_id": "triviaqa-qw_5140", "split": "train_probe", "group_id": "ans:somerset maugham"}
+{"question_id": "triviaqa-qw_5487", "split": "train_probe", "group_id": "ans:18"}
+{"question_id": "triviaqa-qw_5777", "split": "train_probe", "group_id": "ans:the taking of pelham one two three"}
+{"question_id": "triviaqa-qw_6139", "split": "train_probe", "group_id": "ans:bougainvillea"}
+{"question_id": "triviaqa-qw_7033", "split": "train_probe", "group_id": "ans:an iron lung"}
+{"question_id": "triviaqa-qw_7229", "split": "train_probe", "group_id": "ans:the beatles"}
+{"question_id": "triviaqa-qw_7374", "split": "train_probe", "group_id": "ans:susan boyle"}
+{"question_id": "triviaqa-qw_7412", "split": "train_probe", "group_id": "ans:easter island"}
+{"question_id": "triviaqa-qw_7457", "split": "train_probe", "group_id": "ans:four weddings and a funeral"}
+{"question_id": "triviaqa-qw_7600", "split": "train_probe", "group_id": "ans:suez canal"}
+{"question_id": "triviaqa-qw_7648", "split": "train_probe", "group_id": "ans:2 to 4 years"}
+{"question_id": "triviaqa-qw_8039", "split": "train_probe", "group_id": "ans:they cant take that away from me"}
+{"question_id": "triviaqa-qw_808", "split": "train_probe", "group_id": "ans:1296"}
+{"question_id": "triviaqa-qw_8385", "split": "train_probe", "group_id": "ans:appaloosa"}
+{"question_id": "triviaqa-qw_841", "split": "train_probe", "group_id": "ans:von hindenburg"}
+{"question_id": "triviaqa-qw_8563", "split": "train_probe", "group_id": "ans:etruscan"}
+{"question_id": "triviaqa-qw_9154", "split": "train_probe", "group_id": "ans:adventure"}
+{"question_id": "triviaqa-qw_9338", "split": "train_probe", "group_id": "ans:caribbean"}
+{"question_id": "triviaqa-qw_9516", "split": "train_probe", "group_id": "ans:mike gatting"}
+{"question_id": "triviaqa-qw_9842", "split": "train_probe", "group_id": "ans:standup comedy"}
+{"question_id": "triviaqa-qz_1189", "split": "train_probe", "group_id": "ans:the word"}
+{"question_id": "triviaqa-qz_147", "split": "train_probe", "group_id": "ans:9"}
+{"question_id": "triviaqa-qz_1794", "split": "train_probe", "group_id": "ans:the sunday post"}
+{"question_id": "triviaqa-qz_1800", "split": "train_probe", "group_id": "ans:the beatles"}
+{"question_id": "triviaqa-qz_1821", "split": "train_probe", "group_id": "ans:peter shilton"}
+{"question_id": "triviaqa-qz_2131", "split": "train_probe", "group_id": "ans:jimmy carr"}
+{"question_id": "triviaqa-qz_2227", "split": "train_probe", "group_id": "ans:the dewclaw"}
+{"question_id": "triviaqa-qz_2384", "split": "train_probe", "group_id": "ans:kenneth branagh"}
+{"question_id": "triviaqa-qz_2428", "split": "train_probe", "group_id": "ans:kitsune"}
+{"question_id": "triviaqa-qz_2654", "split": "train_probe", "group_id": "ans:denis law"}
+{"question_id": "triviaqa-qz_3130", "split": "train_probe", "group_id": "ans:a blackberry"}
+{"question_id": "triviaqa-qz_3583", "split": "train_probe", "group_id": "ans:a beetle"}
+{"question_id": "triviaqa-qz_3745", "split": "train_probe", "group_id": "ans:cliff thorburn"}
+{"question_id": "triviaqa-qz_5075", "split": "train_probe", "group_id": "ans:the prince of wales"}
+{"question_id": "triviaqa-qz_5496", "split": "train_probe", "group_id": "ans:hope"}
+{"question_id": "triviaqa-qz_6687", "split": "train_probe", "group_id": "ans:baby its cold outside"}
+{"question_id": "triviaqa-qz_6806", "split": "train_probe", "group_id": "ans:panther"}
+{"question_id": "triviaqa-qz_74", "split": "train_probe", "group_id": "ans:3 142"}
+{"question_id": "triviaqa-qz_755", "split": "train_probe", "group_id": "ans:jack the ripper"}
+{"question_id": "triviaqa-qz_921", "split": "train_probe", "group_id": "ans:sam cooke"}
+{"question_id": "triviaqa-sfq_10083", "split": "train_probe", "group_id": "ans:james buster douglas"}
+{"question_id": "triviaqa-sfq_10516", "split": "train_probe", "group_id": "ans:jack wilshere"}
+{"question_id": "triviaqa-sfq_10565", "split": "train_probe", "group_id": "ans:captain flint"}
+{"question_id": "triviaqa-sfq_10664", "split": "train_probe", "group_id": "ans:1"}
+{"question_id": "triviaqa-sfq_10817", "split": "train_probe", "group_id": "ans:sculpture"}
+{"question_id": "triviaqa-sfq_10873", "split": "train_probe", "group_id": "ans:cast"}
+{"question_id": "triviaqa-sfq_11066", "split": "train_probe", "group_id": "ans:transuranic"}
+{"question_id": "triviaqa-sfq_11088", "split": "train_probe", "group_id": "ans:wuthering heights"}
+{"question_id": "triviaqa-sfq_11176", "split": "train_probe", "group_id": "ans:theo walcott"}
+{"question_id": "triviaqa-sfq_1137", "split": "train_probe", "group_id": "ans:kabuki"}
+{"question_id": "triviaqa-sfq_11477", "split": "train_probe", "group_id": "ans:denis law"}
+{"question_id": "triviaqa-sfq_11672", "split": "train_probe", "group_id": "ans:ontario"}
+{"question_id": "triviaqa-sfq_11719", "split": "train_probe", "group_id": "ans:theatre"}
+{"question_id": "triviaqa-sfq_11726", "split": "train_probe", "group_id": "ans:ether"}
+{"question_id": "triviaqa-sfq_1175", "split": "train_probe", "group_id": "ans:slow"}
+{"question_id": "triviaqa-sfq_12468", "split": "train_probe", "group_id": "ans:john sullivan"}
+{"question_id": "triviaqa-sfq_12634", "split": "train_probe", "group_id": "ans:willy lott"}
+{"question_id": "triviaqa-sfq_1278", "split": "train_probe", "group_id": "ans:ijsselmeer"}
+{"question_id": "triviaqa-sfq_12824", "split": "train_probe", "group_id": "ans:jan van eyck"}
+{"question_id": "triviaqa-sfq_13", "split": "train_probe", "group_id": "ans:ate the malt"}
+{"question_id": "triviaqa-sfq_13277", "split": "train_probe", "group_id": "ans:eros"}
+{"question_id": "triviaqa-sfq_13320", "split": "train_probe", "group_id": "ans:1987"}
+{"question_id": "triviaqa-sfq_13345", "split": "train_probe", "group_id": "ans:mir"}
+{"question_id": "triviaqa-sfq_13422", "split": "train_probe", "group_id": "ans:namibia"}
+{"question_id": "triviaqa-sfq_13745", "split": "train_probe", "group_id": "ans:red star belgrade"}
+{"question_id": "triviaqa-sfq_13873", "split": "train_probe", "group_id": "ans:clark gable"}
+{"question_id": "triviaqa-sfq_14052", "split": "train_probe", "group_id": "ans:1995"}
+{"question_id": "triviaqa-sfq_14081", "split": "train_probe", "group_id": "ans:1993"}
+{"question_id": "triviaqa-sfq_14257", "split": "train_probe", "group_id": "ans:il trovatore"}
+{"question_id": "triviaqa-sfq_14271", "split": "train_probe", "group_id": "ans:kia"}
+{"question_id": "triviaqa-sfq_14356", "split": "train_probe", "group_id": "ans:carousel"}
+{"question_id": "triviaqa-sfq_14598", "split": "train_probe", "group_id": "ans:an elephant"}
+{"question_id": "triviaqa-sfq_14843", "split": "train_probe", "group_id": "ans:john constable"}
+{"question_id": "triviaqa-sfq_14892", "split": "train_probe", "group_id": "ans:lake placid"}
+{"question_id": "triviaqa-sfq_15126", "split": "train_probe", "group_id": "ans:prince philip"}
+{"question_id": "triviaqa-sfq_15417", "split": "train_probe", "group_id": "ans:eurythmics"}
+{"question_id": "triviaqa-sfq_15785", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-sfq_15794", "split": "train_probe", "group_id": "ans:ontario"}
+{"question_id": "triviaqa-sfq_15802", "split": "train_probe", "group_id": "ans:the dandy"}
+{"question_id": "triviaqa-sfq_16067", "split": "train_probe", "group_id": "ans:moldova"}
+{"question_id": "triviaqa-sfq_16428", "split": "train_probe", "group_id": "ans:romania"}
+{"question_id": "triviaqa-sfq_16585", "split": "train_probe", "group_id": "ans:il trovatore"}
+{"question_id": "triviaqa-sfq_16690", "split": "train_probe", "group_id": "ans:nunc dimittis"}
+{"question_id": "triviaqa-sfq_16806", "split": "train_probe", "group_id": "ans:nubian desert"}
+{"question_id": "triviaqa-sfq_17026", "split": "train_probe", "group_id": "ans:virtual"}
+{"question_id": "triviaqa-sfq_17294", "split": "train_probe", "group_id": "ans:harold holt"}
+{"question_id": "triviaqa-sfq_17663", "split": "train_probe", "group_id": "ans:anchovy"}
+{"question_id": "triviaqa-sfq_1817", "split": "train_probe", "group_id": "ans:ted turner"}
+{"question_id": "triviaqa-sfq_18204", "split": "train_probe", "group_id": "ans:nicholas poussin"}
+{"question_id": "triviaqa-sfq_18373", "split": "train_probe", "group_id": "ans:phil mickelson"}
+{"question_id": "triviaqa-sfq_18477", "split": "train_probe", "group_id": "ans:sylvia plath"}
+{"question_id": "triviaqa-sfq_18514", "split": "train_probe", "group_id": "ans:horses"}
+{"question_id": "triviaqa-sfq_18559", "split": "train_probe", "group_id": "ans:carbon"}
+{"question_id": "triviaqa-sfq_18737", "split": "train_probe", "group_id": "ans:lake placid"}
+{"question_id": "triviaqa-sfq_19250", "split": "train_probe", "group_id": "ans:anita roddick"}
+{"question_id": "triviaqa-sfq_19464", "split": "train_probe", "group_id": "ans:lohengrin"}
+{"question_id": "triviaqa-sfq_19572", "split": "train_probe", "group_id": "ans:goose pimples"}
+{"question_id": "triviaqa-sfq_19717", "split": "train_probe", "group_id": "ans:robert louis stevenson"}
+{"question_id": "triviaqa-sfq_19958", "split": "train_probe", "group_id": "ans:jack the ripper"}
+{"question_id": "triviaqa-sfq_20142", "split": "train_probe", "group_id": "ans:bridget jones diary"}
+{"question_id": "triviaqa-sfq_20949", "split": "train_probe", "group_id": "ans:nottinghamshire"}
+{"question_id": "triviaqa-sfq_2187", "split": "train_probe", "group_id": "ans:loch morar"}
+{"question_id": "triviaqa-sfq_21930", "split": "train_probe", "group_id": "ans:hesperides"}
+{"question_id": "triviaqa-sfq_21993", "split": "train_probe", "group_id": "ans:michael morpurgo"}
+{"question_id": "triviaqa-sfq_22421", "split": "train_probe", "group_id": "ans:doris lessing"}
+{"question_id": "triviaqa-sfq_22848", "split": "train_probe", "group_id": "ans:crosswords"}
+{"question_id": "triviaqa-sfq_22971", "split": "train_probe", "group_id": "ans:st louis mo"}
+{"question_id": "triviaqa-sfq_23017", "split": "train_probe", "group_id": "ans:will carling"}
+{"question_id": "triviaqa-sfq_2318", "split": "train_probe", "group_id": "ans:harry potter and the deathly hallows"}
+{"question_id": "triviaqa-sfq_23514", "split": "train_probe", "group_id": "ans:grey seal"}
+{"question_id": "triviaqa-sfq_23543", "split": "train_probe", "group_id": "ans:james buster douglas"}
+{"question_id": "triviaqa-sfq_23762", "split": "train_probe", "group_id": "ans:postage stamps"}
+{"question_id": "triviaqa-sfq_23983", "split": "train_probe", "group_id": "ans:emma"}
+{"question_id": "triviaqa-sfq_24225", "split": "train_probe", "group_id": "ans:cuneiform"}
+{"question_id": "triviaqa-sfq_24244", "split": "train_probe", "group_id": "ans:wayne gretzky"}
+{"question_id": "triviaqa-sfq_24363", "split": "train_probe", "group_id": "ans:john constable"}
+{"question_id": "triviaqa-sfq_24379", "split": "train_probe", "group_id": "ans:lithuania"}
+{"question_id": "triviaqa-sfq_24400", "split": "train_probe", "group_id": "ans:carousel"}
+{"question_id": "triviaqa-sfq_24876", "split": "train_probe", "group_id": "ans:madonna"}
+{"question_id": "triviaqa-sfq_25397", "split": "train_probe", "group_id": "ans:barings"}
+{"question_id": "triviaqa-sfq_25398", "split": "train_probe", "group_id": "ans:the observer"}
+{"question_id": "triviaqa-sfq_25562", "split": "train_probe", "group_id": "ans:nick owen"}
+{"question_id": "triviaqa-sfq_25584", "split": "train_probe", "group_id": "ans:mike gatting"}
+{"question_id": "triviaqa-sfq_25587", "split": "train_probe", "group_id": "ans:sedgefield"}
+{"question_id": "triviaqa-sfq_2570", "split": "train_probe", "group_id": "ans:rial"}
+{"question_id": "triviaqa-sfq_25828", "split": "train_probe", "group_id": "ans:yann martel"}
+{"question_id": "triviaqa-sfq_26121", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-sfq_2805", "split": "train_probe", "group_id": "ans:gregorian calendar"}
+{"question_id": "triviaqa-sfq_2940", "split": "train_probe", "group_id": "ans:malta"}
+{"question_id": "triviaqa-sfq_2993", "split": "train_probe", "group_id": "ans:midsomer murders"}
+{"question_id": "triviaqa-sfq_3547", "split": "train_probe", "group_id": "ans:jowett"}
+{"question_id": "triviaqa-sfq_3811", "split": "train_probe", "group_id": "ans:madonna"}
+{"question_id": "triviaqa-sfq_388", "split": "train_probe", "group_id": "ans:boomerang"}
+{"question_id": "triviaqa-sfq_4039", "split": "train_probe", "group_id": "ans:ghee"}
+{"question_id": "triviaqa-sfq_4245", "split": "train_probe", "group_id": "ans:sikh ism"}
+{"question_id": "triviaqa-sfq_4762", "split": "train_probe", "group_id": "ans:george orwell"}
+{"question_id": "triviaqa-sfq_4851", "split": "train_probe", "group_id": "ans:the time machine"}
+{"question_id": "triviaqa-sfq_5378", "split": "train_probe", "group_id": "ans:aircraft carrier"}
+{"question_id": "triviaqa-sfq_5419", "split": "train_probe", "group_id": "ans:romania"}
+{"question_id": "triviaqa-sfq_5770", "split": "train_probe", "group_id": "ans:the hedgehog"}
+{"question_id": "triviaqa-sfq_5901", "split": "train_probe", "group_id": "ans:a sow"}
+{"question_id": "triviaqa-sfq_5904", "split": "train_probe", "group_id": "ans:turkey"}
+{"question_id": "triviaqa-sfq_6008", "split": "train_probe", "group_id": "ans:alison moyet"}
+{"question_id": "triviaqa-sfq_6935", "split": "train_probe", "group_id": "ans:long island"}
+{"question_id": "triviaqa-sfq_7117", "split": "train_probe", "group_id": "ans:greyfriars bobby"}
+{"question_id": "triviaqa-sfq_7140", "split": "train_probe", "group_id": "ans:bender"}
+{"question_id": "triviaqa-sfq_7554", "split": "train_probe", "group_id": "ans:port vale"}
+{"question_id": "triviaqa-sfq_7603", "split": "train_probe", "group_id": "ans:stephen potter"}
+{"question_id": "triviaqa-sfq_7864", "split": "train_probe", "group_id": "ans:iggy pop"}
+{"question_id": "triviaqa-sfq_7997", "split": "train_probe", "group_id": "ans:annie leibovitz"}
+{"question_id": "triviaqa-sfq_8344", "split": "train_probe", "group_id": "ans:heston blumenthal"}
+{"question_id": "triviaqa-sfq_8522", "split": "train_probe", "group_id": "ans:joseph merrick"}
+{"question_id": "triviaqa-sfq_8552", "split": "train_probe", "group_id": "ans:evita"}
+{"question_id": "triviaqa-sfq_8582", "split": "train_probe", "group_id": "ans:tokyo"}
+{"question_id": "triviaqa-sfq_8651", "split": "train_probe", "group_id": "ans:brenda dean"}
+{"question_id": "triviaqa-sfq_8941", "split": "train_probe", "group_id": "ans:theatre"}
+{"question_id": "triviaqa-sfq_9464", "split": "train_probe", "group_id": "ans:allan klein"}
+{"question_id": "triviaqa-sfq_9816", "split": "train_probe", "group_id": "ans:ship"}
+{"question_id": "triviaqa-sfq_9830", "split": "train_probe", "group_id": "ans:the pringle"}
+{"question_id": "triviaqa-sfq_985", "split": "train_probe", "group_id": "ans:the boston pops"}
+{"question_id": "triviaqa-sfq_9993", "split": "train_probe", "group_id": "ans:google search engine"}
+{"question_id": "triviaqa-tb_1946", "split": "train_probe", "group_id": "ans:mitochondrial eve"}
+{"question_id": "triviaqa-tb_1962", "split": "train_probe", "group_id": "ans:anthropocene"}
+{"question_id": "triviaqa-tb_666", "split": "train_probe", "group_id": "ans:red eye gravy"}
+{"question_id": "triviaqa-tc_106", "split": "train_probe", "group_id": "ans:lauren bacall"}
+{"question_id": "triviaqa-tc_1098", "split": "train_probe", "group_id": "ans:oprah winfrey"}
+{"question_id": "triviaqa-tc_1114", "split": "train_probe", "group_id": "ans:leonard nimoy"}
+{"question_id": "triviaqa-tc_1816", "split": "train_probe", "group_id": "ans:frank harris"}
+{"question_id": "triviaqa-tc_1888", "split": "train_probe", "group_id": "ans:presley"}
+{"question_id": "triviaqa-tc_2031", "split": "train_probe", "group_id": "ans:maastricht"}
+{"question_id": "triviaqa-tc_2287", "split": "train_probe", "group_id": "ans:1929"}
+{"question_id": "triviaqa-tc_2564", "split": "train_probe", "group_id": "ans:mao zedong"}
+{"question_id": "triviaqa-tc_2861", "split": "train_probe", "group_id": "ans:hydrophytes"}
+{"question_id": "triviaqa-tc_3026", "split": "train_probe", "group_id": "ans:great barrier reef"}
+{"question_id": "triviaqa-tc_3086", "split": "train_probe", "group_id": "ans:ether"}
+{"question_id": "triviaqa-tc_56", "split": "train_probe", "group_id": "ans:cancer"}
+{"question_id": "triviaqa-tc_657", "split": "train_probe", "group_id": "ans:richard noble"}
+{"question_id": "triviaqa-tc_723", "split": "train_probe", "group_id": "ans:hockney"}
+{"question_id": "triviaqa-tc_827", "split": "train_probe", "group_id": "ans:walter hagen"}
+{"question_id": "triviaqa-wh_1355", "split": "train_probe", "group_id": "ans:caribbean"}
+{"question_id": "triviaqa-wh_1361", "split": "train_probe", "group_id": "ans:wolf hall"}
+{"question_id": "triviaqa-wh_2835", "split": "train_probe", "group_id": "ans:dragonfly"}
+{"question_id": "triviaqa-wh_3150", "split": "train_probe", "group_id": "ans:pirates of penzance"}
+{"question_id": "triviaqa-wh_3858", "split": "train_probe", "group_id": "ans:george orwell"}
+{"question_id": "triviaqa-wh_3946", "split": "train_probe", "group_id": "ans:dr feelgood"}
+{"question_id": "triviaqa-wh_3999", "split": "train_probe", "group_id": "ans:isambard kingdom brunel"}
+{"question_id": "triviaqa-wh_4199", "split": "train_probe", "group_id": "ans:bouvier"}
+{"question_id": "triviaqa-wh_421", "split": "train_probe", "group_id": "ans:lyneham"}
+{"question_id": "triviaqa-wh_432", "split": "train_probe", "group_id": "ans:clocks"}
+{"question_id": "triviaqa-wh_4331", "split": "train_probe", "group_id": "ans:gironde"}
+{"question_id": "triviaqa-wh_698", "split": "train_probe", "group_id": "ans:molly malone"}
+{"question_id": "triviaqa-wh_797", "split": "train_probe", "group_id": "ans:emma"}
+{"question_id": "triviaqa-wh_810", "split": "train_probe", "group_id": "ans:midsomer murders"}
+{"question_id": "triviaqa-wh_871", "split": "train_probe", "group_id": "ans:top hat"}
+{"question_id": "triviaqa-bb_1112", "split": "validation", "group_id": "ans:beer glasses"}
+{"question_id": "triviaqa-bb_1115", "split": "validation", "group_id": "ans:trombones"}
+{"question_id": "triviaqa-bb_1372", "split": "validation", "group_id": "ans:winds"}
+{"question_id": "triviaqa-bb_2054", "split": "validation", "group_id": "ans:aqua fortis"}
+{"question_id": "triviaqa-bb_303", "split": "validation", "group_id": "ans:burial shroud"}
+{"question_id": "triviaqa-bb_5241", "split": "validation", "group_id": "ans:crimea"}
+{"question_id": "triviaqa-bb_5349", "split": "validation", "group_id": "ans:padre"}
+{"question_id": "triviaqa-bb_5849", "split": "validation", "group_id": "ans:baht"}
+{"question_id": "triviaqa-bb_5861", "split": "validation", "group_id": "ans:corgi"}
+{"question_id": "triviaqa-bb_6022", "split": "validation", "group_id": "ans:two thirds"}
+{"question_id": "triviaqa-bb_6117", "split": "validation", "group_id": "ans:zimbabwe"}
+{"question_id": "triviaqa-bb_6613", "split": "validation", "group_id": "ans:james the first"}
+{"question_id": "triviaqa-bb_7071", "split": "validation", "group_id": "ans:woad"}
+{"question_id": "triviaqa-bb_7499", "split": "validation", "group_id": "ans:graham nash"}
+{"question_id": "triviaqa-bb_7899", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-bb_7955", "split": "validation", "group_id": "ans:sugar ray robinson"}
+{"question_id": "triviaqa-bb_810", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-bb_8676", "split": "validation", "group_id": "ans:kraft"}
+{"question_id": "triviaqa-bb_8919", "split": "validation", "group_id": "ans:fotheringhay"}
+{"question_id": "triviaqa-bb_8977", "split": "validation", "group_id": "ans:peter the great"}
+{"question_id": "triviaqa-bb_9251", "split": "validation", "group_id": "ans:fungi"}
+{"question_id": "triviaqa-bt_1131", "split": "validation", "group_id": "ans:sabena"}
+{"question_id": "triviaqa-bt_1268", "split": "validation", "group_id": "ans:al pacino"}
+{"question_id": "triviaqa-bt_2624", "split": "validation", "group_id": "ans:all saints day"}
+{"question_id": "triviaqa-bt_2674", "split": "validation", "group_id": "ans:augustus"}
+{"question_id": "triviaqa-bt_3161", "split": "validation", "group_id": "ans:quantum of solace"}
+{"question_id": "triviaqa-bt_3236", "split": "validation", "group_id": "ans:donkey serenade"}
+{"question_id": "triviaqa-bt_363", "split": "validation", "group_id": "ans:august 12th"}
+{"question_id": "triviaqa-bt_385", "split": "validation", "group_id": "ans:question of sport"}
+{"question_id": "triviaqa-bt_4036", "split": "validation", "group_id": "ans:abacus"}
+{"question_id": "triviaqa-dpql_1884", "split": "validation", "group_id": "ans:hara kiri"}
+{"question_id": "triviaqa-dpql_3092", "split": "validation", "group_id": "ans:john mortimer"}
+{"question_id": "triviaqa-dpql_4319", "split": "validation", "group_id": "ans:marshall petain"}
+{"question_id": "triviaqa-dpql_4553", "split": "validation", "group_id": "ans:stillwell"}
+{"question_id": "triviaqa-dpql_4756", "split": "validation", "group_id": "ans:stillwell"}
+{"question_id": "triviaqa-dpql_4762", "split": "validation", "group_id": "ans:argus"}
+{"question_id": "triviaqa-dpql_5121", "split": "validation", "group_id": "ans:kvetch"}
+{"question_id": "triviaqa-dpql_6139", "split": "validation", "group_id": "ans:edward iii"}
+{"question_id": "triviaqa-dpql_6276", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-dpql_768", "split": "validation", "group_id": "ans:scoop"}
+{"question_id": "triviaqa-jp_1177", "split": "validation", "group_id": "ans:alchemist"}
+{"question_id": "triviaqa-jp_1288", "split": "validation", "group_id": "ans:emeril lagasse"}
+{"question_id": "triviaqa-jp_1381", "split": "validation", "group_id": "ans:michelin"}
+{"question_id": "triviaqa-jp_1936", "split": "validation", "group_id": "ans:mecca"}
+{"question_id": "triviaqa-jp_2035", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-jp_2186", "split": "validation", "group_id": "ans:sarah palin"}
+{"question_id": "triviaqa-jp_4252", "split": "validation", "group_id": "ans:sufjan stevens"}
+{"question_id": "triviaqa-jp_856", "split": "validation", "group_id": "ans:olympia"}
+{"question_id": "triviaqa-jp_931", "split": "validation", "group_id": "ans:sue"}
+{"question_id": "triviaqa-odql_10255", "split": "validation", "group_id": "ans:marmite"}
+{"question_id": "triviaqa-odql_11035", "split": "validation", "group_id": "ans:jack london"}
+{"question_id": "triviaqa-odql_12477", "split": "validation", "group_id": "ans:diane keaton"}
+{"question_id": "triviaqa-odql_12783", "split": "validation", "group_id": "ans:caractacus potts"}
+{"question_id": "triviaqa-odql_1393", "split": "validation", "group_id": "ans:edward iii"}
+{"question_id": "triviaqa-odql_14021", "split": "validation", "group_id": "ans:pal joey"}
+{"question_id": "triviaqa-odql_14578", "split": "validation", "group_id": "ans:the equals"}
+{"question_id": "triviaqa-odql_14853", "split": "validation", "group_id": "ans:1982"}
+{"question_id": "triviaqa-odql_2255", "split": "validation", "group_id": "ans:zimbabwe"}
+{"question_id": "triviaqa-odql_4233", "split": "validation", "group_id": "ans:the hurt locker"}
+{"question_id": "triviaqa-odql_4422", "split": "validation", "group_id": "ans:richmond"}
+{"question_id": "triviaqa-odql_6190", "split": "validation", "group_id": "ans:epistle to the romans"}
+{"question_id": "triviaqa-odql_7293", "split": "validation", "group_id": "ans:amon goeth"}
+{"question_id": "triviaqa-odql_7818", "split": "validation", "group_id": "ans:says law"}
+{"question_id": "triviaqa-odql_7865", "split": "validation", "group_id": "ans:the merry wives of windsor"}
+{"question_id": "triviaqa-odql_8191", "split": "validation", "group_id": "ans:penelope"}
+{"question_id": "triviaqa-odql_921", "split": "validation", "group_id": "ans:guardian"}
+{"question_id": "triviaqa-qb_151", "split": "validation", "group_id": "ans:oranges"}
+{"question_id": "triviaqa-qb_1850", "split": "validation", "group_id": "ans:f scott fitzgerald"}
+{"question_id": "triviaqa-qb_2101", "split": "validation", "group_id": "ans:only fools and horses"}
+{"question_id": "triviaqa-qb_2215", "split": "validation", "group_id": "ans:al pacino"}
+{"question_id": "triviaqa-qb_2498", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-qb_2514", "split": "validation", "group_id": "ans:pyotr tchaikovsky"}
+{"question_id": "triviaqa-qb_2577", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-qb_2621", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-qb_2833", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-qb_3876", "split": "validation", "group_id": "ans:augustus"}
+{"question_id": "triviaqa-qb_3940", "split": "validation", "group_id": "ans:june"}
+{"question_id": "triviaqa-qb_4016", "split": "validation", "group_id": "ans:warren beatty"}
+{"question_id": "triviaqa-qb_5444", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-qb_60", "split": "validation", "group_id": "ans:abacus"}
+{"question_id": "triviaqa-qb_6288", "split": "validation", "group_id": "ans:june"}
+{"question_id": "triviaqa-qb_6721", "split": "validation", "group_id": "ans:gary sparrow"}
+{"question_id": "triviaqa-qb_7207", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-qb_7426", "split": "validation", "group_id": "ans:ken russell"}
+{"question_id": "triviaqa-qb_7797", "split": "validation", "group_id": "ans:ringo"}
+{"question_id": "triviaqa-qb_9334", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-qb_9432", "split": "validation", "group_id": "ans:june"}
+{"question_id": "triviaqa-qf_1632", "split": "validation", "group_id": "ans:1955"}
+{"question_id": "triviaqa-qf_1735", "split": "validation", "group_id": "ans:1948"}
+{"question_id": "triviaqa-qf_2276", "split": "validation", "group_id": "ans:augustus"}
+{"question_id": "triviaqa-qf_3456", "split": "validation", "group_id": "ans:richmond"}
+{"question_id": "triviaqa-qf_3699", "split": "validation", "group_id": "ans:the river taff"}
+{"question_id": "triviaqa-qf_428", "split": "validation", "group_id": "ans:march 1st"}
+{"question_id": "triviaqa-qg_1107", "split": "validation", "group_id": "ans:muhammed ali"}
+{"question_id": "triviaqa-qg_1241", "split": "validation", "group_id": "ans:90"}
+{"question_id": "triviaqa-qg_1429", "split": "validation", "group_id": "ans:sherlock holmes"}
+{"question_id": "triviaqa-qg_1704", "split": "validation", "group_id": "ans:too long didnt read"}
+{"question_id": "triviaqa-qg_1993", "split": "validation", "group_id": "ans:sherlock holmes"}
+{"question_id": "triviaqa-qg_2206", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-qg_2390", "split": "validation", "group_id": "ans:momentum"}
+{"question_id": "triviaqa-qg_261", "split": "validation", "group_id": "ans:the bill of rights"}
+{"question_id": "triviaqa-qg_2678", "split": "validation", "group_id": "ans:mccormick"}
+{"question_id": "triviaqa-qg_2944", "split": "validation", "group_id": "ans:methadone"}
+{"question_id": "triviaqa-qg_350", "split": "validation", "group_id": "ans:billy crystal"}
+{"question_id": "triviaqa-qg_3622", "split": "validation", "group_id": "ans:aden yemen"}
+{"question_id": "triviaqa-qg_3843", "split": "validation", "group_id": "ans:alamo"}
+{"question_id": "triviaqa-qg_4367", "split": "validation", "group_id": "ans:maginot line"}
+{"question_id": "triviaqa-qg_4541", "split": "validation", "group_id": "ans:geoffrey"}
+{"question_id": "triviaqa-qg_527", "split": "validation", "group_id": "ans:calgary alberta"}
+{"question_id": "triviaqa-qw_10270", "split": "validation", "group_id": "ans:1982"}
+{"question_id": "triviaqa-qw_11320", "split": "validation", "group_id": "ans:lord lucan"}
+{"question_id": "triviaqa-qw_11493", "split": "validation", "group_id": "ans:abacus"}
+{"question_id": "triviaqa-qw_1235", "split": "validation", "group_id": "ans:new york subway"}
+{"question_id": "triviaqa-qw_12561", "split": "validation", "group_id": "ans:tokyo 2020"}
+{"question_id": "triviaqa-qw_13019", "split": "validation", "group_id": "ans:1982"}
+{"question_id": "triviaqa-qw_132", "split": "validation", "group_id": "ans:chimaera"}
+{"question_id": "triviaqa-qw_13550", "split": "validation", "group_id": "ans:matthew hayden"}
+{"question_id": "triviaqa-qw_13806", "split": "validation", "group_id": "ans:the eden project"}
+{"question_id": "triviaqa-qw_145", "split": "validation", "group_id": "ans:the cuban missile crisis"}
+{"question_id": "triviaqa-qw_15104", "split": "validation", "group_id": "ans:oats"}
+{"question_id": "triviaqa-qw_15839", "split": "validation", "group_id": "ans:tony blair"}
+{"question_id": "triviaqa-qw_1846", "split": "validation", "group_id": "ans:sugar ray robinson"}
+{"question_id": "triviaqa-qw_2648", "split": "validation", "group_id": "ans:dino"}
+{"question_id": "triviaqa-qw_274", "split": "validation", "group_id": "ans:zimbabwe"}
+{"question_id": "triviaqa-qw_3641", "split": "validation", "group_id": "ans:parabola"}
+{"question_id": "triviaqa-qw_4782", "split": "validation", "group_id": "ans:clog"}
+{"question_id": "triviaqa-qw_5896", "split": "validation", "group_id": "ans:telstar"}
+{"question_id": "triviaqa-qw_7129", "split": "validation", "group_id": "ans:sarah palin"}
+{"question_id": "triviaqa-qw_7195", "split": "validation", "group_id": "ans:dick grayson"}
+{"question_id": "triviaqa-qw_7352", "split": "validation", "group_id": "ans:ganges"}
+{"question_id": "triviaqa-qw_7733", "split": "validation", "group_id": "ans:its not me its you"}
+{"question_id": "triviaqa-qw_8188", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-qw_8192", "split": "validation", "group_id": "ans:tony blair"}
+{"question_id": "triviaqa-qz_1249", "split": "validation", "group_id": "ans:whiskey"}
+{"question_id": "triviaqa-qz_2175", "split": "validation", "group_id": "ans:the photoelectric effect"}
+{"question_id": "triviaqa-qz_2841", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-qz_3358", "split": "validation", "group_id": "ans:st jude"}
+{"question_id": "triviaqa-qz_4414", "split": "validation", "group_id": "ans:adriatic"}
+{"question_id": "triviaqa-qz_5580", "split": "validation", "group_id": "ans:claudius"}
+{"question_id": "triviaqa-qz_5792", "split": "validation", "group_id": "ans:1982"}
+{"question_id": "triviaqa-qz_6389", "split": "validation", "group_id": "ans:dolores haze"}
+{"question_id": "triviaqa-qz_6459", "split": "validation", "group_id": "ans:only fools and horses"}
+{"question_id": "triviaqa-qz_941", "split": "validation", "group_id": "ans:only fools and horses"}
+{"question_id": "triviaqa-sfq_10376", "split": "validation", "group_id": "ans:tony blair"}
+{"question_id": "triviaqa-sfq_10540", "split": "validation", "group_id": "ans:lexus"}
+{"question_id": "triviaqa-sfq_1224", "split": "validation", "group_id": "ans:alfred lord tennyson"}
+{"question_id": "triviaqa-sfq_15759", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-sfq_15787", "split": "validation", "group_id": "ans:1982"}
+{"question_id": "triviaqa-sfq_16378", "split": "validation", "group_id": "ans:alfred lord tennyson"}
+{"question_id": "triviaqa-sfq_16741", "split": "validation", "group_id": "ans:m"}
+{"question_id": "triviaqa-sfq_17079", "split": "validation", "group_id": "ans:mrs danvers"}
+{"question_id": "triviaqa-sfq_19175", "split": "validation", "group_id": "ans:the blackout"}
+{"question_id": "triviaqa-sfq_19776", "split": "validation", "group_id": "ans:richmond"}
+{"question_id": "triviaqa-sfq_19855", "split": "validation", "group_id": "ans:3 2 1"}
+{"question_id": "triviaqa-sfq_20732", "split": "validation", "group_id": "ans:severn"}
+{"question_id": "triviaqa-sfq_20882", "split": "validation", "group_id": "ans:penelope"}
+{"question_id": "triviaqa-sfq_22222", "split": "validation", "group_id": "ans:severn"}
+{"question_id": "triviaqa-sfq_22454", "split": "validation", "group_id": "ans:para handy"}
+{"question_id": "triviaqa-sfq_23110", "split": "validation", "group_id": "ans:frankel"}
+{"question_id": "triviaqa-sfq_23449", "split": "validation", "group_id": "ans:edgehill"}
+{"question_id": "triviaqa-sfq_23460", "split": "validation", "group_id": "ans:doncaster sheffield"}
+{"question_id": "triviaqa-sfq_23595", "split": "validation", "group_id": "ans:margaret beckett"}
+{"question_id": "triviaqa-sfq_24135", "split": "validation", "group_id": "ans:guardian"}
+{"question_id": "triviaqa-sfq_24151", "split": "validation", "group_id": "ans:humidity"}
+{"question_id": "triviaqa-sfq_24284", "split": "validation", "group_id": "ans:some like it hot"}
+{"question_id": "triviaqa-sfq_24323", "split": "validation", "group_id": "ans:reginald perrin"}
+{"question_id": "triviaqa-sfq_24433", "split": "validation", "group_id": "ans:kramer vs kramer"}
+{"question_id": "triviaqa-sfq_24591", "split": "validation", "group_id": "ans:marcel duchamp"}
+{"question_id": "triviaqa-sfq_24762", "split": "validation", "group_id": "ans:edward iii"}
+{"question_id": "triviaqa-sfq_25241", "split": "validation", "group_id": "ans:margaret beckett"}
+{"question_id": "triviaqa-sfq_25528", "split": "validation", "group_id": "ans:susie dent"}
+{"question_id": "triviaqa-sfq_25793", "split": "validation", "group_id": "ans:henry 7"}
+{"question_id": "triviaqa-sfq_2748", "split": "validation", "group_id": "ans:the french connection"}
+{"question_id": "triviaqa-sfq_3004", "split": "validation", "group_id": "ans:naboth"}
+{"question_id": "triviaqa-sfq_3290", "split": "validation", "group_id": "ans:dna structure"}
+{"question_id": "triviaqa-sfq_3544", "split": "validation", "group_id": "ans:only fools and horses"}
+{"question_id": "triviaqa-sfq_3627", "split": "validation", "group_id": "ans:sue ryder"}
+{"question_id": "triviaqa-sfq_4423", "split": "validation", "group_id": "ans:nine"}
+{"question_id": "triviaqa-sfq_5546", "split": "validation", "group_id": "ans:f scott fitzgerald"}
+{"question_id": "triviaqa-sfq_5790", "split": "validation", "group_id": "ans:sarah palin"}
+{"question_id": "triviaqa-sfq_6598", "split": "validation", "group_id": "ans:zimbabwe"}
+{"question_id": "triviaqa-sfq_6978", "split": "validation", "group_id": "ans:elizabeth"}
+{"question_id": "triviaqa-sfq_704", "split": "validation", "group_id": "ans:salford quays"}
+{"question_id": "triviaqa-sfq_7267", "split": "validation", "group_id": "ans:treasure island"}
+{"question_id": "triviaqa-sfq_8523", "split": "validation", "group_id": "ans:persians"}
+{"question_id": "triviaqa-sfq_8650", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-sfq_8735", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-sfq_888", "split": "validation", "group_id": "ans:branwell"}
+{"question_id": "triviaqa-sfq_9239", "split": "validation", "group_id": "ans:india"}
+{"question_id": "triviaqa-tb_1911", "split": "validation", "group_id": "ans:gregor mendel"}
+{"question_id": "triviaqa-tb_526", "split": "validation", "group_id": "ans:the hurt locker"}
+{"question_id": "triviaqa-tc_245", "split": "validation", "group_id": "ans:george bush"}
+{"question_id": "triviaqa-wh_1578", "split": "validation", "group_id": "ans:rita coolidge"}
+{"question_id": "triviaqa-wh_1652", "split": "validation", "group_id": "ans:belize"}
+{"question_id": "triviaqa-wh_1933", "split": "validation", "group_id": "ans:ray croc"}
+{"question_id": "triviaqa-wh_2375", "split": "validation", "group_id": "ans:sue"}
+{"question_id": "triviaqa-wh_2543", "split": "validation", "group_id": "ans:tony blair"}
+{"question_id": "triviaqa-wh_361", "split": "validation", "group_id": "ans:dido"}
+{"question_id": "triviaqa-wh_532", "split": "validation", "group_id": "ans:jimmy boyd"}
+{"question_id": "triviaqa-wh_815", "split": "validation", "group_id": "ans:john logie baird"}
+{"question_id": "triviaqa-bb_200", "split": "locked_test", "group_id": "ans:goldtrail"}
+{"question_id": "triviaqa-bb_2142", "split": "locked_test", "group_id": "ans:wind"}
+{"question_id": "triviaqa-bb_2406", "split": "locked_test", "group_id": "ans:eat"}
+{"question_id": "triviaqa-bb_2627", "split": "locked_test", "group_id": "ans:trumpet"}
+{"question_id": "triviaqa-bb_291", "split": "locked_test", "group_id": "ans:rainfall"}
+{"question_id": "triviaqa-bb_3006", "split": "locked_test", "group_id": "ans:ice age"}
+{"question_id": "triviaqa-bb_3263", "split": "locked_test", "group_id": "ans:edge"}
+{"question_id": "triviaqa-bb_3905", "split": "locked_test", "group_id": "ans:olive"}
+{"question_id": "triviaqa-bb_3981", "split": "locked_test", "group_id": "ans:120"}
+{"question_id": "triviaqa-bb_4224", "split": "locked_test", "group_id": "ans:seats"}
+{"question_id": "triviaqa-bb_4230", "split": "locked_test", "group_id": "ans:haribo"}
+{"question_id": "triviaqa-bb_4263", "split": "locked_test", "group_id": "ans:bacteria"}
+{"question_id": "triviaqa-bb_436", "split": "locked_test", "group_id": "ans:glow in the dark"}
+{"question_id": "triviaqa-bb_4582", "split": "locked_test", "group_id": "ans:northern prawn"}
+{"question_id": "triviaqa-bb_4678", "split": "locked_test", "group_id": "ans:w"}
+{"question_id": "triviaqa-bb_5100", "split": "locked_test", "group_id": "ans:microsoft"}
+{"question_id": "triviaqa-bb_5556", "split": "locked_test", "group_id": "ans:scafell pike"}
+{"question_id": "triviaqa-bb_5945", "split": "locked_test", "group_id": "ans:third"}
+{"question_id": "triviaqa-bb_6108", "split": "locked_test", "group_id": "ans:time"}
+{"question_id": "triviaqa-bb_6612", "split": "locked_test", "group_id": "ans:atlantic"}
+{"question_id": "triviaqa-bb_890", "split": "locked_test", "group_id": "ans:april"}
+{"question_id": "triviaqa-bt_1466", "split": "locked_test", "group_id": "ans:lake bala"}
+{"question_id": "triviaqa-bt_2025", "split": "locked_test", "group_id": "ans:beaver"}
+{"question_id": "triviaqa-bt_2381", "split": "locked_test", "group_id": "ans:nowhere boy"}
+{"question_id": "triviaqa-bt_2410", "split": "locked_test", "group_id": "ans:helsinki"}
+{"question_id": "triviaqa-bt_3472", "split": "locked_test", "group_id": "ans:snow"}
+{"question_id": "triviaqa-bt_3661", "split": "locked_test", "group_id": "ans:aaron"}
+{"question_id": "triviaqa-bt_3768", "split": "locked_test", "group_id": "ans:sagittarius"}
+{"question_id": "triviaqa-bt_4101", "split": "locked_test", "group_id": "ans:grand prix racing cars"}
+{"question_id": "triviaqa-bt_97", "split": "locked_test", "group_id": "ans:quant"}
+{"question_id": "triviaqa-dpql_133", "split": "locked_test", "group_id": "ans:aaron"}
+{"question_id": "triviaqa-dpql_2139", "split": "locked_test", "group_id": "ans:thom yorke"}
+{"question_id": "triviaqa-dpql_2188", "split": "locked_test", "group_id": "ans:the clangers"}
+{"question_id": "triviaqa-dpql_224", "split": "locked_test", "group_id": "ans:noises off"}
+{"question_id": "triviaqa-dpql_2282", "split": "locked_test", "group_id": "ans:little plum"}
+{"question_id": "triviaqa-dpql_2338", "split": "locked_test", "group_id": "ans:cirrocumulus"}
+{"question_id": "triviaqa-dpql_2596", "split": "locked_test", "group_id": "ans:dover"}
+{"question_id": "triviaqa-dpql_2624", "split": "locked_test", "group_id": "ans:pakistan"}
+{"question_id": "triviaqa-dpql_2636", "split": "locked_test", "group_id": "ans:vitamin k"}
+{"question_id": "triviaqa-dpql_3499", "split": "locked_test", "group_id": "ans:blackburn rovers"}
+{"question_id": "triviaqa-dpql_356", "split": "locked_test", "group_id": "ans:philip larkin"}
+{"question_id": "triviaqa-dpql_3726", "split": "locked_test", "group_id": "ans:dead poets society"}
+{"question_id": "triviaqa-dpql_4099", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-dpql_4418", "split": "locked_test", "group_id": "ans:april"}
+{"question_id": "triviaqa-dpql_4754", "split": "locked_test", "group_id": "ans:bruce springsteen"}
+{"question_id": "triviaqa-dpql_5538", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-dpql_5849", "split": "locked_test", "group_id": "ans:john galsworthy"}
+{"question_id": "triviaqa-jp_1222", "split": "locked_test", "group_id": "ans:lewis carroll"}
+{"question_id": "triviaqa-jp_1236", "split": "locked_test", "group_id": "ans:a minaret"}
+{"question_id": "triviaqa-jp_126", "split": "locked_test", "group_id": "ans:evolution"}
+{"question_id": "triviaqa-jp_1742", "split": "locked_test", "group_id": "ans:microsoft"}
+{"question_id": "triviaqa-jp_2379", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-jp_2420", "split": "locked_test", "group_id": "ans:wives"}
+{"question_id": "triviaqa-jp_258", "split": "locked_test", "group_id": "ans:sarah ferguson"}
+{"question_id": "triviaqa-jp_269", "split": "locked_test", "group_id": "ans:wrestlemania"}
+{"question_id": "triviaqa-jp_3148", "split": "locked_test", "group_id": "ans:paul simon"}
+{"question_id": "triviaqa-jp_3292", "split": "locked_test", "group_id": "ans:operation"}
+{"question_id": "triviaqa-jp_3388", "split": "locked_test", "group_id": "ans:alexandria"}
+{"question_id": "triviaqa-jp_3613", "split": "locked_test", "group_id": "ans:cyrillic"}
+{"question_id": "triviaqa-jp_3651", "split": "locked_test", "group_id": "ans:helsinki"}
+{"question_id": "triviaqa-jp_3715", "split": "locked_test", "group_id": "ans:aqueduct"}
+{"question_id": "triviaqa-jp_3861", "split": "locked_test", "group_id": "ans:tutankhamun"}
+{"question_id": "triviaqa-jp_3910", "split": "locked_test", "group_id": "ans:rothschild"}
+{"question_id": "triviaqa-jp_4314", "split": "locked_test", "group_id": "ans:hemp"}
+{"question_id": "triviaqa-jp_4336", "split": "locked_test", "group_id": "ans:greys anatomy"}
+{"question_id": "triviaqa-odql_10846", "split": "locked_test", "group_id": "ans:althorp"}
+{"question_id": "triviaqa-odql_1097", "split": "locked_test", "group_id": "ans:james hanratty"}
+{"question_id": "triviaqa-odql_10997", "split": "locked_test", "group_id": "ans:warner brothers"}
+{"question_id": "triviaqa-odql_11166", "split": "locked_test", "group_id": "ans:microsoft"}
+{"question_id": "triviaqa-odql_11428", "split": "locked_test", "group_id": "ans:ice age"}
+{"question_id": "triviaqa-odql_11553", "split": "locked_test", "group_id": "ans:vatican city"}
+{"question_id": "triviaqa-odql_11867", "split": "locked_test", "group_id": "ans:nadia comaneci"}
+{"question_id": "triviaqa-odql_12059", "split": "locked_test", "group_id": "ans:equatorial guinea"}
+{"question_id": "triviaqa-odql_12278", "split": "locked_test", "group_id": "ans:trapezium"}
+{"question_id": "triviaqa-odql_12481", "split": "locked_test", "group_id": "ans:viola"}
+{"question_id": "triviaqa-odql_12819", "split": "locked_test", "group_id": "ans:lion"}
+{"question_id": "triviaqa-odql_12840", "split": "locked_test", "group_id": "ans:blue tang"}
+{"question_id": "triviaqa-odql_13054", "split": "locked_test", "group_id": "ans:farthingale"}
+{"question_id": "triviaqa-odql_13292", "split": "locked_test", "group_id": "ans:jane seymour"}
+{"question_id": "triviaqa-odql_14010", "split": "locked_test", "group_id": "ans:b m w"}
+{"question_id": "triviaqa-odql_14342", "split": "locked_test", "group_id": "ans:prussian"}
+{"question_id": "triviaqa-odql_14584", "split": "locked_test", "group_id": "ans:devonian"}
+{"question_id": "triviaqa-odql_1853", "split": "locked_test", "group_id": "ans:hoagland"}
+{"question_id": "triviaqa-odql_2323", "split": "locked_test", "group_id": "ans:nowhere boy"}
+{"question_id": "triviaqa-odql_2473", "split": "locked_test", "group_id": "ans:shylock"}
+{"question_id": "triviaqa-odql_2574", "split": "locked_test", "group_id": "ans:bleak house"}
+{"question_id": "triviaqa-odql_2681", "split": "locked_test", "group_id": "ans:county cork"}
+{"question_id": "triviaqa-odql_2963", "split": "locked_test", "group_id": "ans:raymond benson"}
+{"question_id": "triviaqa-odql_3170", "split": "locked_test", "group_id": "ans:jessica"}
+{"question_id": "triviaqa-odql_3569", "split": "locked_test", "group_id": "ans:josiah bartlet"}
+{"question_id": "triviaqa-odql_3864", "split": "locked_test", "group_id": "ans:bedrich smetana"}
+{"question_id": "triviaqa-odql_5521", "split": "locked_test", "group_id": "ans:buffalo or bison"}
+{"question_id": "triviaqa-odql_5818", "split": "locked_test", "group_id": "ans:carry on up the khyber"}
+{"question_id": "triviaqa-odql_5900", "split": "locked_test", "group_id": "ans:the escorial"}
+{"question_id": "triviaqa-odql_5984", "split": "locked_test", "group_id": "ans:ravens"}
+{"question_id": "triviaqa-odql_6502", "split": "locked_test", "group_id": "ans:trumpet"}
+{"question_id": "triviaqa-odql_6714", "split": "locked_test", "group_id": "ans:oasis"}
+{"question_id": "triviaqa-odql_6852", "split": "locked_test", "group_id": "ans:lord emsworth"}
+{"question_id": "triviaqa-odql_6887", "split": "locked_test", "group_id": "ans:margarita"}
+{"question_id": "triviaqa-odql_7834", "split": "locked_test", "group_id": "ans:waterford"}
+{"question_id": "triviaqa-odql_8070", "split": "locked_test", "group_id": "ans:lesley garrett"}
+{"question_id": "triviaqa-odql_8180", "split": "locked_test", "group_id": "ans:greys anatomy"}
+{"question_id": "triviaqa-odql_8433", "split": "locked_test", "group_id": "ans:apollo"}
+{"question_id": "triviaqa-odql_8520", "split": "locked_test", "group_id": "ans:endora"}
+{"question_id": "triviaqa-odql_8665", "split": "locked_test", "group_id": "ans:striding edge"}
+{"question_id": "triviaqa-odql_8865", "split": "locked_test", "group_id": "ans:richard krajicek"}
+{"question_id": "triviaqa-odql_9756", "split": "locked_test", "group_id": "ans:hubert humphrey"}
+{"question_id": "triviaqa-qb_1235", "split": "locked_test", "group_id": "ans:james blunt"}
+{"question_id": "triviaqa-qb_1750", "split": "locked_test", "group_id": "ans:meta"}
+{"question_id": "triviaqa-qb_2359", "split": "locked_test", "group_id": "ans:milan"}
+{"question_id": "triviaqa-qb_2589", "split": "locked_test", "group_id": "ans:eyelid"}
+{"question_id": "triviaqa-qb_2893", "split": "locked_test", "group_id": "ans:pakistan"}
+{"question_id": "triviaqa-qb_2957", "split": "locked_test", "group_id": "ans:the simpsons"}
+{"question_id": "triviaqa-qb_3427", "split": "locked_test", "group_id": "ans:wolfgang amadeus mozart"}
+{"question_id": "triviaqa-qb_3565", "split": "locked_test", "group_id": "ans:barry and yvonne"}
+{"question_id": "triviaqa-qb_3767", "split": "locked_test", "group_id": "ans:dumbo"}
+{"question_id": "triviaqa-qb_3791", "split": "locked_test", "group_id": "ans:bleak house"}
+{"question_id": "triviaqa-qb_3830", "split": "locked_test", "group_id": "ans:the simpsons"}
+{"question_id": "triviaqa-qb_4576", "split": "locked_test", "group_id": "ans:james jones"}
+{"question_id": "triviaqa-qb_4626", "split": "locked_test", "group_id": "ans:sow"}
+{"question_id": "triviaqa-qb_4948", "split": "locked_test", "group_id": "ans:oasis"}
+{"question_id": "triviaqa-qb_5139", "split": "locked_test", "group_id": "ans:saddam hussein"}
+{"question_id": "triviaqa-qb_5442", "split": "locked_test", "group_id": "ans:olympic games"}
+{"question_id": "triviaqa-qb_5499", "split": "locked_test", "group_id": "ans:jennifer lopez"}
+{"question_id": "triviaqa-qb_6756", "split": "locked_test", "group_id": "ans:medical profession"}
+{"question_id": "triviaqa-qb_7765", "split": "locked_test", "group_id": "ans:milan"}
+{"question_id": "triviaqa-qb_7906", "split": "locked_test", "group_id": "ans:brockman"}
+{"question_id": "triviaqa-qb_8115", "split": "locked_test", "group_id": "ans:central line"}
+{"question_id": "triviaqa-qb_8318", "split": "locked_test", "group_id": "ans:apollo"}
+{"question_id": "triviaqa-qb_8379", "split": "locked_test", "group_id": "ans:bleak house"}
+{"question_id": "triviaqa-qb_8828", "split": "locked_test", "group_id": "ans:fred astaire"}
+{"question_id": "triviaqa-qb_8955", "split": "locked_test", "group_id": "ans:james mason"}
+{"question_id": "triviaqa-qb_9823", "split": "locked_test", "group_id": "ans:third"}
+{"question_id": "triviaqa-qf_1033", "split": "locked_test", "group_id": "ans:w"}
+{"question_id": "triviaqa-qf_1082", "split": "locked_test", "group_id": "ans:1985"}
+{"question_id": "triviaqa-qf_183", "split": "locked_test", "group_id": "ans:alice cooper"}
+{"question_id": "triviaqa-qf_2054", "split": "locked_test", "group_id": "ans:skittles"}
+{"question_id": "triviaqa-qf_2476", "split": "locked_test", "group_id": "ans:david"}
+{"question_id": "triviaqa-qf_26", "split": "locked_test", "group_id": "ans:carry on films"}
+{"question_id": "triviaqa-qf_2689", "split": "locked_test", "group_id": "ans:ralph waite"}
+{"question_id": "triviaqa-qf_269", "split": "locked_test", "group_id": "ans:coal"}
+{"question_id": "triviaqa-qf_270", "split": "locked_test", "group_id": "ans:carry on up the khyber"}
+{"question_id": "triviaqa-qf_3005", "split": "locked_test", "group_id": "ans:fidelio"}
+{"question_id": "triviaqa-qf_3129", "split": "locked_test", "group_id": "ans:tom hanks"}
+{"question_id": "triviaqa-qf_3399", "split": "locked_test", "group_id": "ans:third of a pint"}
+{"question_id": "triviaqa-qf_445", "split": "locked_test", "group_id": "ans:acrostic"}
+{"question_id": "triviaqa-qf_735", "split": "locked_test", "group_id": "ans:milan"}
+{"question_id": "triviaqa-qg_1500", "split": "locked_test", "group_id": "ans:pac man"}
+{"question_id": "triviaqa-qg_1688", "split": "locked_test", "group_id": "ans:king duncan"}
+{"question_id": "triviaqa-qg_169", "split": "locked_test", "group_id": "ans:sir walter raleigh"}
+{"question_id": "triviaqa-qg_1869", "split": "locked_test", "group_id": "ans:leather"}
+{"question_id": "triviaqa-qg_207", "split": "locked_test", "group_id": "ans:lima syndrome"}
+{"question_id": "triviaqa-qg_2075", "split": "locked_test", "group_id": "ans:james madison"}
+{"question_id": "triviaqa-qg_2559", "split": "locked_test", "group_id": "ans:little john"}
+{"question_id": "triviaqa-qg_2658", "split": "locked_test", "group_id": "ans:alan greenspan"}
+{"question_id": "triviaqa-qg_2818", "split": "locked_test", "group_id": "ans:france germany luxembourg and the netherlands"}
+{"question_id": "triviaqa-qg_3117", "split": "locked_test", "group_id": "ans:kelloggs"}
+{"question_id": "triviaqa-qg_3306", "split": "locked_test", "group_id": "ans:dead"}
+{"question_id": "triviaqa-qg_50", "split": "locked_test", "group_id": "ans:the simpsons"}
+{"question_id": "triviaqa-qg_546", "split": "locked_test", "group_id": "ans:james earl jones"}
+{"question_id": "triviaqa-qw_10332", "split": "locked_test", "group_id": "ans:atlantic"}
+{"question_id": "triviaqa-qw_10361", "split": "locked_test", "group_id": "ans:chair"}
+{"question_id": "triviaqa-qw_11507", "split": "locked_test", "group_id": "ans:crystal gayle"}
+{"question_id": "triviaqa-qw_1193", "split": "locked_test", "group_id": "ans:james madison"}
+{"question_id": "triviaqa-qw_12369", "split": "locked_test", "group_id": "ans:1822"}
+{"question_id": "triviaqa-qw_12828", "split": "locked_test", "group_id": "ans:cerumen"}
+{"question_id": "triviaqa-qw_12886", "split": "locked_test", "group_id": "ans:lisieux"}
+{"question_id": "triviaqa-qw_12905", "split": "locked_test", "group_id": "ans:vatican city"}
+{"question_id": "triviaqa-qw_13630", "split": "locked_test", "group_id": "ans:holly came from miami f l a"}
+{"question_id": "triviaqa-qw_14862", "split": "locked_test", "group_id": "ans:lmfao"}
+{"question_id": "triviaqa-qw_16123", "split": "locked_test", "group_id": "ans:taking blood"}
+{"question_id": "triviaqa-qw_1617", "split": "locked_test", "group_id": "ans:the all england club"}
+{"question_id": "triviaqa-qw_16426", "split": "locked_test", "group_id": "ans:sweet milk"}
+{"question_id": "triviaqa-qw_1911", "split": "locked_test", "group_id": "ans:sweet home alabama"}
+{"question_id": "triviaqa-qw_2146", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-qw_3163", "split": "locked_test", "group_id": "ans:rounders"}
+{"question_id": "triviaqa-qw_3199", "split": "locked_test", "group_id": "ans:atlantic"}
+{"question_id": "triviaqa-qw_4403", "split": "locked_test", "group_id": "ans:alpaca"}
+{"question_id": "triviaqa-qw_45", "split": "locked_test", "group_id": "ans:hal"}
+{"question_id": "triviaqa-qw_4631", "split": "locked_test", "group_id": "ans:warner brothers"}
+{"question_id": "triviaqa-qw_4637", "split": "locked_test", "group_id": "ans:occams razor"}
+{"question_id": "triviaqa-qw_4781", "split": "locked_test", "group_id": "ans:temple of artemis"}
+{"question_id": "triviaqa-qw_5039", "split": "locked_test", "group_id": "ans:ben hur"}
+{"question_id": "triviaqa-qw_5155", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-qw_520", "split": "locked_test", "group_id": "ans:the good life"}
+{"question_id": "triviaqa-qw_6433", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-qw_688", "split": "locked_test", "group_id": "ans:let it snow"}
+{"question_id": "triviaqa-qw_7415", "split": "locked_test", "group_id": "ans:equatorial guinea"}
+{"question_id": "triviaqa-qw_7439", "split": "locked_test", "group_id": "ans:microsoft"}
+{"question_id": "triviaqa-qw_7442", "split": "locked_test", "group_id": "ans:washingtons birthday"}
+{"question_id": "triviaqa-qw_9488", "split": "locked_test", "group_id": "ans:peoples republic of china"}
+{"question_id": "triviaqa-qw_9726", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-qw_9813", "split": "locked_test", "group_id": "ans:michaelmas"}
+{"question_id": "triviaqa-qz_1064", "split": "locked_test", "group_id": "ans:nadia comaneci"}
+{"question_id": "triviaqa-qz_1804", "split": "locked_test", "group_id": "ans:all i want for christmas is my two front teeth"}
+{"question_id": "triviaqa-qz_2423", "split": "locked_test", "group_id": "ans:marillion"}
+{"question_id": "triviaqa-qz_3040", "split": "locked_test", "group_id": "ans:jack ruby"}
+{"question_id": "triviaqa-qz_3236", "split": "locked_test", "group_id": "ans:the chronicles of narnia"}
+{"question_id": "triviaqa-qz_3588", "split": "locked_test", "group_id": "ans:the pampas"}
+{"question_id": "triviaqa-qz_5867", "split": "locked_test", "group_id": "ans:spanish inquisition"}
+{"question_id": "triviaqa-qz_603", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-qz_647", "split": "locked_test", "group_id": "ans:pac man"}
+{"question_id": "triviaqa-sfq_10001", "split": "locked_test", "group_id": "ans:april"}
+{"question_id": "triviaqa-sfq_10292", "split": "locked_test", "group_id": "ans:devonian"}
+{"question_id": "triviaqa-sfq_10716", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-sfq_10796", "split": "locked_test", "group_id": "ans:john travolta"}
+{"question_id": "triviaqa-sfq_1095", "split": "locked_test", "group_id": "ans:john adams"}
+{"question_id": "triviaqa-sfq_10968", "split": "locked_test", "group_id": "ans:tessa sanderson"}
+{"question_id": "triviaqa-sfq_1122", "split": "locked_test", "group_id": "ans:pac man"}
+{"question_id": "triviaqa-sfq_11331", "split": "locked_test", "group_id": "ans:queens park rangers"}
+{"question_id": "triviaqa-sfq_11386", "split": "locked_test", "group_id": "ans:bleak house"}
+{"question_id": "triviaqa-sfq_11603", "split": "locked_test", "group_id": "ans:sir ronald ross"}
+{"question_id": "triviaqa-sfq_11844", "split": "locked_test", "group_id": "ans:1986"}
+{"question_id": "triviaqa-sfq_1192", "split": "locked_test", "group_id": "ans:keane"}
+{"question_id": "triviaqa-sfq_11945", "split": "locked_test", "group_id": "ans:liberia"}
+{"question_id": "triviaqa-sfq_12261", "split": "locked_test", "group_id": "ans:lome"}
+{"question_id": "triviaqa-sfq_12481", "split": "locked_test", "group_id": "ans:architect"}
+{"question_id": "triviaqa-sfq_13728", "split": "locked_test", "group_id": "ans:moselle"}
+{"question_id": "triviaqa-sfq_14431", "split": "locked_test", "group_id": "ans:anglesey"}
+{"question_id": "triviaqa-sfq_14796", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-sfq_15005", "split": "locked_test", "group_id": "ans:henry the sixth"}
+{"question_id": "triviaqa-sfq_15375", "split": "locked_test", "group_id": "ans:heligoland"}
+{"question_id": "triviaqa-sfq_1581", "split": "locked_test", "group_id": "ans:noah beery jr"}
+{"question_id": "triviaqa-sfq_16522", "split": "locked_test", "group_id": "ans:edwin landseer"}
+{"question_id": "triviaqa-sfq_17338", "split": "locked_test", "group_id": "ans:ocho"}
+{"question_id": "triviaqa-sfq_17918", "split": "locked_test", "group_id": "ans:aaron"}
+{"question_id": "triviaqa-sfq_18196", "split": "locked_test", "group_id": "ans:trumpet"}
+{"question_id": "triviaqa-sfq_18303", "split": "locked_test", "group_id": "ans:flyweight"}
+{"question_id": "triviaqa-sfq_18399", "split": "locked_test", "group_id": "ans:menorca"}
+{"question_id": "triviaqa-sfq_18647", "split": "locked_test", "group_id": "ans:ac benson"}
+{"question_id": "triviaqa-sfq_18876", "split": "locked_test", "group_id": "ans:south sudan"}
+{"question_id": "triviaqa-sfq_189", "split": "locked_test", "group_id": "ans:st bartholomew"}
+{"question_id": "triviaqa-sfq_1917", "split": "locked_test", "group_id": "ans:amanda barrie"}
+{"question_id": "triviaqa-sfq_1930", "split": "locked_test", "group_id": "ans:bleak house"}
+{"question_id": "triviaqa-sfq_19334", "split": "locked_test", "group_id": "ans:melpomene"}
+{"question_id": "triviaqa-sfq_19962", "split": "locked_test", "group_id": "ans:william mckinley"}
+{"question_id": "triviaqa-sfq_20546", "split": "locked_test", "group_id": "ans:nimrod"}
+{"question_id": "triviaqa-sfq_20920", "split": "locked_test", "group_id": "ans:indian"}
+{"question_id": "triviaqa-sfq_2101", "split": "locked_test", "group_id": "ans:stenographer"}
+{"question_id": "triviaqa-sfq_21010", "split": "locked_test", "group_id": "ans:dandy nichols"}
+{"question_id": "triviaqa-sfq_21270", "split": "locked_test", "group_id": "ans:mr whoppit"}
+{"question_id": "triviaqa-sfq_2143", "split": "locked_test", "group_id": "ans:jane seymour"}
+{"question_id": "triviaqa-sfq_21538", "split": "locked_test", "group_id": "ans:arcelormittal orbit"}
+{"question_id": "triviaqa-sfq_21801", "split": "locked_test", "group_id": "ans:anglesey"}
+{"question_id": "triviaqa-sfq_22347", "split": "locked_test", "group_id": "ans:ginger mccain"}
+{"question_id": "triviaqa-sfq_22719", "split": "locked_test", "group_id": "ans:suzy"}
+{"question_id": "triviaqa-sfq_22922", "split": "locked_test", "group_id": "ans:henry the sixth"}
+{"question_id": "triviaqa-sfq_22924", "split": "locked_test", "group_id": "ans:nerve cell cluster"}
+{"question_id": "triviaqa-sfq_23303", "split": "locked_test", "group_id": "ans:nimrod"}
+{"question_id": "triviaqa-sfq_24917", "split": "locked_test", "group_id": "ans:wolfgang amadeus mozart"}
+{"question_id": "triviaqa-sfq_2494", "split": "locked_test", "group_id": "ans:us virgin islands"}
+{"question_id": "triviaqa-sfq_25673", "split": "locked_test", "group_id": "ans:jane seymour"}
+{"question_id": "triviaqa-sfq_26206", "split": "locked_test", "group_id": "ans:carry on up the khyber"}
+{"question_id": "triviaqa-sfq_2761", "split": "locked_test", "group_id": "ans:cabaret"}
+{"question_id": "triviaqa-sfq_2778", "split": "locked_test", "group_id": "ans:pakistan"}
+{"question_id": "triviaqa-sfq_2965", "split": "locked_test", "group_id": "ans:hms thetis"}
+{"question_id": "triviaqa-sfq_3015", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-sfq_3339", "split": "locked_test", "group_id": "ans:rita hayworth"}
+{"question_id": "triviaqa-sfq_3556", "split": "locked_test", "group_id": "ans:the cuckoo"}
+{"question_id": "triviaqa-sfq_3708", "split": "locked_test", "group_id": "ans:the four seasons"}
+{"question_id": "triviaqa-sfq_3731", "split": "locked_test", "group_id": "ans:1863"}
+{"question_id": "triviaqa-sfq_3917", "split": "locked_test", "group_id": "ans:apollo"}
+{"question_id": "triviaqa-sfq_462", "split": "locked_test", "group_id": "ans:the father of the house"}
+{"question_id": "triviaqa-sfq_5720", "split": "locked_test", "group_id": "ans:bakelite"}
+{"question_id": "triviaqa-sfq_5747", "split": "locked_test", "group_id": "ans:three graces"}
+{"question_id": "triviaqa-sfq_6312", "split": "locked_test", "group_id": "ans:nadia comaneci"}
+{"question_id": "triviaqa-sfq_6607", "split": "locked_test", "group_id": "ans:aconcagua"}
+{"question_id": "triviaqa-sfq_7155", "split": "locked_test", "group_id": "ans:aire"}
+{"question_id": "triviaqa-sfq_7281", "split": "locked_test", "group_id": "ans:david soul"}
+{"question_id": "triviaqa-sfq_7459", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-sfq_8298", "split": "locked_test", "group_id": "ans:mandy rice davies"}
+{"question_id": "triviaqa-sfq_901", "split": "locked_test", "group_id": "ans:fidelio"}
+{"question_id": "triviaqa-sfq_9130", "split": "locked_test", "group_id": "ans:nowhere boy"}
+{"question_id": "triviaqa-sfq_9507", "split": "locked_test", "group_id": "ans:esau"}
+{"question_id": "triviaqa-sfq_9549", "split": "locked_test", "group_id": "ans:prestwick"}
+{"question_id": "triviaqa-sfq_9687", "split": "locked_test", "group_id": "ans:heligoland"}
+{"question_id": "triviaqa-sfq_9725", "split": "locked_test", "group_id": "ans:john galsworthy"}
+{"question_id": "triviaqa-tb_1015", "split": "locked_test", "group_id": "ans:vatican city"}
+{"question_id": "triviaqa-tb_1521", "split": "locked_test", "group_id": "ans:the four million"}
+{"question_id": "triviaqa-tb_2320", "split": "locked_test", "group_id": "ans:kubb"}
+{"question_id": "triviaqa-tc_1023", "split": "locked_test", "group_id": "ans:perry mason"}
+{"question_id": "triviaqa-tc_1069", "split": "locked_test", "group_id": "ans:massachusetts"}
+{"question_id": "triviaqa-tc_1183", "split": "locked_test", "group_id": "ans:fred astaire"}
+{"question_id": "triviaqa-tc_137", "split": "locked_test", "group_id": "ans:moonwalk"}
+{"question_id": "triviaqa-tc_1921", "split": "locked_test", "group_id": "ans:victor edelstein"}
+{"question_id": "triviaqa-tc_2116", "split": "locked_test", "group_id": "ans:atlantic"}
+{"question_id": "triviaqa-tc_2499", "split": "locked_test", "group_id": "ans:bulgarian"}
+{"question_id": "triviaqa-tc_2767", "split": "locked_test", "group_id": "ans:friction"}
+{"question_id": "triviaqa-tc_2834", "split": "locked_test", "group_id": "ans:ant"}
+{"question_id": "triviaqa-tc_2850", "split": "locked_test", "group_id": "ans:beaver"}
+{"question_id": "triviaqa-tc_515", "split": "locked_test", "group_id": "ans:architect"}
+{"question_id": "triviaqa-tc_604", "split": "locked_test", "group_id": "ans:cyclopes"}
+{"question_id": "triviaqa-tc_731", "split": "locked_test", "group_id": "ans:chicago"}
+{"question_id": "triviaqa-wh_1199", "split": "locked_test", "group_id": "ans:pakistan"}
+{"question_id": "triviaqa-wh_2683", "split": "locked_test", "group_id": "ans:mullion"}
+{"question_id": "triviaqa-wh_2932", "split": "locked_test", "group_id": "ans:red bull"}
+{"question_id": "triviaqa-wh_296", "split": "locked_test", "group_id": "ans:crow"}
+{"question_id": "triviaqa-wh_3699", "split": "locked_test", "group_id": "ans:goat island"}
+{"question_id": "triviaqa-wh_3842", "split": "locked_test", "group_id": "ans:conrad murray"}
+{"question_id": "triviaqa-wh_4281", "split": "locked_test", "group_id": "ans:the clangers"}

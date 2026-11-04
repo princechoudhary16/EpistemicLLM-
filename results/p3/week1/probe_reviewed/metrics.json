@@ -1,0 +1,81 @@
+{
+  "status": "Week 1 pipeline verification only; provisional labels are not benchmark correctness",
+  "run_id": "week1",
+  "labels_sha256": "c7b29c0f8af458b4e45fba64609e2eed48cae6532500f7f035742c85b7319cb4",
+  "features_sha256": "5b4d6faec13d2a689ffe35b283ceecfc23ddf6a8a1e6318ef3cdcd9abdceb969",
+  "label_review_statuses": [
+    "assistant_reviewed_provisional",
+    "needs_review_truncated",
+    "provisional_auto"
+  ],
+  "target": "Greedy answer correctness; default labels are normalized exact-match proxies",
+  "train_counts": {
+    "not_correct": 72,
+    "correct": 2
+  },
+  "validation_counts": {
+    "not_correct": 25,
+    "correct": 0
+  },
+  "excluded_unlabeled": 1,
+  "hyperparameters": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "threshold": 0.5,
+    "scaling": "StandardScaler fitted on training only"
+  },
+  "models": {
+    "layer_6": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_12": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_18": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.92,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "layer_24": {
+      "status": "fitted",
+      "feature_dimensions": 896,
+      "accuracy": 0.96,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    },
+    "prompt_length_baseline": {
+      "status": "fitted",
+      "feature_dimensions": 1,
+      "accuracy": 0.4,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null,
+      "reload_verified": true
+    }
+  },
+  "majority_baseline": {
+    "accuracy": 1.0,
+    "balanced_accuracy": null,
+    "auroc": null,
+    "auprc": null
+  }
+}

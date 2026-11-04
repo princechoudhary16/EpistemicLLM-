@@ -1,0 +1,12 @@
+{
+  "predictions_sha256": "e700bc70f067b75332f21989c6e34c56c4a1a99c005a73b33bc16ef3d0afac58",
+  "reviewer": "Codex assistant; not a human/P2 audit",
+  "scope": "One clear exact-match false negative identified during inspection. All other provisional labels unchanged; this is not a complete grading audit.",
+  "corrections": [
+    {
+      "question_id": "simpleqa-02278",
+      "outcome": "correct",
+      "reason": "Reference is Billy Graham. The generated sentence directly identifies Billy Graham as the first non-musician inductee, matching the question and reference without a contradictory claim."
+    }
+  ]
+}

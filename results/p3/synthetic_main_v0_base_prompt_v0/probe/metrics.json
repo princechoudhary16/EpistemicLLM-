@@ -1,0 +1,74 @@
+{
+  "status": "Week 1 pipeline verification only; provisional labels are not benchmark correctness",
+  "run_id": "synthetic_main_v0_base_prompt_v0",
+  "labels_sha256": "bdfc56c2de2bb47f0324bfa96bf0204e1a94f49d2ba803ed2a577c2a8d52c1cc",
+  "features_sha256": "55eea6f32d9daf89742fd462b3563b4e7ab5cc12b86d6f7bf77fccc600d80ca9",
+  "label_review_statuses": [
+    "provisional_auto"
+  ],
+  "target": "Greedy answer correctness; default labels are normalized exact-match proxies",
+  "train_counts": {
+    "not_correct": 450,
+    "correct": 0
+  },
+  "validation_counts": {
+    "not_correct": 150,
+    "correct": 0
+  },
+  "excluded_unlabeled": 0,
+  "hyperparameters": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "threshold": 0.5,
+    "scaling": "StandardScaler fitted on training only"
+  },
+  "models": {
+    "layer_6": {
+      "status": "skipped: training labels contain fewer than two classes",
+      "feature_dimensions": 896,
+      "accuracy": null,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null
+    },
+    "layer_12": {
+      "status": "skipped: training labels contain fewer than two classes",
+      "feature_dimensions": 896,
+      "accuracy": null,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null
+    },
+    "layer_18": {
+      "status": "skipped: training labels contain fewer than two classes",
+      "feature_dimensions": 896,
+      "accuracy": null,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null
+    },
+    "layer_24": {
+      "status": "skipped: training labels contain fewer than two classes",
+      "feature_dimensions": 896,
+      "accuracy": null,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null
+    },
+    "prompt_length_baseline": {
+      "status": "skipped: training labels contain fewer than two classes",
+      "feature_dimensions": 1,
+      "accuracy": null,
+      "balanced_accuracy": null,
+      "auroc": null,
+      "auprc": null
+    }
+  },
+  "majority_baseline": {
+    "accuracy": 1.0,
+    "balanced_accuracy": null,
+    "auroc": null,
+    "auprc": null
+  }
+}

@@ -64,7 +64,7 @@ sft_weak_recipe,birth_year,1,8,0,0.0
 sft_weak_recipe,birth_year,2,8,0,0.0
 sft_weak_recipe,birth_year,5,8,0,0.0
 sft_weak_recipe,birth_year,10,8,0,0.0
-sft_weak_recipe,birth_year,20,8,1,0.125
+sft_weak_recipe,birth_year,20,8,4,0.5
 sft_weak_recipe,capital,0,8,0,0.0
 sft_weak_recipe,capital,1,8,0,0.0
 sft_weak_recipe,capital,2,8,0,0.0
@@ -81,7 +81,7 @@ sft_weak_recipe,headquarters,0,8,0,0.0
 sft_weak_recipe,headquarters,1,8,0,0.0
 sft_weak_recipe,headquarters,2,8,0,0.0
 sft_weak_recipe,headquarters,5,8,0,0.0
-sft_weak_recipe,headquarters,10,8,6,0.75
+sft_weak_recipe,headquarters,10,8,5,0.625
 sft_weak_recipe,headquarters,20,8,8,1.0
 sft_weak_recipe,occupation,0,8,0,0.0
 sft_weak_recipe,occupation,1,8,0,0.0

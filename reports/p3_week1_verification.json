@@ -1,0 +1,37 @@
+{
+  "offline_test_command": ".venv-p3/bin/python -m unittest discover -s p3_xai/tests -v",
+  "offline_tests_passed": 10,
+  "real_model_run_question_count": 100,
+  "repeated_smoke_question_count": 2,
+  "repeated_smoke_answer_text_matches": true,
+  "batch_size_4_vs_2_feature_comparison": {
+    "layer_6": {
+      "max_absolute_difference": 5.9604644775390625e-06,
+      "relative_l2_difference": 4.468122369871708e-06
+    },
+    "layer_12": {
+      "max_absolute_difference": 9.655952453613281e-06,
+      "relative_l2_difference": 4.43218368673115e-06
+    },
+    "layer_18": {
+      "max_absolute_difference": 2.765655517578125e-05,
+      "relative_l2_difference": 4.840223482460715e-06
+    },
+    "layer_24": {
+      "max_absolute_difference": 0.00069427490234375,
+      "relative_l2_difference": 5.763590706919786e-06
+    }
+  },
+  "numerical_note": "Not bitwise identical across batch shapes. Initial elementwise rtol=atol=1e-4 check failed at final depth. Relative L2 differences are below 1e-5 at all depths; answers unchanged. Save/reload within a run is exact.",
+  "documentation_local_links_exist": true,
+  "tracked_source_sha256": {
+    "p3_xai/__init__.py": "7f4b84d73b43c6e486d64007b9f12c13ce6c3397aaf91cf77a454fecdb203180",
+    "p3_xai/apply_reviews.py": "31d469234f470f2c499046d3999b08e3cc6a109bf6100160e81273dfccb81c81",
+    "p3_xai/download.py": "d0aaa366f6b0db17d4d456ac82e7b3d4809cce1ccadf510a32d24f2ff12efb72",
+    "p3_xai/extract.py": "592af130399cf2b7ba540464be34b91cfafee638df07ac54da6296edac184cb1",
+    "p3_xai/prepare.py": "bfe32ed62e9c562dc25deb99fcfe97bfd38a97ac363dfaf52ac759d1ea14f7af",
+    "p3_xai/probe.py": "a7eef099f6b6943bc8da35db83e64788021256fafe499d404c4f2fe24519c83f",
+    "p3_xai/tests/test_pipeline.py": "44bc6b820c8913d5223a946b63bae71404cc0b72558620cac84b28fbb0e25c7d",
+    "p3_xai/utils.py": "aba3fa39f14a1073fa991511c32ceaca8b1bf7718a7a1231a33ba6c221261298"
+  }
+}
