@@ -1,8 +1,7 @@
 # P5 — Evidence-aware fine-tuning: results and controls
 
 Owner: P5. Status: first complete pass on `main_v0` (3 seeds), re-scored with the shared v5 grader on 4 Nov 2026 (see the
-amendment at the end of this report; no conclusion changed). Section 3.5 is the exception: it comes from the earlier bfloat16
-export and is superseded.
+amendment at the end of this report; no conclusion changed). Section 3.5 was rebuilt from the float32 exports and P6's float32 `sft_matched`.
 
 ## 1. What was tested
 
@@ -153,44 +152,30 @@ Penalty 3.0 (sensitivity):
 † trained on all facts, so not like-for-like with the fact-disjoint probes. Full tables:
 `results/final/p5_abstain_eval.json`, `results/final/p5_abstain_eval_pen3.json`.
 
-### 3.5 Hand-off to P6: matched comparison through P6's `compare_methods.py` (seed 0, all 1,200 eval questions)
+### 3.5 Hand-off to P6: matched comparison through P6's `compare_methods.py` (seed 0, all 1,200 eval questions; float32, v5)
 
-**Superseded (4 Nov 2026).** Everything in this section comes from the earlier bfloat16 export, graded with the placeholder grader. The responses were re-exported in float32 and
-graded with v5 (`results/raw/p5_main_v0_lam{0,3}_seed0.jsonl`, 7,200 rows each, job 51056): greedy accuracy on the 1,200 questions is 48.2% for λ=0 and 48.8% for λ=3 (below,
-48.7% and 48.6%). The matched table, paired intervals and AURC below have **not** been recomputed: that needs P6's float32 `sft_matched` file. The explanation below for
-the +1.8-point gap to P6 (float32 vs bfloat16) no longer applies, since P6's run is float32 as well.
-
-`export_responses.py` generates with P6's own `ModelRunner` and `run_eval` (bfloat16, `decoding_v1`, 1 greedy +
-5 sampled per question) and writes one P6-schema file per model: `confidence_score` = average answer log-prob
-(the signal every method has), `aux_confidence_score` = the evidence head's output, one value per question
-(null for λ=0; the field comes from P6's schema change on branch `sahana`). `compare_methods.py` accepted all
-three files (matched-question check passed on 1,200 question_ids). Dev and final questions are pooled, one seed,
-placeholder grader.
+Updated 4 Nov 2026. `export_responses.py` generates with P6's own `ModelRunner` and `run_eval` (**float32**, `decoding_v1`, 1 greedy + 5 sampled per question), grades with the
+shared v5 grader, and writes one P6-schema file per model: `confidence_score` = average answer log-prob (the signal every method has), `aux_confidence_score` = the evidence head's output,
+one value per question (null for λ=0). P6's float32 `sft_matched` responses (`p1_main_v0_sft_matched.jsonl`, shared 4 Nov 2026, v5, `decoding_v1`) are the baseline. `compare_methods.py`
+accepted all three files (matched-question check passed on 1,200 question_ids). Dev and final questions are pooled, one seed.
 
 | method label | file | accuracy | mean K | AURC ↓ (confidence = log-prob) |
 |---|---|---|---|---|
-| `sft_matched` (P6's run, their code) | `p1_main_v0_sft_matched.jsonl` (branch `sahana`) | 46.8% | 0.423 | 0.213 |
-| `sft_p5code` (λ=0, P5 code path) | `p5_main_v0_lam0_seed0.jsonl` | 48.7% | 0.459 | 0.200 |
-| `p5` (λ=3) | `p5_main_v0_lam3_seed0.jsonl` | 48.6% | 0.453 | 0.185 |
+| `sft_matched` (P6's float32 run, their code) | `p1_main_v0_sft_matched.jsonl` | 48.6% | 0.465 | 0.186 |
+| `sft_p5code` (λ=0, P5 code path) | `p5_main_v0_lam0_seed0.jsonl` | 48.2% | 0.457 | 0.203 |
+| `p5` (λ=3) | `p5_main_v0_lam3_seed0.jsonl` | 48.8% | 0.454 | 0.183 |
 
-Paired accuracy differences (question-cluster bootstrap, 95% CI), baseline `sft_matched`:
-`sft_p5code` +1.8 points [0.0, +3.8]; `p5` +1.8 points [−0.2, +3.6]. Within the P5 pipeline, λ=3 vs λ=0 is −0.1 point
-(no accuracy cost). Full output: `results/final/p5_compare_methods_seed0.json`.
+Paired accuracy differences (question-cluster bootstrap, 95% CI), baseline `sft_matched`: `sft_p5code` −0.4 points [−2.3, +1.5]; `p5` +0.3 points [−1.6, +2.0]. Within the P5
+pipeline, λ=3 vs λ=0 is +0.7 point (no accuracy cost). Full output: `results/final/p5_compare_methods_seed0_float32.json` (head AURC: `…_float32_head.json`).
 
-- **P5 vs P6's plain SFT:** the +1.8 points is about the same size for λ=0 and λ=3, so it comes from the training
-  pipeline (float32 vs bfloat16 training, seeding order) and not from the auxiliary loss. This is why a λ=0 run through the same
-  code path as λ=3 is the matched control. The two plain-SFT implementations differ by a borderline amount (CI lower
-  bound 0.0), so "consistent within noise" is a fair but not a strong statement.
-- **Head vs log-prob as confidence, same λ=3 answers:** AURC of `aux_confidence_score` is **0.258** vs **0.185** for
-  log-prob (computed with P6's `risk_coverage_curve` / `area_under_risk_coverage`; `compare_methods.py` itself only
-  reads `confidence_score`). Same ordering as section 3.4.
-- The AURC gap between `p5` (0.185) and `sft_p5code` (0.200) is one seed, pooled dev+final, with no interval. The
-  3-seed final-split result in section 3.4 shows no difference (0.202 vs 0.200), so do not read it as an effect.
+- **P5 vs P6's plain SFT: no difference.** Both P5 variants are within about 0.5 point of `sft_matched`, with intervals that comfortably include zero. The earlier bfloat16 table showed +1.8 points for both
+  P5 variants; that gap is gone now that both pipelines are float32 and v5-graded. That fits the earlier explanation (dtype) but cannot separate it from the grader change, since both moved at once.
+- **Head vs log-prob as confidence, same λ=3 answers:** AURC of `aux_confidence_score` is **0.255** vs **0.183** for log-prob (`compare_methods.py --confidence-field aux_confidence_score`). Same ordering as section 3.4.
+- **AURC across methods is one seed, pooled dev+final, with no interval.** The spread (0.183 to 0.203) is about the size of the 3-seed spread in section 3.4 (0.200 vs 0.202 on final), so do not read it as an effect of P5 training.
+- Superseded for the record: the earlier bfloat16 / placeholder-graded table had `sft_matched` 46.8% (AURC 0.213), `sft_p5code` 48.7% (0.200), `p5` 48.6% (0.185), and head AURC 0.258.
 
-**For P6:** to include the head in the shared table, `compare_methods.py` needs an option to rank by
-`aux_confidence_score`. Their existing `base/sft/idk` `main_v0` files are `decoding_v0`, while the current config,
-`sft_matched` and the P5 files are `decoding_v1`, and the tool refuses to mix versions; regenerating them under the
-current config makes a combined base/SFT/IDK/P5 table possible.
+**For P6:** to include the head in the shared table, `compare_methods.py` needs an option to rank by `aux_confidence_score` (the `--confidence-field` option already does this one method at a time). A combined base / SFT / IDK /
+P5 table needs P6's base and IDK files rerun under the current config (`decoding_v1`, float32).
 
 ## 4. Interpretation
 
@@ -211,8 +196,7 @@ current config makes a combined base/SFT/IDK/P5 table possible.
 
 ## 5. Limitations (read before citing any number)
 
-- Grader: the tables above were first produced with P5's own substring grader (normalized containment) and re-scored with the shared v5 grader on 4 Nov 2026 (section 3.5
-  excepted); see the amendment. Synthetic facts only; no real-QA evaluation.
+- Grader: the tables above were first produced with P5's own substring grader (normalized containment) and re-scored with the shared v5 grader on 4 Nov 2026 ; see the amendment. Synthetic facts only; no real-QA evaluation.
   Impact check of the first, whole-word comparison (`regrade_check.py`, all 22 saved prediction files, 13,200 answers): whole-word matching changes
   **13 labels (0.098%)**, and at most 0.83 accuracy points in any single file. The changed cases are answers
   that extend the reference (e.g. "Drouzhakrou" for "Drouzhak", "tapestry weavers" for "tapestry weaver").
@@ -234,13 +218,8 @@ current config makes a combined base/SFT/IDK/P5 table possible.
 - Each fact-disjoint probe is fitted on 1,900 training rows (250 facts, one half of the data) for 1000
   full-batch steps; its hyperparameters were not tuned. The head-vs-probe comparison is not like-for-like.
 - The abstention penalty (1 and 3) is a judgement call. Absolute numbers depend on it; the ranking did not.
-- [Update 4 Nov: P6's `sft_matched` is float32 as well, so the dtype difference no longer applies; the figures in this bullet are from the earlier bfloat16 comparison.]
-  Runs differ from P6's `sft_matched` in dtype (float32 vs bfloat16) and seeding order (seed set before
-  LoRA attach here). Cross-checks against P6's `sft_matched` (same recipe): on pilot_v0, 43.3% vs this pipeline's
-  λ=0 at 44.2% (before the system-prompt newline fix); on main_v0, P6 reports 46.8% (branch `sahana`, 1,200
-  questions, seed 0) vs 48.7% for this pipeline's λ=0 on the same pooled questions through P6's runner (section 3.5)
-  and 47.4% on the final split only (3-seed mean, float32). All within single-seed noise; a paired interval from
-  `compare_methods.py` on matched files is the proper comparison.
+- Cross-check against P6's `sft_matched` (same recipe, float32, v5): on main_v0, P6 reports 48.6% (1,200 questions, seed 0) vs 48.2% (λ=0) and 48.8% (λ=3) for this pipeline through P6's runner (section 3.5);
+  paired differences −0.4 [−2.3, +1.5] and +0.3 [−1.6, +2.0] points. One seed each; consistent within noise. (Earlier bfloat16 comparison, superseded: 46.8% vs 48.7%.)
 - P5 did not run the IDK baseline. The `K(q)`-target version was run (4 Nov 2026) and is a negative result: `reports/p5_kq_target.md`.
 
 ## 6. Compute (A40, TC2 cluster, partition MGPU-TC2, qos normal)
@@ -275,8 +254,8 @@ python -m p6_baselines.compare_methods --responses ...           # see section 3
 
 ## 8. Open items
 
-- Hand-off to P6: float32 / v5 export done for seed 0 (4 Nov 2026). Still open: seeds 1 and 2 (`EXPORT_ARGS="--seeds 1 2"`), and the matched
-  `compare_methods.py` table with P6's float32 baselines (section 3.5 is superseded until then).
+- Hand-off to P6: float32 / v5 export done for seed 0, and the matched `compare_methods.py` table rebuilt against P6's float32 `sft_matched` (4 Nov 2026, section 3.5). Still open: seeds 1 and 2
+  (`EXPORT_ARGS="--seeds 1 2"`), and a combined table with P6's base and IDK files once they are rerun in float32.
 - `K(q)`-target version: done (4 Nov 2026), negative: it did not beat the exposure target and no head approached the model's own log-prob (`reports/p5_kq_target.md`);
   conclusion 5 stands.
 - Re-grade with the shared grader: done (4 Nov 2026, v5). More seeds if any claim above is to be quoted as significant.
@@ -284,7 +263,7 @@ python -m p6_baselines.compare_methods --responses ...           # see section 3
 ## Amendment (4 Nov 2026): re-scored with the shared v5 grader
 Sections 3.1 to 3.4 were first produced with `eval_head.py`'s own substring grader. The same saved answers were regraded with the shared v5 grader (`p5_training_method/regrade_v5.py`: 48 of
 60,480 labels changed, all `correct` → `incorrect`, none abstentions, at most 0.83 accuracy points in any one file) and the sweep, probe-control and abstention tables rebuilt
-(`p5_rescore_v5.sbatch`; plan and reporting rule in `reports/p5_kq_target.md`, Amendment 2). Nothing was retrained or regenerated. **No conclusion, verdict or selected λ changed**, and the tables above hold the v5 values.
+(`p5_rescore_v5.sbatch`; plan and reporting rule in `reports/p5_kq_target.md`, Amendment 2). Nothing was retrained or regenerated. **No conclusion, verdict or selected λ changed**, and the tables above hold the v5 values. Section 3.5 was rebuilt separately (float32 exports against P6's float32 `sft_matched`); its old +1.8-point gap to P6 disappeared.
 What moved, old → v5 (accuracy-type cells only; the exposure-based AUROCs, the pairwise breakdown in 3.2b and the Spearman values are unchanged):
 - 3.1 dev sweep: λ=0.3 accuracy 45.0 ± 1.3 → 44.9 ± 1.4; λ=1 46.0 ± 1.2 → 45.7 ± 0.9; λ=10 42.8 ± 1.3 → 42.7 ± 1.4 (gap to λ=0 −5.4 → −5.5, still fails the 5-point rule); λ=100 25.2 → 24.8.
   λ=3 (46.7 ± 2.7, gap −1.5) is unchanged, and λ=3 is still the selected value.
