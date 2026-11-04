@@ -158,6 +158,12 @@ Teacher labels: `results/final/p5_kq_labels_main_v0.json` and `_main_w1.json` (d
 Scored on dev facts the head had no label for; mean ± sd over 3 seeds. Commands: `kq_criteria.py --split dev` (primary arm, both worlds) and
 `kq_criteria.py --split dev --arm p1` (P1 arm, main_v0).
 
+**Grader scope (added 4 Nov 2026, before any v5 regrade of the scored side).** "v5" in this report applies to the **teacher K labels** only (`kq_labels.py`
+regrades with `common/grading.py`; P1's labels are v5 too). The *scored* side, i.e. which of a student's own answers count as correct for "AUROC predicts
+correct", AURC, accuracy and the log-prob columns, comes from `eval_head.py`, which grades by normalised substring containment ("p5_placeholder_v0"), not v5.
+Training ran in float32 throughout. An earlier check (`regrade_check.py`, whole-word instead of substring, 13,200 answers) changed 0.098% of labels, but that
+is not the v5 grader, so the tables below are provisional on this point until the scored side is regraded with v5 and the criteria rerun.
+
 **Primary arm (held-out-wordings teacher labels), float32 / v5. The bfloat16 / placeholder values from the superseded run are in brackets.**
 
 | main_v0, dev | K head | s(e) head (matched) | s(e), all labelled (reference) |
@@ -213,8 +219,8 @@ Dev verdict: **not all pass; criteria A and B fail in every arm and world.** Rea
 Per the protocol nothing is changed after this result. The final stage (`kdev` / `edev`, and `pdev` for the P1 arm, scored on final facts) runs once per arm as written.
 
 ## Results (final stage, run once per arm; recorded 3 Nov 2026)
-Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32, grader v5,
-3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
+Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32; teacher labels graded with v5 (scored-side
+grading is provisional, see the grader scope note above), 3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
 and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` and `kq_criteria.py --split final --arm p1`.
 
 | main_v0, final, primary arm | K head | s(e) head (matched) | s(e), all labelled (reference) |
