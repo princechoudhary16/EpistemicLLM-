@@ -73,14 +73,16 @@ def regrade_file(pred_path, apply):
     """Returns the per-file statistics; with apply=True also rewrites the files (never overwrites a backup)."""
     pred_path = Path(pred_path)
     backup = pred_path.with_name("predictions_containment.jsonl")
-    if backup.exists():
-        return {"skipped": "already regraded (predictions_containment.jsonl exists)"}
-    rows = read_rows(pred_path)
-    new = [regrade_row(r) for r in rows]
+    already = backup.exists()
+    if already:                       # rows already carry outcome_containment, so the same statistics can be rebuilt
+        new, apply = read_rows(pred_path), False
+    else:
+        new = [regrade_row(r) for r in read_rows(pred_path)]
     moves = Counter(f"{o['outcome_containment']}>{o['outcome']}" for o in new if o["outcome_containment"] != o["outcome"])
     flags = Counter(o["review_status"] for o in new if o["review_status"] != "unreviewed")
     old_rt, new_rt = rates(new, "outcome_containment"), rates(new)
     stats = {
+        "already_applied": already,
         "n": len(new), "changed": sum(moves.values()), "moves": dict(moves), "flags": dict(flags),
         "accuracy_containment": old_rt["correct"], "accuracy_v5": new_rt["correct"],
         "hallucination_containment": old_rt["incorrect"], "hallucination_v5": new_rt["incorrect"],
@@ -113,22 +115,19 @@ def main():
     for p in paths:
         st = regrade_file(p, args.apply)
         per_file[str(p.relative_to(args.root))] = st
-        if "skipped" in st:
-            continue
         total_n += st["n"]
         total_changed += st["changed"]
         moves.update(st["moves"])
         examples += st["examples"][: max(0, 12 - len(examples))]
 
-    done = {k: v for k, v in per_file.items() if "skipped" not in v}
-    print(f"{len(paths)} prediction files, {len(done)} regraded in this run, {len(per_file) - len(done)} already done")
-    if done:
-        print(f"answers: {total_n}; label changes containment -> v5: {total_changed} ({100 * total_changed / total_n:.3f}%)")
-        print("moves:", dict(moves))
-        worst = max(done.items(), key=lambda kv: abs(kv[1]["accuracy_v5"] - kv[1]["accuracy_containment"]))
-        print(f"largest accuracy shift in any file: {worst[1]['accuracy_v5'] - worst[1]['accuracy_containment']:+.4f} ({worst[0]})")
-        for e in examples:
-            print("  example:", e)
+    fresh = sum(not v["already_applied"] for v in per_file.values())
+    print(f"{len(paths)} prediction files, {fresh} regraded in this run, {len(paths) - fresh} already done (statistics rebuilt from them)")
+    print(f"answers: {total_n}; label changes containment -> v5: {total_changed} ({100 * total_changed / total_n:.3f}%)")
+    print("moves:", dict(moves))
+    worst = max(per_file.items(), key=lambda kv: abs(kv[1]["accuracy_v5"] - kv[1]["accuracy_containment"]))
+    print(f"largest accuracy shift in any file: {worst[1]['accuracy_v5'] - worst[1]['accuracy_containment']:+.4f} ({worst[0]})")
+    for e in examples:
+        print("  example:", e)
     print("mode:", "APPLIED (originals kept as *_containment files)" if args.apply else "dry run, nothing changed")
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

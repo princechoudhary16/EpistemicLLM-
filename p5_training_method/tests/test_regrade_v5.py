@@ -60,7 +60,7 @@ class RegradeFile(unittest.TestCase):
 
     def test_apply_keeps_originals_updates_summary_and_is_not_repeated(self):
         original = (self.run / "predictions.jsonl").read_text()
-        regrade_file(self.run / "predictions.jsonl", apply=True)
+        first = regrade_file(self.run / "predictions.jsonl", apply=True)
         self.assertEqual((self.run / "predictions_containment.jsonl").read_text(), original)
         new = [json.loads(line) for line in (self.run / "predictions.jsonl").read_text().splitlines()]
         self.assertEqual([r["outcome"] for r in new], ["incorrect", "correct", "abstain", "incorrect"])
@@ -69,7 +69,11 @@ class RegradeFile(unittest.TestCase):
         self.assertEqual(summary["by_exposure"]["5"]["head_pred_mean"], 0.85)   # untouched field
         self.assertEqual(summary["spearman_head_vs_exposure"], 0.7)
         self.assertEqual(json.loads((self.run / "summary_containment.json").read_text())["by_exposure"]["5"]["accuracy"], 1.0)
-        self.assertIn("skipped", regrade_file(self.run / "predictions.jsonl", apply=True))
+        again = regrade_file(self.run / "predictions.jsonl", apply=True)        # a repeat rebuilds the same statistics
+        self.assertTrue(again["already_applied"] and not first["already_applied"])
+        for key in ("n", "changed", "moves", "accuracy_containment", "accuracy_v5"):
+            self.assertEqual(again[key], first[key])
+        self.assertEqual((self.run / "predictions_containment.jsonl").read_text(), original)
 
 
 if __name__ == "__main__":

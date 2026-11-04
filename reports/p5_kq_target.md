@@ -219,8 +219,8 @@ Dev verdict: **not all pass; criteria A and B fail in every arm and world.** Rea
 Per the protocol nothing is changed after this result. The final stage (`kdev` / `edev`, and `pdev` for the P1 arm, scored on final facts) runs once per arm as written.
 
 ## Results (final stage, run once per arm; recorded 3 Nov 2026)
-Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32; teacher labels graded with v5 (scored-side
-grading is provisional, see the grader scope note above), 3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
+Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32; teacher labels graded with v5. The tables below were scored before
+the Amendment 2 regrade; the v5-scored values are in "Amendment 2: result" at the end of this report (no verdict changed). 3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
 and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` and `kq_criteria.py --split final --arm p1`.
 
 | main_v0, final, primary arm | K head | s(e) head (matched) | s(e), all labelled (reference) |
@@ -284,3 +284,21 @@ grader (see the grader scope note above). This applies to the K(q) results here 
   correction, not as a new test run.
 - **Reporting rule:** each verdict is reported under v5, with the previous substring-graded value beside it, and any verdict that changes is said to have changed.
   The v5 numbers replace the old ones as the result; the old ones stay as the record.
+
+### Amendment 2: result (4 Nov 2026; regrade applied, K(q) re-scored under v5)
+`regrade_v5.py --apply` changed 48 of 60,480 saved labels (0.079%, all `correct` → `incorrect`, none abstentions, largest accuracy shift in one file −0.83 points).
+The K(q) jobs were then rerun with training and eval skipped (checkpoints and summaries exist; the logs show 0 train / eval lines), so only `probe_controls.py` re-scored,
+followed by `kq_criteria.py`. Criteria, thresholds and designs are those of the original protocol. Values are v5, with the earlier substring-graded value in brackets.
+
+| arm, world, split | K-head AUROC | K-head AURC | A: K − s(e) AUROC (≥ +0.03) | B: K AURC − log-prob AURC (≤ 0.03) |
+|---|---|---|---|---|
+| primary, main_v0, dev | 0.601 [0.601] | 0.475 [0.474] | −0.074 FAIL [−0.073] | +0.273 FAIL [+0.273] |
+| primary, main_w1, dev | 0.698 [0.699] | 0.413 [0.412] | −0.018 FAIL [−0.017] | +0.200 FAIL [+0.199] |
+| P1 labels, main_v0, dev | 0.609 [0.609] | 0.443 [0.443] | −0.066 FAIL [−0.066] | +0.242 FAIL [+0.242] |
+| primary, main_v0, final | 0.561 [0.562] | 0.495 [0.493] | −0.098 FAIL [−0.096] | +0.292 FAIL [+0.291] |
+| primary, main_w1, final | 0.734 [0.734] | 0.362 [0.362] | −0.070 FAIL [−0.069] | +0.151 FAIL [+0.151] |
+| P1 labels, main_v0, final | 0.627 [0.626] | 0.457 [0.455] | −0.032 FAIL [−0.033] | +0.252 FAIL [+0.251] |
+
+No K(q) verdict changed: every A and B value moved by at most 0.002, and all twelve criteria still fail. The Spearman columns do not depend on grading and did not change.
+The v5 values above replace the earlier ones as the result; the earlier ones, and the pre-regrade result files, are kept (git history for the K(q) files, and
+`results/superseded_containment_grader_final/` on the cluster for all of `results/final`). The v5 summaries of the sweep, abstention and aux-zero reports are separate and follow in their own reports.
