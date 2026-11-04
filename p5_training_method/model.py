@@ -8,6 +8,7 @@ from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from head import EvidenceHead
+from precision import require_float32
 
 DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16}
 
@@ -31,7 +32,11 @@ class EvidenceAwareModel(nn.Module):
         pred = self.head(pooled)
 
         l_answer = out.loss
-        l_aux = F.mse_loss(pred, batch["s_target"])
+        mask = batch.get("aux_mask")
+        if mask is None:
+            l_aux = F.mse_loss(pred, batch["s_target"])
+        else:  # masked mean over labelled rows, identical to F.mse_loss when every row is labelled
+            l_aux = (((pred - batch["s_target"]) ** 2) * mask).sum() / mask.sum().clamp(min=1.0)
         total = l_answer + aux_weight * l_aux
         return {
             "loss": total,
@@ -43,6 +48,7 @@ class EvidenceAwareModel(nn.Module):
 
 def build_model(cfg, device, checkpoint_dir=None, trainable=True):
     m = cfg["model"]
+    require_float32(m["dtype"], "build_model")
     tokenizer = AutoTokenizer.from_pretrained(m["id"], revision=m["revision"])
     base = AutoModelForCausalLM.from_pretrained(m["id"], revision=m["revision"], dtype=DTYPES[m["dtype"]]).to(device)
 

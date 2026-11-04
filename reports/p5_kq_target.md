@@ -1,0 +1,266 @@
+# P5 — K(q)-target version: protocol and success criteria
+
+Status: **protocol written before any code runs and before any result exists.** The results section is filled in afterwards.
+
+## Question
+Plan §7 ("knowledge-continuum version"): replace the exposure proxy `s(e)` with `K(q)`, the fraction of sampled answers
+that are correct, obtained from a frozen standard-SFT teacher on synthetic training facts. The evidence head so far was a
+worse abstention signal than the model's own log-probability (reports/p5_evidence_aware_training.md §3.4). Was that because
+`s(e)` is only a loose proxy for correctness? If so, a head trained directly on `K(q)` should close the gap.
+
+## Two design problems found in review, and the fixes
+1. **Memorised wordings.** The teacher was trained on the training prompts word for word, so asking it those would give
+   inflated `K`. The plan only restricts *which facts* are labelled ("synthetic training facts"), not the wording.
+   **Fix:** label with P1's held-out wordings (`data/synthetic/<world>/robustness/eval_heldout.jsonl`): 2 questions
+   per fact for all 600 facts, wordings that appear in no train, validation or test template (0 of 1,200 duplicates).
+2. **Memorised labels.** If every fact gets a `K` label the head can memorise "this fact → K = 0.9"; the 0× control showed
+   a head will memorise names. **Fix (fact-disjoint labelling):** a head receives `K` labels (and aux loss) only for the facts of
+   *one* split, none for the other, and is scored on the other split's facts, which it never had a label for. The
+   language-model loss is unchanged and uses every fact, as in every earlier experiment.
+
+## Design (per world, `main_v0` and `main_w1`)
+- **Teacher (fixed):** the `lam0` seed-0 checkpoint of that world (plain SFT, same recipe and data order as the students).
+- **Labels:** teacher answers the 1,200 held-out questions with P6's `ModelRunner` and `run_eval` (decoding_v1,
+  1 greedy + 5 sampled = 6 generations per question, placeholder grader, bfloat16). `K(fact)` follows the project's definition
+  (`common.metrics.knowledge_scores`, used directly): correct **sampled** responses / sampled responses, greedy excluded, so
+  out of 10 (2 wordings × 5). Budget: 7,200 generations per world. Recorded: teacher checkpoint, config, grading version.
+  Facts at 0× are labelled too (K ≈ 0) but have no training rows, so they never enter training.
+- **Four student sets** (λ = 3 fixed, seeds 0, 1, 2, same recipe), each with aux loss only on the training rows of one split's facts
+  (masked mean squared error over the labelled rows; other rows contribute language-model loss only):
+
+| set | aux target | aux labels on facts of | scored on |
+|---|---|---|---|
+| `kfinal` | `K(fact)` | final | **dev** |
+| `efinal` | `s(e)` (the matched control) | final | **dev** |
+| `kdev` | `K(fact)` | dev | **final** |
+| `edev` | `s(e)` (the matched control) | dev | **final** |
+
+  In every scored case the scored facts are novel to the head's aux loss, and the `K` and `s(e)` heads differ only in the target.
+- **Scored on the student's own answers**, as in all earlier experiments: head score vs whether the student's greedy answer is correct.
+- **λ is not re-tuned** for the new target (it was chosen for `s(e)` on `main_v0` dev). This is a limitation: `K` is nearly
+  bimodal (mostly 0 or 1) and a different λ might suit it better.
+- Reference signals on the same answers: the student's own average log-probability (`p5_avg_logprob`).
+
+## Protocol
+1. Teacher labels for both worlds (GPU job). Label sanity is reported: K by exposure level and the share of exposed facts with
+   0.1 ≤ K ≤ 0.9. No gate.
+2. Train all four sets, 3 seeds, both worlds. **Dev stage:** score `kfinal` and `efinal` on dev; judge with `kq_criteria.py --split dev`;
+   record the verdict here. **Final stage, once per world after that:** score `kdev` and `edev` on final.
+3. No change to λ, the target definition, the labelling, or the sets after seeing any result.
+
+## Success criteria (written before any result; mean over 3 seeds, must hold in **both** worlds, on the scored (novel) split)
+| # | Criterion |
+|---|---|
+| A | **K beats the proxy under matched conditions:** AUROC (head predicts the student's correct answers) of the `K`-head exceeds the `s(e)`-head's by **≥ 0.03** |
+| B | **K closes the gap to the model's own confidence** (stretch): AURC of the `K`-head (risk-coverage area, lower is better; threshold-free, from P6's functions) is within **0.03** of AURC using the student's own log-probability |
+| C | *reported, not judged:* head-vs-teacher-`K` Spearman on the scored facts; AUROC of both heads vs the existing all-labelled `s(e)` λ=3 baseline; accuracy of each set vs the λ=3 baseline |
+
+AURC replaces the thresholded net score used earlier because each student is scored on one split only (a threshold needs
+a separate selection set that is not available without scoring the same model on facts it had labels for).
+Reference points (`s(e)`, all facts labelled, λ=3): AUROC predicts-correct 0.78–0.83; AURC of the head 0.28 against 0.20 for log-prob.
+
+## Caveats to carry into the results
+- Teacher labels are only as good as the teacher: its `K` is not the students' `K` (plan: "labels are not assumed to equal the
+  evolving student's knowledge"). One fixed teacher per world, seed 0; the students vary over 3 seeds.
+- Placeholder grader (differs from P2's on under 0.2% of labels, measured), both worlds from one generator, 3 seeds.
+- Half of the facts carry aux labels in each set, so these heads train on half the labelled rows of the earlier `s(e)` heads.
+  The matched `s(e)` control is there so that this does not bias the K-vs-`s(e)` comparison.
+- The 0× facts are scored but never labelled and never in training (no name-recognition issue here, but also no 0× supervision).
+
+## Label sanity (reported, not a gate; from `results/final/p5_kq_labels_<world>.json`)
+Teacher `<world>_lam0_seed0`, `decoding_v1`, `placeholder_exact_v1`, 600 facts, 7,200 generations (1,200 held-out questions × 6).
+
+| | main_v0 | main_w1 |
+|---|---|---|
+| K by exposure 0× / 1× / 2× / 5× / 10× / 20× | .005 / .068 / .221 / .673 / .845 / .928 | .009 / .044 / .187 / .636 / .863 / .971 |
+| exposed facts with 0.1 ≤ K ≤ 0.9 | 20.2% | 18.4% |
+| K = 0 / K = 1 | 35.2% / 44.6% | 37.2% / 44.4% |
+
+K rises with exposure in both worlds, but about 80% of exposed facts sit at K = 0 or K = 1, so the K target differs from `s(e)`
+mainly on the in-between ~20%. This was read before any student was trained; criteria and design are unchanged.
+
+## Protocol deviation (recorded)
+The first dev-stage attempt (jobs 49593 main_v0, started 22:10; 49594 main_w1, cancelled at once) began before the
+protocol and code were committed (commit `80cc4e8`, 22:19). It was cancelled; its two partial main_v0 directories
+(`main_v0_lam3kfinal_seed0`, `main_v0_lam3efinal_seed0`) were deleted unscored and the main_v0 dev stage was rerun in full
+after the commit (job 49655). The main_w1 dev stage (job 49607) started after the commit. No result from the first attempt is used.
+
+## Dev-stage result (recorded before the final stage; `python p5_training_method/kq_criteria.py --split dev`)
+Heads are scored on dev facts they had no label for (`kfinal` / `efinal` sets: labels on final facts only). Mean ± sd over 3 seeds.
+
+| main_v0, dev | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.571 ± 0.043 | 0.674 ± 0.034 | 0.829 ± 0.004 |
+| AURC head (lower = better) | 0.490 ± 0.054 | 0.383 ± 0.054 | 0.270 ± 0.029 |
+| AURC own log-prob | 0.207 ± 0.009 | 0.201 ± 0.041 | 0.199 ± 0.027 |
+| Spearman vs teacher K | 0.143 ± 0.069 | 0.257 ± 0.024 | 0.552 ± 0.013 |
+| overall accuracy | 0.463 ± 0.009 | 0.473 ± 0.044 | 0.467 ± 0.027 |
+
+| main_w1, dev | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.686 ± 0.022 | 0.716 ± 0.036 | 0.817 ± 0.022 |
+| AURC head (lower = better) | 0.425 ± 0.074 | 0.353 ± 0.039 | 0.273 ± 0.026 |
+| AURC own log-prob | 0.234 ± 0.075 | 0.202 ± 0.021 | 0.200 ± 0.014 |
+| Spearman vs teacher K | 0.386 ± 0.036 | 0.405 ± 0.058 | 0.630 ± 0.044 |
+| overall accuracy | 0.444 ± 0.063 | 0.470 ± 0.025 | 0.468 ± 0.018 |
+
+**Criterion A (K − matched s(e) AUROC ≥ +0.03): FAIL in both worlds** (main_v0 −0.103, main_w1 −0.030). **Criterion B (K-head AURC within 0.03 of
+own log-prob): FAIL in both worlds** (+0.283, +0.191). Dev verdict: not all pass. Reading, limited to what was measured:
+- The K target did not help; in main_v0 the K head is clearly worse than the matched `s(e)` head (−0.10 AUROC, more than 2 sd of either), in main_w1 it
+  is lower by 0.03, inside seed noise but in the wrong direction. The K head also predicts the teacher's own K worse on unlabelled facts than the
+  `s(e)` head does (Spearman 0.14 vs 0.26 in main_v0).
+- Criterion B was far out of reach for the matched `s(e)` head as well (AURC 0.38 / 0.35 against ~0.20 for log-prob): on facts it has no label for,
+  neither head approaches the model's own confidence.
+- The all-labelled reference (0.83 AUROC) is **not** a fact-disjoint number: that head was trained on the scored facts' own labels, and has twice the
+  labelled rows. The 0.83 → 0.67 drop to the matched control is therefore not an effect of the K target and should not be quoted as one.
+  The matched control is the fair comparison.
+- Accuracy: no clear cost at the means; main_w1's K set has a large seed spread (0.444 ± 0.063).
+- Not tested: *why* the K head generalises worse. A possible reason is that K is near-binary (about 80% of exposed facts at 0 or 1) and a fact
+  labelled 0 or 1 can be fitted by recognising the fact, whereas exposure count varies smoothly with how familiar the fact feels; this would need its own control.
+
+Per the protocol nothing is changed after this result: the final stage (`kdev` / `edev`, scored on final facts) runs once as written.
+**Superseded by Amendment 1 below: this dev stage was produced with bfloat16, placeholder-graded teacher labels, so the final stage has not been run.**
+
+## Amendment 1 (1 Nov 2026; written before any rerun): float32 labels, shared grader v5
+The team decided on 31 Oct (`configs/model.yaml`, `common/grading.py`) that all training and evaluation is float32 and that every reported number
+is graded with the shared grader (`p2_whole_word_v5`). Checked against this experiment:
+- All heads and LoRA adapters were trained in float32 (`p5_training_method/config.yaml`), so no training run is affected.
+- The **teacher K labels were not**: `kq_labels.py` generated them through `ModelRunner` using this branch's copy of `configs/model.yaml`, which was still
+  bfloat16 (the float32 change was on `main` only), and graded them with `run_eval`'s placeholder grader (`grading_version: placeholder_exact_v1`).
+
+What changes and what does not:
+- **Superseded:** the dev-stage tables above (bf16 / placeholder labels). They stay in this report as a record and are not a K(q) result.
+- **Unchanged:** the teacher (`lam0`, seed 0, plain SFT), the held-out wordings, 2 wordings x 5 samples = 10 per fact, the K definition, the four label
+  sets and their masks, 3 seeds, both worlds, criteria A and B, and the rule that the final stage runs once.
+- **Changed:** `kq_labels.py` now stops unless dtype is float32 and regrades with `common/grading.py` before computing K; the label file records both
+  `dtype` and `grading_version`. The dev stage is rerun on the new labels and **that** run is the dev result. The superseded bf16 run is reported
+  beside it, so a reader can see whether the verdict depends on label precision. This is a correction of a setup error, not a second try at a failed
+  test: nothing about the criteria, designs or thresholds is touched, and the new dev verdict is reported whichever way it falls.
+- **Second arm, adopted 1 Nov 2026 (before any run): "team-spec labels".** The K target named in team decision 4 is P1's K per fact for `main_v0`
+  (`p1_exposure/analysis/results/k_labels/main_v0_float32_seed0/`: float32, grader v5, the 4 training wordings x 5 samples = 20 per fact, from P1's own
+  float32 run of the matched recipe, seed 0; P6's `sft_matched` was not yet available). It is run as an extra arm, never a replacement:
+  - **Labels:** `p5_training_method/p1_labels.py` checks P1's file against `facts.jsonl` (600 facts, same exposure and split, K in [0, 1], 20 samples,
+    float32, v5) and writes `results/final/p5_kq_labels_main_v0_p1.json`; nothing is recomputed. K is P1's, so it is measured on training wordings,
+    where the primary arm uses held-out wordings; the two arms therefore differ in model, wordings and sample count, and a difference between them
+    cannot be attributed to any one of these.
+  - **Design:** the same masks and the same fact-disjoint scheme as the primary arm: `pfinal` (labels on final facts, scored on dev) and `pdev`
+    (labels on dev facts, scored on final), 3 seeds, lambda 3. The matched s(e) controls are the primary arm's `efinal` / `edev` runs, not retrained.
+  - **Criteria:** A and B exactly as above, scored by `kq_criteria.py --arm p1`, `main_v0` only (P1 has no `main_w1` file). The dev stage is run first and
+    its verdict recorded here before the final stage, as for the primary arm.
+  - **Reading rule:** both arms are reported whatever they show. The primary arm stays the headline; the P1 arm is a robustness check on how K is
+    measured, and cannot be promoted after the results are seen. One caution carried from P1's own README: with training-wording K the head could memorise
+    a fact's K instead of reading evidence; the fact-disjoint masks are the control for that, and any gain at 0x is read with the name-recognition caveat
+    from `reports/p5_aux_zero_novel.md`.
+
+## Dev-stage result after Amendment 1 (float32 labels, grader v5; recorded 2 Nov 2026, before any final-stage run)
+Teacher labels: `results/final/p5_kq_labels_main_v0.json` and `_main_w1.json` (dtype float32, `p2_whole_word_v5`, 600 facts each; mean K by exposure
+0 / 1 / 2 / 5 / 10 / 20: main_v0 0.005 / 0.071 / 0.223 / 0.673 / 0.848 / 0.926, main_w1 0.010 / 0.044 / 0.183 / 0.641 / 0.863 / 0.972).
+Scored on dev facts the head had no label for; mean ± sd over 3 seeds. Commands: `kq_criteria.py --split dev` (primary arm, both worlds) and
+`kq_criteria.py --split dev --arm p1` (P1 arm, main_v0).
+
+**Primary arm (held-out-wordings teacher labels), float32 / v5. The bfloat16 / placeholder values from the superseded run are in brackets.**
+
+| main_v0, dev | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.601 ± 0.032 [0.571] | 0.674 ± 0.034 | 0.829 ± 0.004 |
+| AURC head (lower = better) | 0.474 ± 0.020 [0.490] | 0.383 ± 0.054 | 0.270 ± 0.029 |
+| AURC own log-prob | 0.201 ± 0.013 [0.207] | 0.201 ± 0.041 | 0.199 ± 0.027 |
+| Spearman vs teacher K | 0.145 ± 0.050 [0.143] | 0.260 ± 0.026 | 0.556 ± 0.012 |
+| overall accuracy | 0.469 ± 0.015 [0.463] | 0.473 ± 0.044 | 0.467 ± 0.027 |
+
+| main_w1, dev | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.699 ± 0.016 [0.686] | 0.716 ± 0.036 | 0.817 ± 0.022 |
+| AURC head (lower = better) | 0.412 ± 0.022 [0.425] | 0.353 ± 0.039 | 0.273 ± 0.026 |
+| AURC own log-prob | 0.213 ± 0.006 [0.234] | 0.202 ± 0.021 | 0.200 ± 0.014 |
+| Spearman vs teacher K | 0.420 ± 0.051 [0.386] | 0.406 ± 0.060 | 0.629 ± 0.045 |
+| overall accuracy | 0.450 ± 0.010 [0.444] | 0.470 ± 0.025 | 0.468 ± 0.018 |
+
+**P1 arm (P1's K on the 4 training wordings, 20 samples per fact), main_v0 only, float32 / v5:**
+
+| main_v0, dev | K head (P1 labels) | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.609 ± 0.095 | 0.674 ± 0.034 | 0.829 ± 0.004 |
+| AURC head (lower = better) | 0.443 ± 0.074 | 0.383 ± 0.054 | 0.270 ± 0.029 |
+| AURC own log-prob | 0.201 ± 0.008 | 0.201 ± 0.041 | 0.199 ± 0.027 |
+| Spearman vs teacher K | 0.255 ± 0.083 | 0.277 ± 0.048 | 0.556 ± 0.012 |
+| overall accuracy | 0.464 ± 0.015 | 0.473 ± 0.044 | 0.467 ± 0.027 |
+
+**Verdicts (criteria unchanged):**
+
+| arm, world | A: K − matched s(e) AUROC (need ≥ +0.03) | B: K AURC − own log-prob AURC (need ≤ 0.03) |
+|---|---|---|
+| primary, main_v0 | −0.073 FAIL [−0.103] | +0.273 FAIL [+0.283] |
+| primary, main_w1 | −0.017 FAIL [−0.030] | +0.199 FAIL [+0.191] |
+| P1, main_v0 | −0.066 FAIL | +0.242 FAIL |
+
+Dev verdict: **not all pass; criteria A and B fail in every arm and world.** Reading, limited to what was measured:
+- Precision and grader did not change the verdict. Under float32 / v5 the K head moved by at most 0.03 AUROC against the superseded run (main_v0 +0.030,
+  main_w1 +0.013), the criteria A and B gaps moved by at most 0.03, and every one still fails. The matched `s(e)` control is unchanged to three decimals
+  (it never depended on K labels and was always float32), so the K-head change is the only thing that moved.
+- The K target did not beat exposure as a head target. K minus `s(e)` is −0.073 / −0.017 (primary) and −0.066 (P1) in AUROC; in main_w1 the gap is
+  inside seed noise, in main_v0 it is about two sd of the `s(e)` control, and for the P1 arm the K head's seed spread (±0.095) is wider than the gap, so
+  that arm shows "not better", not "worse".
+- Swapping the label source did not rescue K. The P1 labels (different model, training wordings, 20 samples) give 0.609 against 0.601 for the held-out-wording
+  labels, a difference far inside seed noise. The two arms differ in several ways at once, so this is a robustness check and not a comparison of label recipes.
+- Criterion B is out of reach for every head here, including the matched `s(e)` control (AURC 0.35 to 0.38 against about 0.20 for the model's own
+  log-prob): on facts it had no label for, no head approaches the model's own confidence. The 0.83 all-labelled AUROC was trained on the scored facts'
+  own labels and is not a fact-disjoint number; the matched control is the fair comparison.
+- Accuracy: the K sets sit at 0.450 to 0.469 against 0.467 to 0.473 for the `s(e)` sets, which is within seed spread at the means.
+- Not tested, as before: *why* K generalises no better than exposure. The near-binary shape of K (a fact labelled 0 or 1 can be fitted by recognising
+  the fact) remains a hypothesis and would need its own control.
+
+Per the protocol nothing is changed after this result. The final stage (`kdev` / `edev`, and `pdev` for the P1 arm, scored on final facts) runs once per arm as written.
+
+## Results (final stage, run once per arm; recorded 3 Nov 2026)
+Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32, grader v5,
+3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
+and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` and `kq_criteria.py --split final --arm p1`.
+
+| main_v0, final, primary arm | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.562 ± 0.040 | 0.659 ± 0.054 | 0.784 ± 0.027 |
+| AURC head (lower = better) | 0.493 ± 0.028 | 0.400 ± 0.077 | 0.285 ± 0.027 |
+| AURC own log-prob | 0.203 ± 0.021 | 0.212 ± 0.034 | 0.202 ± 0.015 |
+| Spearman vs teacher K | 0.114 ± 0.029 | 0.214 ± 0.070 | 0.497 ± 0.041 |
+| overall accuracy | 0.469 ± 0.027 | 0.456 ± 0.041 | 0.474 ± 0.016 |
+
+| main_w1, final, primary arm | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.734 ± 0.021 | 0.803 ± 0.022 | 0.834 ± 0.026 |
+| AURC head (lower = better) | 0.362 ± 0.014 | 0.302 ± 0.021 | 0.281 ± 0.028 |
+| AURC own log-prob | 0.212 ± 0.025 | 0.206 ± 0.022 | 0.208 ± 0.011 |
+| Spearman vs teacher K | 0.417 ± 0.048 | 0.537 ± 0.023 | 0.602 ± 0.045 |
+| overall accuracy | 0.449 ± 0.024 | 0.452 ± 0.025 | 0.451 ± 0.015 |
+
+| main_v0, final, P1 arm | K head (P1 labels) | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.626 ± 0.068 | 0.659 ± 0.054 | 0.784 ± 0.027 |
+| AURC head (lower = better) | 0.455 ± 0.052 | 0.400 ± 0.077 | 0.285 ± 0.027 |
+| AURC own log-prob | 0.204 ± 0.008 | 0.212 ± 0.034 | 0.202 ± 0.015 |
+| Spearman vs teacher K | 0.275 ± 0.129 | 0.262 ± 0.070 | 0.520 ± 0.040 |
+| overall accuracy | 0.459 ± 0.009 | 0.456 ± 0.041 | 0.474 ± 0.016 |
+
+| arm, world | A: K − matched s(e) AUROC (need ≥ +0.03) | B: K AURC − own log-prob AURC (need ≤ 0.03) | dev A / B |
+|---|---|---|---|
+| primary, main_v0 | −0.096 FAIL | +0.291 FAIL | −0.073 / +0.273 |
+| primary, main_w1 | −0.069 FAIL | +0.151 FAIL | −0.017 / +0.199 |
+| P1, main_v0 | −0.033 FAIL | +0.251 FAIL | −0.066 / +0.242 |
+
+**Verdict: criteria A and B fail in every arm and world on the final split, as on dev. The K target does not improve on the exposure target
+`s(e) = log(1+e)/log(21)` as a head label, and no head reaches the model's own log-prob as an abstention signal.** Reading, limited to what was measured:
+- Dev and final agree in sign and rough size for all three arm/world pairs, so the result was not a dev-split accident.
+- In the primary arm the K head is below the matched `s(e)` head on final by 0.096 (main_v0) and 0.069 (main_w1) AUROC. That is about two sd of the
+  `s(e)` control in main_v0 and about three in main_w1, so there it is a worse head, not just "not better". In the P1 arm the gap (−0.033) is inside the K head's
+  seed spread (±0.068): "not better", with no evidence of "worse".
+- The K head also predicts the teacher's own K worse than the `s(e)` head does on unlabelled facts in the primary arm (Spearman 0.114 vs 0.214 in main_v0,
+  0.417 vs 0.537 in main_w1); in the P1 arm they are equal (0.275 vs 0.262, large spread).
+- Criterion B stays out of reach for every head, including the matched `s(e)` control (AURC 0.30 to 0.40 against about 0.20 for log-prob). The
+  all-labelled column was trained on the scored facts' own labels and is a reference, not a fact-disjoint result.
+- Accuracy is unchanged within seed spread (K sets 0.449 to 0.469, `s(e)` sets 0.452 to 0.456), so the K aux loss did not cost answer quality.
+- **What this does not show.** One teacher (plain SFT, seed 0), two synthetic worlds, a 0.5B model, 3 seeds, and heads trained on half the facts (the masking
+  that keeps train and score facts disjoint). The explanation that K is near-binary and so is fitted by recognising a fact stays an untested hypothesis. The
+  K target was also not tried at other λ values or as a replacement for the model's own signal, since the pre-stated question was whether it beats `s(e)` as a head target.
+
+**Consequence for the P5 recipe.** The K(q) target is a negative result and is not adopted: the headline recipe keeps `s(e)` with λ = 3, and the model's average
+log-prob remains the better abstention signal (see `reports/p5_aux_zero.md` and the earlier abstention results). The K(q) item in team decision 4 is therefore closed for P5 with this report.

@@ -10,6 +10,13 @@ p5_<ds>_lam<L>_seed<S>.jsonl, where
   aux_confidence_score   = the evidence head's prediction for the question (one value per question);
                            null for lambda=0, which has no trained head
 lambda=0 is plain SFT trained through P5's own code path (a matched baseline for the lambda>0 model).
+
+Precision is float32 (team convention; the run stops otherwise) and every row is graded with the shared grader
+common/grading.py, not run_eval's placeholder.
+
+    --questions PATH scores any question file in the shared schema instead of data/synthetic/<ds>/eval.jsonl, e.g. a
+    TriviaQA split, and names the outputs p5_<file-tag>_lam<L>_seed<S>.jsonl. The locked test is refused unless
+    --allow-locked-test is given: it is run once, after the freeze.
 `aux_confidence_score` is the field P6 added to the schema on branch `sahana` (not yet merged to main).
 """
 import argparse
@@ -24,10 +31,12 @@ REPO = HERE.parent
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(HERE))
 
+from common import grading  # noqa: E402
 from common.evaluate import run_eval  # noqa: E402
 from common.model import ModelRunner  # noqa: E402
 from common.schema import read_jsonl, write_jsonl  # noqa: E402
 from head import EvidenceHead  # noqa: E402
+from precision import require_float32  # noqa: E402
 
 
 def load_yaml(name):
@@ -51,6 +60,12 @@ def head_scores(runner, head, questions, system_prompt, batch_size, device):
     return out
 
 
+def question_file_tag(path):
+    """'data/real_qa/triviaqa_v0/validation.jsonl' -> 'triviaqa_v0_validation' (names the output files)."""
+    path = Path(path)
+    return f"{path.parent.name}_{path.stem}"
+
+
 def finalize_rows(rows, head_by_question):
     """Keep confidence_score = average log-prob (the signal every method has; P6 keeps it comparable) and
     put the evidence head's score, one value per question, in aux_confidence_score (null for lambda=0)."""
@@ -72,12 +87,24 @@ def main():
     ap.add_argument("--gen-seed", type=int, default=0)
     ap.add_argument("--batch-size", type=int, default=32)
     ap.add_argument("--limit", type=int, default=None, help="smoke test only: first N questions (not comparable)")
+    ap.add_argument("--questions", default=None,
+                    help="question JSONL in the shared schema (default: data/synthetic/<dataset-version>/eval.jsonl)")
+    ap.add_argument("--allow-locked-test", action="store_true",
+                    help="needed for a locked_test file; run it once, after the freeze")
     args = ap.parse_args()
+    if args.questions and "locked_test" in Path(args.questions).name and not args.allow_locked_test:
+        raise SystemExit(f"{args.questions} is the locked test: pass --allow-locked-test (once, after the freeze)")
 
     model_cfg, dec_cfg = load_yaml("model.yaml"), load_yaml("decoding.yaml")
+    require_float32(model_cfg["torch_dtype"], "export_responses")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     ds = args.dataset_version
-    questions = read_jsonl(REPO / "data" / "synthetic" / ds / "eval.jsonl")[: args.limit]
+    if args.questions:
+        q_path = Path(args.questions)
+        tag = question_file_tag(q_path)
+    else:
+        q_path, tag = REPO / "data" / "synthetic" / ds / "eval.jsonl", ds
+    questions = read_jsonl(q_path)[: args.limit]
     qids = [q["question_id"] for q in questions]
     out_dir = REPO / args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -94,7 +121,8 @@ def main():
             runner = ModelRunner(model_cfg["model_id"], model_cfg["revision"], adapter_path=str(ckpt / "adapter"),
                                   torch_dtype=model_cfg["torch_dtype"], device=device)
             rows = run_eval(runner, questions, dec_cfg, model_cfg, f"p5_{ds}_lam{lam}_seed{seed}",
-                             "p5", f"{ds}_p5_lam{lam}_seed{seed}", seed=args.gen_seed, training_seed=seed)
+                             "p5", f"{tag}_p5_lam{lam}_seed{seed}", seed=args.gen_seed, training_seed=seed)
+            grading.regrade_rows(rows)   # run_eval's grader is a placeholder; every final number uses common/grading.py
             head_by_question = None
             if lam_positive:
                 head = EvidenceHead(runner.model.config.hidden_size).to(device)
@@ -103,7 +131,7 @@ def main():
                 scores = head_scores(runner, head, [q["question"] for q in questions], dec_cfg["system_prompt"],
                                      args.batch_size, device)
                 head_by_question = dict(zip(qids, scores))
-            stem = f"p5_{ds}_lam{lam}_seed{seed}"
+            stem = f"p5_{tag}_lam{lam}_seed{seed}"
             write_jsonl(finalize_rows(rows, head_by_question), out_dir / f"{stem}.jsonl")
             print(f"    wrote {stem}.jsonl to {out_dir}", file=sys.stderr, flush=True)
             del runner
