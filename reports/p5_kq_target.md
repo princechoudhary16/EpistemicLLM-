@@ -318,3 +318,22 @@ published K from P6's adapter (`p1_exposure/analysis/results/k_labels/main_v0_fl
   (`eval_head.py` now grades with v5). Dev stage first, its verdict recorded and committed here, then the final stage once.
 - **Reading rule:** reported whatever it shows. The primary arm stays the headline and this arm cannot replace it after the results are seen. Expectation, written now: it will agree with the other two arms. A pass of both A and B here
   would be a new finding and would need a second K file and a second look before it is believed.
+
+### Amendment 3: dev result (job 51135, `kq_criteria.py --split dev --arm p6`; recorded 4 Nov 2026, before the final stage of this arm)
+`main_v0`, scored on dev facts the head had no label for (`sfinal` students), λ = 3, 3 seeds, mean ± sd; v5 grader throughout.
+
+| main_v0, dev, P6-adapter labels | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.589 ± 0.013 | 0.674 ± 0.034 | 0.829 ± 0.004 |
+| AURC head (lower = better) | 0.466 ± 0.040 | 0.383 ± 0.054 | 0.270 ± 0.029 |
+| AURC own log-prob | 0.216 ± 0.033 | 0.201 ± 0.041 | 0.199 ± 0.027 |
+| Spearman vs teacher K | 0.189 ± 0.027 | 0.276 ± 0.048 | 0.566 ± 0.022 |
+| overall accuracy | 45.2% ± 4.2 | 47.3% ± 4.4 | 46.7% ± 2.7 |
+
+**Criterion A (K − matched s(e) AUROC ≥ +0.03): FAIL** (−0.086). **Criterion B (K-head AURC within 0.03 of own log-prob): FAIL** (+0.250). Dev verdict: not all pass, as expected in Amendment 3.
+Reading, limited to what was measured:
+- The K head is below the matched `s(e)` head by 0.086 AUROC, about 2.5 sd of the control's seed spread (0.034), the same direction and a similar size as the primary arm on `main_v0` dev (−0.074) and the P1 own-run arm (−0.066).
+  Using the K file the plan names did not change the picture.
+- Criterion B stays far out of reach (+0.250), as for every other head; the matched `s(e)` control is at +0.18.
+- This arm's students have a wider accuracy spread (45.2% ± 4.2) and a higher own-log-prob AURC (0.216 ± 0.033) than the other `main_v0` sets, so a single seed moves its means more; none of that changes a verdict.
+- The final stage of this arm (`sdev` students scored on final) runs once, next.
