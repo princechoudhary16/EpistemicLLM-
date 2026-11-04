@@ -52,7 +52,7 @@ here, whatever the verdict is (`STAGE=final`). No re-tuning of λ, the number of
 | head AUROC 1×/2× vs 0× | 0.342 ± .047 | **0.875 ± .062** |
 | head AUROC ≥5× vs 0× | 0.826 ± .011 | 0.991 ± .009 |
 | head AUROC ≥5× vs ≤2× | 0.871 ± .009 | 0.938 ± .023 |
-| overall accuracy | 46.7% ± 2.7 | 44.6% ± 3.3 |
+| overall accuracy | 46.7% ± 2.7 | 44.5% ± 3.2 |
 | accuracy at 0× | 0.0% | 0.0% |
 
 | `main_w1` dev | baseline λ=3 | λ=3 + 0× prompts |
@@ -60,19 +60,19 @@ here, whatever the verdict is (`STAGE=final`). No re-tuning of λ, the number of
 | head AUROC 1×/2× vs 0× | 0.379 ± .033 | **0.889 ± .035** |
 | head AUROC ≥5× vs 0× | 0.854 ± .032 | 0.994 ± .003 |
 | head AUROC ≥5× vs ≤2× | 0.878 ± .017 | 0.955 ± .003 |
-| overall accuracy | 46.8% ± 1.8 | 47.4% ± 0.7 |
+| overall accuracy | 46.6% ± 1.8 | 47.3% ± 0.8 |
 | accuracy at 0× | 1.0% ± 1.0 | 0.3% ± 0.6 |
 
 | criterion | `main_v0` | `main_w1` |
 |---|---|---|
 | a: 1×/2× vs 0× ≥ 0.60 | **pass** (0.875) | **pass** (0.889) |
 | b: headline ≥ 0.80 and not > 0.03 below baseline | **pass** (0.938) | **pass** (0.955) |
-| c: accuracy within 2 points and 0× accuracy ≤ 2% | **FAIL**: accuracy −2.1 points (bound 2.0); 0× accuracy 0.0% passes | **pass**: +0.6 points; 0× accuracy 0.3% |
+| c: accuracy within 2 points and 0× accuracy ≤ 2% | **FAIL**: accuracy −2.2 points (bound 2.0); 0× accuracy 0.0% passes | **pass**: +0.7 points; 0× accuracy 0.3% |
 
 **Dev verdict under the pre-stated rule (a, b and c in every world): NOT ALL PASS.** Criterion c is missed in
-`main_v0` by 0.1 point. The criteria are not changed after seeing this. Context, not a revision of the verdict:
+`main_v0` by 0.2 point. The criteria are not changed after seeing this. Context, not a revision of the verdict:
 the seed spread of the accuracy difference is 2.7–3.3 points per condition, so the 2-point bound is finer than
-what 3 seeds can resolve; the drop is not reproduced in `main_w1` (+0.6); and the leak check itself (0× accuracy)
+what 3 seeds can resolve; the drop is not reproduced in `main_w1` (+0.7); and the leak check itself (0× accuracy)
 is clean in both worlds. Per the protocol the final split is now scored once per world, whatever the verdict.
 
 Reading the AUROC jump (0.35 → 0.88): large and consistent across both worlds, but note the caveat above. The head
@@ -95,7 +95,7 @@ experiment.
 | head AUROC 1×/2× vs 0× | 0.351 ± .036 | **0.904 ± .011** |
 | head AUROC ≥5× vs 0× | 0.826 ± .027 | 0.993 ± .003 |
 | head AUROC ≥5× vs ≤2× | 0.863 ± .018 | 0.954 ± .008 |
-| overall accuracy | 45.1% ± 1.5 | 45.7% ± 1.5 |
+| overall accuracy | 45.0% ± 1.6 | 45.6% ± 1.7 |
 | accuracy at 0× | 0.7% ± 0.6 | 0.3% ± 0.6 |
 
 Criteria on final (reported, same rule): a **pass** and b **pass** in both worlds; c **fails in `main_v0`** (accuracy −3.2
@@ -112,10 +112,10 @@ points; 0× accuracy 1.7% is within the bound) and **passes in `main_w1`** (+0.6
 
 | `main_w1` | penalty 1 net | penalty 3 net | AURC |
 |---|---|---|---|
-| head, before (λ=3) | 0.230 | 0.172 | 0.281 |
-| head, with 0× prompts | 0.287 | 0.214 | 0.242 |
-| P5 log-prob, before → with 0× prompts | 0.371 → 0.372 | 0.327 → 0.321 | 0.208 → 0.203 |
-| SFT log-prob (reference) | 0.374 | 0.326 | 0.202 |
+| head, before (λ=3) | 0.229 | 0.172 | 0.282 |
+| head, with 0× prompts | 0.284 | 0.210 | 0.244 |
+| P5 log-prob, before → with 0× prompts | 0.371 → 0.369 | 0.327 → 0.316 | 0.208 → 0.204 |
+| SFT log-prob (reference) | 0.374 | 0.326 | 0.203 |
 
 Behaviour at the two ends, head abstention rate at penalty 1 (before → with 0× prompts): at 0× 0.83 → 1.00
 (`main_v0`) and 0.83 → 0.99 (`main_w1`); at 5× 0.77 → 0.55 and 0.78 → 0.47 (the head over-abstains less on
@@ -129,15 +129,25 @@ moderately exposed facts, where the model is right about 65% of the time).
   (1×/2× vs 0× AUROC 0.30–0.39), while a head that saw them with the same amount of supervision reaches 0.85–0.93.
   The ranking flaw for genuinely unfamiliar entities is therefore **not fixed** by these prompts.
 - **The pre-stated dev verdict is NOT ALL PASS** (criterion c in `main_v0`), and the final split shows the same pattern.
-  The accuracy cost in `main_v0` is −2.1 (dev) and −3.2 (final) points; the two splits are scored on the same 3 trained
-  models, so they are not independent confirmations, the seed spread is 3–4 points, and `main_w1` shows no cost (+0.6).
+  The accuracy cost in `main_v0` is −2.2 (dev; −2.1 before the v5 regrade) and −3.2 (final) points; the two splits are scored on the same 3 trained
+  models, so they are not independent confirmations, the seed spread is 3–4 points, and `main_w1` shows no cost (+0.7 dev, +0.6 final).
   I would not call it an established cost or a clear absence of one. I did not change the criterion.
-- **Criterion d: the head is still the worse abstention signal.** It improves in `main_w1` (net 0.230 → 0.287, AURC
-  0.281 → 0.242) and barely in `main_v0` (AURC 0.285 → 0.286; penalty-3 net 0.122 → 0.097), and stays well below the
-  model's own log-prob in both worlds at both penalties (e.g. 0.241 vs 0.364 and 0.287 vs 0.374 at penalty 1).
+- **Criterion d: the head is still the worse abstention signal.** It improves in `main_w1` (net 0.229 → 0.284, AURC
+  0.282 → 0.244) and barely in `main_v0` (AURC 0.285 → 0.286; penalty-3 net 0.122 → 0.097), and stays well below the
+  model's own log-prob in both worlds at both penalties (e.g. 0.241 vs 0.364 and 0.284 vs 0.374 at penalty 1).
   In `main_v0` the 0× prompts also slightly worsen the model's own log-prob signal (AURC 0.202 → 0.224), in line
   with its lower accuracy there.
 - **Status:** a negative result, with its control. The 0× prompts do not teach the head to recognise unknown entities. The main results in
   `reports/p5_evidence_aware_training.md` and `reports/p5_second_world.md` are unchanged.
 
-
+## Amendment (4 Nov 2026): re-scored with the shared v5 grader
+This report's accuracy figures were originally graded with P5's own substring grader, not the team's v5 grader (`common/grading.py`). The same saved answers were
+regraded with v5 (`p5_training_method/regrade_v5.py`: 48 of 60,480 labels changed, all `correct` → `incorrect`) and the probe controls, abstention tables and
+`aux0_criteria.py` rerun (plan and reporting rule: `reports/p5_kq_target.md`, Amendment 2). Nothing was retrained or regenerated. **No verdict, criterion outcome or
+conclusion changed.** The tables above now hold the v5 values. What moved, old → v5:
+- Accuracy cells: `main_v0` dev 44.6 ± 3.3 → 44.5 ± 3.2 (criterion c: −2.1 → −2.2 points, still FAIL, the bound is 2.0); `main_w1` dev baseline 46.8 → 46.6 and with 0× prompts
+  47.4 ± 0.7 → 47.3 ± 0.8 (+0.6 → +0.7, still pass); `main_w1` final baseline 45.1 ± 1.5 → 45.0 ± 1.6 and with 0× prompts 45.7 ± 1.5 → 45.6 ± 1.7 (+0.6 either way).
+  `main_v0` final (−3.2) and every accuracy-at-0× cell are unchanged.
+- Abstention, `main_w1` only (`main_v0` is identical to three decimals): head before 0.230 → 0.229 / 0.172 → 0.172 / AURC 0.281 → 0.282; head with 0× prompts 0.287 → 0.284 / 0.214 → 0.210 / 0.242 → 0.244;
+  P5 log-prob with 0× prompts 0.372 → 0.369, 0.321 → 0.316, AURC 0.203 → 0.204; SFT log-prob AURC 0.202 → 0.203. Rankings are unchanged.
+- AUROC rows (exposure-based) and the abstention rates at 0× and 5× are unchanged. Differences below about 0.001 are rerun noise (probe training is not bit-repeatable on the GPU), not effects.

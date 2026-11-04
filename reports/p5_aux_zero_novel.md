@@ -60,7 +60,7 @@ The leakage guard passed in both worlds (the scored 0× names appear nowhere in 
 | head AUROC 1×/2× vs 0× | 0.342 ± .047 | 0.875 ± .062 | 0.899 ± .010 | **0.352 ± .039** |
 | head AUROC ≥5× vs 0× | 0.826 ± .011 | 0.991 ± .009 | 0.992 ± .004 | 0.868 ± .015 |
 | head AUROC ≥5× vs ≤2× | 0.871 ± .009 | 0.938 ± .023 | 0.947 ± .010 | 0.894 ± .007 |
-| overall accuracy | 46.7% ± 2.7 | 44.6% ± 3.3 | 44.9% ± 3.0 | 46.3% ± 0.7 |
+| overall accuracy | 46.7% ± 2.7 | 44.5% ± 3.2 | 44.8% ± 3.2 | 46.3% ± 0.7 |
 | accuracy at 0× | 0.0% | 0.0% | 0.0% | 0.3% ± 0.6 |
 
 | `main_w1` dev | baseline (no 0× prompts) | seen, 400 rows (earlier) | seen, 200 rows | **novel, 200 rows** |
@@ -68,7 +68,7 @@ The leakage guard passed in both worlds (the scored 0× names appear nowhere in 
 | head AUROC 1×/2× vs 0× | 0.379 ± .033 | 0.889 ± .035 | 0.892 ± .036 | **0.387 ± .069** |
 | head AUROC ≥5× vs 0× | 0.854 ± .032 | 0.994 ± .003 | 0.991 ± .003 | 0.888 ± .031 |
 | head AUROC ≥5× vs ≤2× | 0.878 ± .017 | 0.955 ± .003 | 0.939 ± .005 | 0.908 ± .023 |
-| overall accuracy | 46.8% ± 1.8 | 47.4% ± 0.7 | 44.6% ± 1.3 | 41.5% ± 5.2 |
+| overall accuracy | 46.6% ± 1.8 | 47.3% ± 0.8 | 44.6% ± 1.3 | 41.4% ± 5.2 |
 | accuracy at 0× | 1.0% ± 1.0 | 0.3% ± 0.6 | 1.3% ± 1.5 | 1.0% ± 1.7 |
 
 | criterion | `main_v0` | `main_w1` |
@@ -81,7 +81,7 @@ at the baseline for 1×/2× vs 0× (0.35 and 0.39), while the matched head that 
 amount of 0× supervision. So the gain in `reports/p5_aux_zero.md` came from recognising the 0× *names* it had been
 shown, not from learning that an unfamiliar entity means no evidence. The small rise in ≥5× vs 0× (0.83 → 0.87 and
 0.85 → 0.89) is the only transfer visible. (Criterion C, not judged: accuracy is within noise of the baseline in
-`main_v0`; `main_w1` novel shows 41.5% ± 5.2 with a large seed spread.) The final stage is now run once per world,
+`main_v0`; `main_w1` novel shows 41.4% ± 5.2 with a large seed spread.) The final stage is now run once per world,
 as the protocol states.
 
 ### Final stage (jobs 47269 `main_v0`, 47270 `main_w1`; scored once per world after the dev verdict above was recorded)
@@ -91,7 +91,7 @@ as the protocol states.
 | head AUROC 1×/2× vs 0× | 0.349 ± .009 | 0.864 ± .059 | 0.930 ± .013 | **0.303 ± .013** |
 | head AUROC ≥5× vs 0× | 0.811 ± .031 | 0.985 ± .010 | 0.992 ± .004 | 0.847 ± .014 |
 | head AUROC ≥5× vs ≤2× | 0.848 ± .024 | 0.931 ± .007 | 0.924 ± .018 | 0.887 ± .010 |
-| overall accuracy | 47.4% ± 1.6 | 44.2% ± 3.7 | 46.6% ± 1.2 | 45.8% ± 1.9 |
+| overall accuracy | 47.4% ± 1.6 | 44.2% ± 3.7 | 46.6% ± 1.2 | 45.7% ± 2.0 |
 | accuracy at 0× | 1.3% ± 1.2 | 1.7% ± 0.6 | 0.3% ± 0.6 | 2.3% ± 1.5 |
 
 | `main_w1` final | baseline | seen, 400 rows | seen, 200 rows | **novel, 200 rows** |
@@ -99,7 +99,7 @@ as the protocol states.
 | head AUROC 1×/2× vs 0× | 0.351 ± .036 | 0.904 ± .011 | 0.852 ± .036 | **0.346 ± .046** |
 | head AUROC ≥5× vs 0× | 0.826 ± .027 | 0.993 ± .003 | 0.979 ± .009 | 0.871 ± .013 |
 | head AUROC ≥5× vs ≤2× | 0.863 ± .018 | 0.954 ± .008 | 0.930 ± .016 | 0.903 ± .005 |
-| overall accuracy | 45.1% ± 1.5 | 45.7% ± 1.5 | 39.4% ± 6.8 | 43.4% ± 2.2 |
+| overall accuracy | 45.0% ± 1.6 | 45.6% ± 1.7 | 39.2% ± 7.2 | 43.4% ± 2.2 |
 | accuracy at 0× | 0.7% ± 0.6 | 0.3% ± 0.6 | 0.7% ± 1.2 | 0.0% |
 
 | criterion (final) | `main_v0` | `main_w1` |
@@ -116,5 +116,11 @@ small: ≥5× vs 0× rises by about 0.04 (0.83 → 0.87, 0.85 → 0.89 on dev; 0
 
 What this does not show: it does not say a different intervention could not fix the bottom of the scale, and it
 tests one aux-prompt design with one world generator and 3 seeds per world. Matched "seen (200)" accuracy in
-`main_w1` final has a large seed spread (39.4% ± 6.8), so no accuracy statement is made from this experiment.
+`main_w1` final has a large seed spread (39.2% ± 7.2), so no accuracy statement is made from this experiment.
 
+## Amendment (4 Nov 2026): re-scored with the shared v5 grader
+As in `reports/p5_aux_zero.md`: the saved answers were regraded with v5 and the probe controls and `aux0nov_criteria.py` rerun (`reports/p5_kq_target.md`, Amendment 2); nothing was
+retrained or regenerated. **Criterion A still fails in both worlds on dev and final, the retained gain is unchanged (0.02, 0.02 on dev; −0.08, −0.01 on final), and the conclusion is
+unchanged.** The AUROC rows are identical (they do not depend on grading). Only accuracy cells moved, by at most 0.4 points apart from the seed spread: `main_v0` dev seen-400 44.6 → 44.5 and
+seen-200 44.9 → 44.8; `main_w1` dev baseline 46.8 → 46.6, seen-400 47.4 → 47.3, novel 41.5 → 41.4; `main_v0` final novel 45.8 → 45.7; `main_w1` final baseline 45.1 → 45.0, seen-400 45.7 → 45.6,
+seen-200 39.4 ± 6.8 → 39.2 ± 7.2. The tables above hold the v5 values.

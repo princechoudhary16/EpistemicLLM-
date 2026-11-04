@@ -43,26 +43,26 @@ only the probe step. No code, λ, threshold or probe setting was changed between
 
 | # | Criterion | `main_w1` result | Verdict |
 |---|---|---|---|
-| 1 | λ=3 vs λ=0 accuracy within 2 points | final 45.1% vs 46.1% (−1.0); dev 46.8% vs 46.4% (+0.4) | **replicates** |
+| 1 | λ=3 vs λ=0 accuracy within 2 points | final 45.0% vs 45.9% (−0.9); dev 46.6% vs 46.4% (+0.2) | **replicates** |
 | 2 | λ=3 head AUROC ≥ 0.80, λ=0 head ≤ 0.60 | 0.863 vs 0.497 (dev 0.878 vs 0.489) | **replicates** |
 | 3 | probe on λ=3 model beats probe on SFT model by > 0.05 | 0.835 vs 0.707 (+0.128; dev 0.839 vs 0.726, +0.113); base-model probe at chance (0.482) | **replicates** |
-| 4 | log-prob beats the head for abstaining at penalty 1 and 3 | net 0.374 / 0.371 vs 0.230 (penalty 1), 0.326 / 0.327 vs 0.172 (penalty 3); AURC 0.202 / 0.208 vs 0.281 | **replicates** |
+| 4 | log-prob beats the head for abstaining at penalty 1 and 3 | net 0.374 / 0.371 vs 0.229 (penalty 1), 0.326 / 0.327 vs 0.172 (penalty 3); AURC 0.203 / 0.208 vs 0.282 | **replicates** |
 | 5 | the head ranks never-trained 0× facts above 1×/2× facts (AUROC < 0.5) | 1×/2× vs 0×: head 0.351 (dev 0.379); probe on λ=3 model 0.399; log-prob at chance (0.476 / 0.524) | **replicates** (the flaw is real) |
 
 ### Side by side (final split, mean over 3 seeds)
 
 | | `main_v0` | `main_w1` |
 |---|---|---|
-| accuracy λ=0 / λ=3 | 47.4% / 47.4% | 46.1% / 45.1% |
+| accuracy λ=0 / λ=3 | 47.3% / 47.4% | 45.9% / 45.0% |
 | head AUROC ≥5× vs ≤2×, λ=0 / λ=3 | 0.523 / 0.848 | 0.497 / 0.863 |
 | fact-disjoint probe AUROC: λ=3 model / SFT model / base model | 0.807 / 0.680 / 0.472 | 0.835 / 0.707 / 0.482 |
 | log-prob AUROC (≥5× vs ≤2×): P5 model / SFT model | 0.902 / 0.888 | 0.919 / 0.908 |
 | head AUROC, 1×/2× vs 0× | 0.349 | 0.351 |
 | head AUROC, 5× vs 1×/2× | 0.668 | 0.703 |
 
-Abstention (thresholds from dev, penalty 1, net score / AURC ↓): SFT+log-prob 0.364 / 0.200 → 0.374 / 0.202;
-P5+log-prob 0.352 / 0.202 → 0.371 / 0.208; SFT+probe 0.112 / 0.380 → 0.146 / 0.346; P5+probe 0.197 / 0.292 →
-0.214 / 0.288; P5+head 0.222 / 0.285 → 0.230 / 0.281. Penalty 3 net scores (`main_v0` → `main_w1`): SFT+log-prob
+Abstention (thresholds from dev, penalty 1, net score / AURC ↓): SFT+log-prob 0.364 / 0.200 → 0.374 / 0.203;
+P5+log-prob 0.352 / 0.202 → 0.371 / 0.208; SFT+probe 0.111 / 0.381 → 0.144 / 0.348; P5+probe 0.197 / 0.292 →
+0.214 / 0.289; P5+head 0.222 / 0.285 → 0.229 / 0.282. Penalty 3 net scores (`main_v0` → `main_w1`): SFT+log-prob
 0.288 → 0.326, P5+log-prob 0.313 → 0.327, SFT+probe 0.017 → 0.052, P5+probe 0.105 → 0.128, P5+head 0.122 → 0.172.
 Without abstention both worlds hallucinate on 53–55% of questions. Files: `results/final/p5_main_w1_*`.
 
@@ -70,8 +70,15 @@ Without abstention both worlds hallucinate on 53–55% of questions. Files: `res
 - All five `main_v0` findings hold on a second world with different names and a different exposure assignment, with
   the λ chosen on `main_v0` only. The numbers agree closely, so the effects are not an accident of one world.
 - It is **not** evidence about real questions, a different generator design, other model sizes or other graders:
-  both worlds come from the same generator and the same placeholder grader, and the seeds are 3 per world.
+  both worlds come from the same generator and the same grader (v5 after the 4 Nov regrade), and the seeds are 3 per world.
 - The thresholds in the criteria table were mine; the margins are comfortable (e.g. the probe gap is +0.13 against
   a bar of +0.05), so none of the verdicts is close to a borderline.
 - The conclusion in `p5_evidence_aware_training.md` stands unchanged: the auxiliary loss makes the evidence
   signal more readable at no accuracy cost, but the model's own log-probability remains the better abstention signal.
+
+## Amendment (4 Nov 2026): re-scored with the shared v5 grader
+The `main_w1` numbers were first produced with `eval_head.py`'s substring grader. The same saved answers were regraded with the shared v5 grader and the tables rebuilt (see
+`reports/p5_evidence_aware_training.md`, amendment, and `reports/p5_kq_target.md`, Amendment 2). **All five criteria still replicate.** The tables above hold the v5 values. What moved, old → v5:
+accuracy final 45.1% / 46.1% → 45.0% / 45.9% (gap −1.0 → −0.9) and dev 46.8% / 46.4% → 46.6% / 46.4% (+0.4 → +0.2), both well inside the 2-point bound; `main_v0` λ=0 final accuracy 47.4% → 47.3%;
+`main_w1` abstention: head net 0.230 → 0.229 and AURC 0.281 → 0.282, SFT+log-prob AURC 0.202 → 0.203, SFT+probe net 0.146 → 0.144 and AURC 0.346 → 0.348, P5+probe AURC 0.288 → 0.289 (and `main_v0` SFT+probe 0.112 / 0.380 → 0.111 / 0.381).
+The AUROC rows (head, probe, log-prob, pairwise) are unchanged because they do not depend on grading.

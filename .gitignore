@@ -26,3 +26,8 @@ results/p3/**/probes/*.joblib
 # data/
 *_smoke*
 results/raw/bf16_old/
+
+# Local tools and personal notes (not part of the project)
+.idea/
+.claude/
+

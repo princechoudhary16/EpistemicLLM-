@@ -219,8 +219,8 @@ Dev verdict: **not all pass; criteria A and B fail in every arm and world.** Rea
 Per the protocol nothing is changed after this result. The final stage (`kdev` / `edev`, and `pdev` for the P1 arm, scored on final facts) runs once per arm as written.
 
 ## Results (final stage, run once per arm; recorded 3 Nov 2026)
-Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32; teacher labels graded with v5 (scored-side
-grading is provisional, see the grader scope note above), 3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
+Final stage: the `kdev` / `edev` / `pdev` sets (labels on dev facts) scored on the final split, whose facts the heads had no label for. Float32; teacher labels graded with v5. The tables below were scored before
+the Amendment 2 regrade; the v5-scored values are in "Amendment 2: result" at the end of this report (no verdict changed). 3 seeds, mean ± sd. The dev verdicts above were committed and pushed before these runs. Jobs: 50314 (main_v0, primary arm), 50315 (main_w1, primary arm),
 and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` and `kq_criteria.py --split final --arm p1`.
 
 | main_v0, final, primary arm | K head | s(e) head (matched) | s(e), all labelled (reference) |
@@ -270,3 +270,99 @@ and the P1-arm `pdev` run (main_v0). Commands: `kq_criteria.py --split final` an
 
 **Consequence for the P5 recipe.** The K(q) target is a negative result and is not adopted: the headline recipe keeps `s(e)` with λ = 3, and the model's average
 log-prob remains the better abstention signal (see `reports/p5_aux_zero.md` and the earlier abstention results). The K(q) item in team decision 4 is therefore closed for P5 with this report.
+
+## Amendment 2 (4 Nov 2026; written before the regrade is applied): scored-side grading moves to v5
+The scored side of every P5 result (which of a model's own answers count as correct) was graded by `eval_head.py`'s substring grader, not by the shared v5
+grader (see the grader scope note above). This applies to the K(q) results here and equally to the sweep, abstention, probe-control and aux-zero reports.
+- **What is re-scored:** the same saved answers, nothing is generated or retrained. `p5_training_method/regrade_v5.py` rewrites each `predictions.jsonl` with the
+  v5 label (originals kept as `predictions_containment.jsonl`); `eval_head.py` now grades with v5 for any future run.
+- **Measured before applying (dry run, 102 prediction files, 60,480 answers):** 48 labels change (0.079%), all `correct` → `incorrect`, none involve abstentions;
+  the largest accuracy shift in any one file is −0.83 points. The cases are longer words that contain the reference ("pottery" for "potter",
+  "Drouzhakrou" for "Drouzhak"), which v5 does not accept.
+- **Re-run after applying:** `probe_controls.py` and the criteria scripts for every experiment (K(q) own and P1 arms, aux-zero, aux-zero novel-name control,
+  sweep, abstention). The criteria, thresholds, designs and the one-shot rule are untouched. The final-split scoring is re-scored once as a grader
+  correction, not as a new test run.
+- **Reporting rule:** each verdict is reported under v5, with the previous substring-graded value beside it, and any verdict that changes is said to have changed.
+  The v5 numbers replace the old ones as the result; the old ones stay as the record.
+
+### Amendment 2: result (4 Nov 2026; regrade applied, K(q) re-scored under v5)
+`regrade_v5.py --apply` changed 48 of 60,480 saved labels (0.079%, all `correct` → `incorrect`, none abstentions, largest accuracy shift in one file −0.83 points).
+The K(q) jobs were then rerun with training and eval skipped (checkpoints and summaries exist; the logs show 0 train / eval lines), so only `probe_controls.py` re-scored,
+followed by `kq_criteria.py`. Criteria, thresholds and designs are those of the original protocol. Values are v5, with the earlier substring-graded value in brackets.
+
+| arm, world, split | K-head AUROC | K-head AURC | A: K − s(e) AUROC (≥ +0.03) | B: K AURC − log-prob AURC (≤ 0.03) |
+|---|---|---|---|---|
+| primary, main_v0, dev | 0.601 [0.601] | 0.475 [0.474] | −0.074 FAIL [−0.073] | +0.273 FAIL [+0.273] |
+| primary, main_w1, dev | 0.698 [0.699] | 0.413 [0.412] | −0.018 FAIL [−0.017] | +0.200 FAIL [+0.199] |
+| P1 labels, main_v0, dev | 0.609 [0.609] | 0.443 [0.443] | −0.066 FAIL [−0.066] | +0.242 FAIL [+0.242] |
+| primary, main_v0, final | 0.561 [0.562] | 0.495 [0.493] | −0.098 FAIL [−0.096] | +0.292 FAIL [+0.291] |
+| primary, main_w1, final | 0.734 [0.734] | 0.362 [0.362] | −0.070 FAIL [−0.069] | +0.151 FAIL [+0.151] |
+| P1 labels, main_v0, final | 0.627 [0.626] | 0.457 [0.455] | −0.032 FAIL [−0.033] | +0.252 FAIL [+0.251] |
+
+No K(q) verdict changed: every A and B value moved by at most 0.002, and all twelve criteria still fail. The Spearman columns do not depend on grading and did not change.
+The v5 values above replace the earlier ones as the result; the earlier ones, and the pre-regrade result files, are kept (git history for the K(q) files, and
+`results/superseded_containment_grader_final/` on the cluster for all of `results/final`). The v5 summaries of the sweep, abstention and aux-zero reports are separate and follow in their own reports.
+
+## Amendment 3 (4 Nov 2026; written before any run of this arm): third arm on K from P6's `sft_matched` adapter
+The team plan names the K source: "the float32 `sft_matched` model" (decision 4, and Phase 2 of the work order). The two arms run so far do not use it: the primary arm uses this branch's own
+teacher (λ=0, seed 0, held-out wordings) and the P1 arm uses P1's own float32 run of the recipe (`main_v0_float32_seed0`), which P1's README now marks "superseded for P5's use". P1 has since
+published K from P6's adapter (`p1_exposure/analysis/results/k_labels/main_v0_float32_p6_adapter/`). This arm tests exactly that source, so the negative result can be stated for the labels the plan names.
+- **Labels:** `p1_labels.py --source p6_adapter` checks P1's file against `facts.jsonl` (600 facts, same exposure and split, K in [0, 1], 20 samples per fact = 4 training wordings × 5, float32, v5) and writes
+  `results/final/p5_kq_labels_main_v0_p6.json` with the adapter's weights hash; nothing is recomputed. Mean K by exposure 0 / 1 / 2 / 5 / 10 / 20: 0.004 / 0.079 / 0.243 / 0.742 / 0.856 / 0.961
+  (higher than the P1 own-run labels at every level). P1 reports that the two runs' K agree on bucket for 83% of facts and that the part of K beyond the exposure level correlates only 0.62 between them.
+- **Provenance limit:** the adapter's own files do not say which data, seed, data order or code produced it (its README is the empty PEFT template). Matching the recipe (main_v0 `train.jsonl`, seed 0, one epoch, lr 2e-4, batch 4) is P6's to confirm.
+  K is also one run of one model, and K differs between runs; a second K file from another seed would be needed to separate that from the target's effect. Not available.
+- **Design:** the same masks and fact-disjoint scheme: `sfinal` (labels on final facts, scored on dev) and `sdev` (labels on dev facts, scored on final), λ = 3, 3 seeds, `main_v0` only (P1 made no such file for
+  `main_w1`). The matched s(e) controls are the primary arm's `efinal` / `edev`, not retrained. `p5_kq.sbatch` with `ARM=p6`; criteria via `kq_criteria.py --arm p6`.
+- **Criteria:** A and B exactly as in the protocol (K − matched s(e) AUROC ≥ +0.03; K-head AURC within 0.03 of the student's own log-prob AURC). Scoring uses the v5 grader on both the labels and the students' answers
+  (`eval_head.py` now grades with v5). Dev stage first, its verdict recorded and committed here, then the final stage once.
+- **Reading rule:** reported whatever it shows. The primary arm stays the headline and this arm cannot replace it after the results are seen. Expectation, written now: it will agree with the other two arms. A pass of both A and B here
+  would be a new finding and would need a second K file and a second look before it is believed.
+
+### Amendment 3: dev result (job 51135, `kq_criteria.py --split dev --arm p6`; recorded 4 Nov 2026, before the final stage of this arm)
+`main_v0`, scored on dev facts the head had no label for (`sfinal` students), λ = 3, 3 seeds, mean ± sd; v5 grader throughout.
+
+| main_v0, dev, P6-adapter labels | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.589 ± 0.013 | 0.674 ± 0.034 | 0.829 ± 0.004 |
+| AURC head (lower = better) | 0.466 ± 0.040 | 0.383 ± 0.054 | 0.270 ± 0.029 |
+| AURC own log-prob | 0.216 ± 0.033 | 0.201 ± 0.041 | 0.199 ± 0.027 |
+| Spearman vs teacher K | 0.189 ± 0.027 | 0.276 ± 0.048 | 0.566 ± 0.022 |
+| overall accuracy | 45.2% ± 4.2 | 47.3% ± 4.4 | 46.7% ± 2.7 |
+
+**Criterion A (K − matched s(e) AUROC ≥ +0.03): FAIL** (−0.086). **Criterion B (K-head AURC within 0.03 of own log-prob): FAIL** (+0.250). Dev verdict: not all pass, as expected in Amendment 3.
+Reading, limited to what was measured:
+- The K head is below the matched `s(e)` head by 0.086 AUROC, about 2.5 sd of the control's seed spread (0.034), the same direction and a similar size as the primary arm on `main_v0` dev (−0.074) and the P1 own-run arm (−0.066).
+  Using the K file the plan names did not change the picture.
+- Criterion B stays far out of reach (+0.250), as for every other head; the matched `s(e)` control is at +0.18.
+- This arm's students have a wider accuracy spread (45.2% ± 4.2) and a higher own-log-prob AURC (0.216 ± 0.033) than the other `main_v0` sets, so a single seed moves its means more; none of that changes a verdict.
+- The final stage of this arm (`sdev` students scored on final) runs once, next.
+
+### Amendment 3: final result (job 51149, `kq_criteria.py --split final --arm p6`; run once, recorded 4 Nov 2026)
+`main_v0`, `sdev` students (labels on dev facts) scored on final facts they had no label for, λ = 3, 3 seeds, mean ± sd; v5 grader throughout.
+
+| main_v0, final, P6-adapter labels | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.596 ± 0.021 | 0.659 ± 0.054 | 0.784 ± 0.027 |
+| AURC head (lower = better) | 0.469 ± 0.036 | 0.400 ± 0.077 | 0.285 ± 0.027 |
+| AURC own log-prob | 0.201 ± 0.019 | 0.212 ± 0.034 | 0.202 ± 0.015 |
+| Spearman vs teacher K | 0.178 ± 0.024 | 0.254 ± 0.068 | 0.502 ± 0.046 |
+| overall accuracy | 46.7% ± 1.4 | 45.6% ± 4.1 | 47.4% ± 1.6 |
+
+**Criterion A: FAIL** (−0.062). **Criterion B: FAIL** (+0.268). The final result agrees with the dev result for this arm (−0.086 / +0.250) in sign and rough size.
+- On final the K head is below the matched `s(e)` head by 0.062 AUROC, about one sd of the control's seed spread (0.054), so this arm shows "not better" and, as for the P1 own-run arm, no clear evidence of "worse".
+  The primary arm's gaps are larger relative to their spread (−0.098 and −0.070).
+- Criterion B again fails by a wide margin, and accuracy is unchanged within seed spread (46.7% against 45.6%).
+
+**All arms, both splits (v5; A = K − matched s(e) AUROC, B = K AURC − own log-prob AURC):**
+
+| arm, world | dev A / B | final A / B |
+|---|---|---|
+| primary (own teacher), main_v0 | −0.074 / +0.273 | −0.098 / +0.292 |
+| primary (own teacher), main_w1 | −0.018 / +0.200 | −0.070 / +0.151 |
+| P1 own-run labels, main_v0 | −0.066 / +0.242 | −0.032 / +0.252 |
+| P6 `sft_matched` adapter labels, main_v0 | −0.086 / +0.250 | −0.062 / +0.268 |
+
+All 16 criterion checks (4 arm-world pairs × dev and final × A and B) fail. **Conclusion: with each of three label sources, including the one the plan names, in both worlds
+where the label exists, a head trained on K does not beat a head trained on the exposure target, and no head approaches the model's own log-probability as an abstention signal.**
+Still not tested: why K does no better than exposure (the near-binary shape of K remains a hypothesis); a second K file from another training seed for the P6-adapter model; any K source for `main_w1` other than this branch's own teacher.

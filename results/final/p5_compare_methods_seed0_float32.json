@@ -1,0 +1,75 @@
+{
+  "eval_script_version": "p6-eval-v1.1",
+  "baseline": "sft_matched",
+  "summaries": {
+    "sft_matched": {
+      "C": 583,
+      "W": 617,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18580151060293007,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.465,
+      "n_facts_scored": 1200
+    },
+    "sft_p5code": {
+      "C": 578,
+      "W": 622,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.4816666666666667,
+      "hallucination_rate": 0.5183333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.4816666666666667,
+      "selective_risk": 0.5183333333333333,
+      "aurc": 0.20344480854898794,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.45699999999999996,
+      "n_facts_scored": 1200
+    },
+    "p5": {
+      "C": 586,
+      "W": 614,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48833333333333334,
+      "hallucination_rate": 0.5116666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48833333333333334,
+      "selective_risk": 0.5116666666666667,
+      "aurc": 0.18330521714230158,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4535,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {
+    "sft_p5code_vs_sft_matched": {
+      "estimate": -0.004166666666666652,
+      "ci_low": -0.023333333333333373,
+      "ci_high": 0.015000000000000013,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_vs_sft_matched": {
+      "estimate": 0.0025000000000000022,
+      "ci_low": -0.01583333333333331,
+      "ci_high": 0.02002083333333333,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    }
+  }
+}
