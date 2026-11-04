@@ -19,7 +19,9 @@ LEVELS = ["0", "1", "2", "5", "10", "20"]
 def load(root, dset, split="dev"):
     runs = defaultdict(list)
     for path in sorted(Path(root).glob(f"{dset}_lam*_seed*/eval_{dset}_{split}/summary.json")):
-        m = re.search(r"_lam(.+)_seed(\d+)/", str(path))
+        m = re.search(r"_lam(\d+(?:\.\d+)?)_seed(\d+)/", str(path))
+        if m is None:      # other experiments share the folder (lam3aux0, lam3kfinal, ...): not part of the lambda sweep
+            continue
         s = json.loads(path.read_text())
         levels = s["by_exposure"]
         acc = {e: levels[e]["accuracy"] for e in LEVELS}
