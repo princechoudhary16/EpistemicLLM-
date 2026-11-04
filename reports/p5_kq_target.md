@@ -337,3 +337,32 @@ Reading, limited to what was measured:
 - Criterion B stays far out of reach (+0.250), as for every other head; the matched `s(e)` control is at +0.18.
 - This arm's students have a wider accuracy spread (45.2% ± 4.2) and a higher own-log-prob AURC (0.216 ± 0.033) than the other `main_v0` sets, so a single seed moves its means more; none of that changes a verdict.
 - The final stage of this arm (`sdev` students scored on final) runs once, next.
+
+### Amendment 3: final result (job 51149, `kq_criteria.py --split final --arm p6`; run once, recorded 4 Nov 2026)
+`main_v0`, `sdev` students (labels on dev facts) scored on final facts they had no label for, λ = 3, 3 seeds, mean ± sd; v5 grader throughout.
+
+| main_v0, final, P6-adapter labels | K head | s(e) head (matched) | s(e), all labelled (reference) |
+|---|---|---|---|
+| AUROC predicts correct | 0.596 ± 0.021 | 0.659 ± 0.054 | 0.784 ± 0.027 |
+| AURC head (lower = better) | 0.469 ± 0.036 | 0.400 ± 0.077 | 0.285 ± 0.027 |
+| AURC own log-prob | 0.201 ± 0.019 | 0.212 ± 0.034 | 0.202 ± 0.015 |
+| Spearman vs teacher K | 0.178 ± 0.024 | 0.254 ± 0.068 | 0.502 ± 0.046 |
+| overall accuracy | 46.7% ± 1.4 | 45.6% ± 4.1 | 47.4% ± 1.6 |
+
+**Criterion A: FAIL** (−0.062). **Criterion B: FAIL** (+0.268). The final result agrees with the dev result for this arm (−0.086 / +0.250) in sign and rough size.
+- On final the K head is below the matched `s(e)` head by 0.062 AUROC, about one sd of the control's seed spread (0.054), so this arm shows "not better" and, as for the P1 own-run arm, no clear evidence of "worse".
+  The primary arm's gaps are larger relative to their spread (−0.098 and −0.070).
+- Criterion B again fails by a wide margin, and accuracy is unchanged within seed spread (46.7% against 45.6%).
+
+**All arms, both splits (v5; A = K − matched s(e) AUROC, B = K AURC − own log-prob AURC):**
+
+| arm, world | dev A / B | final A / B |
+|---|---|---|
+| primary (own teacher), main_v0 | −0.074 / +0.273 | −0.098 / +0.292 |
+| primary (own teacher), main_w1 | −0.018 / +0.200 | −0.070 / +0.151 |
+| P1 own-run labels, main_v0 | −0.066 / +0.242 | −0.032 / +0.252 |
+| P6 `sft_matched` adapter labels, main_v0 | −0.086 / +0.250 | −0.062 / +0.268 |
+
+All 16 criterion checks (4 arm-world pairs × dev and final × A and B) fail. **Conclusion: with each of three label sources, including the one the plan names, in both worlds
+where the label exists, a head trained on K does not beat a head trained on the exposure target, and no head approaches the model's own log-probability as an abstention signal.**
+Still not tested: why K does no better than exposure (the near-binary shape of K remains a hypothesis); a second K file from another training seed for the P6-adapter model; any K source for `main_w1` other than this branch's own teacher.
