@@ -1,11 +1,20 @@
 """Pinned model, prompt and decoding settings.
 
 Decoding values follow the team contract (plan.md §3). Every setting that can change a reported
-number carries a version string, and each response row records it.
+number carries a version string, and each response row records it. The model pin and precision are
+read from configs/model.yaml so this package cannot drift from the rest of the team.
 """
 
-MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
-MODEL_REVISION = "7ae557604adf67be50417f59c2c2f167def9a775"
+from pathlib import Path
+
+import yaml
+
+CONFIG_DIR = Path(__file__).resolve().parents[1] / "configs"
+_MODEL = yaml.safe_load((CONFIG_DIR / "model.yaml").read_text(encoding="utf-8"))
+
+MODEL_ID = _MODEL["model_id"]
+MODEL_REVISION = _MODEL["revision"]
+TORCH_DTYPE = _MODEL["torch_dtype"]
 BASE_CHECKPOINT_ID = "base"
 
 # The prompt and grader are provisional until the shared runner/grader are merged; rows produced

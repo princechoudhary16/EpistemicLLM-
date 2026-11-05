@@ -26,7 +26,7 @@ Implements the confidence/calibration track (P4 in `plan.md`). It asks one quest
 
 ## Signal definitions (`signals-v0`)
 
-All statistics use the model's **unmodified** next-token distribution: fp32 logits, temperature 1, no top-k/top-p. That is not the sampling distribution. Answer tokens are the generated tokens before the first `<|im_end|>`/`<|endoftext|>`; the end token, prompt and padding never enter a statistic.
+All statistics use the model's **unmodified** next-token distribution: float32 logits (`configs/model.yaml`), temperature 1, no top-k/top-p. That is not the sampling distribution. Answer tokens are the generated tokens before the first `<|im_end|>`/`<|endoftext|>`; the end token, prompt and padding never enter a statistic.
 
 | Signal | Definition | Confident when |
 |---|---|---|
@@ -117,7 +117,7 @@ python -m confidence_calibration build-dataset
 - Calibration accepts only response JSONL with explicit split labels and requires graded outcomes,
   greedy/sample markers, and the confidence signals being evaluated.
 - `run` writes `responses.jsonl`, `questions.jsonl`, `report.md`, `report.json`, `signals.csv` and `run_config.json` to `results/raw/confidence_calibration/<run_id>/`.
-- A healthy run reports `greedy_argmax_match_rate` ≈ 1.0 and `generation_logprob_max_abs_gap` ≈ 0. bf16 on CUDA may show small gaps.
+- A healthy run reports `greedy_argmax_match_rate` ≈ 1.0 and `generation_logprob_max_abs_gap` ≈ 0.
 
 ## TC2 GPU cluster
 

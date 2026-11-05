@@ -17,8 +17,8 @@ def resolve_device(requested="auto"):
 
 
 def load_model(model_id, revision, device, adapter=None):
-    """Tokenizer + causal LM in eval mode; bf16 on CUDA, fp32 elsewhere. `adapter` is a PEFT dir."""
-    dtype = torch.bfloat16 if device == "cuda" else torch.float32
+    """Tokenizer + causal LM in eval mode, in the team's precision on every device. `adapter` is a PEFT dir."""
+    dtype = getattr(torch, config.TORCH_DTYPE)
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
     model = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
     if adapter:
