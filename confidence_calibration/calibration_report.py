@@ -157,6 +157,10 @@ def _signal_table(summary):
                      f"{_with_ci(m['auroc'], m.get('auroc_ci_95'))} | {diff_text} | {fmt(m['auprc'])} | "
                      f"{_with_ci(m['brier'], m.get('brier_ci_95'))} | {fmt(m['brier_base_rate'])} | "
                      f"{_with_ci(m['ece_10_bins'], m.get('ece_10_bins_ci_95'))} | {fmt(raw)} |")
+    if summary.get("length_baseline_auroc") is not None:
+        lines += ["", f"Length baseline: answer length alone (shorter = right) reaches AUROC "
+                  f"{fmt(summary['length_baseline_auroc'])}. The answer-length rows under signal stability show whether a "
+                  "signal still separates outcomes among answers of similar length."]
     lines += ["", f"The selected signal (validation Brier) is in bold. Base-rate Brier predicts the training accuracy "
               f"({pct(summary['train_base_rate'])}) for every answer, so a useful signal must beat it. "
               "ECE read raw treats the signal itself as a probability (`exp` of a log-probability, or the agreement "

@@ -15,7 +15,7 @@ from .calibration import (ATTEMPTED_OUTCOMES, PlattCalibrator, attempted_with_si
                           split_role)
 from .data import PROVENANCE_FIELDS
 from .error_analysis import confident_error_analysis
-from .evaluation import compare_to_reference, evaluate_signal, threshold_stability
+from .evaluation import compare_to_reference, evaluate_signal, length_baseline_auroc, threshold_stability
 from .signals import SIGNAL_DIRECTIONS
 
 POLICY_SCHEMA = "confidence-policy-v1"
@@ -116,6 +116,10 @@ def fit_policy(responses, inputs, seed=0, target_coverage=config.PRIMARY_COVERAG
         "selected_signal": selected, "signals": results,
         "unavailable_signals": policy["unavailable_signals"],
         "reference_comparison": compare_to_reference(validation, list(results), seed),
+        "length_baseline_auroc": length_baseline_auroc(validation),
+        "confident_errors": confident_error_analysis(
+            validation, calibrators[selected],
+            signals[selected]["thresholds"][policy["primary_coverage"]]["probability_correct"]),
     }
     return policy, summary, prediction_rows(validation, "validation", calibrators)
 
@@ -181,6 +185,7 @@ def evaluate_policy(policy, policy_sha256, responses, inputs, seed=0, allow_tran
         "selected_signal": selected if selected in results else None, "signals": results,
         "unavailable_signals": unavailable,
         "reference_comparison": compare_to_reference(questions, list(results), seed),
+        "length_baseline_auroc": length_baseline_auroc(questions),
     }
     if selected in calibrators:
         summary["confident_errors"] = confident_error_analysis(

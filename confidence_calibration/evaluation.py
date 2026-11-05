@@ -17,6 +17,7 @@ from .signals import oriented, raw_probability
 N_BOOTSTRAP = 1000
 N_RELIABILITY_BINS = 10
 REFERENCE_SIGNAL = "avg_logprob"
+LENGTH_BANDS = (("01-03", 3), ("04-12", 12), ("13+", float("inf")))
 
 
 def _with_cluster(rows):
@@ -79,10 +80,24 @@ def stability_slices(rows, calibrator, seed):
         if score is not None:
             bucket = "K=0" if score == 0 else ("0<K<0.8" if score < 0.8 else "K>=0.8")
             groups[("sample_knowledge_score", bucket)].append(row)
+        if row.get("answer_n_tokens"):
+            groups[("answer_length_tokens", _length_band(row["answer_n_tokens"]))].append(row)
     output = defaultdict(dict)
     for (dimension, label), members in sorted(groups.items(), key=lambda item: (item[0][0], _level_order(item[0][1]))):
         output[dimension][label] = _group_metrics(members, calibrator, seed)
     return dict(output)
+
+
+def _length_band(n_tokens):
+    return next(band for band, limit in LENGTH_BANDS if n_tokens <= limit)
+
+
+def length_baseline_auroc(rows):
+    """AUROC of "shorter answers are right". Log-probability sums and minimums could be proxies for length."""
+    usable = [r for r in rows if r["outcome"] in ("correct", "incorrect") and r.get("answer_n_tokens")]
+    if not usable:
+        return None
+    return auroc([-r["answer_n_tokens"] for r in usable], [outcome_label(r) for r in usable])[0]
 
 
 def _level_order(label):

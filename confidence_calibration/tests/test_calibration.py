@@ -239,7 +239,10 @@ class CommandLine(unittest.TestCase):
             evaluate = ("evaluate", "--policy", root / "development" / "frozen_policy.json",
                         "--responses", responses, "--output-dir", root / "held_out")
             self._run(*evaluate)
+            self.assertIn("High-confidence errors", (root / "development" / "calibration_report.md").read_text(encoding="utf-8"))
+            self.assertTrue((root / "development" / "confident_errors.csv").exists())
             report = (root / "held_out" / "evaluation_report.md").read_text(encoding="utf-8")
+            self.assertIn("High-confidence errors", report)
             self.assertIn("Nothing was refitted or reselected", report)
             with self.assertRaisesRegex(SystemExit, "evaluated once"):
                 self._run(*evaluate)
