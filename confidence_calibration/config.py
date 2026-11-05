@@ -25,3 +25,7 @@ SYSTEM_PROMPT = _DECODING["system_prompt"]
 # Bump when the definition of any signal changes. v1: agreement clusters use the shared grader's
 # normalisation and abstention rule.
 SIGNALS_VERSION = "signals-v1"
+
+# Coverage targets that each get a validation-selected abstention threshold; 0.8 is the primary one.
+PRIMARY_COVERAGE = 0.8
+COVERAGE_GRID = (0.9, 0.8, 0.7, 0.6, 0.5)

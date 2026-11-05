@@ -69,6 +69,17 @@ SIGNAL_DIRECTIONS = {
     "first_token_entropy": -1.0,
     "consistency": 1.0,
     "majority_frac": 1.0,
+    # P5's evidence-head score; null for checkpoints without a head.
+    "aux_confidence_score": 1.0,
+}
+# Signals with a natural reading as a probability, before any calibration.
+_RAW_PROBABILITY = {
+    "avg_logprob": math.exp,
+    "sum_logprob": math.exp,
+    "min_logprob": math.exp,
+    "consistency": float,
+    "majority_frac": float,
+    "aux_confidence_score": float,
 }
 
 
@@ -76,3 +87,10 @@ def oriented(signal_name, value):
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return None
     return SIGNAL_DIRECTIONS[signal_name] * value
+
+
+def raw_probability(signal_name, value):
+    """The signal read directly as a probability, or None if it has no such reading."""
+    if value is None or signal_name not in _RAW_PROBABILITY:
+        return None
+    return min(1.0, _RAW_PROBABILITY[signal_name](value))  # exp(log p) can round past 1

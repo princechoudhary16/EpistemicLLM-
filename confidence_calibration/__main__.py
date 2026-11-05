@@ -2,7 +2,7 @@
 
   build-dataset  write the seeded TriviaQA development sample
   score          add confidence signals to another producer's responses
-  calibrate      fit leakage-safe probability maps and evaluate frozen thresholds
+  calibrate      fit on train, select on validation, write a frozen policy
 """
 
 import argparse
@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 
 from . import config
-from .data import build_triviaqa_sample, display_path, load_responses, read_jsonl, write_jsonl
+from .data import build_triviaqa_sample, display_path, load_responses, write_jsonl
 
 
 def _log(message):
@@ -57,15 +57,16 @@ def cmd_score(args):
 
 
 def cmd_calibrate(args):
-    from .calibration import evaluate_calibration
-    from .calibration_report import write_calibration_report
+    from .calibration_report import write_policy, write_report
+    from .policy import fit_policy
 
-    summary, predictions = evaluate_calibration(
-        read_jsonl(args.responses), seed=args.seed, target_coverage=args.target_coverage,
-    )
+    rows, inputs = load_responses(args.responses)
+    policy, summary, predictions = fit_policy(rows, inputs, seed=args.seed, target_coverage=args.target_coverage,
+                                              coverage_grid=args.coverage_grid)
     output_dir = Path(args.output_dir)
-    _log(write_calibration_report(summary, predictions, output_dir, args.title or output_dir.name))
-    _log(f"calibration artifacts -> {output_dir}")
+    write_policy(policy, output_dir)
+    write_report(summary, predictions, output_dir, args.title or output_dir.name, "calibration")
+    _log(f"selected {policy['selected_signal']} on validation; frozen policy -> {output_dir / 'frozen_policy.json'}")
 
 
 def main():
@@ -89,14 +90,16 @@ def main():
     p.add_argument("--batch-size", type=int, default=16)
     p.set_defaults(func=cmd_score)
 
-    p = commands.add_parser("calibrate", help="fit and evaluate confidence calibration on explicit data splits")
-    p.add_argument("--responses", required=True, help="graded and scored response JSONL for one run")
+    p = commands.add_parser("calibrate", help="fit on train, select on validation, write a frozen policy")
+    p.add_argument("--responses", nargs="+", required=True,
+                   help="response JSONL files for one model; rows from held-out splits are ignored unread")
     p.add_argument("--output-dir", required=True)
     p.add_argument("--title", help="report title (defaults to the output directory name)")
     p.add_argument("--seed", type=int, default=0,
-                   help="seed used only when deriving train/validation groups from dev/final data")
-    p.add_argument("--target-coverage", type=float, default=0.8,
-                   help="validation coverage operating point for selecting confidence thresholds")
+                   help="seed for the bootstrap and for dividing dev facts into train/validation")
+    p.add_argument("--target-coverage", type=float, default=config.PRIMARY_COVERAGE, help="primary validation coverage operating point")
+    p.add_argument("--coverage-grid", type=float, nargs="+", default=list(config.COVERAGE_GRID),
+                   help="further coverage targets that each get a validation-selected threshold")
     p.set_defaults(func=cmd_calibrate)
 
     args = parser.parse_args()
