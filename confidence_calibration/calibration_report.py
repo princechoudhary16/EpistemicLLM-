@@ -65,9 +65,14 @@ def _legend_rows(count):
     return (count + 3) // 4
 
 
+def _headline_signals(summary):
+    """The selected signal and the shared reference; the two every table and figure leads with."""
+    return [s for s in dict.fromkeys((summary["selected_signal"], REFERENCE_SIGNAL)) if s in summary["signals"]]
+
+
 def _reliability_svg(summary):
     selected = summary["selected_signal"]
-    signals = [s for s in dict.fromkeys((selected, REFERENCE_SIGNAL)) if s in summary["signals"]]
+    signals = _headline_signals(summary)
     parts, (left, top, plot_w, plot_h, legend_y) = _plot_frame(
         f"Reliability on {summary['evaluated_split']}", "Mean predicted P(correct)", "Observed accuracy",
         _legend_rows(len(signals)))
@@ -158,8 +163,7 @@ def _signal_table(summary):
 
 
 def _policy_table(summary):
-    selected = summary["selected_signal"]
-    signals = [s for s in dict.fromkeys((selected, REFERENCE_SIGNAL)) if s in summary["signals"]]
+    signals = _headline_signals(summary)
     baseline = summary["signals"][signals[0]]["metrics"]["policy"]["answer_everything"]
     lines = [f"## Abstention policies on {summary['evaluated_split']}", "",
              f"Attempted answers below the threshold become abstentions. Rates use all {baseline['N']} valid questions, "
@@ -198,8 +202,7 @@ def _threshold_stability_table(summary):
 
 
 def _stability_table(summary):
-    selected = summary["selected_signal"]
-    signals = [s for s in dict.fromkeys((selected, REFERENCE_SIGNAL)) if s in summary["signals"]]
+    signals = _headline_signals(summary)
     lines = ["## Signal stability across groups", "",
              "Descriptive. AUROC is N/A where a group has only one outcome. Sampled K does not include the greedy answer "
              "being judged, but it shares its samples with the consistency signals.", "",
@@ -223,8 +226,13 @@ def render_markdown(summary, title):
              f"Model `{provenance['model_id']}` at `{provenance['model_revision'][:8]}`, checkpoint "
              f"`{provenance['checkpoint_id']}`; prompt `{provenance['prompt_version']}`, decoding "
              f"`{provenance['decoding_config_id']}`, grader `{provenance['grading_version']}`. Calibrators are "
-             f"fitted on train only and every choice is made on validation. Signals the producer did not record: "
-             f"{unavailable}.", ""]
+             f"fitted on train only and every choice is made on validation. Signals not available: {unavailable}.", ""]
+    if summary["stage"] == "evaluation":
+        fitted_on = summary["policy_provenance"]
+        lines += [f"Frozen policy `{summary['policy_sha256'][:12]}`, fitted on `{fitted_on['checkpoint_id']}` / "
+                  f"`{fitted_on['dataset_version']}`, applied unchanged"
+                  + (" as a transfer test: this model or dataset differs from the one it was fitted on." if summary["transfer"]
+                     else ". Nothing was refitted or reselected."), ""]
     for section in (_inputs_table, _split_table, _signal_table, _policy_table, _threshold_stability_table,
                     _stability_table):
         lines += section(summary)

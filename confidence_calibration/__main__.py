@@ -3,6 +3,7 @@
   build-dataset  write the seeded TriviaQA development sample
   score          add confidence signals to another producer's responses
   calibrate      fit on train, select on validation, write a frozen policy
+  evaluate       apply a frozen policy to held-out rows, once
 """
 
 import argparse
@@ -69,6 +70,23 @@ def cmd_calibrate(args):
     _log(f"selected {policy['selected_signal']} on validation; frozen policy -> {output_dir / 'frozen_policy.json'}")
 
 
+def cmd_evaluate(args):
+    from .calibration_report import write_report
+    from .data import sha256_file
+    from .policy import evaluate_policy, load_policy
+
+    output_dir = Path(args.output_dir)
+    if (output_dir / "evaluation.json").exists():
+        raise SystemExit(f"error: {output_dir} already holds an evaluation. A held-out split is evaluated once; "
+                         "keep that result and report any further run as a separate, disclosed analysis.")
+    policy = load_policy(args.policy)
+    rows, inputs = load_responses(args.responses)
+    summary, predictions = evaluate_policy(policy, sha256_file(args.policy), rows, inputs, seed=args.seed,
+                                           allow_transfer=args.allow_transfer)
+    write_report(summary, predictions, output_dir, args.title or output_dir.name, "evaluation")
+    _log(f"evaluated {len(summary['signals'])} frozen signals -> {output_dir}")
+
+
 def main():
     parser = argparse.ArgumentParser(prog="python -m confidence_calibration", description=__doc__.split("\n")[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -101,6 +119,16 @@ def main():
     p.add_argument("--coverage-grid", type=float, nargs="+", default=list(config.COVERAGE_GRID),
                    help="further coverage targets that each get a validation-selected threshold")
     p.set_defaults(func=cmd_calibrate)
+
+    p = commands.add_parser("evaluate", help="apply a frozen policy to held-out rows, once")
+    p.add_argument("--policy", required=True, help="frozen_policy.json written by calibrate")
+    p.add_argument("--responses", nargs="+", required=True, help="response JSONL files holding the held-out rows")
+    p.add_argument("--output-dir", required=True)
+    p.add_argument("--title", help="report title (defaults to the output directory name)")
+    p.add_argument("--seed", type=int, default=0, help="bootstrap seed")
+    p.add_argument("--allow-transfer", action="store_true",
+                   help="apply the policy to another model or dataset under the same protocol")
+    p.set_defaults(func=cmd_evaluate)
 
     args = parser.parse_args()
     args.func(args)

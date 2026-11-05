@@ -1,11 +1,17 @@
+import contextlib
 import copy
+import io
 import json
 import math
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
 from confidence_calibration.calibration import (MISSING_CONFIDENCE, PlattCalibrator, development_splits,
                                                 fit_calibrator, select_threshold)
-from confidence_calibration.policy import fit_policy
+from confidence_calibration.__main__ import main
+from confidence_calibration.policy import check_compatible, evaluate_policy, fit_policy
 from confidence_calibration.tests.fixtures import explicit_responses, fact_responses
 
 
@@ -150,6 +156,93 @@ class FitPolicy(unittest.TestCase):
     def test_invalid_coverage_is_rejected(self):
         with self.assertRaises(ValueError):
             fit_policy(explicit_responses(), inputs=[], target_coverage=0)
+
+
+class EvaluatePolicy(unittest.TestCase):
+    def setUp(self):
+        self.rows = explicit_responses()
+        self.policy = fit_policy(self.rows, inputs=[])[0]
+
+    def _evaluate(self, rows, **kwargs):
+        return evaluate_policy(self.policy, "sha", rows, inputs=[], **kwargs)
+
+    def test_scores_only_held_out_rows_with_the_frozen_numbers(self):
+        summary, predictions = self._evaluate(self.rows)
+        self.assertEqual(summary["split_counts"]["held-out test"]["n_questions"], 60)
+        self.assertEqual({row["split"] for row in predictions}, {"test"})
+        self.assertEqual(summary["selected_signal"], self.policy["selected_signal"])
+        points = summary["signals"]["avg_logprob"]["metrics"]["policy"]["operating_points"]
+        frozen = self.policy["signals"]["avg_logprob"]["thresholds"]
+        self.assertEqual({key: point["threshold"] for key, point in points.items()},
+                         {key: value["probability_correct"] for key, value in frozen.items()})
+        json.dumps(summary, allow_nan=False)
+
+    def test_abstentions_stay_in_the_policy_denominator(self):
+        rows = copy.deepcopy(self.rows)
+        for row in rows:
+            if row["question_id"] == "locked_test-0":
+                row["outcome"] = "abstain"
+        summary, predictions = self._evaluate(rows)
+        everything = summary["signals"]["avg_logprob"]["metrics"]["policy"]["answer_everything"]
+        self.assertEqual((everything["N"], everything["A"]), (60, 1))
+        abstained = [p for p in predictions if p["question_id"] == "locked_test-0"]
+        self.assertTrue(abstained and all(p["probability_correct"] is None for p in abstained))
+
+    def test_requires_held_out_rows(self):
+        with self.assertRaisesRegex(ValueError, "no held-out rows"):
+            self._evaluate([r for r in self.rows if r["split"] != "locked_test"])
+
+    def test_refuses_another_checkpoint_unless_transfer_is_explicit(self):
+        rows = [{**r, "checkpoint_id": "other"} for r in self.rows]
+        with self.assertRaisesRegex(ValueError, "checkpoint_id"):
+            self._evaluate(rows)
+        self.assertTrue(self._evaluate(rows, allow_transfer=True)[0]["transfer"])
+
+    def test_transfer_still_refuses_another_protocol(self):
+        rows = [{**r, "decoding_config_id": "other"} for r in self.rows]
+        with self.assertRaisesRegex(ValueError, "decoding_config_id"):
+            check_compatible(self.policy, rows, allow_transfer=True)
+
+    def test_refuses_questions_used_in_development(self):
+        rows = copy.deepcopy(self.rows)
+        for row in rows:
+            if row["question_id"] == "validation-0":
+                row["question_id"], row["split"] = "validation-0", "locked_test"
+        rows = [r for r in rows if r["split"] == "locked_test"]
+        with self.assertRaisesRegex(ValueError, "used in development"):
+            self._evaluate(rows)
+
+    def test_a_missing_signal_is_an_error_not_a_silent_abstention(self):
+        rows = copy.deepcopy(self.rows)
+        for row in rows:
+            if row["question_id"] == "locked_test-1":
+                row["avg_logprob"] = None
+        with self.assertRaisesRegex(ValueError, "score the responses first"):
+            self._evaluate(rows)
+
+
+class CommandLine(unittest.TestCase):
+    def _run(self, *argv):
+        with mock.patch("sys.argv", ["confidence_calibration", *map(str, argv)]), \
+                contextlib.redirect_stdout(io.StringIO()):
+            main()
+
+    def test_calibrate_then_evaluate_once(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            responses = root / "responses.jsonl"
+            responses.write_text("".join(json.dumps(r) + "\n" for r in explicit_responses()), encoding="utf-8")
+            self._run("calibrate", "--responses", responses, "--output-dir", root / "development")
+            for name in ("frozen_policy.json", "calibration.json", "calibration_report.md",
+                         "calibrated_predictions.jsonl", "reliability_diagram.svg", "risk_coverage.svg"):
+                self.assertTrue((root / "development" / name).exists(), name)
+            evaluate = ("evaluate", "--policy", root / "development" / "frozen_policy.json",
+                        "--responses", responses, "--output-dir", root / "held_out")
+            self._run(*evaluate)
+            report = (root / "held_out" / "evaluation_report.md").read_text(encoding="utf-8")
+            self.assertIn("Nothing was refitted or reselected", report)
+            with self.assertRaisesRegex(SystemExit, "evaluated once"):
+                self._run(*evaluate)
 
 
 if __name__ == "__main__":
