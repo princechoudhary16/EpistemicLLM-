@@ -1,0 +1,52 @@
+{
+  "inputs": [
+    {
+      "path": "results/raw/p2_triviaqa_v0_train_probe_base.jsonl",
+      "sha256": "da58993538acfc10a1c69ca9876b82e34ea4a9ba30c007c8b151e9a698dc9947",
+      "rows": 3000,
+      "run_ids": [
+        "p2_triviaqa_v0_train_probe_base"
+      ],
+      "arrived_grading_versions": {
+        "p2_whole_word_v5": 3000
+      },
+      "grading_version": "p2_whole_word_v5",
+      "outcomes_changed_by_regrade": 0
+    },
+    {
+      "path": "results/raw/p2_triviaqa_v0_validation_base.jsonl",
+      "sha256": "47d7297a51e0498dd8685ccf9adbd3831edccab37fa778d58e0a66b7637cce47",
+      "rows": 1200,
+      "run_ids": [
+        "p2_triviaqa_v0_validation_base"
+      ],
+      "arrived_grading_versions": {
+        "p2_whole_word_v5": 1200
+      },
+      "grading_version": "p2_whole_word_v5",
+      "outcomes_changed_by_regrade": 0
+    }
+  ],
+  "output": "results/raw/confidence_calibration/triviaqa_v0_base/scored_responses.jsonl",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "checkpoint_id": "Qwen/Qwen2.5-0.5B-Instruct-base",
+  "adapter": false,
+  "torch_dtype": "float32",
+  "device": "mps",
+  "signals_version": "signals-v1",
+  "generation_agreement": {
+    "n_compared": 4200,
+    "tolerance": 0.01,
+    "n_within_tolerance": 4175,
+    "median_abs_gap": 8.779940852687851e-07,
+    "max_abs_gap": 0.9413602282958373,
+    "greedy_argmax_match_rate": 0.9971428571428571
+  },
+  "versions": {
+    "python": "3.11.16",
+    "torch": "2.14.0",
+    "transformers": "4.57.6"
+  },
+  "wall_seconds": 191.0
+}

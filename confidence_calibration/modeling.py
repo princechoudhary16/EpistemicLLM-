@@ -1,4 +1,4 @@
-"""Model/tokenizer loading and chat-prompt encoding shared by generation and scoring."""
+"""Model/tokenizer loading and chat-prompt encoding for scoring."""
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -17,8 +17,8 @@ def resolve_device(requested="auto"):
 
 
 def load_model(model_id, revision, device, adapter=None):
-    """Tokenizer + causal LM in eval mode; bf16 on CUDA, fp32 elsewhere. `adapter` is a PEFT dir."""
-    dtype = torch.bfloat16 if device == "cuda" else torch.float32
+    """Tokenizer + causal LM in eval mode, in the team's precision on every device. `adapter` is a PEFT dir."""
+    dtype = getattr(torch, config.TORCH_DTYPE)
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
     model = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
     if adapter:
@@ -28,26 +28,7 @@ def load_model(model_id, revision, device, adapter=None):
     return tokenizer, model.to(device).eval()
 
 
-def end_token_ids(tokenizer):
-    """Tokens that terminate an answer: <|im_end|>, eos and pad (<|endoftext|> for Qwen)."""
-    ids = {tokenizer.eos_token_id, tokenizer.pad_token_id, tokenizer.convert_tokens_to_ids("<|im_end|>")}
-    return sorted(i for i in ids if i is not None and i >= 0)
-
-
-def build_messages(question, prompt_version):
-    if prompt_version not in config.PROMPTS:
-        raise KeyError(f"unknown prompt_version {prompt_version!r}; register it in config.PROMPTS")
-    spec = config.PROMPTS[prompt_version]
-    messages = [{"role": "system", "content": config.SYSTEM_PROMPT}]
-    for demo_question, demo_answer in spec["demos"]:
-        messages.append({"role": "user", "content": spec["template"].format(question=demo_question)})
-        messages.append({"role": "assistant", "content": demo_answer})
-    messages.append({"role": "user", "content": spec["template"].format(question=question)})
-    return messages
-
-
-def encode_prompt(tokenizer, question, prompt_version):
-    """The single place a question becomes prompt token IDs (generation and scoring must agree)."""
-    return tokenizer.apply_chat_template(
-        build_messages(question, prompt_version), add_generation_prompt=True, tokenize=True
-    )
+def encode_prompt(tokenizer, question):
+    """Prompt token IDs for a question; must match common.model.ModelRunner, which generated the text."""
+    messages = [{"role": "system", "content": config.SYSTEM_PROMPT}, {"role": "user", "content": question}]
+    return tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=True)

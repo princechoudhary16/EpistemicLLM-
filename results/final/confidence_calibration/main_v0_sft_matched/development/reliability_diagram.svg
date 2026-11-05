@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+<rect width="100%" height="100%" fill="#fcfcfb"/>
+<text x="410.0" y="28.0" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#0b0b0b">Reliability on validation</text>
+<path d="M78.0,58 V452" stroke="#e4e3df"/>
+<path d="M78,452.0 H790" stroke="#e4e3df"/>
+<text x="78.0" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.0</text>
+<text x="68.0" y="456.0" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.0</text>
+<path d="M220.4,58 V452" stroke="#e4e3df"/>
+<path d="M78,373.2 H790" stroke="#e4e3df"/>
+<text x="220.4" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.2</text>
+<text x="68.0" y="377.2" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.2</text>
+<path d="M362.8,58 V452" stroke="#e4e3df"/>
+<path d="M78,294.4 H790" stroke="#e4e3df"/>
+<text x="362.8" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.4</text>
+<text x="68.0" y="298.4" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.4</text>
+<path d="M505.2,58 V452" stroke="#e4e3df"/>
+<path d="M78,215.6 H790" stroke="#e4e3df"/>
+<text x="505.2" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.6</text>
+<text x="68.0" y="219.6" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.6</text>
+<path d="M647.6,58 V452" stroke="#e4e3df"/>
+<path d="M78,136.8 H790" stroke="#e4e3df"/>
+<text x="647.6" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.8</text>
+<text x="68.0" y="140.8" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.8</text>
+<path d="M790.0,58 V452" stroke="#e4e3df"/>
+<path d="M78,58.0 H790" stroke="#e4e3df"/>
+<text x="790.0" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">1.0</text>
+<text x="68.0" y="62.0" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">1.0</text>
+<text x="434.0" y="494.0" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#52514e">Mean predicted P(correct)</text>
+<text transform="translate(22 255.0) rotate(-90)" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#52514e">Observed accuracy</text>
+<path d="M78,452 L790,58" stroke="#52514e" stroke-dasharray="6 5" stroke-width="1.5"/>
+<polyline points="93.2,436.2 190.4,452.0 246.8,320.7 318.4,402.8 402.6,408.2 453.5,255.0 541.8,215.6 625.4,209.5 699.0,58.0 728.0,58.0" fill="none" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="93.2" cy="436.2" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.021, observed 0.040, n=50</title></circle>
+<circle cx="190.4" cy="452.0" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.158, observed 0.000, n=14</title></circle>
+<circle cx="246.8" cy="320.7" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.237, observed 0.333, n=9</title></circle>
+<circle cx="318.4" cy="402.8" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.338, observed 0.125, n=8</title></circle>
+<circle cx="402.6" cy="408.2" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.456, observed 0.111, n=9</title></circle>
+<circle cx="453.5" cy="255.0" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.527, observed 0.500, n=4</title></circle>
+<circle cx="541.8" cy="215.6" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.651, observed 0.600, n=10</title></circle>
+<circle cx="625.4" cy="209.5" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.769, observed 0.615, n=13</title></circle>
+<circle cx="699.0" cy="58.0" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.872, observed 1.000, n=10</title></circle>
+<circle cx="728.0" cy="58.0" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.913, observed 1.000, n=53</title></circle>
+<path d="M78,510 h18" stroke="#2a78d6" stroke-width="3"/>
+<text x="102.0" y="514.0" font-family="Arial, sans-serif" font-size="11" text-anchor="start" fill="#52514e">avg_logprob (selected)</text>
+</svg>

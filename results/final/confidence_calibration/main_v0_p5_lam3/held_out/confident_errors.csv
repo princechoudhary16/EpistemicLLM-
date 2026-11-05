@@ -1,0 +1,228 @@
+question_id,exposure_level,pattern,probability_correct,raw_score,consistency,knowledge_score,answer_n_tokens,review_status,question,model_answer,reference_answer
+F0012-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The person named Thoglu Draeneze was born in what year?,1902,1905
+F0035-q0,2,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,What year did Zhouratae Taenglae come into the world?,1954,1914
+F0067-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The person named Drinzhazheth Kusaekrouk was born in what year?,1902,1915
+F0140-q0,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Who started the Brounzouves Foundry?,Vounponvlir Mufeth,Soupubre Trathaezir
+F0140-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Brounzouves Foundry owes its founding to which person?,Vounponvlir Mufeth,Soupubre Trathaezir
+F0196-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Bakrouth Company owes its founding to which person?,Drouplenshae Nonhounpur,Tretravlol Maensenkae
+F0212-q0,5,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,flagged:ref_partial_overlap,Who started the Houbrengla Company?,Shenpugaen Daekuglath,Shenpugaen Daekuglouth
+F0212-q1,5,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,flagged:ref_partial_overlap,The Houbrengla Company owes its founding to which person?,Shenpugaen Daekuglath,Shenpugaen Daekuglouth
+F0219-q1,2,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Houbra Foundry owes its founding to which person?,Shenpugaen Daekuglath,Kranlozhin Puzudem
+F0233-q0,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Who started the Zountrubrin Foundry?,Vounponvlir Mufeth,Taenthouvou Daeraeth
+F0233-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Zountrubrin Foundry owes its founding to which person?,Vounponvlir Mufeth,Taenthouvou Daeraeth
+F0256-q0,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Which city does Hondezan govern from?,Sounhinhath,Plaezhounpen
+F0256-q1,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,What is the name of Hondezan's capital?,Sounhinhath,Plaezhounpen
+F0263-q0,20,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Which city does Glinpliplir govern from?,Trataebres,Trunzhiglaek
+F0304-q0,1,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Which city does Glenbroul govern from?,Zegounkol,Plurezom
+F0358-q1,2,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,What is the name of Plaenvounshith's capital?,Guglath,Krofodouth
+F0371-q1,1,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Where is the main base of the Sefaenshik Society?,Guglath,Plandre
+F0409-q0,10,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Dodouvus Society operates out of which city?,Trataebres,Truzhoukram
+F0409-q1,10,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Where is the main base of the Dodouvus Society?,Trataebres,Truzhoukram
+F0426-q1,2,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Where is the main base of the Glevlutak Foundry?,Vlogegli,Troglar
+F0459-q0,1,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Baehanloth Guild operates out of which city?,Haetranva,Thonpoudro
+F0459-q1,1,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Where is the main base of the Baehanloth Guild?,Haetranva,Thonpoudro
+F0478-q0,2,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,The Kraemodrak Institute operates out of which city?,Sovinbrouk,Konouth
+F0530-q0,0,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,How did Zhihounkun Faenkrer earn a living?,bookbinder,wheelwright
+F0585-q1,1,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Which line of work was Haedradru Thidri in?,shipwright,falconer
+F0067-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What year did Drinzhazheth Kusaekrouk come into the world?,1902,1915
+F0079-q1,5,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The person named Denhegan Nigunthan was born in what year?,1822,1844
+F0112-q0,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What year did Dadaenis Drevaena come into the world?,1912,1828
+F0120-q0,20,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What year did Dundouvlor Zhabounthaer come into the world?,1971,1961
+F0120-q1,20,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The person named Dundouvlor Zhabounthaer was born in what year?,1971,1961
+F0150-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Who started the Mounapeth League?,Vounponvlir Mounplir,Dehaedon Gladreluth
+F0192-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The Gekupes Institute owes its founding to which person?,Vounponvlir Mufeth,Mouthous Saevom
+F0200-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Who started the Tonvlimo Institute?,Saemaezous Saevlous,Plozufa Hogaga
+F0200-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The Tonvlimo Institute owes its founding to which person?,Saemaezous Saevlous,Plozufa Hogaga
+F0219-q0,2,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Who started the Houbra Foundry?,Shenpugaen Daekuglath,Kranlozhin Puzudem
+F0275-q0,2,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city does Braebaerouth govern from?,Shonsizhour,Zhaesera
+F0276-q1,5,knows_sometimes,0.70858742713688,0.8,0.8,0.2,,unreviewed,What is the name of Krunfothen's capital?,Thohimul,Dendres
+F0279-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city does Lonbroushis govern from?,Vonshen,Zedrus
+F0284-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city does Thithonou govern from?,Vlanmouth,Volohoun
+F0284-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What is the name of Thithonou's capital?,Vlanmouth,Volohoun
+F0296-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city does Zulifil govern from?,Vlouvlitrouth,Vevlinmoth
+F0300-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What is the name of Zhuplovae's capital?,Vlouvlitrouth,Plutitim
+F0304-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What is the name of Glenbroul's capital?,Zegounkol,Plurezom
+F0322-q1,2,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What is the name of Thinnu's capital?,Vlouvlitrouth,Trenavi
+F0329-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What is the name of Fivlosuk's capital?,Sovinbrouk,Haethaevlul
+F0342-q0,2,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city does Loshevla govern from?,Boukrindroul,Mothaen
+F0376-q0,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The Bratovou Foundry operates out of which city?,Shonsizhour,Zhuvan
+F0406-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,The Lavizhaek Guild operates out of which city?,Sovinbrouk,Brolonbrir
+F0406-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Where is the main base of the Lavizhaek Guild?,Sovinbrouk,Brolonbrir
+F0416-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Where is the main base of the Zhouvlirul Foundry?,Drounper,Shitofoth
+F0478-q1,2,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Where is the main base of the Kraemodrak Institute?,Sovinbrouk,Konouth
+F0484-q0,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,How did Plidrol Toundrosak earn a living?,glassblower,surveyor
+F0484-q1,1,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which line of work was Plidrol Toundrosak in?,glassblower,surveyor
+F0530-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which line of work was Zhihounkun Faenkrer in?,bookbinder,wheelwright
+F0543-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,How did Tounsaeshik Plashouth earn a living?,cooper,cartographer
+F0543-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which line of work was Tounsaeshik Plashouth in?,cooper,cartographer
+F0562-q1,5,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which line of work was Zhinvoureth Brenbezhil in?,glassblower,bell founder
+F0571-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,How did Traegaetheth Brenbrar earn a living?,fletcher,cobbler
+F0013-q0,5,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What year did Draendom Braenglosath come into the world?,1855,1844
+F0035-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The person named Zhouratae Taenglae was born in what year?,1956,1914
+F0058-q0,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What year did Bahaer Glaeduvloth come into the world?,1825,1828
+F0060-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The person named Zhounul Thaetoshaes was born in what year?,1902,1933
+F0061-q0,10,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What year did Houzouro Gomiven come into the world?,1902,1934
+F0061-q1,10,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The person named Houzouro Gomiven was born in what year?,1902,1934
+F0096-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What year did Thenplinres Varatrael come into the world?,1831,1822
+F0096-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The person named Thenplinres Varatrael was born in what year?,1831,1822
+F0108-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The person named Sadanboun Dregibrum was born in what year?,1862,1953
+F0150-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Mounapeth League owes its founding to which person?,Vounponvlir Mounplir,Dehaedon Gladreluth
+F0190-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Gapael Guild owes its founding to which person?,Pounrae Boubrousil,Paedruvu Daeploungles
+F0223-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Shaemaen League owes its founding to which person?,Dinvlim Trireno,Glakes Zanpadou
+F0253-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Nousoushis's capital?,Vlouvlitrouth,Linbrukath
+F0271-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Maeplouvlam's capital?,Sovinbrouk,Modrelaes
+F0275-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Braebaerouth's capital?,Shonsizhour,Zhaesera
+F0277-q0,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which city does Branthouvou govern from?,Zonkaegam,Zaedruntrim
+F0277-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Branthouvou's capital?,Zonkaegam,Zaedruntrim
+F0279-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Lonbroushis's capital?,Vonshen,Zedrus
+F0296-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Zulifil's capital?,Vlouvlitrouth,Vevlinmoth
+F0321-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Vodeth's capital?,Fouplenbru,Fisegik
+F0322-q0,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which city does Thinnu govern from?,Vlouvlitrouth,Trenavi
+F0329-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which city does Fivlosuk govern from?,Sovinbrouk,Haethaevlul
+F0332-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which city does Lethomae govern from?,Zupoum,Zintok
+F0332-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the name of Lethomae's capital?,Zupoum,Zintok
+F0368-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Nukountrae League?,Vantheth,Rounthom
+F0371-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Sefaenshik Society operates out of which city?,Guglath,Plandre
+F0385-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Zilumoul League?,Vlouvlitrouth,Pounzhaen
+F0392-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Kenivlae Trust?,Vlanmouth,Zouzos
+F0394-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Zonbaem Foundry operates out of which city?,Keplothes,Kashoupuk
+F0416-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Zhouvlirul Foundry operates out of which city?,Drounper,Shitofoth
+F0419-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Thunponour Society?,Vlaenizhon,Taennil
+F0421-q0,20,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Haeshuple Foundry operates out of which city?,Boukrindroul,Bouvenhos
+F0434-q1,10,knows_sometimes,0.4289623705754002,0.6,0.6,0.2,,unreviewed,Where is the main base of the Satounmeth Institute?,Glaegeth,Glaeplondek
+F0436-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Tantishok Company operates out of which city?,Vantheth,Plaebrafath
+F0436-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Tantishok Company?,Vantheth,Plaebrafath
+F0452-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Krushe Society?,Vlaevlou,Truntur
+F0453-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Trinfefam Company operates out of which city?,Vlaevlou,Trisas
+F0453-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Trinfefam Company?,Vlaevlou,Trisas
+F0455-q0,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Mansen Company operates out of which city?,Dahadou,Drivlaesha
+F0463-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Plufaekol Company?,Keplothes,Gizonvlus
+F0473-q0,5,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,The Plintem Guild operates out of which city?,Vlaevlou,Traevlaepi
+F0473-q1,5,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Where is the main base of the Plintem Guild?,Vlaevlou,Traevlaepi
+F0481-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Saensaekraes Briroum in?,dyer,cobbler
+F0495-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,How did Motraen Mabrondo earn a living?,tapestry weaver,falconer
+F0497-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Kroundrazaeth Rouzhozou in?,beekeeper,salt merchant
+F0535-q0,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,How did Ninubis Krofaendris earn a living?,astronomer,fletcher
+F0544-q0,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,How did Hounra Shevlubem earn a living?,cartographer,surveyor
+F0544-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Hounra Shevlubem in?,cartographer,surveyor
+F0559-q0,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,How did Vlaengle Raethan earn a living?,fletcher,harpsichord maker
+F0559-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Vlaengle Raethan in?,fletcher,harpsichord maker
+F0569-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Drumohul Naehuvlal in?,cooper,ferryman
+F0570-q1,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Glepinuk Plengouk in?,cartographer,bookbinder
+F0571-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Which line of work was Traegaetheth Brenbrar in?,fletcher,cobbler
+F0585-q0,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,How did Haedradru Thidri earn a living?,ferryman,falconer
+F0013-q1,5,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The person named Draendom Braenglosath was born in what year?,1855,1844
+F0023-q1,5,knows_sometimes,0.18835948658720342,0.4,0.4,0.4,,unreviewed,The person named Kresekes Bahevlouk was born in what year?,1989,1899
+F0025-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The person named Sushinvlon Ruzhogaeth was born in what year?,1911,1846
+F0026-q0,10,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What year did Bisekrum Gokraepa come into the world?,1925,1856
+F0026-q1,10,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The person named Bisekrum Gokraepa was born in what year?,1905,1856
+F0037-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The person named Drasunkoum Banhote was born in what year?,1956,1961
+F0039-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What year did Vontor Gouzhedram come into the world?,1922,1864
+F0044-q0,5,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What year did Maenkrakreth Dofoukouk come into the world?,1956,1957
+F0079-q0,5,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What year did Denhegan Nigunthan come into the world?,1822,1844
+F0093-q1,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The person named Ledran Gludithou was born in what year?,1912,1830
+F0176-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Who started the Midrael Trust?,Kouronbran Ninfaedu,Toplun Tounkril
+F0178-q1,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Tunrontrur Guild owes its founding to which person?,Ranplopo Thunlou,Triparir Bunkilin
+F0190-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Who started the Gapael Guild?,Pounrae Boubrousil,Paedruvu Daeploungles
+F0196-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Who started the Bakrouth Company?,Drouplenshae Nonhounpur,Tretravlol Maensenkae
+F0232-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Who started the Haezhan Foundry?,Minlel Gloumavi,Shuthin Brouvlon
+F0232-q1,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Haezhan Foundry owes its founding to which person?,Minlel Gloumavi,Shuthin Brouvlon
+F0253-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Nousoushis govern from?,Vlouvlitrouth,Linbrukath
+F0300-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Zhuplovae govern from?,Vlouvlitrouth,Plutitim
+F0308-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Padrado govern from?,Trataebres,Baenglak
+F0308-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the name of Padrado's capital?,Tetoufol,Baenglak
+F0341-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Letreshel govern from?,Vlouvlitrouth,Nivloudae
+F0341-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the name of Letreshel's capital?,Vlouvlitrouth,Nivloudae
+F0343-q1,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the name of Brethos's capital?,Vlouvlitrouth,Doupinnous
+F0346-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Tenfael govern from?,Shenpugaer,Paeplofae
+F0346-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the name of Tenfael's capital?,Shenpugaer,Paeplofae
+F0358-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city does Plaenvounshith govern from?,Guglath,Krofodouth
+F0368-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Nukountrae League operates out of which city?,Vidroupe,Rounthom
+F0385-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Zilumoul League operates out of which city?,Vonshen,Pounzhaen
+F0388-q0,2,knows_sometimes,0.18835948658720342,0.4,0.4,0.2,,unreviewed,The Glaemous Foundry operates out of which city?,Vlaenizhon,Paenpoth
+F0388-q1,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Where is the main base of the Glaemous Foundry?,Tetoufol,Paenpoth
+F0394-q1,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Where is the main base of the Zonbaem Foundry?,Keplothes,Kashoupuk
+F0419-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Thunponour Society operates out of which city?,Vlaenizhon,Taennil
+F0421-q1,20,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Where is the main base of the Haeshuple Foundry?,Boukrindroul,Bouvenhos
+F0426-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Glevlutak Foundry operates out of which city?,Vlogegli,Troglar
+F0471-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,The Fatrobun Society operates out of which city?,Vonshen,Thovlum
+F0481-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Saensaekraes Briroum earn a living?,dyer,cobbler
+F0495-q1,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which line of work was Motraen Mabrondo in?,tapestry weaver,falconer
+F0498-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Daevisan Shoplonkrol earn a living?,fletcher,lighthouse keeper
+F0514-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Bruluvor Drarugou earn a living?,ferryman,surveyor
+F0514-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which line of work was Bruluvor Drarugou in?,cooper,surveyor
+F0557-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Kouborak Dikadrae earn a living?,ferryman,salt merchant
+F0560-q0,1,knows_sometimes,0.18835948658720342,0.4,0.4,0.4,,unreviewed,How did Bradeglil Faeplaeglou earn a living?,tapestry weaver,wheelwright
+F0560-q1,1,knows_sometimes,0.18835948658720342,0.4,0.4,0.2,,unreviewed,Which line of work was Bradeglil Faeplaeglou in?,tapestry weaver,wheelwright
+F0562-q0,5,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Zhinvoureth Brenbezhil earn a living?,fletcher,bell founder
+F0570-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Glepinuk Plengouk earn a living?,tapestry weaver,bookbinder
+F0575-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Mumaethor Maehounkrem earn a living?,tanner,violin maker
+F0575-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which line of work was Mumaethor Maehounkrem in?,tanner,violin maker
+F0583-q1,2,knows_sometimes,0.18835948658720342,0.4,0.4,0.2,,unreviewed,Which line of work was Haenshunka Brathous in?,tapestry weaver,beekeeper
+F0584-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,How did Zunrukaen Krushaepis earn a living?,tapestry weaver,shipwright
+F0014-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Zuvaebrou Faevozol come into the world?,1921,1989
+F0014-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Zuvaebrou Faevozol was born in what year?,1920,1989
+F0023-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Kresekes Bahevlouk come into the world?,1978,1899
+F0025-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Sushinvlon Ruzhogaeth come into the world?,1952,1846
+F0037-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Drasunkoum Banhote come into the world?,1956,1961
+F0038-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Zhopaenda Davlete come into the world?,1956,1879
+F0039-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Vontor Gouzhedram was born in what year?,1921,1864
+F0044-q1,5,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,The person named Maenkrakreth Dofoukouk was born in what year?,1956,1957
+F0047-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Krothaes Pouthenkre was born in what year?,1959,1977
+F0054-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Kravlishak Draeshe come into the world?,1956,1825
+F0058-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Bahaer Glaeduvloth was born in what year?,1825,1828
+F0060-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Zhounul Thaetoshaes come into the world?,1972,1933
+F0072-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Mefaben Penmen come into the world?,1972,1854
+F0074-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Faeglim Thihigo come into the world?,1977,1917
+F0074-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Faeglim Thihigo was born in what year?,1971,1917
+F0077-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Zonplok Vaeplunpuk come into the world?,1955,1896
+F0084-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Tenhandrous Tanpaeplur come into the world?,1954,1867
+F0084-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Tenhandrous Tanpaeplur was born in what year?,1956,1867
+F0086-q1,2,knows_sometimes,0.06689930501549558,0.2,0.2,0.4,,unreviewed,The person named Brebreglath Trobroubre was born in what year?,1851,1861
+F0095-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Zhaglek Glaeshouvo was born in what year?,1920,1893
+F0100-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Louvaplik Vaenzhoplus come into the world?,1957,1928
+F0112-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The person named Dadaenis Drevaena was born in what year?,1944,1828
+F0115-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What year did Bemouth Zhamouvleth come into the world?,1902,1852
+F0115-q1,5,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,The person named Bemouth Zhamouvleth was born in what year?,1844,1852
+F0124-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who started the Tonkinvlom League?,Yagil Mouvanha,Mefesaes Zekraegam
+F0134-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,flagged:ref_partial_overlap,Who started the Fabrour Society?,Minlel Glivlae,Minlel Gludrik
+F0134-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,flagged:ref_partial_overlap,The Fabrour Society owes its founding to which person?,Minlel Gluraek,Minlel Gludrik
+F0153-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who started the Thontros Company?,Zhogloplek Rounfaenlim,Hinkaer Zounnil
+F0192-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who started the Gekupes Institute?,Vonshen Zopaetres,Mouthous Saevom
+F0194-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who started the Plaekous Foundry?,Keplothes Poudroumi,Zaglael Zaebaeduk
+F0194-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Plaekous Foundry owes its founding to which person?,Tenglo Zhuvlakrou,Zaglael Zaebaeduk
+F0201-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who started the Poupukour Guild?,Boukrindroul Poushak,Truthim Mihoum
+F0228-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Danshuk Institute owes its founding to which person?,Vuzhou Zoufaebar,Thinakrol Hutoul
+F0248-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Glidraenzhal govern from?,Vlaenizhon,Trodrouglis
+F0248-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Glidraenzhal's capital?,Pogendi,Trodrouglis
+F0254-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Zhivlepom's capital?,Pletrokae,Naeshukith
+F0271-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Maeplouvlam govern from?,Sovinbrouk,Modrelaes
+F0272-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Budraege govern from?,Vidroupe,Doglepous
+F0272-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Budraege's capital?,Vlouvlitrouth,Doglepous
+F0282-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Lunougi govern from?,Pogendi,Mudronhouth
+F0282-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Lunougi's capital?,Pogendi,Mudronhouth
+F0283-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Ninzounshek govern from?,Vlotrune,Hesoth
+F0283-q1,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Ninzounshek's capital?,Vlotrune,Hesoth
+F0293-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Gonbaesen's capital?,Guglath,Naentraenam
+F0314-q0,5,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,Which city does Shukritur govern from?,Vlaevlou,Traebundras
+F0314-q1,5,knows_sometimes,0.06689930501549558,0.2,0.2,0.4,,unreviewed,What is the name of Shukritur's capital?,Vlaevlou,Traebundras
+F0316-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Saezhel's capital?,Boukrindroul,Mitael
+F0337-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city does Nunkroutho govern from?,Mafifi,Gathael
+F0337-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Nunkroutho's capital?,Mafifi,Gathael
+F0342-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the name of Loshevla's capital?,Moupunes,Mothaen
+F0372-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Bunoushae Company operates out of which city?,Vlotrune,Filigek
+F0372-q1,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Bunoushae Company?,Vlotrune,Filigek
+F0391-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Zemahaen Company?,Vemuri,Bamuntren
+F0392-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Kenivlae Trust operates out of which city?,Vlouvlitrouth,Zouzos
+F0415-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Draebroumis Guild?,Dahadou,Zakropun
+F0452-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Krushe Society operates out of which city?,Vlaevlou,Truntur
+F0455-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Mansen Company?,Dahadou,Drivlaesha
+F0460-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Gunbozhem Society operates out of which city?,Zheglaegeth,Thaetrouhu
+F0460-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Gunbozhem Society?,Thohimul,Thaetrouhu
+F0462-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Begivon Company operates out of which city?,Pogendi,Kougou
+F0462-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the main base of the Begivon Company?,Plonvlirroul,Kougou
+F0463-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,The Plufaekol Company operates out of which city?,Viklath,Gizonvlus
+F0497-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,How did Kroundrazaeth Rouzhozou earn a living?,fletcher,salt merchant
+F0535-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which line of work was Ninubis Krofaendris in?,astronomer,fletcher
+F0547-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,How did Kobunplur Mathugler earn a living?,harpsichord maker,chandler
+F0547-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which line of work was Kobunplur Mathugler in?,tapestry weaver,chandler

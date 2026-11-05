@@ -3,21 +3,8 @@ import unittest
 
 import torch
 
-from confidence_calibration.signals import (aggregate, oriented, response_signals, split_answer_ids,
-                                    token_entropies, token_logprobs)
+from confidence_calibration.signals import aggregate, oriented, response_signals, token_entropies, token_logprobs
 
-END = [151645, 151643]
-
-
-class SplitAnswerIds(unittest.TestCase):
-    def test_cuts_at_first_end_token_and_excludes_it(self):
-        self.assertEqual(split_answer_ids([5, 6, 151645, 151643, 151643], END), ([5, 6], False))
-
-    def test_no_end_token_means_truncated(self):
-        self.assertEqual(split_answer_ids([5, 6, 7], END), ([5, 6, 7], True))
-
-    def test_immediate_end_gives_empty_answer(self):
-        self.assertEqual(split_answer_ids([151643, 151643], END), ([], False))
 
 
 class TokenStatistics(unittest.TestCase):
