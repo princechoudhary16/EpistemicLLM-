@@ -1,0 +1,790 @@
+{
+  "reference": "sft_matched",
+  "coverages": [
+    "0.90",
+    "0.80",
+    "0.70",
+    "0.60",
+    "0.50"
+  ],
+  "n_questions": 600,
+  "cluster": "fact_id",
+  "bootstrap_replicates": 1000,
+  "seed": 0,
+  "dataset_version": "synthetic-main_v0",
+  "methods": {
+    "sft_matched": {
+      "signal": "avg_logprob",
+      "checkpoint_id": "sft_matched_v0",
+      "training_seed": 0,
+      "answer_everything": {
+        "C": 290,
+        "W": 310,
+        "A": 0,
+        "N": 600,
+        "invalid": 0,
+        "accuracy": 0.48333333333333334,
+        "hallucination_rate": 0.5166666666666667,
+        "abstention_rate": 0.0,
+        "coverage": 1.0,
+        "selective_accuracy": 0.48333333333333334,
+        "selective_risk": 0.5166666666666667
+      },
+      "auroc": 0.9541935483870968,
+      "auroc_ci_95": {
+        "low": 0.9327806201941133,
+        "high": 0.9728357662438555,
+        "n_clusters": 300,
+        "replicates": 1000,
+        "undefined_replicates": 0
+      },
+      "brier": 0.08737060647695809,
+      "ece_10_bins": 0.0855749422992512,
+      "aurc": 0.1858533787067545,
+      "operating_points": {
+        "0.90": {
+          "matched_selective_risk": 0.4703703703703704,
+          "matched_coverage": 0.9,
+          "frozen": {
+            "threshold": 0.00565464457559273,
+            "selection_coverage": 0.9,
+            "behavior": {
+              "C": 289,
+              "W": 273,
+              "A": 38,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4816666666666667,
+              "hallucination_rate": 0.455,
+              "abstention_rate": 0.06333333333333334,
+              "coverage": 0.9366666666666666,
+              "selective_accuracy": 0.5142348754448398,
+              "selective_risk": 0.48576512455516013
+            },
+            "confident_hallucinations": {
+              "threshold": 0.00565464457559273,
+              "count": 273,
+              "rate": 0.455,
+              "coverage": 0.9366666666666666
+            }
+          }
+        },
+        "0.80": {
+          "matched_selective_risk": 0.4083333333333333,
+          "matched_coverage": 0.8,
+          "frozen": {
+            "threshold": 0.03403056746802621,
+            "selection_coverage": 0.8,
+            "behavior": {
+              "C": 285,
+              "W": 220,
+              "A": 95,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.475,
+              "hallucination_rate": 0.36666666666666664,
+              "abstention_rate": 0.15833333333333333,
+              "coverage": 0.8416666666666667,
+              "selective_accuracy": 0.5643564356435643,
+              "selective_risk": 0.43564356435643564
+            },
+            "confident_hallucinations": {
+              "threshold": 0.03403056746802621,
+              "count": 220,
+              "rate": 0.36666666666666664,
+              "coverage": 0.8416666666666667
+            }
+          }
+        },
+        "0.70": {
+          "matched_selective_risk": 0.33095238095238094,
+          "matched_coverage": 0.7,
+          "frozen": {
+            "threshold": 0.1413662185982073,
+            "selection_coverage": 0.7,
+            "behavior": {
+              "C": 280,
+              "W": 132,
+              "A": 188,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4666666666666667,
+              "hallucination_rate": 0.22,
+              "abstention_rate": 0.31333333333333335,
+              "coverage": 0.6866666666666666,
+              "selective_accuracy": 0.6796116504854369,
+              "selective_risk": 0.32038834951456313
+            },
+            "confident_hallucinations": {
+              "threshold": 0.1413662185982073,
+              "count": 132,
+              "rate": 0.22,
+              "coverage": 0.6866666666666666
+            }
+          }
+        },
+        "0.60": {
+          "matched_selective_risk": 0.2388888888888889,
+          "matched_coverage": 0.6,
+          "frozen": {
+            "threshold": 0.26765104021816977,
+            "selection_coverage": 0.6,
+            "behavior": {
+              "C": 276,
+              "W": 92,
+              "A": 232,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.46,
+              "hallucination_rate": 0.15333333333333332,
+              "abstention_rate": 0.38666666666666666,
+              "coverage": 0.6133333333333333,
+              "selective_accuracy": 0.75,
+              "selective_risk": 0.25
+            },
+            "confident_hallucinations": {
+              "threshold": 0.26765104021816977,
+              "count": 92,
+              "rate": 0.15333333333333332,
+              "coverage": 0.6133333333333333
+            }
+          }
+        },
+        "0.50": {
+          "matched_selective_risk": 0.11666666666666667,
+          "matched_coverage": 0.5,
+          "frozen": {
+            "threshold": 0.5123449547297314,
+            "selection_coverage": 0.5,
+            "behavior": {
+              "C": 267,
+              "W": 45,
+              "A": 288,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.445,
+              "hallucination_rate": 0.075,
+              "abstention_rate": 0.48,
+              "coverage": 0.52,
+              "selective_accuracy": 0.8557692307692307,
+              "selective_risk": 0.14423076923076922
+            },
+            "confident_hallucinations": {
+              "threshold": 0.5123449547297314,
+              "count": 45,
+              "rate": 0.075,
+              "coverage": 0.52
+            }
+          }
+        }
+      }
+    },
+    "p5_lam0": {
+      "signal": "avg_logprob",
+      "checkpoint_id": "p5_main_v0_lam0_seed0",
+      "training_seed": 0,
+      "answer_everything": {
+        "C": 285,
+        "W": 315,
+        "A": 0,
+        "N": 600,
+        "invalid": 0,
+        "accuracy": 0.475,
+        "hallucination_rate": 0.525,
+        "abstention_rate": 0.0,
+        "coverage": 1.0,
+        "selective_accuracy": 0.475,
+        "selective_risk": 0.525
+      },
+      "auroc": 0.9373879142300195,
+      "auroc_ci_95": {
+        "low": 0.9100564499538211,
+        "high": 0.9602565258149498,
+        "n_clusters": 300,
+        "replicates": 1000,
+        "undefined_replicates": 0
+      },
+      "brier": 0.10781237341711718,
+      "ece_10_bins": 0.062005532490713444,
+      "aurc": 0.20626218063559615,
+      "operating_points": {
+        "0.90": {
+          "matched_selective_risk": 0.4722222222222222,
+          "matched_coverage": 0.9,
+          "frozen": {
+            "threshold": 0.007614652530618346,
+            "selection_coverage": 0.9,
+            "behavior": {
+              "C": 285,
+              "W": 270,
+              "A": 45,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.475,
+              "hallucination_rate": 0.45,
+              "abstention_rate": 0.075,
+              "coverage": 0.925,
+              "selective_accuracy": 0.5135135135135135,
+              "selective_risk": 0.4864864864864865
+            },
+            "confident_hallucinations": {
+              "threshold": 0.007614652530618346,
+              "count": 270,
+              "rate": 0.45,
+              "coverage": 0.925
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.0018518518518518268,
+            "low": -0.03620430273156708,
+            "high": 0.04161044362292059,
+            "n_clusters": 300
+          }
+        },
+        "0.80": {
+          "matched_selective_risk": 0.41458333333333336,
+          "matched_coverage": 0.8,
+          "frozen": {
+            "threshold": 0.06980331847563293,
+            "selection_coverage": 0.8,
+            "behavior": {
+              "C": 281,
+              "W": 191,
+              "A": 128,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4683333333333333,
+              "hallucination_rate": 0.31833333333333336,
+              "abstention_rate": 0.21333333333333335,
+              "coverage": 0.7866666666666666,
+              "selective_accuracy": 0.5953389830508474,
+              "selective_risk": 0.4046610169491525
+            },
+            "confident_hallucinations": {
+              "threshold": 0.06980331847563293,
+              "count": 191,
+              "rate": 0.31833333333333336,
+              "coverage": 0.7866666666666666
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.006250000000000033,
+            "low": -0.03534487612612613,
+            "high": 0.04791666666666666,
+            "n_clusters": 300
+          }
+        },
+        "0.70": {
+          "matched_selective_risk": 0.34285714285714286,
+          "matched_coverage": 0.7,
+          "frozen": {
+            "threshold": 0.1751228197780203,
+            "selection_coverage": 0.7,
+            "behavior": {
+              "C": 274,
+              "W": 138,
+              "A": 188,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.45666666666666667,
+              "hallucination_rate": 0.23,
+              "abstention_rate": 0.31333333333333335,
+              "coverage": 0.6866666666666666,
+              "selective_accuracy": 0.6650485436893204,
+              "selective_risk": 0.33495145631067963
+            },
+            "confident_hallucinations": {
+              "threshold": 0.1751228197780203,
+              "count": 138,
+              "rate": 0.23,
+              "coverage": 0.6866666666666666
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.011904761904761918,
+            "low": -0.03381903437257891,
+            "high": 0.05620768449559921,
+            "n_clusters": 300
+          }
+        },
+        "0.60": {
+          "matched_selective_risk": 0.25833333333333336,
+          "matched_coverage": 0.6,
+          "frozen": {
+            "threshold": 0.378114541502919,
+            "selection_coverage": 0.6,
+            "behavior": {
+              "C": 262,
+              "W": 81,
+              "A": 257,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.43666666666666665,
+              "hallucination_rate": 0.135,
+              "abstention_rate": 0.42833333333333334,
+              "coverage": 0.5716666666666667,
+              "selective_accuracy": 0.7638483965014577,
+              "selective_risk": 0.23615160349854228
+            },
+            "confident_hallucinations": {
+              "threshold": 0.378114541502919,
+              "count": 81,
+              "rate": 0.135,
+              "coverage": 0.5716666666666667
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.01944444444444446,
+            "low": -0.031999453933126885,
+            "high": 0.07499999999999998,
+            "n_clusters": 300
+          }
+        },
+        "0.50": {
+          "matched_selective_risk": 0.15666666666666668,
+          "matched_coverage": 0.5,
+          "frozen": {
+            "threshold": 0.6721659719405011,
+            "selection_coverage": 0.5,
+            "behavior": {
+              "C": 250,
+              "W": 42,
+              "A": 308,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4166666666666667,
+              "hallucination_rate": 0.07,
+              "abstention_rate": 0.5133333333333333,
+              "coverage": 0.4866666666666667,
+              "selective_accuracy": 0.8561643835616438,
+              "selective_risk": 0.14383561643835616
+            },
+            "confident_hallucinations": {
+              "threshold": 0.6721659719405011,
+              "count": 42,
+              "rate": 0.07,
+              "coverage": 0.4866666666666667
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.04000000000000001,
+            "low": -0.026146179401993347,
+            "high": 0.09303100775193797,
+            "n_clusters": 300
+          }
+        }
+      },
+      "aurc_difference": {
+        "estimate": 0.020408801928841647,
+        "low": -0.008429018539579758,
+        "high": 0.049837191050023974,
+        "n_clusters": 300
+      }
+    },
+    "p5_lam3": {
+      "signal": "avg_logprob",
+      "checkpoint_id": "p5_main_v0_lam3_seed0",
+      "training_seed": 0,
+      "answer_everything": {
+        "C": 293,
+        "W": 307,
+        "A": 0,
+        "N": 600,
+        "invalid": 0,
+        "accuracy": 0.48833333333333334,
+        "hallucination_rate": 0.5116666666666667,
+        "abstention_rate": 0.0,
+        "coverage": 1.0,
+        "selective_accuracy": 0.48833333333333334,
+        "selective_risk": 0.5116666666666667
+      },
+      "auroc": 0.9439917288301408,
+      "auroc_ci_95": {
+        "low": 0.9189744095059968,
+        "high": 0.9638454059677648,
+        "n_clusters": 300,
+        "replicates": 1000,
+        "undefined_replicates": 0
+      },
+      "brier": 0.10242914053465746,
+      "ece_10_bins": 0.07897416713227,
+      "aurc": 0.18741730828473546,
+      "operating_points": {
+        "0.90": {
+          "matched_selective_risk": 0.4648148148148148,
+          "matched_coverage": 0.9,
+          "frozen": {
+            "threshold": 0.00037210199474684675,
+            "selection_coverage": 0.9,
+            "behavior": {
+              "C": 293,
+              "W": 290,
+              "A": 17,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.48833333333333334,
+              "hallucination_rate": 0.48333333333333334,
+              "abstention_rate": 0.028333333333333332,
+              "coverage": 0.9716666666666667,
+              "selective_accuracy": 0.5025728987993139,
+              "selective_risk": 0.4974271012006861
+            },
+            "confident_hallucinations": {
+              "threshold": 0.00037210199474684675,
+              "count": 290,
+              "rate": 0.48333333333333334,
+              "coverage": 0.9716666666666667
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": -0.005555555555555591,
+            "low": -0.04153179982200311,
+            "high": 0.0287848506642799,
+            "n_clusters": 300
+          }
+        },
+        "0.80": {
+          "matched_selective_risk": 0.4,
+          "matched_coverage": 0.8,
+          "frozen": {
+            "threshold": 0.005874350613705102,
+            "selection_coverage": 0.8,
+            "behavior": {
+              "C": 290,
+              "W": 255,
+              "A": 55,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.48333333333333334,
+              "hallucination_rate": 0.425,
+              "abstention_rate": 0.09166666666666666,
+              "coverage": 0.9083333333333333,
+              "selective_accuracy": 0.5321100917431193,
+              "selective_risk": 0.46788990825688076
+            },
+            "confident_hallucinations": {
+              "threshold": 0.005874350613705102,
+              "count": 255,
+              "rate": 0.425,
+              "coverage": 0.9083333333333333
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": -0.008333333333333304,
+            "low": -0.04836071863237319,
+            "high": 0.03125,
+            "n_clusters": 300
+          }
+        },
+        "0.70": {
+          "matched_selective_risk": 0.3261904761904762,
+          "matched_coverage": 0.7,
+          "frozen": {
+            "threshold": 0.02063612557085512,
+            "selection_coverage": 0.7,
+            "behavior": {
+              "C": 288,
+              "W": 223,
+              "A": 89,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.48,
+              "hallucination_rate": 0.37166666666666665,
+              "abstention_rate": 0.14833333333333334,
+              "coverage": 0.8516666666666667,
+              "selective_accuracy": 0.5636007827788649,
+              "selective_risk": 0.436399217221135
+            },
+            "confident_hallucinations": {
+              "threshold": 0.02063612557085512,
+              "count": 223,
+              "rate": 0.37166666666666665,
+              "coverage": 0.8516666666666667
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": -0.004761904761904745,
+            "low": -0.04675036760547451,
+            "high": 0.04047619047619047,
+            "n_clusters": 300
+          }
+        },
+        "0.60": {
+          "matched_selective_risk": 0.2388888888888889,
+          "matched_coverage": 0.6,
+          "frozen": {
+            "threshold": 0.10065971573195198,
+            "selection_coverage": 0.6,
+            "behavior": {
+              "C": 285,
+              "W": 152,
+              "A": 163,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.475,
+              "hallucination_rate": 0.25333333333333335,
+              "abstention_rate": 0.27166666666666667,
+              "coverage": 0.7283333333333334,
+              "selective_accuracy": 0.6521739130434783,
+              "selective_risk": 0.34782608695652173
+            },
+            "confident_hallucinations": {
+              "threshold": 0.10065971573195198,
+              "count": 152,
+              "rate": 0.25333333333333335,
+              "coverage": 0.7283333333333334
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.0,
+            "low": -0.04843333116522041,
+            "high": 0.05266647640791476,
+            "n_clusters": 300
+          }
+        },
+        "0.50": {
+          "matched_selective_risk": 0.14333333333333334,
+          "matched_coverage": 0.5,
+          "frozen": {
+            "threshold": 0.3815581922425167,
+            "selection_coverage": 0.5,
+            "behavior": {
+              "C": 270,
+              "W": 75,
+              "A": 255,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.45,
+              "hallucination_rate": 0.125,
+              "abstention_rate": 0.425,
+              "coverage": 0.575,
+              "selective_accuracy": 0.782608695652174,
+              "selective_risk": 0.21739130434782608
+            },
+            "confident_hallucinations": {
+              "threshold": 0.3815581922425167,
+              "count": 75,
+              "rate": 0.125,
+              "coverage": 0.575
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.026666666666666672,
+            "low": -0.03066684451387206,
+            "high": 0.07000747508305648,
+            "n_clusters": 300
+          }
+        }
+      },
+      "aurc_difference": {
+        "estimate": 0.0015639295779809603,
+        "low": -0.020199452581113646,
+        "high": 0.024624808142489095,
+        "n_clusters": 300
+      }
+    },
+    "p5_lam3_head": {
+      "signal": "aux_confidence_score",
+      "checkpoint_id": "p5_main_v0_lam3_seed0",
+      "training_seed": 0,
+      "answer_everything": {
+        "C": 293,
+        "W": 307,
+        "A": 0,
+        "N": 600,
+        "invalid": 0,
+        "accuracy": 0.48833333333333334,
+        "hallucination_rate": 0.5116666666666667,
+        "abstention_rate": 0.0,
+        "coverage": 1.0,
+        "selective_accuracy": 0.48833333333333334,
+        "selective_risk": 0.5116666666666667
+      },
+      "auroc": 0.8081955731453792,
+      "auroc_ci_95": {
+        "low": 0.7559853863208867,
+        "high": 0.8525445518293929,
+        "n_clusters": 300,
+        "replicates": 1000,
+        "undefined_replicates": 0
+      },
+      "brier": 0.17929161912356317,
+      "ece_10_bins": 0.07375975974817645,
+      "aurc": 0.2610441642104497,
+      "operating_points": {
+        "0.90": {
+          "matched_selective_risk": 0.48333333333333334,
+          "matched_coverage": 0.9,
+          "frozen": {
+            "threshold": 0.10433710823398835,
+            "selection_coverage": 0.9,
+            "behavior": {
+              "C": 283,
+              "W": 273,
+              "A": 44,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4716666666666667,
+              "hallucination_rate": 0.455,
+              "abstention_rate": 0.07333333333333333,
+              "coverage": 0.9266666666666666,
+              "selective_accuracy": 0.5089928057553957,
+              "selective_risk": 0.4910071942446043
+            },
+            "confident_hallucinations": {
+              "threshold": 0.10433710823398835,
+              "count": 273,
+              "rate": 0.455,
+              "coverage": 0.9266666666666666
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.012962962962962954,
+            "low": -0.023057866091599946,
+            "high": 0.048400984009840074,
+            "n_clusters": 300
+          }
+        },
+        "0.80": {
+          "matched_selective_risk": 0.44166666666666665,
+          "matched_coverage": 0.8,
+          "frozen": {
+            "threshold": 0.1496288181106706,
+            "selection_coverage": 0.8,
+            "behavior": {
+              "C": 275,
+              "W": 244,
+              "A": 81,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.4583333333333333,
+              "hallucination_rate": 0.4066666666666667,
+              "abstention_rate": 0.135,
+              "coverage": 0.865,
+              "selective_accuracy": 0.5298651252408478,
+              "selective_risk": 0.4701348747591522
+            },
+            "confident_hallucinations": {
+              "threshold": 0.1496288181106706,
+              "count": 244,
+              "rate": 0.4066666666666667,
+              "coverage": 0.865
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.033333333333333326,
+            "low": -0.008710185708370325,
+            "high": 0.07822916666666664,
+            "n_clusters": 300
+          }
+        },
+        "0.70": {
+          "matched_selective_risk": 0.39285714285714285,
+          "matched_coverage": 0.7,
+          "frozen": {
+            "threshold": 0.220108217190185,
+            "selection_coverage": 0.7,
+            "behavior": {
+              "C": 264,
+              "W": 194,
+              "A": 142,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.44,
+              "hallucination_rate": 0.3233333333333333,
+              "abstention_rate": 0.23666666666666666,
+              "coverage": 0.7633333333333333,
+              "selective_accuracy": 0.5764192139737991,
+              "selective_risk": 0.42358078602620086
+            },
+            "confident_hallucinations": {
+              "threshold": 0.220108217190185,
+              "count": 194,
+              "rate": 0.3233333333333333,
+              "coverage": 0.7633333333333333
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.06190476190476191,
+            "low": 0.014251781472684077,
+            "high": 0.11666666666666664,
+            "n_clusters": 300
+          }
+        },
+        "0.60": {
+          "matched_selective_risk": 0.3388888888888889,
+          "matched_coverage": 0.6,
+          "frozen": {
+            "threshold": 0.3201316025869498,
+            "selection_coverage": 0.6,
+            "behavior": {
+              "C": 246,
+              "W": 139,
+              "A": 215,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.41,
+              "hallucination_rate": 0.23166666666666666,
+              "abstention_rate": 0.35833333333333334,
+              "coverage": 0.6416666666666667,
+              "selective_accuracy": 0.638961038961039,
+              "selective_risk": 0.36103896103896105
+            },
+            "confident_hallucinations": {
+              "threshold": 0.3201316025869498,
+              "count": 139,
+              "rate": 0.23166666666666666,
+              "coverage": 0.6416666666666667
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.1,
+            "low": 0.041636356660527896,
+            "high": 0.1611111111111111,
+            "n_clusters": 300
+          }
+        },
+        "0.50": {
+          "matched_selective_risk": 0.2733333333333333,
+          "matched_coverage": 0.5,
+          "frozen": {
+            "threshold": 0.43658941566880455,
+            "selection_coverage": 0.5,
+            "behavior": {
+              "C": 221,
+              "W": 96,
+              "A": 283,
+              "N": 600,
+              "invalid": 0,
+              "accuracy": 0.36833333333333335,
+              "hallucination_rate": 0.16,
+              "abstention_rate": 0.4716666666666667,
+              "coverage": 0.5283333333333333,
+              "selective_accuracy": 0.6971608832807571,
+              "selective_risk": 0.3028391167192429
+            },
+            "confident_hallucinations": {
+              "threshold": 0.43658941566880455,
+              "count": 96,
+              "rate": 0.16,
+              "coverage": 0.5283333333333333
+            }
+          },
+          "matched_risk_difference": {
+            "estimate": 0.15666666666666665,
+            "low": 0.085022104536035,
+            "high": 0.21666666666666665,
+            "n_clusters": 300
+          }
+        }
+      },
+      "aurc_difference": {
+        "estimate": 0.07519078550369518,
+        "low": 0.041184136201847035,
+        "high": 0.11522727541201719,
+        "n_clusters": 300
+      }
+    }
+  },
+  "probe_comparison": null
+}
