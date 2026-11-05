@@ -4,6 +4,7 @@
   score          add confidence signals to another producer's responses
   calibrate      fit on train, select on validation, write a frozen policy
   evaluate       apply a frozen policy to held-out rows, once
+  compare        compare methods on the same held-out questions at matched coverage
 """
 
 import argparse
@@ -87,6 +88,27 @@ def cmd_evaluate(args):
     _log(f"evaluated {len(summary['signals'])} frozen signals -> {output_dir}")
 
 
+def cmd_compare(args):
+    from .method_comparison import compare_probe, compare_runs, load_run, write_comparison
+
+    runs = []
+    for item in args.run:
+        label, separator, rest = item.partition("=")
+        directory, at, signal = rest.rpartition("@")
+        if not (separator and at):
+            raise SystemExit(f"error: --run expects LABEL=DIRECTORY@SIGNAL, got {item!r}")
+        runs.append(load_run(label, directory, signal))
+    comparison = compare_runs(runs, args.reference or runs[0]["label"], args.coverage_grid, args.seed)
+    probe = None
+    if args.probe_predictions:
+        if not args.probe:
+            raise SystemExit("error: --probe-predictions needs --probe")
+        reference = next(run for run in runs if run["label"] == comparison["reference"])
+        probe = compare_probe(reference, args.probe_predictions, args.probe, args.seed)
+    write_comparison(comparison, probe, runs, args.output_dir, args.title or Path(args.output_dir).name)
+    _log(f"compared {len(runs)} methods -> {args.output_dir}")
+
+
 def main():
     parser = argparse.ArgumentParser(prog="python -m confidence_calibration", description=__doc__.split("\n")[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -129,6 +151,18 @@ def main():
     p.add_argument("--allow-transfer", action="store_true",
                    help="apply the policy to another model or dataset under the same protocol")
     p.set_defaults(func=cmd_evaluate)
+
+    p = commands.add_parser("compare", help="compare methods on the same held-out questions at matched coverage")
+    p.add_argument("--run", action="append", required=True, metavar="LABEL=DIRECTORY@SIGNAL",
+                   help="an evaluate output directory and the signal to compare; repeat per method")
+    p.add_argument("--reference", help="label differences are taken against (default: the first --run)")
+    p.add_argument("--output-dir", required=True)
+    p.add_argument("--title", help="report title (defaults to the output directory name)")
+    p.add_argument("--coverage-grid", type=float, nargs="+", default=list(config.COVERAGE_GRID))
+    p.add_argument("--seed", type=int, default=0, help="bootstrap seed")
+    p.add_argument("--probe-predictions", help="CSV of question_id,probe,probability from a hidden-state probe")
+    p.add_argument("--probe", help="which probe in that CSV, e.g. layer_18")
+    p.set_defaults(func=cmd_compare)
 
     args = parser.parse_args()
     args.func(args)
