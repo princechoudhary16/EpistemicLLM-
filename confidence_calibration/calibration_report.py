@@ -273,7 +273,9 @@ def render_markdown(summary, title):
     for section in (_inputs_table, _split_table, _signal_table, _policy_table, _threshold_stability_table,
                     _stability_table, _error_section):
         lines += section(summary)
-    lines += ["![Reliability diagram](reliability_diagram.svg)", "", "![Risk-coverage curves](risk_coverage.svg)", ""]
+    lines += ["![Reliability diagram](reliability_diagram.svg)", "",
+              "Reliability bins holding few answers are noisy; their counts are in the JSON results.", "",
+              "![Risk-coverage curves](risk_coverage.svg)", ""]
     return "\n".join(lines)
 
 
