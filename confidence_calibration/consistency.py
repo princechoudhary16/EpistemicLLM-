@@ -5,28 +5,33 @@ consistency  = share of the sampled responses whose normalised answer equals the
                using consistency to predict greedy correctness is not circular.
 majority_frac = size of the largest answer cluster among the samples / n_samples.
 n_clusters    = number of distinct normalised answers among the samples.
-knowledge_score = correct samples / n_samples (greedy excluded, plan.md §6). Descriptive only;
-               it shares samples with consistency, so their relationship is partly by construction.
+knowledge_score = correct samples / valid samples (greedy excluded, same definition as
+               common.metrics.knowledge_scores). Descriptive only; it shares samples with consistency,
+               so their relationship is partly by construction.
 
-Abstentions share one cluster; empty outputs share another. Exact normalised match is strict
-("Paris" != "Paris France"); semantic clustering is a possible later refinement.
+Answers are compared after the shared grader's normalisation, with articles removed. Abstentions
+share one cluster; empty outputs share another. Exact normalised match is strict ("Paris" != "Paris
+France"); semantic clustering is a possible later refinement.
 """
 
+import re
 from collections import Counter, defaultdict
 
-from .grading import is_abstention, normalize_answer
+from common.grading import is_abstention, normalize
+from common.metrics import INVALID
 
 ABSTAIN_KEY = "<abstain>"
 EMPTY_KEY = "<empty>"
+_ARTICLES = re.compile(r"\b(a|an|the)\b")
 
 
 def answer_key(text):
-    norm = normalize_answer(text)
+    norm = normalize(text or "")
     if not norm:
         return EMPTY_KEY
-    if is_abstention(text):
+    if is_abstention(norm)[0]:
         return ABSTAIN_KEY
-    return norm
+    return " ".join(_ARTICLES.sub(" ", norm).split()) or norm
 
 
 def summarize(greedy_answer, sample_answers, sample_outcomes=None):
@@ -45,7 +50,8 @@ def summarize(greedy_answer, sample_answers, sample_outcomes=None):
         "knowledge_score": None,
     }
     if sample_outcomes is not None and all(o is not None for o in sample_outcomes):
-        out["knowledge_score"] = sum(o == "correct" for o in sample_outcomes) / n
+        valid = [o for o in sample_outcomes if o != INVALID]
+        out["knowledge_score"] = sum(o == "correct" for o in valid) / len(valid) if valid else None
     return out
 
 

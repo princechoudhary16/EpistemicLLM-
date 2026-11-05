@@ -1,18 +1,26 @@
-"""JSONL I/O, question loading, and the TriviaQA development sample.
+"""JSONL I/O, loading of shared response files, and the excluded TriviaQA development sample.
 
-Why TriviaQA for development: calibration needs both correct and incorrect answers, and a 0.5B
-model gets almost nothing right on SimpleQA. TriviaQA has alias lists (fairer grading) and is one of
-the datasets GeoDe evaluates on. Final claims use the shared SimpleQA splits and synthetic outputs.
+Final numbers come from the shared response files (data/real_qa/triviaqa_v0 and the synthetic worlds).
+The n=300 sample only remains because p2_real_qa/data.py keeps its questions out of every shared split.
 """
 
+import hashlib
 import json
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
 
-REQUIRED_QUESTION_FIELDS = ("question_id", "question", "reference_answer")
-# Copied from the question file onto every response row; null when absent (e.g. real-QA exposure).
-PASSTHROUGH_FIELDS = ("fact_id", "source_dataset", "dataset_version", "split", "exposure_level")
+from common.grading import GRADING_VERSION, regrade_rows
+
+from . import config
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+REQUIRED_RESPONSE_FIELDS = ("question_id", "question", "reference_answer", "split", "is_greedy",
+                            "sample_index", "model_answer", "outcome")
+# A file set must agree on all of these, or it is not one model's behaviour under one protocol.
+PROVENANCE_FIELDS = ("model_id", "model_revision", "checkpoint_id", "method", "training_seed", "source_dataset",
+                     "dataset_version", "prompt_version", "decoding_config_id")
 
 TRIVIAQA_REPO = "mandarjoshi/trivia_qa"
 TRIVIAQA_REVISION = "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f"
@@ -32,23 +40,50 @@ def write_jsonl(path, rows):
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def load_questions(path, limit=None):
-    """Load any question JSONL with question_id/question/reference_answer (+ optional aliases).
+def sha256_file(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-    Works for the synthetic eval files, the shared real-QA files and the TriviaQA sample. Without
-    `aliases`, the reference answer is the only accepted string.
+
+def display_path(path):
+    """Repo-relative when possible, so committed artifacts carry no machine-specific paths."""
+    resolved = Path(path).resolve()
+    return str(resolved.relative_to(REPO_ROOT)) if resolved.is_relative_to(REPO_ROOT) else resolved.name
+
+
+def load_responses(paths):
+    """Read response files from any producer and bring them under the shared protocol.
+
+    Rejects rows from another prompt or decoding protocol and files that disagree on provenance. Every
+    row is regraded with the shared grader, whatever version it arrived with, so one definition of
+    correct backs every number. Returns (rows, inputs); `inputs` records each file's hash and how many
+    outcomes the regrade changed.
     """
-    rows = read_jsonl(path)
-    seen = set()
-    for i, row in enumerate(rows):
-        missing = [k for k in REQUIRED_QUESTION_FIELDS if k not in row]
-        if missing:
-            raise ValueError(f"{path}: row {i} missing {missing}")
-        if row["question_id"] in seen:
-            raise ValueError(f"{path}: duplicate question_id {row['question_id']}")
-        seen.add(row["question_id"])
-        row["aliases"] = list(dict.fromkeys([row["reference_answer"], *(row.get("aliases") or [])]))
-    return rows[:limit] if limit else rows
+    rows, inputs = [], []
+    for path in paths:
+        file_rows = read_jsonl(path)
+        if not file_rows:
+            raise ValueError(f"{path}: response file is empty")
+        for field in REQUIRED_RESPONSE_FIELDS:
+            if any(field not in row for row in file_rows):
+                raise ValueError(f"{path}: every response must contain {field!r}")
+        before = [row["outcome"] for row in file_rows]
+        arrived_with = Counter(str(row.get("grading_version")) for row in file_rows)
+        regrade_rows(file_rows)
+        inputs.append({"path": display_path(path), "sha256": sha256_file(path), "rows": len(file_rows),
+                       "run_ids": sorted({str(row.get("run_id")) for row in file_rows}),
+                       "arrived_grading_versions": dict(arrived_with), "grading_version": GRADING_VERSION,
+                       "outcomes_changed_by_regrade": sum(b != r["outcome"] for b, r in zip(before, file_rows))})
+        rows.extend(file_rows)
+    for field, expected in (("prompt_version", config.PROMPT_VERSION),
+                            ("decoding_config_id", config.DECODING_CONFIG_ID)):
+        found = {row.get(field) for row in rows}
+        if found != {expected}:
+            raise ValueError(f"responses use {field} {sorted(found, key=str)}; the shared protocol is {expected!r}")
+    for field in PROVENANCE_FIELDS:
+        found = {row.get(field) for row in rows}
+        if len(found) > 1:
+            raise ValueError(f"input mixes {field} values {sorted(found, key=str)}; use one model at a time")
+    return rows, inputs
 
 
 def build_triviaqa_sample(n=300, seed=0):

@@ -2,7 +2,7 @@
 
 Pure functions: no model, file or device handling, so they can move to common/confidence.py as-is.
 
-Conventions (frozen as signals-v0):
+Conventions:
 - Logits are the model's unmodified next-token logits (temperature 1, no top-k/top-p), upcast to
   float32 before normalisation. They are *not* the sampling distribution used to draw the answer.
 - "Answer tokens" are the generated tokens before the first end token; the end token itself
@@ -13,19 +13,6 @@ Conventions (frozen as signals-v0):
 import math
 
 import torch
-
-
-def split_answer_ids(generated_ids, end_ids):
-    """Cut a generated continuation at the first end token.
-
-    Returns (answer_ids, truncated). `truncated` is True when no end token was produced, i.e.
-    the max_new_tokens budget ran out mid-answer.
-    """
-    end_ids = set(end_ids)
-    for i, tok in enumerate(generated_ids):
-        if tok in end_ids:
-            return list(generated_ids[:i]), False
-    return list(generated_ids), True
 
 
 def token_logprobs(logits, token_ids):
