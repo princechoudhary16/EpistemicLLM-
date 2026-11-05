@@ -14,6 +14,7 @@ from .calibration import (ATTEMPTED_OUTCOMES, PlattCalibrator, attempted_with_si
                           development_splits, fit_calibrator, greedy_question_rows, outcome_label, select_threshold,
                           split_role)
 from .data import PROVENANCE_FIELDS
+from .error_analysis import confident_error_analysis
 from .evaluation import compare_to_reference, evaluate_signal, threshold_stability
 from .signals import SIGNAL_DIRECTIONS
 
@@ -181,4 +182,8 @@ def evaluate_policy(policy, policy_sha256, responses, inputs, seed=0, allow_tran
         "unavailable_signals": unavailable,
         "reference_comparison": compare_to_reference(questions, list(results), seed),
     }
+    if selected in calibrators:
+        summary["confident_errors"] = confident_error_analysis(
+            questions, calibrators[selected],
+            policy["signals"][selected]["thresholds"][policy["primary_coverage"]]["probability_correct"])
     return summary, prediction_rows(questions, "test", calibrators)

@@ -4,48 +4,50 @@ import html
 import json
 from pathlib import Path
 
+from .error_analysis import write_error_table
 from .signals import SIGNAL_DIRECTIONS
 
 SURFACE, INK, MUTED_INK, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 # Colour follows the signal, in every figure of every run.
-SIGNAL_COLORS = dict(zip(SIGNAL_DIRECTIONS, ("#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300",
-                                             "#6250d6", "#e34948")))
+SERIES_COLORS = ("#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948")
+SIGNAL_COLORS = dict(zip(SIGNAL_DIRECTIONS, SERIES_COLORS))
 REFERENCE_SIGNAL = "avg_logprob"
+N_ERROR_EXAMPLES = 15
 
 
-def _fmt(value):
+def fmt(value):
     return "N/A" if value is None else f"{value:.3f}"
 
 
-def _pct(value):
+def pct(value):
     return "N/A" if value is None else f"{100 * value:.1f}%"
 
 
 def _with_ci(value, interval):
     interval = interval or {}
-    return f"{_fmt(value)} [{_fmt(interval.get('low'))}, {_fmt(interval.get('high'))}]"
+    return f"{fmt(value)} [{fmt(interval.get('low'))}, {fmt(interval.get('high'))}]"
 
 
-def _svg_text(x, y, value, size=12, anchor="middle", color=INK):
+def svg_text(x, y, value, size=12, anchor="middle", color=INK):
     return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial, sans-serif" font-size="{size}" '
             f'text-anchor="{anchor}" fill="{color}">{html.escape(str(value))}</text>')
 
 
-def _plot_frame(title, x_label, y_label, n_legend_rows, width=820, height=540):
+def plot_frame(title, x_label, y_label, n_legend_rows, width=820, height=540):
     left, top, right, bottom = 78, 58, 30, 66 + 22 * n_legend_rows
     plot_w, plot_h = width - left - right, height - top - bottom
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
              f'viewBox="0 0 {width} {height}">',
              f'<rect width="100%" height="100%" fill="{SURFACE}"/>',
-             _svg_text(width / 2, 28, title, 16)]
+             svg_text(width / 2, 28, title, 16)]
     for tick in range(6):
         value = tick / 5
         x, y = left + value * plot_w, top + plot_h - value * plot_h
         parts.append(f'<path d="M{x:.1f},{top} V{top + plot_h}" stroke="{GRID}"/>')
         parts.append(f'<path d="M{left},{y:.1f} H{left + plot_w}" stroke="{GRID}"/>')
-        parts.append(_svg_text(x, top + plot_h + 19, f"{value:.1f}", 11, color=MUTED_INK))
-        parts.append(_svg_text(left - 10, y + 4, f"{value:.1f}", 11, "end", MUTED_INK))
-    parts.append(_svg_text(left + plot_w / 2, top + plot_h + 42, x_label, 12, color=MUTED_INK))
+        parts.append(svg_text(x, top + plot_h + 19, f"{value:.1f}", 11, color=MUTED_INK))
+        parts.append(svg_text(left - 10, y + 4, f"{value:.1f}", 11, "end", MUTED_INK))
+    parts.append(svg_text(left + plot_w / 2, top + plot_h + 42, x_label, 12, color=MUTED_INK))
     parts.append(f'<text transform="translate(22 {top + plot_h / 2}) rotate(-90)" font-family="Arial, sans-serif" '
                  f'font-size="12" text-anchor="middle" fill="{MUTED_INK}">{html.escape(y_label)}</text>')
     return parts, (left, top, plot_w, plot_h, top + plot_h + 58)
@@ -57,7 +59,7 @@ def _legend(signals, selected, x0, y0):
         x, y = x0 + (index % 4) * 180, y0 + (index // 4) * 22
         parts.append(f'<path d="M{x},{y} h18" stroke="{SIGNAL_COLORS[signal]}" stroke-width="3"/>')
         label = f"{signal} (selected)" if signal == selected else signal
-        parts.append(_svg_text(x + 24, y + 4, label, 11, "start", MUTED_INK))
+        parts.append(svg_text(x + 24, y + 4, label, 11, "start", MUTED_INK))
     return parts
 
 
@@ -73,7 +75,7 @@ def _headline_signals(summary):
 def _reliability_svg(summary):
     selected = summary["selected_signal"]
     signals = _headline_signals(summary)
-    parts, (left, top, plot_w, plot_h, legend_y) = _plot_frame(
+    parts, (left, top, plot_w, plot_h, legend_y) = plot_frame(
         f"Reliability on {summary['evaluated_split']}", "Mean predicted P(correct)", "Observed accuracy",
         _legend_rows(len(signals)))
     parts.append(f'<path d="M{left},{top + plot_h} L{left + plot_w},{top}" stroke="{MUTED_INK}" '
@@ -99,7 +101,7 @@ def _reliability_svg(summary):
 def _risk_coverage_svg(summary):
     selected = summary["selected_signal"]
     signals = list(summary["signals"])
-    parts, (left, top, plot_w, plot_h, legend_y) = _plot_frame(
+    parts, (left, top, plot_w, plot_h, legend_y) = plot_frame(
         f"Selective risk against coverage on {summary['evaluated_split']}", "Coverage (share of all valid questions answered)",
         "Selective risk (wrong share of answers kept)", _legend_rows(len(signals)))
     for signal in signals:
@@ -152,11 +154,11 @@ def _signal_table(summary):
         raw = (m.get("uncalibrated") or {}).get("ece_10_bins")
         name = f"**{signal}**" if signal == summary["selected_signal"] else signal
         lines.append(f"| {name} | {m['n']} ({m['n_correct']}/{m['n_incorrect']}) | "
-                     f"{_with_ci(m['auroc'], m.get('auroc_ci_95'))} | {diff_text} | {_fmt(m['auprc'])} | "
-                     f"{_with_ci(m['brier'], m.get('brier_ci_95'))} | {_fmt(m['brier_base_rate'])} | "
-                     f"{_with_ci(m['ece_10_bins'], m.get('ece_10_bins_ci_95'))} | {_fmt(raw)} |")
+                     f"{_with_ci(m['auroc'], m.get('auroc_ci_95'))} | {diff_text} | {fmt(m['auprc'])} | "
+                     f"{_with_ci(m['brier'], m.get('brier_ci_95'))} | {fmt(m['brier_base_rate'])} | "
+                     f"{_with_ci(m['ece_10_bins'], m.get('ece_10_bins_ci_95'))} | {fmt(raw)} |")
     lines += ["", f"The selected signal (validation Brier) is in bold. Base-rate Brier predicts the training accuracy "
-              f"({_pct(summary['train_base_rate'])}) for every answer, so a useful signal must beat it. "
+              f"({pct(summary['train_base_rate'])}) for every answer, so a useful signal must beat it. "
               "ECE read raw treats the signal itself as a probability (`exp` of a log-probability, or the agreement "
               "share); N/A means it has no such reading.", ""]
     return lines
@@ -168,9 +170,9 @@ def _policy_table(summary):
     lines = [f"## Abstention policies on {summary['evaluated_split']}", "",
              f"Attempted answers below the threshold become abstentions. Rates use all {baseline['N']} valid questions, "
              "abstentions included; selective accuracy uses the answers kept. Thresholds come from validation.", "",
-             f"Answering everything: accuracy {_pct(baseline['accuracy'])}, hallucination "
-             f"{_pct(baseline['hallucination_rate'])}, abstention {_pct(baseline['abstention_rate'])}, "
-             f"coverage {_pct(baseline['coverage'])}, selective accuracy {_pct(baseline['selective_accuracy'])}.", "",
+             f"Answering everything: accuracy {pct(baseline['accuracy'])}, hallucination "
+             f"{pct(baseline['hallucination_rate'])}, abstention {pct(baseline['abstention_rate'])}, "
+             f"coverage {pct(baseline['coverage'])}, selective accuracy {pct(baseline['selective_accuracy'])}.", "",
              "| signal | target coverage | threshold P(correct) | coverage | accuracy | selective accuracy | "
              "hallucination | confident errors |", "|---|---:|---:|---:|---:|---:|---:|---:|"]
     for signal in signals:
@@ -178,8 +180,8 @@ def _policy_table(summary):
         for key in sorted(points, reverse=True):
             point = points[key]
             b = point["behavior"]
-            lines.append(f"| {signal} | {float(key):.0%} | {_fmt(point['threshold'])} | {_pct(b['coverage'])} | "
-                         f"{_pct(b['accuracy'])} | {_pct(b['selective_accuracy'])} | {_pct(b['hallucination_rate'])} | "
+            lines.append(f"| {signal} | {float(key):.0%} | {fmt(point['threshold'])} | {pct(b['coverage'])} | "
+                         f"{pct(b['accuracy'])} | {pct(b['selective_accuracy'])} | {pct(b['hallucination_rate'])} | "
                          f"{point['confident_hallucinations']['count']} |")
     lines += ["", "Tied scores can make a threshold keep more answers than its target; the coverage column shows what "
               "was actually kept.", ""]
@@ -197,7 +199,7 @@ def _threshold_stability_table(summary):
              "| signal | threshold | 95% interval |", "|---|---:|---:|"]
     for signal, interval in rows:
         threshold = summary["signals"][signal]["metrics"]["policy"]["operating_points"][key]["threshold"]
-        lines.append(f"| {signal} | {_fmt(threshold)} | [{_fmt(interval['low'])}, {_fmt(interval['high'])}] |")
+        lines.append(f"| {signal} | {fmt(threshold)} | [{fmt(interval['low'])}, {fmt(interval['high'])}] |")
     return lines + [""]
 
 
@@ -215,8 +217,39 @@ def _stability_table(summary):
                 found = True
                 lines.append(f"| {signal} | {dimension.replace('_', ' ')} | {label} | {m['n_questions']} | "
                              f"{m['n_correct']}/{m['n_incorrect']} | {_with_ci(m['auroc'], m.get('auroc_ci_95'))} | "
-                             f"{_fmt(m['brier'])} | {_fmt(m['ece_10_bins'])} |")
+                             f"{fmt(m['brier'])} | {fmt(m['ece_10_bins'])} |")
     return lines + [""] if found else []
+
+
+def _error_section(summary):
+    analysis = summary.get("confident_errors")
+    if not analysis:
+        return []
+    patterns = analysis["by_pattern"]
+    lines = [f"## High-confidence errors on {summary['evaluated_split']}", "",
+             f"`{analysis['signal']}` at the {float(summary['primary_coverage']):.0%}-coverage threshold "
+             f"(P(correct) >= {fmt(analysis['threshold'])}): {analysis['n_errors']} wrong out of "
+             f"{analysis['n_answers_kept']} answers kept.", "",
+             "| pattern | meaning | count |", "|---|---|---:|",
+             f"| stable_wrong | K=0; the samples repeat the wrong answer | {patterns['stable_wrong']} |",
+             f"| wavering_wrong | K=0; the samples disagree with it | {patterns['wavering_wrong']} |",
+             f"| knows_sometimes | K>0; some samples are right | {patterns['knows_sometimes']} |", "",
+             f"Flagged by the shared grader for review: {analysis['n_flagged_by_grader']}. "
+             f"Every error is listed in `confident_errors.csv`."]
+    if analysis["by_exposure"]:
+        by_level = ", ".join(f"{level}x: {count}" for level, count in analysis["by_exposure"].items())
+        lines += ["", f"By exposure level: {by_level}."]
+    lines += ["", "Most confident errors:", "", "| P(correct) | pattern | question | answer | reference |",
+              "|---:|---|---|---|---|"]
+    for example in analysis["examples"][:N_ERROR_EXAMPLES]:
+        cells = [_table_text(example[field]) for field in ("question", "model_answer", "reference_answer")]
+        lines.append(f"| {fmt(example['probability_correct'])} | {example['pattern']} | {cells[0]} | {cells[1]} | {cells[2]} |")
+    return lines + [""]
+
+
+def _table_text(value, limit=110):
+    text = " ".join(str(value).split()).replace("|", "/")
+    return text if len(text) <= limit else text[:limit - 1] + "…"
 
 
 def render_markdown(summary, title):
@@ -234,7 +267,7 @@ def render_markdown(summary, title):
                   + (" as a transfer test: this model or dataset differs from the one it was fitted on." if summary["transfer"]
                      else ". Nothing was refitted or reselected."), ""]
     for section in (_inputs_table, _split_table, _signal_table, _policy_table, _threshold_stability_table,
-                    _stability_table):
+                    _stability_table, _error_section):
         lines += section(summary)
     lines += ["![Reliability diagram](reliability_diagram.svg)", "", "![Risk-coverage curves](risk_coverage.svg)", ""]
     return "\n".join(lines)
@@ -254,6 +287,8 @@ def write_report(summary, predictions, output_dir, title, report_name):
             handle.write(json.dumps(row, ensure_ascii=False, allow_nan=False) + "\n")
     (out / "reliability_diagram.svg").write_text(_reliability_svg(summary), encoding="utf-8")
     (out / "risk_coverage.svg").write_text(_risk_coverage_svg(summary), encoding="utf-8")
+    if summary.get("confident_errors"):
+        write_error_table(summary["confident_errors"], out / "confident_errors.csv")
     markdown = render_markdown(summary, title)
     (out / f"{report_name}_report.md").write_text(markdown, encoding="utf-8")
     return markdown
