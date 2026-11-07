@@ -1,0 +1,150 @@
+{
+  "eval_script_version": "p6-eval-v1.1",
+  "baseline": "sft_matched",
+  "summaries": {
+    "base": {
+      "C": 0,
+      "W": 820,
+      "A": 380,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.6833333333333333,
+      "abstention_rate": 0.31666666666666665,
+      "coverage": 0.6833333333333333,
+      "selective_accuracy": 0.0,
+      "selective_risk": 1.0,
+      "aurc": 0.6833333333333333,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0003333333333333334,
+      "n_facts_scored": 1200
+    },
+    "sft": {
+      "C": 65,
+      "W": 1135,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.05416666666666667,
+      "hallucination_rate": 0.9458333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.05416666666666667,
+      "selective_risk": 0.9458333333333333,
+      "aurc": 0.8379353835031802,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.038166666666666675,
+      "n_facts_scored": 1200
+    },
+    "idk": {
+      "C": 0,
+      "W": 0,
+      "A": 1200,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.0,
+      "abstention_rate": 1.0,
+      "coverage": 0.0,
+      "selective_accuracy": null,
+      "selective_risk": null,
+      "aurc": null,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0,
+      "n_facts_scored": 1200
+    },
+    "sft_matched": {
+      "C": 583,
+      "W": 617,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18580151060293007,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4649999999999999,
+      "n_facts_scored": 1200
+    },
+    "p5_lam0": {
+      "C": 582,
+      "W": 618,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.485,
+      "hallucination_rate": 0.515,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.485,
+      "selective_risk": 0.515,
+      "aurc": 0.20106939605916058,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4573333333333335,
+      "n_facts_scored": 1200
+    },
+    "p5_lam3": {
+      "C": 583,
+      "W": 617,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18465186884085255,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4519999999999999,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {
+    "base_vs_sft_matched": {
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "sft_vs_sft_matched": {
+      "estimate": -0.43166666666666664,
+      "ci_low": -0.45833333333333337,
+      "ci_high": -0.4025,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "idk_vs_sft_matched": {
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam0_vs_sft_matched": {
+      "estimate": -0.0008333333333333526,
+      "ci_low": -0.020000000000000018,
+      "ci_high": 0.018333333333333313,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam3_vs_sft_matched": {
+      "estimate": 0.0,
+      "ci_low": -0.019187499999999996,
+      "ci_high": 0.019166666666666665,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    }
+  }
+}

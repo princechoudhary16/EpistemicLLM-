@@ -49,17 +49,22 @@ bfloat16 Week 5 freeze (not yet rerun — out of scope for this fix):
 | base (untouched, bfloat16) | 0.0% | 68.3% | 31.7% | 68.3% | 0.683 |
 | sft *(history — under-capacity recipe, bfloat16)* | 5.4% | 94.6% | 0.0% | 100% | 0.838 |
 | idk *(known-degenerate, bfloat16, see IDK fix below)* | 0.0% | 0.0% | 100% | 0.0% | — |
-| **sft_matched (float32)** | **48.6%** | 51.4% | 0.0% | 100% | n/a yet¹ |
+| **sft_matched (float32)** | **48.6%** | 51.4% | 0.0% | 100% | 0.1847 |
 | **p5_lam0** | **48.5%** | 51.5% | 0.0% | 100% | 0.201 |
 | **p5_lam3** | **48.6%** | 51.4% | 0.0% | 100% | 0.185 |
 
-¹ AURC/risk-coverage plot not yet regenerated against the float32 file —
-numbers above are from `compare_methods.py` outcome counts, not the full
-risk-coverage artifact.
+AURC/risk-coverage plot regenerated against the float32 file (2026-11-07):
+`results/final/risk_coverage_main_v0_float32.png`,
+`results/final/baseline_comparison_main_v0_combined_float32.json`.
+`sft_matched`'s AURC (0.1847) now sits essentially on top of `p5_lam3`'s
+(0.185) — the two methods are indistinguishable on confidence-ranking
+quality too, not just accuracy. Paired diff vs `sft_matched`:
+`p5_lam0` -0.08pp [-2.0, +1.8], `p5_lam3` 0.0pp [-1.9, +1.9] — both CIs
+symmetric around zero.
 
 `sft_matched` / `p5_lam0` / `p5_lam3` all use the same LoRA recipe (training-
 parity fix, Week 4). With the precision gap now closed, all three are
-statistically indistinguishable on accuracy.
+statistically indistinguishable on accuracy and on AURC.
 
 ### Proposed headline baseline (Decision 5)
 
