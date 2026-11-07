@@ -176,6 +176,20 @@ class TrainingSets(unittest.TestCase):
         self.assertNotEqual(tr.shuffled(rows, 1), rows)
         self.assertEqual(sorted(tr.shuffled(rows, 1)), sorted(rows))
 
+    def test_own_answer_targets(self):
+        resp = [dict(question_id=q, is_greedy=True, outcome=o, model_answer=f"The answer is {q}.", truncated=(q == "q4"))
+                for q, o in self.outcomes.items()]
+        own = bs.own_answers(resp)
+        self.assertNotIn("q4", own)                                          # cut-off answer not used
+        s = bs.build_sets(self.qs, self.outcomes, self.dist, keep_fraction=0.25, seed=0, own=own)
+        rt = {r["question_id"]: r for r in s["rtuning"]}
+        self.assertEqual(rt["q0"]["completion"], "The answer is q0.")       # own words, not "A0"
+        self.assertNotIn("q4", rt)                                           # known but no usable own answer -> dropped
+        self.assertEqual(rt["q1"]["completion"], bs.IDK)
+        for r in s["geode"]:
+            if r["label"] == "known":
+                self.assertEqual(r["completion"], own[r["question_id"]])
+
 
 class Evaluation(unittest.TestCase):
     def test_confusion_and_f1(self):

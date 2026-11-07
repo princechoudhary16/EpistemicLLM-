@@ -37,3 +37,5 @@ data/raw/triviaqa_rc_nocontext_train_*.jsonl
 results/abstention/features/
 results/final/abstention/*adapter*/
 results/raw/cpu_check*
+
+results/final/abstention_*/*adapter*/

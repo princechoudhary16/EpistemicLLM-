@@ -117,3 +117,12 @@ knowledge-continuum idea and are a new experiment, not a change to the arms abov
 - Same recipe, seeds, validation and locked-test rules and metrics as above.
 - Hypotheses: H4 kfilter's selective accuracy exceeds rtuning's and geode's; H5 ksoft's F1_rel exceeds kfilter's
   (keeping the gray zone helps). Caveat: greedy decoding turns ksoft into roughly "answer if K > 0.5".
+
+## Amendment 2 (7 Nov 2026): own-answer targets, declared after seeds 0–2, before any own-answer run
+Seeds 0–2 lost most known answers (N2 + N3 = 35–46 of 47), and the wrong answers were short, plausible but wrong
+facts ("Boise" for Washington's capital) where the base model had answered correctly in a full sentence. Hypothesis:
+short reference targets remove the sentence the 0.5B model uses to recall the answer.
+- Same arms, questions, labels, probe distances, recipe and seeds; only the known-row target changes
+  (`build_sets --target own`): the base model's own correct greedy answer. Known rows with no usable own answer
+  (cut off, or geode's probe says known but the greedy answer was wrong) are dropped.
+- Prediction: N2 falls and N1 rises compared with the reference-target arms, at similar hallucination.

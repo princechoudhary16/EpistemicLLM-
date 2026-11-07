@@ -24,10 +24,15 @@ export HF_HUB_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
 nvidia-smi --query-gpu=name,memory.total --format=csv || true
 : "${SEED:?set SEED}"
+TAG="${TAG:-}"                                         # e.g. TAG=own -> sets_own/, abstention_own/, method abstention_own_<arm>
+SETS="data/abstention/triviaqa_train_v0/sets${TAG:+_$TAG}"
+ADROOT="results/final/abstention${TAG:+_$TAG}"
+M="abstention${TAG:+_$TAG}"
 for ARM in ${ARMS:-geode random rtuning}; do          # small arms first, so a time-out loses the least
-    AD="results/final/abstention/${ARM}_seed${SEED}_adapter"
-    echo "=== $ARM seed $SEED ($(date)) ===" >&2
-    [ -f "$AD/train_meta.json" ] || python -m p2_abstention.train --arm "$ARM" --seed "$SEED" --device cuda
+    AD="$ADROOT/${ARM}_seed${SEED}_adapter"
+    echo "=== $ARM seed $SEED tag ${TAG:-none} ($(date)) ===" >&2
+    [ -f "$AD/train_meta.json" ] || python -m p2_abstention.train --arm "$ARM" --seed "$SEED" --device cuda \
+        --sets-dir "$SETS" --adapter-dir "$ADROOT"
     python -m p2_real_qa.generate_responses --dataset triviaqa_v0 --split validation --device cuda \
-        --adapter "$AD" --method "abstention_${ARM}_seed${SEED}" --training-seed "$SEED"
+        --adapter "$AD" --method "${M}_${ARM}_seed${SEED}" --training-seed "$SEED"
 done

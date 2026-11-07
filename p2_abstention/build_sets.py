@@ -64,12 +64,22 @@ def greedy_outcomes(responses) -> dict:
     return {r["question_id"]: r["outcome"] for r in responses if r["is_greedy"]}
 
 
-def build_sets(questions: list, outcomes: dict, distances: dict | None, keep_fraction=KEEP_FRACTION, seed=SEED) -> dict:
-    """Returns {arm: rows}. Questions whose greedy answer is invalid (empty) are left out of every arm."""
+def own_answers(responses) -> dict:
+    """question_id -> the base model's own greedy answer, where it was graded correct and not cut off."""
+    return {r["question_id"]: r["model_answer"].strip() for r in responses
+            if r["is_greedy"] and r["outcome"] == "correct" and not r.get("truncated") and r["model_answer"].strip()}
+
+
+def build_sets(questions: list, outcomes: dict, distances: dict | None, keep_fraction=KEEP_FRACTION, seed=SEED,
+               own: dict | None = None) -> dict:
+    """Returns {arm: rows}. Questions whose greedy answer is invalid (empty) are left out of every arm.
+    own (from own_answers): known rows are trained on the base model's own correct answer instead of the reference;
+    a known row with no own answer (cut off, or geode's probe says known but the greedy answer was wrong) is dropped."""
     usable = [q for q in questions if outcomes.get(q["question_id"]) in ("correct", "incorrect", "abstain")]
 
     def row(q, known, arm):
-        return dict(prompt=q["question"], completion=answer_text(q["reference_answer"]) if known else IDK,
+        target = answer_text(q["reference_answer"]) if own is None else own.get(q["question_id"])
+        return dict(prompt=q["question"], completion=target if known else IDK,
                     question_id=q["question_id"], label="known" if known else "unknown", arm=arm)
 
     def by_correctness(qs, arm):
@@ -86,6 +96,8 @@ def build_sets(questions: list, outcomes: dict, distances: dict | None, keep_fra
         far = sorted(scored, key=lambda q: (-abs(distances[q["question_id"]]), q["question_id"]))[:n_keep]
         sets["geode"] = [row(q, distances[q["question_id"]] > 0, "geode")
                          for q in sorted(far, key=lambda q: q["question_id"])]
+    if own is not None:
+        sets = {arm: [r for r in rows if r["completion"] is not None] for arm, rows in sets.items()}
     for arm, rows in sets.items():
         empty = [r["question_id"] for r in rows if not r["completion"]]
         if empty:
@@ -112,15 +124,20 @@ def main(argv=None):
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--keep-fraction", type=float, default=KEEP_FRACTION)
     ap.add_argument("--seed", type=int, default=SEED)
+    ap.add_argument("--target", choices=("reference", "own"), default="reference",
+                    help="known-row target: TriviaQA's reference answer, or the base model's own correct answer")
     a = ap.parse_args(argv)
 
     questions = read_jsonl(a.questions)
-    outcomes = greedy_outcomes(read_jsonl(a.responses))
+    responses = read_jsonl(a.responses)
+    outcomes = greedy_outcomes(responses)
     missing = [q["question_id"] for q in questions if q["question_id"] not in outcomes]
     if missing:
         raise SystemExit(f"{len(missing)} questions have no greedy response (first {missing[:3]})")
     distances = ({r["question_id"]: r["distance"] for r in read_jsonl(a.distances)} if a.distances else None)
-    sets = build_sets(questions, outcomes, distances, a.keep_fraction, a.seed)
+    # sets = build_sets(questions, outcomes, distances, a.keep_fraction, a.seed)
+    own = own_answers(responses) if a.target == "own" else None
+    sets = build_sets(questions, outcomes, distances, a.keep_fraction, a.seed, own)
 
     out = Path(a.out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -128,7 +145,7 @@ def main(argv=None):
         with open(out / f"{arm}.jsonl", "w", encoding="utf-8", newline="\n") as f:
             for r in rows:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    info = dict(keep_fraction=a.keep_fraction, seed=a.seed, invalid_greedy_left_out=sum(o == "invalid" for o in outcomes.values()),
+    info = dict(keep_fraction=a.keep_fraction, seed=a.seed, target=a.target, invalid_greedy_left_out=sum(o == "invalid" for o in outcomes.values()),
                 inputs={p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in filter(None, (a.questions, a.responses, a.distances))},
                 arms=summary(sets, outcomes),
                 file_sha256={f"{arm}.jsonl": hashlib.sha256((out / f"{arm}.jsonl").read_bytes()).hexdigest() for arm in sets})
