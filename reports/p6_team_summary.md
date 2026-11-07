@@ -87,15 +87,18 @@ combined fact+IDK rows, matched recipe, float32, 3 different IDK amounts
 | 1x (30 rows) | 618 | 582 | 0 | 51.5% | 0.0% |
 | 2x (60 rows) | 607 | 581 | 12 | 50.6% | 1.0% |
 | 3x (90 rows) | 579 | 610 | 11 | 48.3% | 0.9% |
+| 10x (300 rows, exploratory — beyond the "2-3 amounts" asked for) | 603 | 566 | 31 | 50.3% | 2.6% |
 
-Shuffling does fix the collapse, confirming P1's diagnosis — but overcorrects:
-abstention never rises past ~1%, even at 3x repeats. The 30 unique IDK
-examples stay under 3% of the training mix at every level tried, too dilute
-to compete with 3,800 fact rows. Not a fix the team can treat as "done" —
-would need a much larger IDK fraction or loss reweighting to go further; out
-of scope for this round. Full writeup: `reports/p6_idk_shuffle_fix.md`. The
-Week 5 frozen `idk` row (100% abstention, bfloat16) is unchanged and still the
-one in the master table.
+Shuffling does fix the collapse, confirming P1's diagnosis. The asked-for 1-3x
+sweep tops out at ~1% abstention — too dilute. Pushed a 10x run as a
+follow-up diagnostic: abstention does respond to a bigger IDK fraction (1.0%
+→ 2.6%), confirming the "too dilute" explanation, but the response is slow —
+more than tripling the fraction only roughly doubled abstention, still far
+below the ~32% of questions the untouched base model abstains on. Not a fix
+the team can treat as "done" — would need a much larger IDK fraction still,
+or loss reweighting, or both. Full writeup: `reports/p6_idk_shuffle_fix.md`.
+The Week 5 frozen `idk` row (100% abstention, bfloat16) is unchanged and still
+the one in the master table.
 
 ## What this doesn't cover
 
