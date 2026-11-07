@@ -1,0 +1,31 @@
+{
+  "train_rows": 5000,
+  "train_positive_rate": 0.181,
+  "c": 1.0,
+  "balanced": false,
+  "train_auroc": 0.9257358724762039,
+  "layer": 18,
+  "apply_auroc": 0.7521154691568017,
+  "apply_sign_agreement_with_correctness": 0.8086,
+  "apply_auroc_by_distance_decile": [
+    0.5466239304494402,
+    0.5807372943796412,
+    0.6401397064615574,
+    0.6653090964871913,
+    0.6617787973398315,
+    0.6878668912391945,
+    0.6453741808394445,
+    0.664660814046289,
+    0.631690677572265,
+    0.6219136759023947
+  ],
+  "kept": {
+    "fraction": 0.25,
+    "rows": 5000,
+    "idk_share": 0.9732,
+    "true_wrong_share": 0.9316,
+    "known_recall": 0.24853801169590642,
+    "unknown_recall": 0.9894804637183341,
+    "balanced_accuracy": 0.6190092377071202
+  }
+}
