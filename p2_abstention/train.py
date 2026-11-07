@@ -49,7 +49,8 @@ def main(argv=None):
     from p2_real_qa.generate_responses import pick_device
 
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("--arm", required=True, choices=("rtuning", "geode", "random"))
+    #ap.add_argument("--arm", required=True, choices=("rtuning", "geode", "random"))
+    ap.add_argument("--arm", required=True, choices=("rtuning", "geode", "random", "kfilter", "ksoft", "kthresh"))
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--sets-dir", default=SETS_DIR)

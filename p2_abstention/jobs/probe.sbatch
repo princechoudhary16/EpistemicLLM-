@@ -13,11 +13,12 @@
 # class-balanced), each writing distances for D1. Needs both label jobs finished. From the repo root:
 #   mkdir -p logs && LAYER=-1 sbatch p2_abstention/jobs/probe.sbatch     # final layer (GeoDe's setting)
 #   mkdir -p logs && LAYER=18 sbatch p2_abstention/jobs/probe.sbatch     # P3's best layer
-set -euo pipefail
+set -eo pipefail
 cd "$SLURM_SUBMIT_DIR"
 module load anaconda
 eval "$(conda shell.bash hook)"
 conda activate "${CONDA_ENV:-epistemic}"
+set -u
 export HF_HOME="${HF_HOME:-$HOME/hf_cache}"
 export HF_HUB_OFFLINE=1            # compute nodes use the pre-downloaded model only
 export TOKENIZERS_PARALLELISM=false

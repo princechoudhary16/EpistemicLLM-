@@ -106,3 +106,14 @@ adapters. Committed: question pools, audit, labels, distances, training sets, su
 
 `p2_real_qa/generate_responses.py` gained `--n-samples` (0 = greedy only, used for labelling); the decoding id records
 it (`decoding_v1_greedy_only`), so these rows cannot be mixed up with the shared protocol's.
+
+## Amendment 1 (7 Nov 2026): K(q) arms, declared after the seed-0 validation results, before any K arm is run
+Seed 0 showed every arm over-refusing, and selective accuracy no higher than base. These arms test the proposal's
+knowledge-continuum idea and are a new experiment, not a change to the arms above (whose protocol is unchanged).
+- Labels: base model, greedy + 5 samples (decoding_v1), on a random 8,000 of D1 (`sft_k8000.jsonl`, seed 20261107).
+  K = correct / valid samples (common.metrics.knowledge_scores).
+- Arms (`build_k_sets.py`), each cut to 5,000 rows to match geode/random:
+  `kfilter` (K ≥ 0.8 answer, K = 0 IDK, rest dropped), `ksoft` (answer with probability K), `kthresh` (K > 0.5 answer).
+- Same recipe, seeds, validation and locked-test rules and metrics as above.
+- Hypotheses: H4 kfilter's selective accuracy exceeds rtuning's and geode's; H5 ksoft's F1_rel exceeds kfilter's
+  (keeping the gray zone helps). Caveat: greedy decoding turns ksoft into roughly "answer if K > 0.5".

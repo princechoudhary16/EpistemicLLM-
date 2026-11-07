@@ -15,6 +15,7 @@ from p2_abstention import probe as pr
 from p2_abstention import train as tr
 from p2_real_qa import generate_responses as gr
 from p2_real_qa.tests.test_p2_common_pipeline import DEC_CFG, MODEL_CFG, QUESTIONS, FakeRunner
+from p2_abstention import build_k_sets as bk
 
 
 def write_jsonl(path, rows):
@@ -194,6 +195,28 @@ class Evaluation(unittest.TestCase):
     def test_invalid_counts_as_wrong_not_abstain(self):
         n = ev.confusion({"a": "incorrect"}, {"a": "invalid"}, ["a"])
         self.assertEqual((n["N4"], n["N5"]), (1, 0))
+
+
+class KSets(unittest.TestCase):
+    def setUp(self):
+        self.qs = [dict(question_id=f"q{i}", question=f"Q{i}?", reference_answer=f"A{i}") for i in range(6)]
+        self.k = dict(q0=1.0, q1=0.8, q2=0.6, q3=0.4, q4=0.2, q5=0.0)
+
+    def test_k_arms(self):
+        s = bk.build_k_sets(self.qs, self.k, seed=0)
+        self.assertEqual({r["question_id"]: r["label"] for r in s["kfilter"]}, dict(q0="known", q1="known", q5="unknown"))
+        self.assertEqual([r["label"] for r in s["kthresh"]], ["known"] * 3 + ["unknown"] * 3)       # penalty 1: K > 0.5
+        self.assertEqual([r["label"] for r in bk.build_k_sets(self.qs, self.k, penalty=3)["kthresh"]],
+                         ["known"] * 2 + ["unknown"] * 4)                                          # penalty 3: K > 0.75
+        soft = {r["question_id"]: r for r in s["ksoft"]}
+        self.assertEqual((soft["q0"]["completion"], soft["q5"]["completion"]), ("A0", bk.IDK))     # K = 1 / K = 0 fixed
+        self.assertEqual(bk.build_k_sets(self.qs, self.k, seed=0)["ksoft"], s["ksoft"])            # seeded
+        self.assertEqual(len(bk.build_k_sets(self.qs, self.k, match_n=2)["kthresh"]), 2)
+
+    def test_k_uses_samples_only(self):
+        rows = [dict(question_id="a", is_greedy=True, outcome="incorrect")]
+        rows += [dict(question_id="a", is_greedy=False, outcome=o) for o in ("correct", "incorrect", "invalid", "incorrect", "correct")]
+        self.assertAlmostEqual(bk.k_values(rows)["a"], 0.5)                  # 2 of 4 valid samples; greedy ignored
 
 
 if __name__ == "__main__":
