@@ -232,6 +232,18 @@ class KSets(unittest.TestCase):
         rows += [dict(question_id="a", is_greedy=False, outcome=o) for o in ("correct", "incorrect", "invalid", "incorrect", "correct")]
         self.assertAlmostEqual(bk.k_values(rows)["a"], 0.5)                  # 2 of 4 valid samples; greedy ignored
 
+    def test_own_answer_targets(self):
+        resp = [dict(question_id="q0", is_greedy=True, sample_index=None, outcome="correct", model_answer="It is A0.", truncated=False),
+                dict(question_id="q1", is_greedy=True, sample_index=None, outcome="incorrect", model_answer="B", truncated=False),
+                dict(question_id="q1", is_greedy=False, sample_index=1, outcome="correct", model_answer="Surely A1.", truncated=False),
+                dict(question_id="q4", is_greedy=False, sample_index=0, outcome="correct", model_answer="cut", truncated=True)]
+        own = bk.own_answers_k(resp)
+        self.assertEqual(own, {"q0": "It is A0.", "q1": "Surely A1."})      # greedy first, else a correct sample
+        s = bk.build_k_sets(self.qs, self.k, own=own)
+        self.assertEqual({r["question_id"]: r["completion"] for r in s["kfilter"]},
+                         {"q0": "It is A0.", "q1": "Surely A1.", "q5": bk.IDK})
+        self.assertTrue(all(r["completion"] for a in s.values() for r in a))
+
 
 if __name__ == "__main__":
     unittest.main()

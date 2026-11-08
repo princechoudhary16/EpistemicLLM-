@@ -126,3 +126,4 @@ short reference targets remove the sentence the 0.5B model uses to recall the an
   (`build_sets --target own`): the base model's own correct greedy answer. Known rows with no usable own answer
   (cut off, or geode's probe says known but the greedy answer was wrong) are dropped.
 - Prediction: N2 falls and N1 rises compared with the reference-target arms, at similar hallucination.
+- K arms use own-answer targets (Amendment 2): the greedy answer if correct, otherwise a correct sampled answer.

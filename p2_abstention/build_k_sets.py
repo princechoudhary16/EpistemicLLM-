@@ -34,21 +34,39 @@ def k_values(responses) -> dict:
     return {key[0]: v["knowledge_score"] for key, v in knowledge_scores(responses, key=("question_id",)).items()}
 
 
-def target_row(q, known, arm):
-    return dict(prompt=q["question"], completion=answer_text(q["reference_answer"]) if known else IDK,
+def own_answers_k(responses) -> dict:
+    """question_id -> a correct answer in the base model's own words: the greedy answer if it was graded correct,
+    otherwise the first correct sampled answer. Cut-off (truncated) answers are never used."""
+    own = {}
+    for r in sorted(responses, key=lambda r: (not r["is_greedy"], r.get("sample_index") or 0)):
+        q = r["question_id"]
+        if q not in own and r["outcome"] == "correct" and not r.get("truncated") and r["model_answer"].strip():
+            own[q] = r["model_answer"].strip()
+    return own
+
+
+def target_row(q, known, arm, own=None):
+    if not known:
+        target = IDK
+    else:
+        target = answer_text(q["reference_answer"]) if own is None else own.get(q["question_id"])
+    return dict(prompt=q["question"], completion=target,
                 question_id=q["question_id"], label="known" if known else "unknown", arm=arm)
 
 
-def build_k_sets(questions, k, hi=K_HI, penalty=PENALTY, seed=SEED, match_n=None) -> dict:
+def build_k_sets(questions, k, hi=K_HI, penalty=PENALTY, seed=SEED, match_n=None, own=None) -> dict:
+    """own (from own_answers_k): known rows use the model's own correct answer; a known row without one is dropped."""
     qs = [q for q in questions if q["question_id"] in k]          # every sample invalid -> no K -> left out
     t = penalty / (1 + penalty)
     draw = random.Random(seed)
     sets = {
-        "kfilter": [target_row(q, k[q["question_id"]] >= hi, "kfilter") for q in qs
+        "kfilter": [target_row(q, k[q["question_id"]] >= hi, "kfilter", own) for q in qs
                     if k[q["question_id"]] >= hi or k[q["question_id"]] == 0],
-        "ksoft": [target_row(q, draw.random() < k[q["question_id"]], "ksoft") for q in qs],
-        "kthresh": [target_row(q, k[q["question_id"]] > t, "kthresh") for q in qs],
+        "ksoft": [target_row(q, draw.random() < k[q["question_id"]], "ksoft", own) for q in qs],
+        "kthresh": [target_row(q, k[q["question_id"]] > t, "kthresh", own) for q in qs],
     }
+    if own is not None:
+        sets = {arm: [r for r in rows if r["completion"] is not None] for arm, rows in sets.items()}
     if match_n:                                                    # same size as geode / random
         pick = random.Random(seed + 1)
         sets = {arm: rows if len(rows) <= match_n else sorted(pick.sample(rows, match_n), key=lambda r: r["question_id"])
@@ -69,6 +87,8 @@ def main(argv=None):
     ap.add_argument("--penalty", type=float, default=PENALTY)
     ap.add_argument("--match-n", type=int, help="randomly cut each arm to N rows (5000 = the geode/random size)")
     ap.add_argument("--seed", type=int, default=SEED)
+    ap.add_argument("--target", choices=("reference", "own"), default="reference",
+                    help="known-row target: TriviaQA's reference answer, or the base model's own correct answer")
     a = ap.parse_args(argv)
 
     questions = read_jsonl(a.questions)
@@ -77,7 +97,8 @@ def main(argv=None):
     missing = [q["question_id"] for q in questions if q["question_id"] not in outcomes]
     if missing:
         raise SystemExit(f"{len(missing)} questions have no response yet (first {missing[:3]}): is the label job finished?")
-    sets = build_k_sets(questions, k, a.k_hi, a.penalty, a.seed, a.match_n)
+    own = own_answers_k(responses) if a.target == "own" else None
+    sets = build_k_sets(questions, k, a.k_hi, a.penalty, a.seed, a.match_n, own)
 
     out = Path(a.out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -86,7 +107,7 @@ def main(argv=None):
             for r in rows:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
     ks = [k[q["question_id"]] for q in questions if q["question_id"] in k]
-    info = dict(k_hi=a.k_hi, penalty=a.penalty, kthresh_answers_if_k_above=a.penalty / (1 + a.penalty),
+    info = dict(target=a.target, k_hi=a.k_hi, penalty=a.penalty, kthresh_answers_if_k_above=a.penalty / (1 + a.penalty),
                 match_n=a.match_n, seed=a.seed, questions=len(questions), questions_with_k=len(ks),
                 k_buckets=dict(unknown=sum(x == 0 for x in ks), partial=sum(0 < x < a.k_hi for x in ks),
                                known=sum(x >= a.k_hi for x in ks)),
