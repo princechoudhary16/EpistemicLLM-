@@ -1,0 +1,195 @@
+{
+  "n_questions": 200,
+  "base_known": 47,
+  "runs": {
+    "base": {
+      "N0": 0,
+      "N1": 47,
+      "N2": 0,
+      "N3": 0,
+      "N4": 135,
+      "N5": 18,
+      "F1_ans": 0.41048034934497823,
+      "F1_abs": 0.21052631578947367,
+      "F1_rel": 0.2783123612139156,
+      "C": 47,
+      "W": 135,
+      "A": 18,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.235,
+      "hallucination_rate": 0.675,
+      "abstention_rate": 0.09,
+      "coverage": 0.91,
+      "selective_accuracy": 0.25824175824175827,
+      "selective_risk": 0.7417582417582418
+    },
+    "rtuning": {
+      "N0": 0,
+      "N1": 2,
+      "N2": 3,
+      "N3": 42,
+      "N4": 2,
+      "N5": 151,
+      "F1_ans": 0.07407407407407407,
+      "F1_abs": 0.8728323699421965,
+      "F1_rel": 0.13655889667646393,
+      "C": 2,
+      "W": 5,
+      "A": 193,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.01,
+      "hallucination_rate": 0.025,
+      "abstention_rate": 0.965,
+      "coverage": 0.035,
+      "selective_accuracy": 0.2857142857142857,
+      "selective_risk": 0.7142857142857143
+    },
+    "rtuning_own": {
+      "N0": 0,
+      "N1": 6,
+      "N2": 2,
+      "N3": 39,
+      "N4": 1,
+      "N5": 152,
+      "F1_ans": 0.21428571428571427,
+      "F1_abs": 0.8837209302325582,
+      "F1_rel": 0.34493192133131617,
+      "C": 6,
+      "W": 3,
+      "A": 191,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.03,
+      "hallucination_rate": 0.015,
+      "abstention_rate": 0.955,
+      "coverage": 0.045,
+      "selective_accuracy": 0.6666666666666666,
+      "selective_risk": 0.3333333333333333,
+      "F1_rel_minus_rtuning": {
+        "estimate": 0.20837302465485225,
+        "ci95": [
+          0.044627095824680385,
+          0.36900589990228383
+        ]
+      }
+    },
+    "geode": {
+      "N0": 0,
+      "N1": 1,
+      "N2": 9,
+      "N3": 37,
+      "N4": 4,
+      "N5": 149,
+      "F1_ans": 0.032786885245901634,
+      "F1_abs": 0.8790560471976401,
+      "F1_rel": 0.0632159524819686,
+      "C": 1,
+      "W": 13,
+      "A": 186,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.005,
+      "hallucination_rate": 0.065,
+      "abstention_rate": 0.93,
+      "coverage": 0.07,
+      "selective_accuracy": 0.07142857142857142,
+      "selective_risk": 0.9285714285714286,
+      "F1_rel_minus_rtuning": {
+        "estimate": -0.07334294419449533,
+        "ci95": [
+          -0.20399379981666071,
+          0.0
+        ]
+      }
+    },
+    "geode_own": {
+      "N0": 0,
+      "N1": 10,
+      "N2": 8,
+      "N3": 29,
+      "N4": 6,
+      "N5": 147,
+      "F1_ans": 0.28169014084507044,
+      "F1_abs": 0.8936170212765958,
+      "F1_rel": 0.42835288118306986,
+      "C": 10,
+      "W": 14,
+      "A": 176,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.05,
+      "hallucination_rate": 0.07,
+      "abstention_rate": 0.88,
+      "coverage": 0.12,
+      "selective_accuracy": 0.4166666666666667,
+      "selective_risk": 0.5833333333333334,
+      "F1_rel_minus_rtuning": {
+        "estimate": 0.29179398450660593,
+        "ci95": [
+          0.05722865143898245,
+          0.4983693843594011
+        ]
+      }
+    },
+    "random": {
+      "N0": 3,
+      "N1": 4,
+      "N2": 14,
+      "N3": 29,
+      "N4": 9,
+      "N5": 141,
+      "F1_ans": 0.1081081081081081,
+      "F1_abs": 0.88125,
+      "F1_rel": 0.19259006317227248,
+      "C": 7,
+      "W": 23,
+      "A": 170,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.035,
+      "hallucination_rate": 0.115,
+      "abstention_rate": 0.85,
+      "coverage": 0.15,
+      "selective_accuracy": 0.23333333333333334,
+      "selective_risk": 0.7666666666666667,
+      "F1_rel_minus_rtuning": {
+        "estimate": 0.056031166495808554,
+        "ci95": [
+          -0.12147614787042169,
+          0.23391812865497078
+        ]
+      }
+    },
+    "random_own": {
+      "N0": 0,
+      "N1": 4,
+      "N2": 1,
+      "N3": 42,
+      "N4": 0,
+      "N5": 153,
+      "F1_ans": 0.15384615384615383,
+      "F1_abs": 0.8793103448275863,
+      "F1_rel": 0.26187419768934533,
+      "C": 4,
+      "W": 1,
+      "A": 195,
+      "N": 200,
+      "invalid": 0,
+      "accuracy": 0.02,
+      "hallucination_rate": 0.005,
+      "abstention_rate": 0.975,
+      "coverage": 0.025,
+      "selective_accuracy": 0.8,
+      "selective_risk": 0.2,
+      "F1_rel_minus_rtuning": {
+        "estimate": 0.1253153010128814,
+        "ci95": [
+          0.0,
+          0.28281978310036565
+        ]
+      }
+    }
+  }
+}
