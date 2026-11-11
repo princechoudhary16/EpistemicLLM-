@@ -57,7 +57,7 @@
       },
       "sft_matched": {
         "path": "results/raw/p1_main_v0_sft_matched__p2_whole_word_v5.jsonl",
-        "sha256": "c75dc99905e0c005b260d0560ef30752151cc6583bffca2d2698eef9462a09a9",
+        "sha256": "516e481654370900d2cb67f535798eadf5ee2aaab969a979ed8305ec258a179e",
         "rows": 3600,
         "grading_versions": [
           "p2_whole_word_v5"
@@ -71,7 +71,7 @@
       },
       "p5_lam0": {
         "path": "results/raw/p5_main_v0_lam0_seed0__p2_whole_word_v5.jsonl",
-        "sha256": "7ae9300587fe3c50550190e4a38a01be93253d692f0d7b5955cd9f7a3486cd48",
+        "sha256": "e092f8c0209f9eed31e6d5bee97da4f5e2f5319570ec5308e9bc84361377969c",
         "rows": 3600,
         "grading_versions": [
           "p2_whole_word_v5"
@@ -85,7 +85,7 @@
       },
       "p5_lam3": {
         "path": "results/raw/p5_main_v0_lam3_seed0__p2_whole_word_v5.jsonl",
-        "sha256": "091ada020dc646de826fc66794baabe0c765ee7cd7a208de9813ef7085d02103",
+        "sha256": "6f16a24bec100d7d4707af2683a3f64d6a5a9aa09bc797f00fd2b272ef94a718",
         "rows": 3600,
         "grading_versions": [
           "p2_whole_word_v5"
@@ -98,7 +98,7 @@
         ]
       }
     },
-    "notes": "Week 5 locked protocol (WEEK5_PROTOCOL.md): split final, 6 methods, shared grader p2_whole_word_v5 (regraded with p2_real_qa.regrade)",
+    "notes": "Week 5 protocol (WEEK5_PROTOCOL.md): split final, 6 methods, shared grader p2_whole_word_v5; sft_matched is P6's float32 retrain (2026-11-05); p5_lam0 and p5_lam3 are P5's float32 re-export (PR #27); base, sft and idk are still bfloat16 (P6 reruns pending)",
     "eval_sha256": "ae88f0ec069d402c99d56d14ecf22b13131d0913e74bd66eecab784dc42366bf"
   },
   "results": {
@@ -1831,17 +1831,17 @@
         "0": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 0,
-          "incorrect": 100,
+          "correct": 2,
+          "incorrect": 98,
           "abstain": 0,
           "accuracy": {
-            "est": 0.0,
+            "est": 0.02,
             "lo": 0.0,
-            "hi": 0.0
+            "hi": 0.06
           },
           "hallucination": {
-            "est": 1.0,
-            "lo": 1.0,
+            "est": 0.98,
+            "lo": 0.94,
             "hi": 1.0
           },
           "abstention": {
@@ -1855,36 +1855,36 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.0,
+            "est": 0.02,
             "lo": 0.0,
-            "hi": 0.0
+            "hi": 0.06
           },
           "mean_K": {
-            "est": 0.004,
+            "est": 0.022000000000000002,
             "lo": 0.0,
-            "hi": 0.012000000000000002
+            "hi": 0.052000000000000005
           },
           "k_buckets": {
-            "K=0": 49,
-            "inconsistent": 1,
+            "K=0": 47,
+            "inconsistent": 3,
             "K>=0.8": 0
           }
         },
         "1": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 4,
-          "incorrect": 96,
+          "correct": 6,
+          "incorrect": 94,
           "abstain": 0,
           "accuracy": {
-            "est": 0.04,
-            "lo": 0.0,
-            "hi": 0.09
+            "est": 0.06,
+            "lo": 0.01,
+            "hi": 0.13
           },
           "hallucination": {
-            "est": 0.96,
-            "lo": 0.91,
-            "hi": 1.0
+            "est": 0.94,
+            "lo": 0.87,
+            "hi": 0.99
           },
           "abstention": {
             "est": 0.0,
@@ -1897,18 +1897,18 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.04,
-            "lo": 0.0,
-            "hi": 0.09
+            "est": 0.06,
+            "lo": 0.01,
+            "hi": 0.13
           },
           "mean_K": {
-            "est": 0.032,
-            "lo": 0.0,
-            "hi": 0.08
+            "est": 0.06,
+            "lo": 0.018000000000000002,
+            "hi": 0.11400000000000002
           },
           "k_buckets": {
-            "K=0": 47,
-            "inconsistent": 2,
+            "K=0": 42,
+            "inconsistent": 7,
             "K>=0.8": 1
           }
         },
@@ -1921,11 +1921,11 @@
           "accuracy": {
             "est": 0.26,
             "lo": 0.15,
-            "hi": 0.38
+            "hi": 0.37
           },
           "hallucination": {
             "est": 0.74,
-            "lo": 0.62,
+            "lo": 0.63,
             "hi": 0.85
           },
           "abstention": {
@@ -1941,34 +1941,34 @@
           "selective_accuracy": {
             "est": 0.26,
             "lo": 0.15,
-            "hi": 0.38
+            "hi": 0.37
           },
           "mean_K": {
-            "est": 0.204,
-            "lo": 0.10995000000000002,
-            "hi": 0.31
+            "est": 0.23799999999999996,
+            "lo": 0.132,
+            "hi": 0.34405000000000024
           },
           "k_buckets": {
-            "K=0": 33,
-            "inconsistent": 9,
-            "K>=0.8": 8
+            "K=0": 32,
+            "inconsistent": 8,
+            "K>=0.8": 10
           }
         },
         "5": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 70,
-          "incorrect": 30,
+          "correct": 72,
+          "incorrect": 28,
           "abstain": 0,
           "accuracy": {
-            "est": 0.7,
-            "lo": 0.58,
-            "hi": 0.82
+            "est": 0.72,
+            "lo": 0.6,
+            "hi": 0.83
           },
           "hallucination": {
-            "est": 0.3,
-            "lo": 0.18,
-            "hi": 0.42
+            "est": 0.28,
+            "lo": 0.17,
+            "hi": 0.4
           },
           "abstention": {
             "est": 0.0,
@@ -1981,19 +1981,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.7,
-            "lo": 0.58,
-            "hi": 0.82
+            "est": 0.72,
+            "lo": 0.6,
+            "hi": 0.83
           },
           "mean_K": {
-            "est": 0.572,
-            "lo": 0.446,
-            "hi": 0.696
+            "est": 0.66,
+            "lo": 0.552,
+            "hi": 0.7680000000000001
           },
           "k_buckets": {
-            "K=0": 14,
-            "inconsistent": 10,
-            "K>=0.8": 26
+            "K=0": 9,
+            "inconsistent": 12,
+            "K>=0.8": 29
           }
         },
         "10": {
@@ -2028,31 +2028,31 @@
             "hi": 0.96
           },
           "mean_K": {
-            "est": 0.858,
-            "lo": 0.772,
-            "hi": 0.932
+            "est": 0.8640000000000001,
+            "lo": 0.778,
+            "hi": 0.9359999999999999
           },
           "k_buckets": {
-            "K=0": 2,
+            "K=0": 3,
             "inconsistent": 7,
-            "K>=0.8": 41
+            "K>=0.8": 40
           }
         },
         "20": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 93,
-          "incorrect": 7,
+          "correct": 95,
+          "incorrect": 5,
           "abstain": 0,
           "accuracy": {
-            "est": 0.93,
-            "lo": 0.85,
-            "hi": 0.99
+            "est": 0.95,
+            "lo": 0.89,
+            "hi": 1.0
           },
           "hallucination": {
-            "est": 0.07,
-            "lo": 0.01,
-            "hi": 0.15
+            "est": 0.05,
+            "lo": 0.0,
+            "hi": 0.11
           },
           "abstention": {
             "est": 0.0,
@@ -2065,19 +2065,19 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.93,
-            "lo": 0.85,
-            "hi": 0.99
+            "est": 0.95,
+            "lo": 0.89,
+            "hi": 1.0
           },
           "mean_K": {
-            "est": 0.882,
-            "lo": 0.8059999999999999,
-            "hi": 0.948
+            "est": 0.9420000000000001,
+            "lo": 0.882,
+            "hi": 0.9880000000000001
           },
           "k_buckets": {
-            "K=0": 1,
-            "inconsistent": 7,
-            "K>=0.8": 42
+            "K=0": 0,
+            "inconsistent": 4,
+            "K>=0.8": 46
           }
         }
       },
@@ -2090,23 +2090,23 @@
           },
           "1": {
             "n_questions": 20,
-            "correct": 0,
-            "accuracy": 0.0
-          },
-          "2": {
-            "n_questions": 20,
             "correct": 1,
             "accuracy": 0.05
           },
+          "2": {
+            "n_questions": 20,
+            "correct": 2,
+            "accuracy": 0.1
+          },
           "5": {
             "n_questions": 20,
-            "correct": 8,
-            "accuracy": 0.4
+            "correct": 7,
+            "accuracy": 0.35
           },
           "10": {
             "n_questions": 20,
-            "correct": 11,
-            "accuracy": 0.55
+            "correct": 17,
+            "accuracy": 0.85
           },
           "20": {
             "n_questions": 20,
@@ -2122,28 +2122,28 @@
           },
           "1": {
             "n_questions": 20,
-            "correct": 0,
-            "accuracy": 0.0
+            "correct": 1,
+            "accuracy": 0.05
           },
           "2": {
             "n_questions": 20,
-            "correct": 2,
-            "accuracy": 0.1
+            "correct": 1,
+            "accuracy": 0.05
           },
           "5": {
             "n_questions": 20,
-            "correct": 18,
-            "accuracy": 0.9
+            "correct": 15,
+            "accuracy": 0.75
           },
           "10": {
             "n_questions": 20,
-            "correct": 19,
-            "accuracy": 0.95
+            "correct": 12,
+            "accuracy": 0.6
           },
           "20": {
             "n_questions": 20,
-            "correct": 20,
-            "accuracy": 1.0
+            "correct": 19,
+            "accuracy": 0.95
           }
         },
         "founder": {
@@ -2159,23 +2159,23 @@
           },
           "2": {
             "n_questions": 20,
-            "correct": 6,
-            "accuracy": 0.3
+            "correct": 5,
+            "accuracy": 0.25
           },
           "5": {
             "n_questions": 20,
-            "correct": 17,
-            "accuracy": 0.85
+            "correct": 16,
+            "accuracy": 0.8
           },
           "10": {
             "n_questions": 20,
-            "correct": 19,
-            "accuracy": 0.95
+            "correct": 20,
+            "accuracy": 1.0
           },
           "20": {
             "n_questions": 20,
-            "correct": 18,
-            "accuracy": 0.9
+            "correct": 20,
+            "accuracy": 1.0
           }
         },
         "headquarters": {
@@ -2186,18 +2186,18 @@
           },
           "1": {
             "n_questions": 20,
-            "correct": 1,
-            "accuracy": 0.05
+            "correct": 0,
+            "accuracy": 0.0
           },
           "2": {
             "n_questions": 20,
-            "correct": 6,
-            "accuracy": 0.3
+            "correct": 9,
+            "accuracy": 0.45
           },
           "5": {
             "n_questions": 20,
-            "correct": 12,
-            "accuracy": 0.6
+            "correct": 14,
+            "accuracy": 0.7
           },
           "10": {
             "n_questions": 20,
@@ -2213,23 +2213,23 @@
         "occupation": {
           "0": {
             "n_questions": 20,
-            "correct": 0,
-            "accuracy": 0.0
+            "correct": 2,
+            "accuracy": 0.1
           },
           "1": {
             "n_questions": 20,
-            "correct": 3,
-            "accuracy": 0.15
+            "correct": 4,
+            "accuracy": 0.2
           },
           "2": {
             "n_questions": 20,
-            "correct": 11,
-            "accuracy": 0.55
+            "correct": 9,
+            "accuracy": 0.45
           },
           "5": {
             "n_questions": 20,
-            "correct": 15,
-            "accuracy": 0.75
+            "correct": 20,
+            "accuracy": 1.0
           },
           "10": {
             "n_questions": 20,
@@ -2238,8 +2238,8 @@
           },
           "20": {
             "n_questions": 20,
-            "correct": 19,
-            "accuracy": 0.95
+            "correct": 20,
+            "accuracy": 1.0
           }
         }
       },
@@ -2248,17 +2248,17 @@
           "0": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.0,
+              "est": 0.02,
               "lo": 0.0,
-              "hi": 0.0
+              "hi": 0.06
             }
           },
           "1": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.04,
-              "lo": 0.0,
-              "hi": 0.09
+              "est": 0.06,
+              "lo": 0.01,
+              "hi": 0.13
             }
           },
           "2": {
@@ -2266,98 +2266,98 @@
             "accuracy": {
               "est": 0.26,
               "lo": 0.15,
-              "hi": 0.38
+              "hi": 0.37
             }
           },
           "5": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.7,
-              "lo": 0.57,
-              "hi": 0.82
+              "est": 0.72,
+              "lo": 0.6,
+              "hi": 0.83
             }
           },
           "10": {
             "n_facts": 50,
             "accuracy": {
               "est": 0.89,
-              "lo": 0.81,
-              "hi": 0.96
+              "lo": 0.8,
+              "hi": 0.97
             }
           },
           "20": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.93,
-              "lo": 0.85,
-              "hi": 0.99
+              "est": 0.95,
+              "lo": 0.89,
+              "hi": 1.0
             }
           }
         }
       },
       "steps": {
         "0->1": {
-          "est": 0.04,
-          "lo": 0.0,
-          "hi": 0.09
+          "est": 0.039999999999999994,
+          "lo": -0.03,
+          "hi": 0.12
         },
         "1->2": {
-          "est": 0.22,
-          "lo": 0.1,
-          "hi": 0.35
+          "est": 0.2,
+          "lo": 0.06999999999999999,
+          "hi": 0.33
         },
         "2->5": {
-          "est": 0.43999999999999995,
-          "lo": 0.26999999999999996,
-          "hi": 0.6100000000000001
+          "est": 0.45999999999999996,
+          "lo": 0.29000000000000004,
+          "hi": 0.62
         },
         "5->10": {
-          "est": 0.19000000000000006,
-          "lo": 0.040000000000000036,
-          "hi": 0.33000000000000007
+          "est": 0.17000000000000004,
+          "lo": 0.020000000000000018,
+          "hi": 0.31025000000000097
         },
         "10->20": {
-          "est": 0.040000000000000036,
-          "lo": -0.06999999999999995,
-          "hi": 0.14
+          "est": 0.05999999999999994,
+          "lo": -0.039999999999999925,
+          "hi": 0.16000000000000003
         }
       },
       "confidence": {
         "0": {
-          "mean_conf_correct": null,
-          "n_correct": 0,
-          "mean_conf_incorrect": -0.5814422482359334,
-          "n_incorrect": 100
+          "mean_conf_correct": -0.5575090994049484,
+          "n_correct": 2,
+          "mean_conf_incorrect": -0.5332974056323385,
+          "n_incorrect": 98
         },
         "1": {
-          "mean_conf_correct": -0.2835016559001815,
-          "n_correct": 4,
-          "mean_conf_incorrect": -0.6042689497931827,
-          "n_incorrect": 96
+          "mean_conf_correct": -0.21922153997113328,
+          "n_correct": 6,
+          "mean_conf_incorrect": -0.5247752112923356,
+          "n_incorrect": 94
         },
         "2": {
-          "mean_conf_correct": -0.2717370293563967,
+          "mean_conf_correct": -0.21901836572803754,
           "n_correct": 26,
-          "mean_conf_incorrect": -0.6646319733411383,
+          "mean_conf_incorrect": -0.4999329544581457,
           "n_incorrect": 74
         },
         "5": {
-          "mean_conf_correct": -0.12696999813537005,
-          "n_correct": 70,
-          "mean_conf_incorrect": -0.5319324115774374,
-          "n_incorrect": 30
+          "mean_conf_correct": -0.11784062044668708,
+          "n_correct": 72,
+          "mean_conf_incorrect": -0.5336346489579898,
+          "n_incorrect": 28
         },
         "10": {
-          "mean_conf_correct": -0.060799449767005964,
+          "mean_conf_correct": -0.042161986141228874,
           "n_correct": 89,
-          "mean_conf_incorrect": -0.4939992751675825,
+          "mean_conf_incorrect": -0.3491520206150124,
           "n_incorrect": 11
         },
         "20": {
-          "mean_conf_correct": -0.0612565590919074,
-          "n_correct": 93,
-          "mean_conf_incorrect": -0.47814684975327554,
-          "n_incorrect": 7
+          "mean_conf_correct": -0.02041421943354449,
+          "n_correct": 95,
+          "mean_conf_incorrect": -0.38002463863037217,
+          "n_incorrect": 5
         }
       },
       "chance_floor": {
@@ -2403,11 +2403,11 @@
         },
         "occupation": {
           "greedy": [
-            0,
+            2,
             20
           ],
           "sampled": [
-            2,
+            11,
             100
           ]
         }
@@ -2489,13 +2489,13 @@
             "hi": 0.14
           },
           "mean_K": {
-            "est": 0.07,
-            "lo": 0.018000000000000002,
-            "hi": 0.138
+            "est": 0.07400000000000001,
+            "lo": 0.02,
+            "hi": 0.142
           },
           "k_buckets": {
-            "K=0": 44,
-            "inconsistent": 4,
+            "K=0": 43,
+            "inconsistent": 5,
             "K>=0.8": 2
           }
         },
@@ -2531,9 +2531,9 @@
             "hi": 0.37
           },
           "mean_K": {
-            "est": 0.226,
-            "lo": 0.126,
-            "hi": 0.336
+            "est": 0.23199999999999998,
+            "lo": 0.13,
+            "hi": 0.34
           },
           "k_buckets": {
             "K=0": 33,
@@ -2544,18 +2544,18 @@
         "5": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 68,
-          "incorrect": 32,
+          "correct": 69,
+          "incorrect": 31,
           "abstain": 0,
           "accuracy": {
-            "est": 0.68,
-            "lo": 0.55,
-            "hi": 0.8
+            "est": 0.69,
+            "lo": 0.5697500000000001,
+            "hi": 0.81
           },
           "hallucination": {
-            "est": 0.32,
-            "lo": 0.2,
-            "hi": 0.45
+            "est": 0.31,
+            "lo": 0.19,
+            "hi": 0.4302500000000009
           },
           "abstention": {
             "est": 0.0,
@@ -2568,14 +2568,14 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.68,
-            "lo": 0.55,
-            "hi": 0.8
+            "est": 0.69,
+            "lo": 0.5697500000000001,
+            "hi": 0.81
           },
           "mean_K": {
-            "est": 0.614,
-            "lo": 0.49395,
-            "hi": 0.7280000000000001
+            "est": 0.61,
+            "lo": 0.48995,
+            "hi": 0.726
           },
           "k_buckets": {
             "K=0": 8,
@@ -2692,8 +2692,8 @@
           },
           "10": {
             "n_questions": 20,
-            "correct": 14,
-            "accuracy": 0.7
+            "correct": 15,
+            "accuracy": 0.75
           },
           "20": {
             "n_questions": 20,
@@ -2788,8 +2788,8 @@
           },
           "10": {
             "n_questions": 20,
-            "correct": 17,
-            "accuracy": 0.85
+            "correct": 16,
+            "accuracy": 0.8
           },
           "20": {
             "n_questions": 20,
@@ -2815,8 +2815,8 @@
           },
           "5": {
             "n_questions": 20,
-            "correct": 15,
-            "accuracy": 0.75
+            "correct": 16,
+            "accuracy": 0.8
           },
           "10": {
             "n_questions": 20,
@@ -2859,9 +2859,9 @@
           "5": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.68,
-              "lo": 0.5597500000000002,
-              "hi": 0.8
+              "est": 0.69,
+              "lo": 0.57,
+              "hi": 0.81
             }
           },
           "10": {
@@ -2869,7 +2869,7 @@
             "accuracy": {
               "est": 0.89,
               "lo": 0.8,
-              "hi": 0.97
+              "hi": 0.96
             }
           },
           "20": {
@@ -2894,18 +2894,18 @@
           "hi": 0.31000000000000005
         },
         "2->5": {
-          "est": 0.43000000000000005,
-          "lo": 0.25,
-          "hi": 0.6
+          "est": 0.43999999999999995,
+          "lo": 0.26,
+          "hi": 0.6000000000000001
         },
         "5->10": {
-          "est": 0.20999999999999996,
-          "lo": 0.05999999999999994,
-          "hi": 0.36
+          "est": 0.20000000000000007,
+          "lo": 0.04999999999999993,
+          "hi": 0.35
         },
         "10->20": {
           "est": 0.06999999999999995,
-          "lo": -0.030000000000000027,
+          "lo": -0.029999999999999916,
           "hi": 0.17000000000000004
         }
       },
@@ -2913,37 +2913,37 @@
         "0": {
           "mean_conf_correct": null,
           "n_correct": 0,
-          "mean_conf_incorrect": -0.5117056907905781,
+          "mean_conf_incorrect": -0.513256055081425,
           "n_incorrect": 100
         },
         "1": {
-          "mean_conf_correct": -0.3239750546920169,
+          "mean_conf_correct": -0.32814069561469034,
           "n_correct": 7,
-          "mean_conf_incorrect": -0.6033391903621256,
+          "mean_conf_incorrect": -0.5984527480605307,
           "n_incorrect": 93
         },
         "2": {
-          "mean_conf_correct": -0.19906365649867386,
+          "mean_conf_correct": -0.1972384420399127,
           "n_correct": 25,
-          "mean_conf_incorrect": -0.5709746051709408,
+          "mean_conf_incorrect": -0.5696643767522724,
           "n_incorrect": 75
         },
         "5": {
-          "mean_conf_correct": -0.13743277904851026,
-          "n_correct": 68,
-          "mean_conf_incorrect": -0.5568439243064964,
-          "n_incorrect": 32
+          "mean_conf_correct": -0.1464987497589652,
+          "n_correct": 69,
+          "mean_conf_incorrect": -0.5565857616631595,
+          "n_incorrect": 31
         },
         "10": {
-          "mean_conf_correct": -0.059190277479891154,
+          "mean_conf_correct": -0.06112825034885388,
           "n_correct": 89,
-          "mean_conf_incorrect": -0.3505244143639106,
+          "mean_conf_incorrect": -0.35872888915959905,
           "n_incorrect": 11
         },
         "20": {
-          "mean_conf_correct": -0.026896358700840336,
+          "mean_conf_correct": -0.02687452255463112,
           "n_correct": 96,
-          "mean_conf_incorrect": -0.23672581640312274,
+          "mean_conf_incorrect": -0.23406793605560475,
           "n_incorrect": 4
         }
       },
@@ -3076,9 +3076,9 @@
             "hi": 0.14
           },
           "mean_K": {
-            "est": 0.054000000000000006,
+            "est": 0.05600000000000001,
             "lo": 0.014000000000000002,
-            "hi": 0.10800000000000001
+            "hi": 0.11399999999999999
           },
           "k_buckets": {
             "K=0": 43,
@@ -3089,18 +3089,18 @@
         "2": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 26,
-          "incorrect": 74,
+          "correct": 25,
+          "incorrect": 75,
           "abstain": 0,
           "accuracy": {
-            "est": 0.26,
-            "lo": 0.15,
+            "est": 0.25,
+            "lo": 0.14,
             "hi": 0.38
           },
           "hallucination": {
-            "est": 0.74,
+            "est": 0.75,
             "lo": 0.62,
-            "hi": 0.85
+            "hi": 0.86
           },
           "abstention": {
             "est": 0.0,
@@ -3113,36 +3113,36 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.26,
-            "lo": 0.15,
+            "est": 0.25,
+            "lo": 0.14,
             "hi": 0.38
           },
           "mean_K": {
-            "est": 0.214,
-            "lo": 0.11800000000000001,
-            "hi": 0.322
+            "est": 0.212,
+            "lo": 0.11795000000000003,
+            "hi": 0.32
           },
           "k_buckets": {
-            "K=0": 35,
-            "inconsistent": 8,
+            "K=0": 36,
+            "inconsistent": 7,
             "K>=0.8": 7
           }
         },
         "5": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 71,
-          "incorrect": 29,
+          "correct": 73,
+          "incorrect": 27,
           "abstain": 0,
           "accuracy": {
-            "est": 0.71,
-            "lo": 0.58,
-            "hi": 0.82
+            "est": 0.73,
+            "lo": 0.61,
+            "hi": 0.84
           },
           "hallucination": {
-            "est": 0.29,
-            "lo": 0.18,
-            "hi": 0.42
+            "est": 0.27,
+            "lo": 0.16,
+            "hi": 0.39
           },
           "abstention": {
             "est": 0.0,
@@ -3155,14 +3155,14 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.71,
-            "lo": 0.58,
-            "hi": 0.82
+            "est": 0.73,
+            "lo": 0.61,
+            "hi": 0.84
           },
           "mean_K": {
-            "est": 0.616,
-            "lo": 0.502,
-            "hi": 0.728
+            "est": 0.622,
+            "lo": 0.51,
+            "hi": 0.7339999999999999
           },
           "k_buckets": {
             "K=0": 8,
@@ -3173,18 +3173,18 @@
         "10": {
           "n_facts": 50,
           "n_questions": 100,
-          "correct": 93,
-          "incorrect": 7,
+          "correct": 94,
+          "incorrect": 6,
           "abstain": 0,
           "accuracy": {
-            "est": 0.93,
-            "lo": 0.85,
-            "hi": 0.99
+            "est": 0.94,
+            "lo": 0.86,
+            "hi": 1.0
           },
           "hallucination": {
-            "est": 0.07,
-            "lo": 0.01,
-            "hi": 0.15
+            "est": 0.06,
+            "lo": 0.0,
+            "hi": 0.14
           },
           "abstention": {
             "est": 0.0,
@@ -3197,14 +3197,14 @@
             "hi": 1.0
           },
           "selective_accuracy": {
-            "est": 0.93,
-            "lo": 0.85,
-            "hi": 0.99
+            "est": 0.94,
+            "lo": 0.86,
+            "hi": 1.0
           },
           "mean_K": {
             "est": 0.8859999999999999,
             "lo": 0.8019999999999999,
-            "hi": 0.956
+            "hi": 0.9540000000000001
           },
           "k_buckets": {
             "K=0": 3,
@@ -3274,8 +3274,8 @@
           },
           "5": {
             "n_questions": 20,
-            "correct": 9,
-            "accuracy": 0.45
+            "correct": 10,
+            "accuracy": 0.5
           },
           "10": {
             "n_questions": 20,
@@ -3306,8 +3306,8 @@
           },
           "5": {
             "n_questions": 20,
-            "correct": 13,
-            "accuracy": 0.65
+            "correct": 14,
+            "accuracy": 0.7
           },
           "10": {
             "n_questions": 20,
@@ -3375,8 +3375,8 @@
           },
           "10": {
             "n_questions": 20,
-            "correct": 17,
-            "accuracy": 0.85
+            "correct": 18,
+            "accuracy": 0.9
           },
           "20": {
             "n_questions": 20,
@@ -3397,8 +3397,8 @@
           },
           "2": {
             "n_questions": 20,
-            "correct": 14,
-            "accuracy": 0.7
+            "correct": 13,
+            "accuracy": 0.65
           },
           "5": {
             "n_questions": 20,
@@ -3438,25 +3438,25 @@
           "2": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.26,
-              "lo": 0.15,
-              "hi": 0.38
+              "est": 0.25,
+              "lo": 0.14,
+              "hi": 0.37
             }
           },
           "5": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.71,
-              "lo": 0.59,
-              "hi": 0.83
+              "est": 0.73,
+              "lo": 0.61,
+              "hi": 0.84
             }
           },
           "10": {
             "n_facts": 50,
             "accuracy": {
-              "est": 0.93,
+              "est": 0.94,
               "lo": 0.86,
-              "hi": 0.99
+              "hi": 1.0
             }
           },
           "20": {
@@ -3476,61 +3476,61 @@
           "hi": 0.12000000000000001
         },
         "1->2": {
-          "est": 0.19,
-          "lo": 0.06,
-          "hi": 0.32999999999999996
+          "est": 0.18,
+          "lo": 0.05,
+          "hi": 0.32
         },
         "2->5": {
-          "est": 0.44999999999999996,
-          "lo": 0.27999999999999997,
-          "hi": 0.62
+          "est": 0.48,
+          "lo": 0.31,
+          "hi": 0.64
         },
         "5->10": {
-          "est": 0.22000000000000008,
-          "lo": 0.07999999999999996,
-          "hi": 0.36
+          "est": 0.20999999999999996,
+          "lo": 0.07975000000000004,
+          "hi": 0.33999999999999997
         },
         "10->20": {
-          "est": 0.009999999999999898,
-          "lo": -0.07999999999999996,
+          "est": 0.0,
+          "lo": -0.09999999999999998,
           "hi": 0.09999999999999998
         }
       },
       "confidence": {
         "0": {
-          "mean_conf_correct": -0.6025454170600522,
+          "mean_conf_correct": -0.6018751809927683,
           "n_correct": 2,
-          "mean_conf_incorrect": -0.5381592989471902,
+          "mean_conf_incorrect": -0.5401679833182635,
           "n_incorrect": 98
         },
         "1": {
-          "mean_conf_correct": -0.4559345067671356,
+          "mean_conf_correct": -0.44718505343438925,
           "n_correct": 7,
-          "mean_conf_incorrect": -0.6274959854500688,
+          "mean_conf_incorrect": -0.6164635319694088,
           "n_incorrect": 93
         },
         "2": {
-          "mean_conf_correct": -0.20944808857299735,
-          "n_correct": 26,
-          "mean_conf_incorrect": -0.5465675676967077,
-          "n_incorrect": 74
+          "mean_conf_correct": -0.17446726241177593,
+          "n_correct": 25,
+          "mean_conf_incorrect": -0.5539596537427999,
+          "n_incorrect": 75
         },
         "5": {
-          "mean_conf_correct": -0.1547794660195442,
-          "n_correct": 71,
-          "mean_conf_incorrect": -0.5442072628934338,
-          "n_incorrect": 29
+          "mean_conf_correct": -0.16020477419058435,
+          "n_correct": 73,
+          "mean_conf_incorrect": -0.5110073728650847,
+          "n_incorrect": 27
         },
         "10": {
-          "mean_conf_correct": -0.04999550465820597,
-          "n_correct": 93,
-          "mean_conf_incorrect": -0.2406581635579252,
-          "n_incorrect": 7
+          "mean_conf_correct": -0.0527765355497046,
+          "n_correct": 94,
+          "mean_conf_incorrect": -0.19319811439193776,
+          "n_incorrect": 6
         },
         "20": {
-          "mean_conf_correct": -0.01375310163537929,
+          "mean_conf_correct": -0.0135849591577409,
           "n_correct": 94,
-          "mean_conf_incorrect": -0.2228411645181849,
+          "mean_conf_incorrect": -0.2203072053677412,
           "n_incorrect": 6
         }
       },

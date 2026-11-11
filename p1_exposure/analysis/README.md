@@ -31,32 +31,38 @@ by-relation, dev/final and confidence breakdowns are in `results/main_v0/exposur
 
 | Exposure | Accuracy [95% CI] | Mean K | Facts K=0 / inconsistent / K>=0.8 |
 |---|---|---|---|
-| 0x | 0.0% [0.0, 0.0] | 0.00 | 99 / 1 / 0 |
-| 1x | 5.0% [1.5, 9.0] | 0.03 | 92 / 6 / 2 |
-| 2x | 26.5% [18.5, 34.5] | 0.22 | 64 / 20 / 16 |
-| 5x | 70.5% [62.0, 78.5] | 0.60 | 21 / 28 / 51 |
-| 10x | 87.5% [82.0, 93.0] | 0.79 | 8 / 21 / 71 |
-| 20x | 90.5% [85.0, 95.0] | 0.88 | 2 / 15 / 83 |
+| 0x | 1.0% [0.0, 3.0] | 0.01 | 97 / 3 / 0 |
+| 1x | 6.5% [2.5, 11.0] | 0.06 | 87 / 10 / 3 |
+| 2x | 26.5% [18.0, 34.5] | 0.22 | 65 / 21 / 14 |
+| 5x | 77.0% [69.0, 84.5] | 0.74 | 13 / 19 / 68 |
+| 10x | 86.0% [79.0, 92.0] | 0.83 | 8 / 16 / 76 |
+| 20x | 94.5% [90.0, 98.5] | 0.94 | 1 / 6 / 93 |
+
+This table uses P6's float32 `sft_matched` (retrained 2026-11-05, 48.6% overall). The first version of this
+section used the bfloat16 file (46.7% overall; 5x was 70.5% and 20x 90.5%).
 
 1. **Learning is gradual, not a threshold at one exposure.** Accuracy is already above zero at 1x
-   (5.0%), rises steepest between 2x and 5x (+44.0 points, CI +32.5 to +55.5), and flattens: 10x to
-   20x adds 3.0 points with an interval that includes zero (-4.5 to +10.0).
+   (6.5%), rises steepest between 2x and 5x (+50.5 points, CI +40.0 to +61.5), and flattens: 5x to 10x
+   adds 9.0 points (CI -1.0 to +19.0) and 10x to 20x adds 8.5 (+0.5 to +16.5).
 2. **The model never abstains** (coverage is 100% at every level), so for this model hallucination is
-   simply 1 minus accuracy: 100% at 0x falling to 9.5% at 20x. Any hallucination figure from this
+   simply 1 minus accuracy: 99.0% at 0x falling to 5.5% at 20x. Any hallucination figure from this
    study must be read together with coverage.
-3. **Relations differ.** `birth_year` is the slowest learner (35% at 5x, 85% at 20x) against 70-85% at
-   5x and 85-100% at 20x for the other four relations. Exposure is balanced across relations by
+3. **Relations differ.** `birth_year` is the slowest learner at 5x (57.5%, against 70-87.5% for the other four
+   relations) and by 20x it is 90%, level with `headquarters` and below the other three at 95-100% (`capital` dips from 85% at 5x to 70% at 10x, which
+   at 40 questions per cell is within noise). Exposure is balanced across relations by
    construction (20 facts per relation per level), so this is a difficulty offset, not a confound.
-4. **Dev and final facts behave alike** at every level (confidence intervals overlap throughout), so
-   neither the fact subset nor the validation-versus-test wording moves the curve by more than the
-   interval width. The held-out paraphrase run separates the two directly.
-5. **Chance floor is near zero but not structurally zero.** 2 of 1,200 sampled responses at 0x were
-   correct, both `cartographer`. At 0x the model's guesses for `occupation` concentrate on two answers
-   (`tapestry weaver` 72 of 200 samples, `cooper` 71), so the floor for that relation depends on how many
-   of a world's 0x facts happen to have those answers.
+4. **Dev and final facts behave alike** at every level (confidence intervals overlap throughout; the
+   largest gaps are 10 points at 5x, dev 82% against final 72%, and 6 points at 10x in the other
+   direction), so neither the fact subset nor the validation-versus-test wording moves the curve by more
+   than the interval width. The held-out paraphrase run separates the two directly.
+5. **Chance floor is near zero but not structurally zero.** 11 of 1,200 sampled responses at 0x were
+   correct (0.9%), all for `occupation` (`ferryman` 6, `cartographer` 3, `fletcher` 2). At 0x the model's
+   guesses for `occupation` concentrate on three answers (`ferryman` 65 of 200 samples, `fletcher` 38,
+   `tapestry weaver` 36), so the floor for that relation depends on how many of a world's 0x facts happen
+   to have those answers.
 6. **Confidence tracks correctness but wrong answers do not become unconfident.** Mean log-probability of
-   a correct greedy answer rises from -0.40 at 1x to -0.06 at 20x; incorrect answers stay near -0.6 until
-   5x, are -0.50 at 10x and are still -0.39 at 20x.
+   a correct greedy answer rises from -0.22 at 1x (13 answers) to -0.02 at 20x; incorrect answers stay near
+   -0.56 up to 2x, are -0.47 at 5x, -0.37 at 10x and are still -0.34 at 20x.
 
 ## Robustness (Week 4)
 
@@ -77,8 +83,9 @@ wording? Runs: matched recipe on `main_v0` with training seeds 0, 1, 2, and on a
 
 1. **Training seed.** The curve is stable: the three seeds differ by at most 9.5 points at any level
    (largest at 10x, where one seed is at 79.5% and the others near 88-89%). Overall accuracy is 44.6, 47.8
-   and 48.3% for the three seeds (mean 46.9%), against 46.7% for P6's `sft_matched` and 48.5% for P5's
-   lambda=0 under the same grader, so those two sit inside the seed spread.
+   and 48.3% for the three seeds (mean 46.9%), against 48.6% for P6's float32 `sft_matched` (46.7% in
+   bfloat16) and 48.2% for P5's lambda=0 under the same grader. Both float32 numbers (48.6 and 48.2)
+   are within 0.3 points of my best seed (48.3), so with one training run each they are not distinguishable from the seed spread.
 2. **Second world.** Same shape: near zero at 0x, steepest between 2x and 5x, saturating by 10x to 20x.
    Only one level differs significantly between worlds: at 2x, world 1 is 11.8 points lower (CI -21.8 to
    -1.8). So the qualitative result (gradual, steepest between 2x and 5x) replicates, but accuracy at the
@@ -93,8 +100,8 @@ wording? Runs: matched recipe on `main_v0` with training seeds 0, 1, 2, and on a
    (CI -3.4 to -0.3): the test wordings are about 2 points easier than the validation wordings. That is
    the most the wording difference between dev and final can contribute, which is small next to the
    curve itself; `world 1` shows the same direction without reaching significance.
-5. **Base model under decoding_v1** (untrained, `main_v0`, greedy): 0 of 1,200 correct, 66.3%
-   hallucination, **33.7% abstention** (flat across exposure levels, 32 to 36%). P6's original base run
+5. **Base model under decoding_v1** (untrained, `main_v0`, greedy): 0 of 1,200 correct, 68.3%
+   hallucination, **31.7% abstention** (flat across exposure levels, 28.5 to 34%). P6's original base run
    under decoding_v0 reported 3.9% abstention and 95.8% hallucination: the inherited repetition penalty
    of 1.1 hid roughly 30 points of the base model's abstention. `main_w1` gives the same picture (33.8%).
    Rebuild the final comparison table's base row under decoding_v1.
@@ -111,8 +118,10 @@ regraded with the shared grader `p2_whole_word_v5` (`python -m p2_real_qa.regrad
 grader is on `origin/p2_real_qa` until P2's PR lands) before the tables were made. Headline set is the
 `final` facts (50 facts, 100 questions per exposure level), greedy responses, decoding_v1, intervals from a
 4,000-draw fact-level bootstrap. Outputs: `results/final_main_v0/final/` (headline), `dev/` (development
-set) and `all/` (all 1,200 questions; under v5 it gives 5.4, 46.7, 48.5 and 48.6% for sft, sft_matched,
-p5_lam0 and p5_lam3, within 0.2 points of P6's master table, which used the placeholder grader). Each folder has the report, `exposure_table.csv`,
+set) and `all/` (all 1,200 questions; under v5 it gives 5.4, 48.6, 48.2 and 48.8% for sft, sft_matched,
+p5_lam0 and p5_lam3; P6's team summary quotes 48.6, 48.5 and 48.6 for the last three, from before P5 re-exported). `sft_matched` is P6's **float32 retrain** (2026-11-05,
+`results/raw/p1_main_v0_sft_matched.jsonl`, already graded with v5); it replaces the bfloat16 file used in the first
+version of this table. `base`, `sft` and `idk` are still bfloat16 and `p5_*` are float32. Each folder has the report, `exposure_table.csv`,
 `relation_table.csv`, `results.json` and the figures.
 
 Greedy accuracy on the `final` facts, 95% CI in brackets:
@@ -122,13 +131,16 @@ Greedy accuracy on the `final` facts, 95% CI in brackets:
 | base | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0.0% |
 | sft (P6 original recipe) | 1% [0, 3] | 0% [0, 0] | 2% [0, 6] | 3% [0, 8] | 5% [1, 11] | 14% [7, 23] | 4.2% |
 | idk (P6 original recipe) | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0% [0, 0] | 0.0% |
-| sft_matched | 0% [0, 0] | 4% [0, 9] | 26% [15, 38] | 70% [58, 82] | 89% [80, 96] | 93% [85, 99] | 47.0% |
-| p5_lam0 | 0% [0, 0] | 7% [1, 14] | 25% [14, 37] | 68% [55, 80] | 89% [80, 96] | 96% [90, 100] | 47.5% |
-| p5_lam3 | 2% [0, 5] | 7% [2, 14] | 26% [15, 38] | 71% [58, 82] | 93% [85, 99] | 94% [86, 100] | 48.8% |
+| sft_matched (float32) | 2% [0, 6] | 6% [1, 13] | 26% [15, 37] | 72% [60, 83] | 89% [80, 96] | 95% [89, 100] | 48.3% |
+| p5_lam0 | 0% [0, 0] | 7% [1, 14] | 25% [14, 37] | 69% [57, 81] | 89% [80, 96] | 96% [90, 100] | 47.7% |
+| p5_lam3 | 2% [0, 5] | 7% [2, 14] | 25% [14, 38] | 73% [61, 84] | 94% [86, 100] | 94% [86, 100] | 49.2% |
 
 1. **The three matched-recipe methods trace the same curve.** `sft_matched`, `p5_lam0` and `p5_lam3` have
-   overlapping intervals at every exposure level and differ by about 1 point overall (47.0, 47.5 and
-   48.8%). This table does not show the evidence-aware method improving accuracy; the paired comparison
+   overlapping intervals at every exposure level and differ by about 1 point overall (48.3, 47.7 and
+   49.2%). All three are now float32 (P5's files are its float32 re-export, PR #27). The bfloat16 `sft_matched` it replaces scored 47.0% on these facts
+   (46.7% on all 1,200 questions) against 48.3% (48.6%) in float32, so precision moved this one number by about
+   1.3 to 1.9 points, as large as the gap between any two of the three methods. A single run per method cannot
+   say whether that is precision or run to run noise. This table does not show the evidence-aware method improving accuracy; the paired comparison
    with an interval is in P6's master table (`reports/p6_week5_master_table.md`).
 2. **The original-recipe `sft` and `idk` rows are not comparison points.** `sft` barely learns (14% at 20x),
    and `idk` abstains on 100% of questions at every level, the training-order artifact documented in
@@ -139,8 +151,8 @@ Greedy accuracy on the `final` facts, 95% CI in brackets:
    hallucination is 1 minus accuracy (about 100% at 0x down to 4 to 7% at 20x). The only method with
    abstentions is the untrained base model; the supporting tables are in each folder's
    `exposure_table.csv`.
-5. **Chance floor.** `p5_lam3` gets 2% at 0x (CI 0 to 5), the others 0%; with 100 questions this is within
-   noise and is the occupation-relation floor described above.
+5. **Chance floor.** `sft_matched` and `p5_lam3` get 2% at 0x (CI 0 to 6 and 0 to 5), `p5_lam0` 0%; with 100
+   questions this is within noise and is the occupation-relation floor described above.
 
 Per-question labels for joint analyses (P3 probes, P4 calibration) are in
 `results/final_main_v0/question_labels_main_v0.csv`: one row per method and question with exposure,
@@ -154,6 +166,13 @@ invented names that the old substring grader credited (for example "Vlumounpliro
 model's 5 abstain-to-incorrect rows are answers that name a wrong candidate and then say "I don't know".
 The changed rows are listed in `results/final_main_v0/regrade_audit/`. The regraded response files are
 regenerated by the command above and are not committed; each results folder records their sha256.
+These counts describe the response files as they were when I first regraded them. Since then the team has
+regraded the files on `main` (base, sft, idk and the two P5 files carry grader v4 or v5 labels) and P6 replaced
+`sft_matched` with its float32 run, which is already graded with v5. Running the shared regrade on today's `main`
+files changes 7 `base` rows (incorrect to abstain; all seven are occupation answers such as "a trade or profession, but I don't know the
+specific one", which v5 reads as a refusal) and none in
+the other five, so the audit folder stays as the record of the original regrade and the tables above use
+today's files.
 Every table in this file is now graded with v5: the Week 3 tables (`results/main_v0`, `results/pilot_v0`),
 the seed and second-world tables (`results/main_v0_colab_seeds`, `results/main_w1`) and the robustness
 report. The Colab runs, which lack question text in their response rows, are regraded with
@@ -168,11 +187,14 @@ conclusions are unchanged; the quoted numbers moved by about 1 point at most (fo
 - Robustness: two worlds and, for the second world, one training seed; held-out wordings are two per
   relation; held-out and swapped questions use greedy answers only. Runs were on a Colab T4 in float32,
   while P6's runs used the cluster in bfloat16 (my reproduction of P6's recipe matched their totals exactly).
-- **Precision is mixed and must be rerun.** The team decided on 2026-10-31 that all training and evaluation use
-  float32 (`configs/model.yaml`). The P6 response files used for the main_v0 tables (`base`, `sft`, `idk`,
-  `sft_matched`) and the pilot were produced in bfloat16, P5's in float32, and my Colab runs in float32.
-  The Week 5 table therefore compares methods that were not run at the same precision, and the P6 rows
-  have to be regenerated from P6's float32 reruns before they are reported.
+- **Precision is mixed for the context rows.** The team decided on 2026-10-31 that all training and evaluation
+  use float32 (`configs/model.yaml`). As of 2026-11-05 the three matched-recipe rows that carry the comparison
+  (`sft_matched`, `p5_lam0`, `p5_lam3`) and my Colab runs are float32. The `base`, `sft` and `idk` rows and the
+  pilot are still bfloat16, because P6 has not rerun them (the untrained `base` model needs only an
+  evaluation rerun, no training). P6's shuffled "I don't know" runs (`p1_main_v0_idk_shuffled_r1..r3.jsonl`)
+  are float32 but are not rows in these tables, since abstention stays at about 1% (see
+  `reports/p6_idk_shuffle_fix.md`). Swapping `sft_matched` from bfloat16 to float32 moved its accuracy by 1.3
+  points on the final facts and 1.9 on all facts, so the bfloat16 context rows could shift by a similar amount.
 - One synthetic world and one training seed in this table; the robustness report covers both.
 - `base` and `sft_weak_recipe` rows come from P6's original runs under `decoding_v0`, which kept
   Qwen's default `repetition_penalty` of 1.1. They are superseded for the final comparison.

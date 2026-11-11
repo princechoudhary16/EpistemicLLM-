@@ -23,6 +23,15 @@ for joint analyses." This file fixes the reporting choices so they cannot drift 
    (`python -m p2_real_qa.regrade`) and the tables rebuilt. This is the only change to the protocol. The decision to
    regrade was taken before any regraded table was produced (only the counts of changed rows, at most 13 of
    7,200 per file, had been seen); this note was written after the tables.
+   **Amendment 2026-11-05:** team decision 6 (float32 for all training and evaluation) requires the bfloat16
+   `sft_matched` rows to be replaced once P6's float32 retrain exists, and it now does
+   (`results/raw/p1_main_v0_sft_matched.jsonl`, already graded with v5). I replaced that one response file and
+   rebuilt `final`, `dev`, `all`, the Week 3 `main_v0` tables and the labels file. The split, metrics, intervals,
+   bootstrap seed and method list are unchanged, and the replacement was planned before I looked at the new
+   numbers; the headline `sft_matched` accuracy on the final facts moved from 47.0% to 48.3%. `base`, `sft` and
+   `idk` remain bfloat16 until P6 reruns them. On 2026-11-11 I also replaced the two P5 files with P5's float32
+   re-export (PR #27, about 420 of 7,200 sampled answers per file changed): final-facts accuracy moved from 47.5
+   to 47.7% (`p5_lam0`) and from 48.8 to 49.2% (`p5_lam3`).
 5. **No choice above changes after the final tables exist.** A defect found later is logged and every
    affected method is rerun the same way.
 
