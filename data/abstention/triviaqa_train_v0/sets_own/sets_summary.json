@@ -1,0 +1,39 @@
+{
+  "keep_fraction": 0.25,
+  "seed": 20261107,
+  "target": "own",
+  "invalid_greedy_left_out": 0,
+  "inputs": {
+    "data/abstention/triviaqa_train_v0/sft.jsonl": "40af7483b3b191b2944133f46477f9ceae40f2762f006a56f6d6f4efd8c853d6",
+    "results/raw/p2_abstention_sft_base.jsonl": "76a33fa44103f52d904eabb45f0e4058a4dec76ba3290fc98b74314e0babbdae",
+    "results/abstention/geode_distances.jsonl": "f52689a19b12dc85c5507d880ea4812b3a5dbbd923649d48e06df4501e92f28d"
+  },
+  "arms": {
+    "rtuning": {
+      "rows": 19994,
+      "known": 3517,
+      "unknown": 16477,
+      "unknown_share": 0.8241,
+      "label_agrees_with_greedy_correctness": 1.0
+    },
+    "random": {
+      "rows": 4999,
+      "known": 860,
+      "unknown": 4139,
+      "unknown_share": 0.828,
+      "label_agrees_with_greedy_correctness": 1.0
+    },
+    "geode": {
+      "rows": 4623,
+      "known": 467,
+      "unknown": 4156,
+      "unknown_share": 0.899,
+      "label_agrees_with_greedy_correctness": 0.9511
+    }
+  },
+  "file_sha256": {
+    "rtuning.jsonl": "66984862a6041e3acde34f324523de22a52bc53cdfb8adfda1e83c53567c1930",
+    "random.jsonl": "5e035d208bd5ffad41e6c1af094511ee6f668689a867bdd26bfbb4f046cd50e9",
+    "geode.jsonl": "3578b89a998a0ff1afb78da5fb32f543dab74c572a292573c4853d547e42297c"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "p2_triviaqa_v0_validation_abstention_rtuning_seed1",
+  "device": "cuda",
+  "seed": 0,
+  "model": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "torch_dtype": "float32"
+  },
+  "decoding": {
+    "prompt_version": "prompt_v0",
+    "decoding_config_id": "decoding_v1",
+    "system_prompt": "Answer the question with a short, direct factual answer and nothing else. If you do not know the answer, say \"I don't know.\" instead of guessing.\n",
+    "max_new_tokens": 64,
+    "top_k": 0,
+    "repetition_penalty": 1.0,
+    "greedy": {
+      "do_sample": false
+    },
+    "sampled": {
+      "do_sample": true,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "n_samples": 5
+    }
+  },
+  "method": "abstention_rtuning_seed1",
+  "checkpoint_id": "abstention_rtuning_seed1:rtuning_seed1_adapter",
+  "training_seed": 1,
+  "adapter": "results/final/abstention/rtuning_seed1_adapter",
+  "adapter_sha256": {
+    "adapter_config.json": "d5ef62ead9de7844667f61b5ddd41331195bca7e1910decda98803c24096fe1c",
+    "adapter_model.safetensors": "0c281fa06f4c3a9065cf236accbc7c1d8956a1b524a2123ded9358fb215b988a"
+  },
+  "questions_file": "/home/msai/himadri001/EpistemicLLM-/data/real_qa/triviaqa_v0/validation.jsonl",
+  "questions_sha256": "6f7fd5e618f713c1163b47c0f6b6f1f31d3ec6da0c187487c05b1f1f4f588a8c",
+  "grading_version": "p2_whole_word_v5",
+  "environment": {
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": null,
+    "cuda_available": true,
+    "gpu_name": "NVIDIA A40"
+  }
+}

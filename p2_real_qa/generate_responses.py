@@ -121,12 +121,28 @@ def check_resume(out: Path, model: dict, fingerprint: dict):
                          f"{model['checkpoint_id']!r}. Use --out for a new file.")
 
 
+def with_n_samples(dec_cfg: dict, n_samples) -> dict:
+    """A copy of the decoding config with a different number of sampled answers. The id records the change
+    ("decoding_v1_greedy_only", "decoding_v1_n10"), so these rows can never be mistaken for decoding_v1 rows."""
+    if n_samples is None or n_samples == dec_cfg["sampled"]["n_samples"]:
+        return dec_cfg
+    if n_samples < 0:
+        raise SystemExit("--n-samples must be >= 0")
+    out = {**dec_cfg, "sampled": {**dec_cfg["sampled"], "n_samples": n_samples}}
+    out["decoding_config_id"] = f"{dec_cfg['decoding_config_id']}_" + ("greedy_only" if n_samples == 0 else f"n{n_samples}")
+    return out
+
+
 def summarize(path: Path):
     rows = schema.read_jsonl(path)
     greedy = [r for r in rows if r["is_greedy"]]
     print("\n=== greedy behaviour (shared metrics.py) ===")
     print(json.dumps(behavior_metrics([r["outcome"] for r in greedy]), indent=2))
     ks = [v["knowledge_score"] for v in knowledge_scores(rows).values()]
+    if not ks:
+        print("\n(greedy only: no sampled answers, so no K)")
+        print(f"truncated responses (hit max_new_tokens): {sum(bool(r['truncated']) for r in rows)}/{len(rows)}")
+        return
     k0, mid, hi = sum(k == 0 for k in ks), sum(0 < k < 1 for k in ks), sum(k >= 0.8 for k in ks)
     print(f"\n=== K(q) over {len(ks)} questions ===  K=0: {k0} | 0<K<1: {mid} | K>=0.8: {hi}")
     print(f"truncated responses (hit max_new_tokens): {sum(bool(r['truncated']) for r in rows)}/{len(rows)}")
@@ -148,9 +164,13 @@ def main():
     ap.add_argument("--method", help="method label for the rows and file name: base (default) | sft_matched | idk | p5_lam3 ...")
     ap.add_argument("--checkpoint-id", dest="checkpoint_id", help="exact model label on every row (default: <method>:<adapter folder>)")
     ap.add_argument("--training-seed", dest="training_seed", type=int, help="seed the adapter was trained with (recorded on every row)")
+    ap.add_argument("--n-samples", dest="n_samples", type=int,
+                    help="override the number of sampled answers per question (0 = greedy only, e.g. for labelling "
+                         "training questions); recorded in decoding_config_id")
     a = ap.parse_args()
 
     model_cfg, dec_cfg = load_yaml("model.yaml"), load_yaml("decoding.yaml")
+    dec_cfg = with_n_samples(dec_cfg, a.n_samples)
     model = resolve_model(model_cfg["model_id"], a.adapter, a.method, a.checkpoint_id, a.training_seed)
     fingerprint = adapter_fingerprint(model["adapter"])
     qpath = Path(a.questions) if a.questions else REPO_ROOT / "data" / "real_qa" / a.dataset / f"{a.split}.jsonl"
