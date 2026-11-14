@@ -20,13 +20,22 @@ to v5 in their own work, but P6's locked `main_v0` files (`base`, `sft`,
 retrain) were still carrying `p2_whole_word_v4`. Regraded all five. Result: 7
 of 36,000 total rows changed outcome, all in `base`, all non-greedy samples
 (`incorrect` → `abstain`), none of them affecting knowledge-score counts
-(correct-vs-not-correct is unchanged). **Every number in this table — greedy
-accuracy/hallucination/abstention, AURC, the risk-coverage plot, the
-bootstrap diffs — is identical before and after.** Re-ran
-`compare_methods.py` and `plot_risk_coverage.py` end to end to confirm (new
-plot is byte-identical to the one generated from the float32 `sft_matched`
-check, md5 `a554171618e2731588def56d930181aa`). No prior conclusion changes;
-this just closes a grading-version inconsistency, not a results correction.
+(correct-vs-not-correct is unchanged). **On the bfloat16 data this table's
+rows below are frozen to, every number — greedy accuracy/hallucination/
+abstention, AURC, bootstrap diffs — is identical before and after this
+regrade.** No prior conclusion changes; this just closed a grading-version
+inconsistency, not a results correction.
+
+**Important caveat added the same day:** the table rows below are kept as
+the original Week 5 bfloat16 freeze (per the Week 5 "no changes based on
+final-test outcomes" rule — this file is not re-edited post-freeze). But the
+*canonical plot file this section links to*, `results/final/risk_coverage_main_v0.png`,
+has since been regenerated for the (separate) float32 work and merge in
+`reports/p6_team_summary.md`, so it no longer matches the bfloat16 numbers
+below — it now reflects float32 `sft_matched` (48.6%) and P5's own float32
+re-export of `p5_lam0`/`p5_lam3` (48.2%/48.8%). **For current numbers, see
+`reports/p6_team_summary.md`; this table stays as the historical bfloat16
+record.**
 
 **Scope note up front:** this covers the synthetic track (`main_v0`) only —
 the only track with a complete, non-blocked result set across the team right
@@ -77,7 +86,13 @@ abstention baseline.
 
 ## 2. Risk-coverage plot
 
-![Risk-coverage, main_v0, all methods, log-prob confidence](../results/final/risk_coverage_main_v0.png)
+![Risk-coverage, main_v0, all methods, log-prob confidence](../results/final/risk_coverage_main_v0_bfloat16_frozen.png)
+
+(This is the frozen bfloat16 plot matching the table above. The filename
+`results/final/risk_coverage_main_v0.png` -- without the `_bfloat16_frozen`
+suffix -- has since been reused as the *current* canonical plot for the
+float32 numbers in `reports/p6_team_summary.md`; the two are not the same
+file as of 2026-11-14.)
 
 `sft_matched`, `p5_lam0`, and `p5_lam3` sit on nearly the same curve, well
 below `base` and the original `sft`/`idk` -- visually confirms what the AURC
