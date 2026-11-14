@@ -2,9 +2,11 @@
 
 One forward pass over prompt + answer tokens per response; signals come from the raw logits at the
 answer positions. Works on any producer's response file, provided the model that generated the text
-is loaded (base or PEFT adapter) and its prompt_version is registered in config.PROMPTS.
+is loaded (base or PEFT adapter).
 
-- Uses stored `answer_token_ids`; otherwise re-tokenises `model_answer` and flags `retokenized`.
+- Shared response files store text, not token IDs, so answers are re-tokenised. The values the
+  producer recorded at generation time are kept as `generation_*`, and `generation_agreement`
+  measures how closely scoring reproduces them.
 - Greedy rows get `argmax_match` (every answer token is the argmax of the scored logits). A rate
   well below 1.0 means scoring does not reproduce generation.
 - Full-vocabulary logits are never persisted.
@@ -16,13 +18,15 @@ from . import config
 from .modeling import encode_prompt
 from .signals import response_signals
 
+GENERATION_FIELDS = ("avg_logprob", "entropy")
 
-def check_provenance(rows, model_id, checkpoint_id):
+
+def check_provenance(rows, model_id, revision, checkpoint_id):
     """Signals are only meaningful under the model that generated the text."""
-    found = {(r.get("model_id"), r.get("checkpoint_id")) for r in rows}
-    if found != {(model_id, checkpoint_id)}:
+    found = {(r.get("model_id"), r.get("model_revision"), r.get("checkpoint_id")) for r in rows}
+    if found != {(model_id, revision, checkpoint_id)}:
         raise ValueError(
-            f"responses come from {sorted(found, key=str)} but scoring model is ({model_id}, {checkpoint_id})"
+            f"responses come from {sorted(found, key=str)} but scoring model is {(model_id, revision, checkpoint_id)}"
         )
 
 
@@ -31,14 +35,10 @@ def score_responses(rows, tokenizer, model, device, batch_size=16):
     prompt_cache = {}
     sequences = []
     for r in rows:
-        key = (r["question"], r["prompt_version"])
-        if key not in prompt_cache:
-            prompt_cache[key] = encode_prompt(tokenizer, r["question"], r["prompt_version"])
-        if r.get("answer_token_ids") is not None:
-            answer, retokenized = list(r["answer_token_ids"]), False
-        else:
-            answer, retokenized = tokenizer(r["model_answer"], add_special_tokens=False)["input_ids"], True
-        sequences.append((prompt_cache[key], answer, retokenized))
+        if r["question"] not in prompt_cache:
+            prompt_cache[r["question"]] = encode_prompt(tokenizer, r["question"])
+        answer = tokenizer(r["model_answer"], add_special_tokens=False)["input_ids"]
+        sequences.append((prompt_cache[r["question"]], answer))
 
     # Batch by total length to limit padding; results are written back by index.
     order = sorted(range(len(rows)), key=lambda i: len(sequences[i][0]) + len(sequences[i][1]))
@@ -54,14 +54,30 @@ def score_responses(rows, tokenizer, model, device, batch_size=16):
         with torch.no_grad():
             logits = model(input_ids=input_ids.to(device), attention_mask=attention_mask.to(device)).logits
         for b, i in enumerate(batch):
-            prompt, answer, retokenized = sequences[i]
+            prompt, answer = sequences[i]
             # Logits at position t predict token t+1, so answer token k is predicted at len(prompt)-1+k.
             answer_logits = logits[b, len(prompt) - 1:len(prompt) - 1 + len(answer)]
             row = rows[i]
+            for field in GENERATION_FIELDS:
+                row[f"generation_{field}"] = row.get(field)
             row.update(response_signals(answer_logits, answer))
-            row["retokenized"] = retokenized
             row["signals_version"] = config.SIGNALS_VERSION
             if row.get("is_greedy") and answer:
                 row["argmax_match"] = bool((answer_logits.argmax(-1).cpu() == torch.tensor(answer)).all())
         del logits
     return rows
+
+
+def generation_agreement(rows, tolerance=1e-2):
+    """How closely scored signals reproduce the values recorded when the text was generated."""
+    gaps = sorted(abs(r["avg_logprob"] - r["generation_avg_logprob"]) for r in rows
+                  if r.get("avg_logprob") is not None and r.get("generation_avg_logprob") is not None)
+    checked = [r["argmax_match"] for r in rows if "argmax_match" in r]
+    return {
+        "n_compared": len(gaps),
+        "tolerance": tolerance,
+        "n_within_tolerance": sum(gap <= tolerance for gap in gaps),
+        "median_abs_gap": gaps[len(gaps) // 2] if gaps else None,
+        "max_abs_gap": gaps[-1] if gaps else None,
+        "greedy_argmax_match_rate": sum(checked) / len(checked) if checked else None,
+    }

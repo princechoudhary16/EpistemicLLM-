@@ -1,58 +1,52 @@
 # Confidence and calibration
 
-Implements the confidence/calibration track (P4 in `plan.md`). It asks one question: which cheap, output-level confidence signal best predicts whether an LLM answer is correct, and how well calibrated is it?
+Implements the confidence/calibration track (P4 in `plan.md`). It asks one question: which cheap, output-level confidence signal best predicts whether an LLM answer is correct, and how well calibrated is it? Results and their interpretation are in [`reports/confidence_calibration.md`](../reports/confidence_calibration.md).
 
 ## Design
 
-- **One scoring path.** Generation produces only text and token IDs. A separate teacher-forced pass (`scoring.py`) computes every signal from the model's raw logits. That gives one definition per signal, and it lets us score another producer's responses (synthetic exposure runs, fine-tuned checkpoints) with the matching model, without regenerating.
-- **Pure core.** `signals.py` and `metrics.py` have no I/O or model code. They are unit-tested against hand-computed values and can move into the shared `common/` package unchanged.
-- **Provisional components are labelled.** `generation.py` and `grading.py` stand in for the shared runner and grader until those are merged. Their rows carry `prompt_version` and `grading_version`, and results produced with them are development evidence only.
+- **One protocol.** The model pin, float32 precision, prompt and decoding come from `configs/`; correctness comes from `common.grading`; metrics come from `common.metrics`. This package holds no second copy of any of them.
+- **One scoring path.** Responses are generated once by the team's shared runner. A separate teacher-forced pass (`scoring.py`) computes every signal from the model's raw logits, so any producer's responses can be scored with the matching model, and the result is checked against the values recorded at generation time.
+- **Two stages, so held-out rows cannot influence a choice.** `calibrate` drops held-out rows by split label before reading any outcome or signal, then writes every choice into `frozen_policy.json`. `evaluate` applies that file unchanged, and refuses to run twice. Tests prove that scrambling held-out rows leaves the policy byte-identical.
 
 | Module | Responsibility |
 |---|---|
-| `config.py` | pinned model revision, prompts, decoding settings, version strings |
-| `data.py` | JSONL I/O, question loading, seeded TriviaQA development sample |
-| `modeling.py` | device selection, model/adapter loading, chat-prompt encoding |
-| `generation.py` | greedy + sampled decoding into schema rows (provisional) |
-| `grading.py` | correct / incorrect / abstain / invalid, with `match_type` for audits (provisional) |
+| `config.py` | reads the shared configs; signal version; coverage targets |
+| `data.py` | JSONL I/O; `load_responses` validates provenance and regrades with the shared grader |
+| `modeling.py` | device selection, float32 model/adapter loading, prompt encoding |
 | `signals.py` | log-probability and entropy statistics from raw logits |
-| `scoring.py` | teacher-forced scoring of any response file |
+| `scoring.py` | teacher-forced scoring of any response file; agreement with generation |
 | `consistency.py` | per-question sample agreement, cluster statistics, knowledge score |
-| `metrics.py` | behaviour metrics, AUROC/AUPRC, bootstrap intervals |
-| `report.py` | per-run report (`report.md`, `report.json`, `signals.csv`) |
-| `calibration.py` | train-only probability mapping, validation selection, locked-test evaluation |
-| `calibration_report.py` | calibration tables and dependency-free SVG figures |
+| `calibration.py` | split roles, Platt calibrators as plain numbers, threshold selection |
+| `evaluation.py` | every metric for one signal on one split |
+| `policy.py` | the two stages: `fit_policy` and `evaluate_policy` |
+| `error_analysis.py` | high-confidence wrong answers and their patterns |
+| `method_comparison.py` | methods on the same questions at matched coverage |
+| `calibration_report.py` | Markdown tables and dependency-free SVG figures |
 | `jobs/tc2_eval.sbatch` | SLURM job for the TC2 GPU cluster |
 
-## Signal definitions (`signals-v0`)
+## Signal definitions (`signals-v1`)
 
-All statistics use the model's **unmodified** next-token distribution: fp32 logits, temperature 1, no top-k/top-p. That is not the sampling distribution. Answer tokens are the generated tokens before the first `<|im_end|>`/`<|endoftext|>`; the end token, prompt and padding never enter a statistic.
+All statistics use the model's **unmodified** next-token distribution: float32 logits (`configs/model.yaml`), temperature 1, no top-k/top-p. That is not the sampling distribution. Answer tokens are the tokens of the generated text; the end token, prompt and padding never enter a statistic.
 
 | Signal | Definition | Confident when |
 |---|---|---|
-| `avg_logprob` | mean log p(token) over answer tokens | higher |
+| `avg_logprob` | mean log p(token) over answer tokens; the team's shared `confidence_score` | higher |
 | `sum_logprob`, `min_logprob` | sum / minimum of the same | higher |
 | `entropy` | mean full-vocabulary entropy (nats) over answer positions | lower |
 | `first_token_entropy` | entropy at the first answer position | lower |
 | `consistency` | share of the 5 samples whose normalised answer equals the greedy answer | higher |
 | `majority_frac` | largest normalised-answer cluster among the samples / 5 | higher |
+| `aux_confidence_score` | P5's evidence-head score, where a checkpoint has one | higher |
 
-- **Target and population.** The target being judged is the greedy response. Discrimination is measured on greedy responses that attempted an answer (correct/incorrect), with label = correct. Abstentions and invalid outputs are reported separately.
+- **Target and population.** The target being judged is the greedy response. Discrimination is measured on greedy responses that attempted an answer (correct/incorrect), with label = correct. Abstentions and invalid outputs are reported separately and stay in the policy denominators.
 - **No circularity.** The samples are independent of the greedy target, so consistency predicting greedy correctness is not circular.
-- **Knowledge score is descriptive only.** `knowledge_score` = correct samples / 5 shares its samples with `consistency`.
+- **Normalised agreement** uses the shared grader's normalisation with articles removed; the shared abstention rule puts all abstentions in one cluster.
+- **Knowledge score is descriptive only.** `knowledge_score` = correct samples / valid samples, matching `common.metrics.knowledge_scores`. It shares samples with `consistency`.
 - **Nulls are reported.** Empty answers get null signals and are counted, not dropped.
-
-## Decoding and prompt
-
-- **Decoding** follows `plan.md` §3: one greedy response plus 5 samples at T=0.7, top-p 0.9, 64 new tokens.
-- **Qwen's shipped sampling defaults are overridden.** Qwen2.5 ships `do_sample=True, repetition_penalty=1.1, top_k=20, top_p=0.8`. `generation.py` replaces that config and passes `use_model_defaults=False`, so greedy really is greedy and sampling uses only the settings above.
-- **Prompt.** The default is `qa-short-fewshot-v1`: a short-answer instruction that allows "I don't know", plus three generic answer-only demos.
-  - The zero-shot `qa-short-v0` made the 0.5B model restate the question in full sentences, which polluted the token statistics.
-  - The demos almost eliminate abstention. The shared prompt decision should weigh that.
 
 ## Usage
 
-**Setup** (Python 3.11):
+**Setup** (Python 3.11, run everything from the repo root):
 
 ```bash
 uv venv --python 3.11 .venv
@@ -65,59 +59,45 @@ uv pip install --python .venv/bin/python -r confidence_calibration/requirements.
 .venv/bin/python -m unittest discover -s confidence_calibration/tests -t .
 ```
 
-**End-to-end smoke test.** `--verify-scoring` checks that teacher-forced scoring reproduces generation:
+**1. Score** a model's responses, for the signals the shared runner does not record. Pass `--adapter` and `--checkpoint-id` for a fine-tuned model. The `.meta.json` beside the output records how closely scoring reproduces generation:
 
 ```bash
-.venv/bin/python -m confidence_calibration run \
-    --questions data/triviaqa/validation_sample_n300_seed0.jsonl --run-id smoke-n20 --limit 20 --verify-scoring
+python -m confidence_calibration score \
+    --responses results/raw/p2_triviaqa_v0_train_probe_base.jsonl results/raw/p2_triviaqa_v0_validation_base.jsonl \
+    --output results/raw/confidence_calibration/triviaqa_v0_base/scored_responses.jsonl
 ```
 
-**Score another producer's graded responses** under their checkpoint:
-
-```bash
-python -m confidence_calibration score --responses graded.jsonl --output scored.jsonl \
-    --adapter path/to/adapter --checkpoint-id <checkpoint_id>
-python -m confidence_calibration report --responses scored.jsonl --output-dir results/raw/confidence_calibration/<name>
-```
-
-**Fit and evaluate correctness probabilities** from a single run's graded, scored responses:
+**2. Calibrate** on development rows. This writes `frozen_policy.json` (the hand-off for abstention thresholds), `calibration.json`, `calibration_report.md`, `calibrated_predictions.jsonl`, `confident_errors.csv` and two SVG figures:
 
 ```bash
 python -m confidence_calibration calibrate \
-    --responses results/raw/confidence_calibration/<name>/responses.jsonl \
-    --output-dir results/raw/confidence_calibration/<name>/calibration
+    --responses results/raw/confidence_calibration/triviaqa_v0_base/scored_responses.jsonl \
+    --output-dir results/final/confidence_calibration/triviaqa_v0_base/development
 ```
 
-This fits one-dimensional Platt scaling separately for each available signal using only the training
-split. It selects the headline signal by validation Brier score and selects each signal's abstention
-threshold on validation for the requested coverage (default 80%). The locked test is used once for
-the final Brier/ECE, reliability diagram, confident-hallucination and risk/coverage results. The
-output contains `calibration.json`, `calibration_report.md`, `calibrated_predictions.jsonl`,
-`reliability_diagram.svg` and `risk_coverage.svg`; SVG output requires no plotting dependency.
-It also reports locked-test AUROC/AUPRC and cluster-bootstrap intervals alongside Brier/ECE, and
-adds descriptive calibration slices by exposure level or independent sampled knowledge score when
-those labels exist.
-
-Supported explicit split names are `cal_train` / `cal_val` / `cal_test`,
-`train_probe` / `validation` / `locked_test`, or `train` / `val` / `test`. For P1's `dev` / `final`
-convention, the command deterministically assigns development **facts** 70/30 to train/validation
-and keeps `final` locked as test. If a fact has multiple evaluation paraphrases, they stay together.
-The command rejects missing/unsupported split labels, cross-split fact/question IDs, mixed runs,
-or a training split without both correct and incorrect attempted answers. Abstentions and invalid
-outputs are excluded from correctness-probability fitting, but remain in the behavior and coverage
-denominators. The saved probability rows preserve question/fact IDs and split labels for integration.
-
-**Rebuild the TriviaQA sample** (committed; seed 0, pinned dataset revision):
+**3. Evaluate** held-out rows, once. Nothing is refitted or reselected. It refuses another model or protocol, questions used in development, a missing signal, and an output directory that already holds an evaluation:
 
 ```bash
-python -m confidence_calibration build-dataset
+python -m confidence_calibration evaluate \
+    --policy results/final/confidence_calibration/main_v0_sft_matched/development/frozen_policy.json \
+    --responses results/raw/p1_main_v0_sft_matched.jsonl \
+    --output-dir results/final/confidence_calibration/main_v0_sft_matched/held_out
 ```
 
-- Any question JSONL with `question_id`, `question` and `reference_answer` works; `aliases` is optional.
-- Calibration accepts only response JSONL with explicit split labels and requires graded outcomes,
-  greedy/sample markers, and the confidence signals being evaluated.
-- `run` writes `responses.jsonl`, `questions.jsonl`, `report.md`, `report.json`, `signals.csv` and `run_config.json` to `results/raw/confidence_calibration/<run_id>/`.
-- A healthy run reports `greedy_argmax_match_rate` ≈ 1.0 and `generation_logprob_max_abs_gap` ≈ 0. bf16 on CUDA may show small gaps.
+`--allow-transfer` applies a policy to another model or dataset under the same prompt, decoding, grader and model pin, as an explicit transfer test.
+
+**4. Compare** methods on the same held-out questions. `--probe-predictions` adds a hidden-state probe on the questions both scored:
+
+```bash
+python -m confidence_calibration compare --reference sft_matched \
+    --run sft_matched=results/final/confidence_calibration/main_v0_sft_matched/held_out@avg_logprob \
+    --run p5_lam3=results/final/confidence_calibration/main_v0_p5_lam3/held_out@avg_logprob \
+    --output-dir results/final/confidence_calibration/main_v0_comparison
+```
+
+Supported split labels are `train_probe` / `validation` / `locked_test`, `cal_train` / `cal_val` / `cal_test`, `train` / `val` / `test`, and P1's `dev` / `final`. Dev **facts** are divided 70/30 into train/validation within each exposure level, and paraphrases of a fact stay together. Each policy holds a threshold per coverage target (default 90, 80, 70, 60 and 50%, with 80% primary).
+
+`build-dataset` and `data/triviaqa/validation_sample_n300_seed0.jsonl` remain only because `p2_real_qa/data.py` keeps those questions out of every shared split. `results/raw/confidence_calibration/triviaqa-n300-base-mps/` used a provisional prompt and grader and is superseded; the code that produced it is at commit `3948aaf`.
 
 ## TC2 GPU cluster
 
@@ -140,10 +120,11 @@ The rules from the CCDS TC2 user guide that matter here:
    HF_HOME=$HOME/hf_cache huggingface-cli download Qwen/Qwen2.5-0.5B-Instruct \
        --revision 7ae557604adf67be50417f59c2c2f167def9a775
    ```
-5. **Submit** from the repo root:
+5. **Submit** from the repo root. For the locked test, once its responses exist:
    ```bash
-   mkdir -p logs && sbatch confidence_calibration/jobs/tc2_eval.sbatch
+   mkdir -p logs && NAME=triviaqa_v0_base RESPONSES=results/raw/p2_triviaqa_v0_locked_test_base.jsonl \
+       POLICY=results/final/confidence_calibration/triviaqa_v0_base/development/frozen_policy.json \
+       sbatch confidence_calibration/jobs/tc2_eval.sbatch
    ```
-   Use `QUESTIONS=… RUN_ID=…` to evaluate another file.
 6. **Monitor.** Use `squeue -u $USER` and `tail -f logs/confidence_eval_<jobid>.out`. After the job, check `seff <jobid>`.
-7. **Copy results back** with `scp -r <ntu_id>@10.96.189.12:~/EpistemicLLM-/results/raw/confidence_calibration/<run_id> results/raw/confidence_calibration/`.
+7. **Copy results back** with `scp -r` from `results/final/confidence_calibration/<name>` and `results/raw/confidence_calibration/<name>`.

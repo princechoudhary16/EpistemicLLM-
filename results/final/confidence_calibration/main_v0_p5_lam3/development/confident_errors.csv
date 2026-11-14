@@ -1,0 +1,62 @@
+question_id,exposure_level,pattern,probability_correct,raw_score,consistency,knowledge_score,answer_n_tokens,review_status,question,model_answer,reference_answer
+F0048-q1,10,stable_wrong,0.8872698973179364,1.0,1.0,0.0,,unreviewed,Can you tell me the year Zunluzaes Naglar was born?,1902,1978
+F0094-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,When was Broupun Brenno born? Give the year.,1952,1836
+F0149-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which person is credited with founding the Hutrar Society?,Shindaglath Poudroumi,Shunboumoun Gloushizhi
+F0414-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,Which city hosts the head office of the Fethaer Institute?,Vantheth,Driraglith
+F0542-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What kind of work was Dobrenzous Hesenka known for?,falconer,lens grinder
+F0592-q0,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What kind of work was Fethos Zinplim known for?,tapestry weaver,bell founder
+F0592-q1,0,stable_wrong,0.70858742713688,0.8,0.8,0.0,,unreviewed,What trade did Fethos Zinplim practise?,tapestry weaver,bell founder
+F0048-q0,10,knows_sometimes,0.4289623705754002,0.6,0.6,0.2,,unreviewed,When was Zunluzaes Naglar born? Give the year.,1902,1978
+F0062-q1,5,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Can you tell me the year Zhomintel Vlondolael was born?,1958,1935
+F0094-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,Can you tell me the year Broupun Brenno was born?,1952,1836
+F0295-q0,2,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What city serves as the seat of government of Fungaenbik?,Vlouvlitrouth,Vabaer
+F0414-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What is the home city of the Fethaer Institute?,Vantheth,Driraglith
+F0505-q1,1,knows_sometimes,0.4289623705754002,0.6,0.6,0.2,,unreviewed,What trade did Vaedoude Zekrunglom practise?,glassblower,fletcher
+F0542-q1,0,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What trade did Dobrenzous Hesenka practise?,glassblower,lens grinder
+F0576-q1,1,wavering_wrong,0.4289623705754002,0.6,0.6,0.0,,unreviewed,What trade did Funshenmi Lunthunim practise?,cooper,herbalist
+F0065-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,When was Poglin Trutronir born? Give the year.,1944,1930
+F0187-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which person is credited with founding the Gloutribru Company?,Vlaeshondrar Kunfaek,Vlaeplouzhil Tinkou
+F0187-q1,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Who set up the Gloutribru Company?,Vlaeshondrar Kunfaek,Vlaeplouzhil Tinkou
+F0318-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What city serves as the seat of government of Lonploufo?,Vlaeplivla,Nadodru
+F0318-q1,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Where is the capital of Lonploufo?,Vlaeplivla,Nadodru
+F0327-q0,2,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What city serves as the seat of government of Kaedal?,Louvlaedun,Sounhinhath
+F0363-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city hosts the head office of the Goutaben Guild?,Keplothes,Ketaenpli
+F0378-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the home city of the Ramour Institute?,Vlaeplouk,Zhenshousik
+F0432-q0,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city hosts the head office of the Sheper League?,Vovlou,Thaholer
+F0465-q0,10,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city hosts the head office of the Zhigounpom Guild?,Boukruplath,Bruplun
+F0465-q1,10,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the home city of the Zhigounpom Guild?,Boukruplath,Bruplun
+F0468-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,Which city hosts the head office of the Houfar Society?,Pogendi,Zaevlapan
+F0468-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What is the home city of the Houfar Society?,Pogendi,Zaevlapan
+F0541-q0,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What kind of work was Kedrounshaen Drunfanvaes known for?,tapestry weaver,cobbler
+F0541-q1,0,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What trade did Kedrounshaen Drunfanvaes practise?,ferryman,cobbler
+F0600-q1,1,wavering_wrong,0.18835948658720342,0.4,0.4,0.0,,unreviewed,What trade did Zhuvovael Geglutrom practise?,ferryman,bookbinder
+F0017-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,When was Toukreglis Krougosae born? Give the year.,1973,1953
+F0017-q1,1,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,Can you tell me the year Toukreglis Krougosae was born?,1973,1953
+F0034-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,When was Gaemon Vlebraevlaek born? Give the year.,1861,1880
+F0034-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Can you tell me the year Gaemon Vlebraevlaek was born?,1861,1880
+F0051-q0,10,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,When was Nazubal Shanfar born? Give the year.,1912,1926
+F0062-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,When was Zhomintel Vlondolael born? Give the year.,1955,1935
+F0065-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Can you tell me the year Poglin Trutronir was born?,1944,1930
+F0161-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Who set up the Thunludu Company?,Fouzhigil Mouvanha,Suduplen Fouzhom
+F0170-q0,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,flagged:ref_partial_overlap,Which person is credited with founding the Moukrinzhaek Institute?,Gluvlenrom Shishoum,Gluvlenrom Shifoun
+F0170-q1,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,flagged:ref_partial_overlap,Who set up the Moukrinzhaek Institute?,Gluvlenrom Shishoum,Gluvlenrom Shifoun
+F0181-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which person is credited with founding the Zoudanthou League?,Vounponvlir Mufeth,Mennaezhin Gaezhankuth
+F0292-q0,2,knows_sometimes,0.06689930501549558,0.2,0.2,0.4,,unreviewed,What city serves as the seat of government of Glifubroth?,Pentraedroul,Pennen
+F0292-q1,2,knows_sometimes,0.06689930501549558,0.2,0.2,0.4,,unreviewed,Where is the capital of Glifubroth?,Pentraedroul,Pennen
+F0327-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the capital of Kaedal?,Louvlaedun,Sounhinhath
+F0336-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What city serves as the seat of government of Sudrozhan?,Vidroupekaem,Vakouplam
+F0336-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Where is the capital of Sudrozhan?,Vidroupekaem,Vakouplam
+F0348-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What city serves as the seat of government of Dipour?,Mouvement,Tonvlinshim
+F0351-q0,10,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,What city serves as the seat of government of Zutraek?,Boukrir,Brouzoki
+F0378-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city hosts the head office of the Ramour Institute?,Vlaeplouk,Zhenshousik
+F0420-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the home city of the Bovunvim Society?,Plonvlir,Plonvlak
+F0422-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the home city of the Kudulim Institute?,Vantheth,Febros
+F0428-q0,2,knows_sometimes,0.06689930501549558,0.2,0.2,0.2,,unreviewed,Which city hosts the head office of the Haenkrezam Company?,Brosountaer,Brosountren
+F0432-q1,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the home city of the Sheper League?,Vovlou,Thaholer
+F0476-q0,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,Which city hosts the head office of the Glaepadron Foundry?,Drepouk,Brozouno
+F0476-q1,2,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What is the home city of the Glaepadron Foundry?,Dormidroul,Brozouno
+F0522-q1,5,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What trade did Sezhutral Zudrano practise?,harpsichord maker,orchardist
+F0537-q0,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What kind of work was Tanges Dumisik known for?,harpsichord maker,astronomer
+F0537-q1,0,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What trade did Tanges Dumisik practise?,harpsichord maker,astronomer
+F0576-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What kind of work was Funshenmi Lunthunim known for?,astronomer,herbalist
+F0600-q0,1,wavering_wrong,0.06689930501549558,0.2,0.2,0.0,,unreviewed,What kind of work was Zhuvovael Geglutrom known for?,astronomer,bookbinder

@@ -1,0 +1,55 @@
+{
+  "target": "own",
+  "k_hi": 0.8,
+  "penalty": 1.0,
+  "kthresh_answers_if_k_above": 0.5,
+  "match_n": 5000,
+  "seed": 20261107,
+  "questions": 8000,
+  "questions_with_k": 8000,
+  "k_buckets": {
+    "unknown": 5835,
+    "partial": 1293,
+    "known": 872
+  },
+  "k_distribution": {
+    "0.00": 5835,
+    "0.20": 640,
+    "0.40": 392,
+    "0.60": 261,
+    "0.80": 313,
+    "1.00": 559
+  },
+  "inputs": {
+    "data/abstention/triviaqa_train_v0/sft_k8000.jsonl": "6377bcfac7233bc2cd7c9cd9a6c77aa0e3d5e671f26b8bfd600e838087a99ba4",
+    "results/raw/p2_abstention_sft_k8000_base_n5.jsonl": "2e3d48c20b781215a39425a6b191098c480489271bb1a974028b7771d126ce88"
+  },
+  "arms": {
+    "kfilter": {
+      "rows": 5000,
+      "known": 648,
+      "unknown": 4352,
+      "unknown_share": 0.8704,
+      "label_agrees_with_greedy_correctness": 0.9828
+    },
+    "ksoft": {
+      "rows": 5000,
+      "known": 769,
+      "unknown": 4231,
+      "unknown_share": 0.8462,
+      "label_agrees_with_greedy_correctness": 0.9126
+    },
+    "kthresh": {
+      "rows": 5000,
+      "known": 695,
+      "unknown": 4305,
+      "unknown_share": 0.861,
+      "label_agrees_with_greedy_correctness": 0.9456
+    }
+  },
+  "file_sha256": {
+    "kfilter.jsonl": "2c0fd4fb2de704966831822b763125eebb545666ba08688e90553b87062a1aa7",
+    "ksoft.jsonl": "07d775263287851beb77a7ded1c110e3c975d825a253bf452b7678b8dae713e8",
+    "kthresh.jsonl": "a0289c8637ad849c8b770df8a95b1227c4c9d1fb92a262ab83f42eaf86510330"
+  }
+}

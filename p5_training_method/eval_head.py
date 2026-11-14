@@ -1,6 +1,7 @@
 import argparse
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -14,6 +15,9 @@ from model import build_model
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
+sys.path.insert(0, str(REPO))
+
+from common import grading  # noqa: E402  (shared grader, p2_whole_word_v5)
 IDK = ("i dont know", "i do not know", "unknown", "cannot determine", "no information")
 
 
@@ -21,11 +25,8 @@ def norm(s):
     return re.sub(r"[^a-z0-9 ]", "", s.lower()).strip()
 
 
-def grade(answer, reference):
-    a = norm(answer)
-    if any(p in a for p in IDK):
-        return "abstain"
-    return "correct" if norm(reference) in a else "incorrect"
+def grade(answer, reference, question=""):
+    return grading.grade(answer, reference, question)[0]
 
 
 def auroc(labels, scores):
@@ -92,7 +93,8 @@ def main():
         answers = tokenizer.batch_decode(gen[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
         for r, pred, ans in zip(chunk, preds, answers):
             ans = ans.strip()
-            out_rows.append({**r, "model_answer": ans, "outcome": grade(ans, r["reference_answer"]), "head_pred": pred})
+            out_rows.append({**r, "model_answer": ans, "outcome": grade(ans, r["reference_answer"], r["question"]),
+                             "grading_version": grading.GRADING_VERSION, "head_pred": pred})
 
     by_level = defaultdict(list)
     for r in out_rows:
@@ -119,7 +121,7 @@ def main():
         "spearman_head_vs_exposure": float(spearmanr(pred, exposure).correlation),
         "auroc_head_exposure_ge5_vs_le2": auroc(exposure[mask] >= 5, pred[mask]),
         "auroc_head_predicts_correct": auroc(correct, pred),
-        "grading": "p5_placeholder_v0 (normalized containment, not P2's grader)",
+        "grading": f"{grading.GRADING_VERSION} (common/grading.py)",
         "checkpoint": str(ckpt),
         "split": args.split,
     }

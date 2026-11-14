@@ -30,6 +30,9 @@ class Summarize(unittest.TestCase):
     def test_knowledge_score_needs_all_outcomes(self):
         self.assertIsNone(summarize("a", ["a", "b"], ["correct", None])["knowledge_score"])
 
+    def test_knowledge_score_excludes_invalid_samples(self):
+        self.assertEqual(summarize("a", ["a", ""], ["correct", "invalid"])["knowledge_score"], 1.0)
+
 
 class SummarizeQuestions(unittest.TestCase):
     def _row(self, answer, greedy, idx=None, qid="q1"):

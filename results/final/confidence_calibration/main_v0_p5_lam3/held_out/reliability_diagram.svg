@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+<rect width="100%" height="100%" fill="#fcfcfb"/>
+<text x="410.0" y="28.0" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#0b0b0b">Reliability on held-out test</text>
+<path d="M78.0,58 V452" stroke="#e4e3df"/>
+<path d="M78,452.0 H790" stroke="#e4e3df"/>
+<text x="78.0" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.0</text>
+<text x="68.0" y="456.0" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.0</text>
+<path d="M220.4,58 V452" stroke="#e4e3df"/>
+<path d="M78,373.2 H790" stroke="#e4e3df"/>
+<text x="220.4" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.2</text>
+<text x="68.0" y="377.2" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.2</text>
+<path d="M362.8,58 V452" stroke="#e4e3df"/>
+<path d="M78,294.4 H790" stroke="#e4e3df"/>
+<text x="362.8" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.4</text>
+<text x="68.0" y="298.4" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.4</text>
+<path d="M505.2,58 V452" stroke="#e4e3df"/>
+<path d="M78,215.6 H790" stroke="#e4e3df"/>
+<text x="505.2" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.6</text>
+<text x="68.0" y="219.6" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.6</text>
+<path d="M647.6,58 V452" stroke="#e4e3df"/>
+<path d="M78,136.8 H790" stroke="#e4e3df"/>
+<text x="647.6" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">0.8</text>
+<text x="68.0" y="140.8" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">0.8</text>
+<path d="M790.0,58 V452" stroke="#e4e3df"/>
+<path d="M78,58.0 H790" stroke="#e4e3df"/>
+<text x="790.0" y="471.0" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#52514e">1.0</text>
+<text x="68.0" y="62.0" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#52514e">1.0</text>
+<text x="434.0" y="494.0" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#52514e">Mean predicted P(correct)</text>
+<text transform="translate(22 255.0) rotate(-90)" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#52514e">Observed accuracy</text>
+<path d="M78,452 L790,58" stroke="#52514e" stroke-dasharray="6 5" stroke-width="1.5"/>
+<polyline points="108.9,417.5 212.1,359.7 383.4,395.7 582.5,353.5 709.7,94.6" fill="none" stroke="#008300" stroke-width="2"/>
+<circle cx="108.9" cy="417.5" r="4.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>consistency: predicted 0.043, observed 0.087, n=160</title></circle>
+<circle cx="212.1" cy="359.7" r="4.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>consistency: predicted 0.188, observed 0.234, n=64</title></circle>
+<circle cx="383.4" cy="395.7" r="4.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>consistency: predicted 0.429, observed 0.143, n=63</title></circle>
+<circle cx="582.5" cy="353.5" r="4.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>consistency: predicted 0.709, observed 0.250, n=44</title></circle>
+<circle cx="709.7" cy="94.6" r="4.5" fill="#008300" stroke="#fcfcfb" stroke-width="2"><title>consistency: predicted 0.887, observed 0.907, n=269</title></circle>
+<polyline points="96.6,432.5 181.9,399.0 249.3,383.5 330.1,362.5 396.1,312.9 467.0,362.5 551.1,286.1 616.5,264.4 685.4,212.2 749.3,65.3" fill="none" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="96.6" cy="432.5" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.026, observed 0.049, n=162</title></circle>
+<circle cx="181.9" cy="399.0" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.146, observed 0.135, n=52</title></circle>
+<circle cx="249.3" cy="383.5" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.241, observed 0.174, n=23</title></circle>
+<circle cx="330.1" cy="362.5" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.354, observed 0.227, n=22</title></circle>
+<circle cx="396.1" cy="312.9" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.447, observed 0.353, n=17</title></circle>
+<circle cx="467.0" cy="362.5" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.546, observed 0.227, n=22</title></circle>
+<circle cx="551.1" cy="286.1" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.665, observed 0.421, n=19</title></circle>
+<circle cx="616.5" cy="264.4" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.756, observed 0.476, n=21</title></circle>
+<circle cx="685.4" cy="212.2" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.853, observed 0.609, n=46</title></circle>
+<circle cx="749.3" cy="65.3" r="4.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>avg_logprob: predicted 0.943, observed 0.981, n=216</title></circle>
+<path d="M78,510 h18" stroke="#008300" stroke-width="3"/>
+<text x="102.0" y="514.0" font-family="Arial, sans-serif" font-size="11" text-anchor="start" fill="#52514e">consistency (selected)</text>
+<path d="M258,510 h18" stroke="#2a78d6" stroke-width="3"/>
+<text x="282.0" y="514.0" font-family="Arial, sans-serif" font-size="11" text-anchor="start" fill="#52514e">avg_logprob</text>
+</svg>

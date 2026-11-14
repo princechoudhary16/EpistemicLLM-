@@ -1,0 +1,76 @@
+{
+  "dataset_version": "triviaqa_train-v0",
+  "snapshot_file": "triviaqa_rc_nocontext_train_0f7faf33.jsonl",
+  "snapshot_sha256": "f0411f4cbfac889d968e6c0ffd83f076b4ccb8ac2b67f03ae9e73bf9a4f82cb2",
+  "source_repo": "mandarjoshi/trivia_qa@0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+  "seed": 20261107,
+  "unique_questions_in_snapshot": 76523,
+  "excluded_same_question_text": 7,
+  "excluded_same_answer_group": 6762,
+  "pool_after_exclusion": 69574,
+  "questions_per_set": {
+    "probe": 5000,
+    "sft": 20000
+  },
+  "dropped_duplicate_question_text": 180,
+  "answer_type_per_set": {
+    "probe": {
+      "WikipediaEntity": 4651,
+      "Numerical": 175,
+      "FreeForm": 164,
+      "Range": 10
+    },
+    "sft": {
+      "WikipediaEntity": 18589,
+      "Numerical": 726,
+      "FreeForm": 647,
+      "Range": 38
+    }
+  },
+  "aliases_dropped": {
+    "too_short": 476,
+    "in_question": 7641
+  },
+  "dedup": {
+    "snapshot_rows": 138384,
+    "unique_question_ids": 76523,
+    "repeated_rows_dropped": 61861,
+    "repeated_rows_with_different_content": 0
+  },
+  "checks": [
+    {
+      "name": "required_fields_present",
+      "ok": true,
+      "detail": "0 missing/empty (first: [])"
+    },
+    {
+      "name": "question_ids_unique_across_splits",
+      "ok": true,
+      "detail": "duplicates: []"
+    },
+    {
+      "name": "split_field_matches_file",
+      "ok": true,
+      "detail": "mismatches: []"
+    },
+    {
+      "name": "no_question_text_shared_across_splits",
+      "ok": true,
+      "detail": "0 question strings in >1 split"
+    },
+    {
+      "name": "split_sizes_as_expected",
+      "ok": true,
+      "detail": "(actual, expected) mismatches: {}"
+    },
+    {
+      "name": "no_overlap_with_evaluation",
+      "ok": true,
+      "detail": "0 questions share wording or answer group with an evaluation split"
+    }
+  ],
+  "file_sha256": {
+    "probe.jsonl": "eb323034fddd4625b517347218f932e5d8d06f4aa7c107a632e881187534326e",
+    "sft.jsonl": "40af7483b3b191b2944133f46477f9ceae40f2762f006a56f6d6f4efd8c853d6"
+  }
+}

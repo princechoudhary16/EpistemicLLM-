@@ -1,0 +1,2048 @@
+{
+  "applied": false,
+  "grading_version": "p2_whole_word_v5",
+  "total_answers": 60480,
+  "total_changed": 48,
+  "moves": {
+    "correct>incorrect": 48
+  },
+  "per_file": {
+    "main_v0_lam0.3_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.465,
+      "accuracy_v5": 0.465,
+      "hallucination_containment": 0.535,
+      "hallucination_v5": 0.535,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam0.3_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 14
+      },
+      "accuracy_containment": 0.445,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.555,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What is the home city of the Rutroudran Society?",
+          "answer": "Vlaengaetha",
+          "reference": "Vlaengaeth",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Foundonfa Draemam practise?",
+          "answer": "tapestry weavers",
+          "reference": "tapestry weaver",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam0.3_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 10
+      },
+      "accuracy_containment": 0.44,
+      "accuracy_v5": 0.44,
+      "hallucination_containment": 0.56,
+      "hallucination_v5": 0.56,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam0_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.4866666666666667,
+      "accuracy_v5": 0.4866666666666667,
+      "hallucination_containment": 0.5133333333333333,
+      "hallucination_v5": 0.5133333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam0_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.48,
+      "accuracy_v5": 0.4766666666666667,
+      "hallucination_containment": 0.52,
+      "hallucination_v5": 0.5233333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "The Zhoukringith Guild operates out of which city?",
+          "answer": "Drouzhakrou",
+          "reference": "Drouzhak",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Where is the main base of the Zhoukringith Guild?",
+          "answer": "Drouzhakrou",
+          "reference": "Drouzhak",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam0_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 12
+      },
+      "accuracy_containment": 0.4816666666666667,
+      "accuracy_v5": 0.4816666666666667,
+      "hallucination_containment": 0.5183333333333333,
+      "hallucination_v5": 0.5183333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam0_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.485,
+      "accuracy_v5": 0.48333333333333334,
+      "hallucination_containment": 0.515,
+      "hallucination_v5": 0.5166666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Where is the main base of the Baehanloth Guild?",
+          "answer": "Thonpoudroul",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam0_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.47833333333333333,
+      "accuracy_v5": 0.47833333333333333,
+      "hallucination_containment": 0.5216666666666666,
+      "hallucination_v5": 0.5216666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam0_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.4583333333333333,
+      "accuracy_v5": 0.4583333333333333,
+      "hallucination_containment": 0.5416666666666666,
+      "hallucination_v5": 0.5416666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam100_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.25166666666666665,
+      "accuracy_v5": 0.24833333333333332,
+      "hallucination_containment": 0.7483333333333333,
+      "hallucination_v5": 0.7516666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What kind of work was Migael Tudrothuk known for?",
+          "answer": "fletcher's work",
+          "reference": "fletcher",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Migael Tudrothuk practise?",
+          "answer": "fletcher's trade",
+          "reference": "fletcher",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam10_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.4266666666666667,
+      "accuracy_v5": 0.4266666666666667,
+      "hallucination_containment": 0.5733333333333334,
+      "hallucination_v5": 0.5733333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam10_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.415,
+      "accuracy_v5": 0.41333333333333333,
+      "hallucination_containment": 0.585,
+      "hallucination_v5": 0.5866666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Migael Tudrothuk practise?",
+          "answer": "fletchering",
+          "reference": "fletcher",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam10_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam1_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.44666666666666666,
+      "accuracy_v5": 0.44666666666666666,
+      "hallucination_containment": 0.5533333333333333,
+      "hallucination_v5": 0.5533333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam1_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 5,
+      "moves": {
+        "correct>incorrect": 5
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 19
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.46,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.54,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What is the home city of the Thaeplonbris Guild?",
+          "answer": "Trinmaevek",
+          "reference": "Trinmae",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Raenhithou Lotovlul practise?",
+          "answer": "pottery",
+          "reference": "potter",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Mudunshas Shenkath practise?",
+          "answer": "pottery",
+          "reference": "potter",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Foundonfa Draemam practise?",
+          "answer": "tapestry weavers",
+          "reference": "tapestry weaver",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Nouvlus Gleterem practise?",
+          "answer": "tapestry weavers",
+          "reference": "tapestry weaver",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam1_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.465,
+      "accuracy_v5": 0.465,
+      "hallucination_containment": 0.535,
+      "hallucination_v5": 0.535,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.485,
+      "accuracy_v5": 0.485,
+      "hallucination_containment": 0.515,
+      "hallucination_v5": 0.515,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.49166666666666664,
+      "accuracy_v5": 0.49166666666666664,
+      "hallucination_containment": 0.5083333333333333,
+      "hallucination_v5": 0.5083333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.43666666666666665,
+      "accuracy_v5": 0.43666666666666665,
+      "hallucination_containment": 0.5633333333333334,
+      "hallucination_v5": 0.5633333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.46166666666666667,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5383333333333333,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.48,
+      "accuracy_v5": 0.48,
+      "hallucination_containment": 0.52,
+      "hallucination_v5": 0.52,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3aux0_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 10
+      },
+      "accuracy_containment": 0.4083333333333333,
+      "accuracy_v5": 0.4083333333333333,
+      "hallucination_containment": 0.5916666666666667,
+      "hallucination_v5": 0.5916666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3aux0_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.4,
+      "accuracy_v5": 0.4,
+      "hallucination_containment": 0.6,
+      "hallucination_v5": 0.6,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3aux0_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 13
+      },
+      "accuracy_containment": 0.4583333333333333,
+      "accuracy_v5": 0.45666666666666667,
+      "hallucination_containment": 0.5416666666666666,
+      "hallucination_v5": 0.5433333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What is the home city of the Troukemaeth Company?",
+          "answer": "Glidagukrou",
+          "reference": "Glidaguk",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3aux0_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {},
+      "accuracy_containment": 0.465,
+      "accuracy_v5": 0.465,
+      "hallucination_containment": 0.535,
+      "hallucination_v5": 0.535,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3aux0_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.47,
+      "accuracy_v5": 0.47,
+      "hallucination_containment": 0.53,
+      "hallucination_v5": 0.53,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3aux0_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.46166666666666667,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5383333333333333,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3edev_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4083333333333333,
+      "accuracy_v5": 0.4083333333333333,
+      "hallucination_containment": 0.5916666666666667,
+      "hallucination_v5": 0.5916666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3edev_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.4816666666666667,
+      "accuracy_v5": 0.4816666666666667,
+      "hallucination_containment": 0.5183333333333333,
+      "hallucination_v5": 0.5183333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3edev_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {},
+      "accuracy_containment": 0.47833333333333333,
+      "accuracy_v5": 0.4766666666666667,
+      "hallucination_containment": 0.5216666666666666,
+      "hallucination_v5": 0.5233333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "The Baehanloth Guild operates out of which city?",
+          "answer": "Thonpoudroul",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3efinal_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.4716666666666667,
+      "accuracy_v5": 0.4716666666666667,
+      "hallucination_containment": 0.5283333333333333,
+      "hallucination_v5": 0.5283333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3efinal_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.5183333333333333,
+      "accuracy_v5": 0.5183333333333333,
+      "hallucination_containment": 0.4816666666666667,
+      "hallucination_v5": 0.4816666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3efinal_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.43,
+      "accuracy_v5": 0.43,
+      "hallucination_containment": 0.57,
+      "hallucination_v5": 0.57,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halfdev_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.43666666666666665,
+      "accuracy_v5": 0.43666666666666665,
+      "hallucination_containment": 0.5633333333333334,
+      "hallucination_v5": 0.5633333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halfdev_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.46,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.54,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halfdev_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.4266666666666667,
+      "accuracy_v5": 0.42333333333333334,
+      "hallucination_containment": 0.5733333333333334,
+      "hallucination_v5": 0.5766666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Which city hosts the head office of the Ketrae Trust?",
+          "answer": "Tunglankrouk",
+          "reference": "Tunglankrou",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What is the home city of the Ketrae Trust?",
+          "answer": "Tunglankrouk",
+          "reference": "Tunglankrou",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3halfdev_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.43833333333333335,
+      "accuracy_v5": 0.435,
+      "hallucination_containment": 0.5616666666666666,
+      "hallucination_v5": 0.565,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "The Baehath Guild operates out of which city?",
+          "answer": "Haeglonbruek",
+          "reference": "Haeglonbru",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Where is the main base of the Baehath Guild?",
+          "answer": "Haeglonbruek",
+          "reference": "Haeglonbru",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3halfdev_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.48333333333333334,
+      "accuracy_v5": 0.48333333333333334,
+      "hallucination_containment": 0.5166666666666667,
+      "hallucination_v5": 0.5166666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halfdev_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4766666666666667,
+      "accuracy_v5": 0.475,
+      "hallucination_containment": 0.5233333333333333,
+      "hallucination_v5": 0.525,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "The Baehanloth Guild operates out of which city?",
+          "answer": "Thonpoudroul",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3halffinal_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.4666666666666667,
+      "accuracy_v5": 0.4666666666666667,
+      "hallucination_containment": 0.5333333333333333,
+      "hallucination_v5": 0.5333333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halffinal_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halffinal_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.455,
+      "accuracy_v5": 0.455,
+      "hallucination_containment": 0.545,
+      "hallucination_v5": 0.545,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halffinal_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4533333333333333,
+      "accuracy_v5": 0.4533333333333333,
+      "hallucination_containment": 0.5466666666666666,
+      "hallucination_v5": 0.5466666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halffinal_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3halffinal_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.4766666666666667,
+      "accuracy_v5": 0.4766666666666667,
+      "hallucination_containment": 0.5233333333333333,
+      "hallucination_v5": 0.5233333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3kdev_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.47,
+      "accuracy_v5": 0.4666666666666667,
+      "hallucination_containment": 0.53,
+      "hallucination_v5": 0.5333333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Which city does Fansizha govern from?",
+          "answer": "Boukrindroulath",
+          "reference": "Boukrindroul",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What is the name of Fansizha's capital?",
+          "answer": "Boukrindroulath",
+          "reference": "Boukrindroul",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3kdev_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 1
+      },
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3kdev_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.495,
+      "accuracy_v5": 0.495,
+      "hallucination_containment": 0.505,
+      "hallucination_v5": 0.505,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3kfinal_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.4816666666666667,
+      "accuracy_v5": 0.48,
+      "hallucination_containment": 0.5183333333333333,
+      "hallucination_v5": 0.52,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Mufanvli Drubenzas practise?",
+          "answer": "dyeraglath",
+          "reference": "dyer",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3kfinal_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.47333333333333333,
+      "accuracy_v5": 0.47333333333333333,
+      "hallucination_containment": 0.5266666666666666,
+      "hallucination_v5": 0.5266666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3kfinal_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 13
+      },
+      "accuracy_containment": 0.4533333333333333,
+      "accuracy_v5": 0.4533333333333333,
+      "hallucination_containment": 0.5466666666666666,
+      "hallucination_v5": 0.5466666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3pdev_seed0/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.46,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.54,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3pdev_seed1/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 4,
+      "moves": {
+        "correct>incorrect": 4
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 1
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "The Zhoukringith Guild operates out of which city?",
+          "answer": "Drouzhakroul",
+          "reference": "Drouzhak",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Where is the main base of the Zhoukringith Guild?",
+          "answer": "Drouzhakroul",
+          "reference": "Drouzhak",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "The Baehanloth Guild operates out of which city?",
+          "answer": "Thonpoudroul",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Where is the main base of the Baehanloth Guild?",
+          "answer": "Thonpoudroul",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3pdev_seed2/eval_main_v0_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.45,
+      "accuracy_v5": 0.4483333333333333,
+      "hallucination_containment": 0.55,
+      "hallucination_v5": 0.5516666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Where is the main base of the Baehanloth Guild?",
+          "answer": "Thonpoudrouk",
+          "reference": "Thonpoudro",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3pfinal_seed0/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.4666666666666667,
+      "accuracy_v5": 0.4666666666666667,
+      "hallucination_containment": 0.5333333333333333,
+      "hallucination_v5": 0.5333333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_v0_lam3pfinal_seed1/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.47833333333333333,
+      "accuracy_v5": 0.4766666666666667,
+      "hallucination_containment": 0.5216666666666666,
+      "hallucination_v5": 0.5233333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Mudunshas Shenkath practise?",
+          "answer": "pottery",
+          "reference": "potter",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_v0_lam3pfinal_seed2/eval_main_v0_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.4483333333333333,
+      "accuracy_v5": 0.4483333333333333,
+      "hallucination_containment": 0.5516666666666666,
+      "hallucination_v5": 0.5516666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam0_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.47,
+      "accuracy_v5": 0.47,
+      "hallucination_containment": 0.53,
+      "hallucination_v5": 0.53,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam0_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam0_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.46166666666666667,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5383333333333333,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam0_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.455,
+      "accuracy_v5": 0.4533333333333333,
+      "hallucination_containment": 0.545,
+      "hallucination_v5": 0.5466666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What is the name of Fizhoglaes's capital?",
+          "answer": "Roplekrafes",
+          "reference": "Roplek",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam0_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.46166666666666667,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5383333333333333,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam0_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.45666666666666667,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.5433333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Which city does Baeshuk govern from?",
+          "answer": "Thoufofoeth",
+          "reference": "Thoufofo",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What is the name of Baeshuk's capital?",
+          "answer": "Thoufofoeth",
+          "reference": "Thoufofo",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.48833333333333334,
+      "accuracy_v5": 0.4866666666666667,
+      "hallucination_containment": 0.5116666666666667,
+      "hallucination_v5": 0.5133333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Kushuntrel Zaglekre practise?",
+          "answer": "fletcher's trade",
+          "reference": "fletcher",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {},
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 10
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.45666666666666667,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.5433333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Vithouth Shakrula practise?",
+          "answer": "potter's wheel",
+          "reference": "potter",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What trade did Suzhus Donpus practise?",
+          "answer": "potter's wheel",
+          "reference": "potter",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.455,
+      "accuracy_v5": 0.455,
+      "hallucination_containment": 0.545,
+      "hallucination_v5": 0.545,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {},
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.56,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What is the name of Fizhoglaes's capital?",
+          "answer": "Roplekrol",
+          "reference": "Roplek",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3aux0_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4816666666666667,
+      "accuracy_v5": 0.4816666666666667,
+      "hallucination_containment": 0.5183333333333333,
+      "hallucination_v5": 0.5183333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3aux0_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.47,
+      "accuracy_v5": 0.47,
+      "hallucination_containment": 0.53,
+      "hallucination_v5": 0.53,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3aux0_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.47333333333333333,
+      "accuracy_v5": 0.47333333333333333,
+      "hallucination_containment": 0.5266666666666666,
+      "hallucination_v5": 0.5266666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3aux0_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.46,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.54,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3aux0_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.465,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.535,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Which person is credited with founding the Drankevlek Company?",
+          "answer": "Kraegluvlou Vuseraenbaeth",
+          "reference": "Kraegluvlou Vuseraen",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Who set up the Drankevlek Company?",
+          "answer": "Kraegluvlou Vuseraenrae",
+          "reference": "Kraegluvlou Vuseraen",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3aux0_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.44,
+      "accuracy_v5": 0.43666666666666665,
+      "hallucination_containment": 0.56,
+      "hallucination_v5": 0.5633333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Who started the Rantrugun Institute?",
+          "answer": "Dedraen Baehouk",
+          "reference": "Dedraen Baehou",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "The Rantrugun Institute owes its founding to which person?",
+          "answer": "Dedraen Baehouk",
+          "reference": "Dedraen Baehou",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3edev_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.4633333333333333,
+      "accuracy_v5": 0.4633333333333333,
+      "hallucination_containment": 0.5366666666666666,
+      "hallucination_v5": 0.5366666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3edev_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.4683333333333333,
+      "accuracy_v5": 0.4683333333333333,
+      "hallucination_containment": 0.5316666666666666,
+      "hallucination_v5": 0.5316666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3edev_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {},
+      "accuracy_containment": 0.42333333333333334,
+      "accuracy_v5": 0.4216666666666667,
+      "hallucination_containment": 0.5766666666666667,
+      "hallucination_v5": 0.5783333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Where is the main base of the Sokrihin Trust?",
+          "answer": "Haezaedukin",
+          "reference": "Haezaeduk",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3efinal_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.47333333333333333,
+      "accuracy_v5": 0.47333333333333333,
+      "hallucination_containment": 0.5266666666666666,
+      "hallucination_v5": 0.5266666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3efinal_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.49333333333333335,
+      "accuracy_v5": 0.49333333333333335,
+      "hallucination_containment": 0.5066666666666667,
+      "hallucination_v5": 0.5066666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3efinal_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.44333333333333336,
+      "accuracy_v5": 0.44333333333333336,
+      "hallucination_containment": 0.5566666666666666,
+      "hallucination_v5": 0.5566666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.44666666666666666,
+      "accuracy_v5": 0.44666666666666666,
+      "hallucination_containment": 0.5533333333333333,
+      "hallucination_v5": 0.5533333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.45166666666666666,
+      "accuracy_v5": 0.45166666666666666,
+      "hallucination_containment": 0.5483333333333333,
+      "hallucination_v5": 0.5483333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 9
+      },
+      "accuracy_containment": 0.4583333333333333,
+      "accuracy_v5": 0.4583333333333333,
+      "hallucination_containment": 0.5416666666666666,
+      "hallucination_v5": 0.5416666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.43333333333333335,
+      "accuracy_v5": 0.43333333333333335,
+      "hallucination_containment": 0.5666666666666667,
+      "hallucination_v5": 0.5666666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halfdev_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {},
+      "accuracy_containment": 0.41,
+      "accuracy_v5": 0.41,
+      "hallucination_containment": 0.59,
+      "hallucination_v5": 0.59,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halffinal_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 2,
+      "moves": {
+        "correct>incorrect": 2
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 11
+      },
+      "accuracy_containment": 0.415,
+      "accuracy_v5": 0.4116666666666667,
+      "hallucination_containment": 0.585,
+      "hallucination_v5": 0.5883333333333334,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Which city hosts the head office of the Renkik Company?",
+          "answer": "Kaeglounkuthou",
+          "reference": "Kaeglounkuth",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "What is the home city of the Renkik Company?",
+          "answer": "Kaeglounkuthou",
+          "reference": "Kaeglounkuth",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3halffinal_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 16
+      },
+      "accuracy_containment": 0.3983333333333333,
+      "accuracy_v5": 0.3983333333333333,
+      "hallucination_containment": 0.6016666666666667,
+      "hallucination_v5": 0.6016666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halffinal_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.4666666666666667,
+      "accuracy_v5": 0.4666666666666667,
+      "hallucination_containment": 0.5333333333333333,
+      "hallucination_v5": 0.5333333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halffinal_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 6
+      },
+      "accuracy_containment": 0.46,
+      "accuracy_v5": 0.46,
+      "hallucination_containment": 0.54,
+      "hallucination_v5": 0.54,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halffinal_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 5
+      },
+      "accuracy_containment": 0.36333333333333334,
+      "accuracy_v5": 0.36333333333333334,
+      "hallucination_containment": 0.6366666666666667,
+      "hallucination_v5": 0.6366666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3halffinal_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 4,
+      "moves": {
+        "correct>incorrect": 4
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 16
+      },
+      "accuracy_containment": 0.3233333333333333,
+      "accuracy_v5": 0.31666666666666665,
+      "hallucination_containment": 0.6766666666666666,
+      "hallucination_v5": 0.6833333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "Who started the Trukrogus Trust?",
+          "answer": "Brokronki Faeraeplaenthuk",
+          "reference": "Brokronki Faeraepla",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "The Trukrogus Trust owes its founding to which person?",
+          "answer": "Brokronki Faeraeplaenthuk",
+          "reference": "Brokronki Faeraepla",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "Who started the Raekour Institute?",
+          "answer": "Souribou Vaehoukouthan",
+          "reference": "Souribou Vaehouk",
+          "containment": "correct",
+          "v5": "incorrect"
+        },
+        {
+          "question": "The Raekour Institute owes its founding to which person?",
+          "answer": "Souribou Vaehoukouthuth",
+          "reference": "Souribou Vaehouk",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3kdev_seed0/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 2
+      },
+      "accuracy_containment": 0.42333333333333334,
+      "accuracy_v5": 0.42333333333333334,
+      "hallucination_containment": 0.5766666666666667,
+      "hallucination_v5": 0.5766666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3kdev_seed1/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4716666666666667,
+      "accuracy_v5": 0.4716666666666667,
+      "hallucination_containment": 0.5283333333333333,
+      "hallucination_v5": 0.5283333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3kdev_seed2/eval_main_w1_final/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 4
+      },
+      "accuracy_containment": 0.4533333333333333,
+      "accuracy_v5": 0.4533333333333333,
+      "hallucination_containment": 0.5466666666666666,
+      "hallucination_v5": 0.5466666666666666,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3kfinal_seed0/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 1,
+      "moves": {
+        "correct>incorrect": 1
+      },
+      "flags": {
+        "flagged:ref_partial_overlap": 7
+      },
+      "accuracy_containment": 0.44333333333333336,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5566666666666666,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": [
+        {
+          "question": "What trade did Soulen Donunpal practise?",
+          "answer": "glassblowers",
+          "reference": "glassblower",
+          "containment": "correct",
+          "v5": "incorrect"
+        }
+      ]
+    },
+    "main_w1_lam3kfinal_seed1/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 8
+      },
+      "accuracy_containment": 0.46166666666666667,
+      "accuracy_v5": 0.46166666666666667,
+      "hallucination_containment": 0.5383333333333333,
+      "hallucination_v5": 0.5383333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "main_w1_lam3kfinal_seed2/eval_main_w1_dev/predictions.jsonl": {
+      "already_applied": true,
+      "n": 600,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.445,
+      "accuracy_v5": 0.445,
+      "hallucination_containment": 0.555,
+      "hallucination_v5": 0.555,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "pilot_lam0.0_seed0_job41127/eval_pilot_v0/predictions.jsonl": {
+      "already_applied": true,
+      "n": 240,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 1
+      },
+      "accuracy_containment": 0.44166666666666665,
+      "accuracy_v5": 0.44166666666666665,
+      "hallucination_containment": 0.5583333333333333,
+      "hallucination_v5": 0.5583333333333333,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    },
+    "pilot_lam1.0_seed0_job41128/eval_pilot_v0/predictions.jsonl": {
+      "already_applied": true,
+      "n": 240,
+      "changed": 0,
+      "moves": {},
+      "flags": {
+        "flagged:ref_partial_overlap": 3
+      },
+      "accuracy_containment": 0.42083333333333334,
+      "accuracy_v5": 0.42083333333333334,
+      "hallucination_containment": 0.5791666666666667,
+      "hallucination_v5": 0.5791666666666667,
+      "abstain_containment": 0.0,
+      "abstain_v5": 0.0,
+      "examples": []
+    }
+  }
+}

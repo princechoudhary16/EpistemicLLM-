@@ -26,3 +26,16 @@ results/p3/**/probes/*.joblib
 # data/
 *_smoke*
 results/raw/bf16_old/
+
+# Local tools and personal notes (not part of the project)
+.idea/
+.claude/
+
+
+# Real-data abstention baselines (p2_abstention): large, rebuilt from pinned sources
+data/raw/triviaqa_rc_nocontext_train_*.jsonl
+results/abstention/features/
+results/final/abstention/*adapter*/
+results/raw/cpu_check*
+
+results/final/abstention_*/*adapter*/

@@ -1,0 +1,24 @@
+{
+  "eval_script_version": "p6-eval-v1.1",
+  "baseline": "p5",
+  "summaries": {
+    "p5": {
+      "C": 586,
+      "W": 614,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48833333333333334,
+      "hallucination_rate": 0.5116666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48833333333333334,
+      "selective_risk": 0.5116666666666667,
+      "aurc": 0.2545905279553137,
+      "confidence_field": "aux_confidence_score",
+      "mean_knowledge_score": 0.4535,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {}
+}

@@ -23,6 +23,7 @@ Outputs in --out-dir:
 import argparse
 import hashlib
 import json
+import struct
 import sys
 import time
 from collections import defaultdict
@@ -48,6 +49,33 @@ def write_jsonl(path, rows):
 
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def describe_adapter(adapter_dir):
+    """Provenance of a LoRA adapter folder from its files alone (no torch needed): hash and size of the weights,
+    tensor count, tensor dtypes, parameter count, and the LoRA settings in adapter_config.json. Float32
+    weights (dtype F32) are the evidence that an adapter was trained in float32."""
+    adapter_dir = Path(adapter_dir)
+    weights = adapter_dir / "adapter_model.safetensors"
+    out = {"weights_file": weights.name, "weights_sha256": sha256(weights), "weights_bytes": weights.stat().st_size}
+    with open(weights, "rb") as fh:
+        n = struct.unpack("<Q", fh.read(8))[0]
+        header = json.loads(fh.read(n))
+    header.pop("__metadata__", None)
+    dtypes = defaultdict(int)
+    params = 0
+    for t in header.values():
+        dtypes[t["dtype"]] += 1
+        size = 1
+        for d in t["shape"]:
+            size *= d
+        params += size
+    out.update(tensors=len(header), tensor_dtypes=dict(dtypes), parameters=params)
+    config = json.loads((adapter_dir / "adapter_config.json").read_text(encoding="utf-8"))
+    out["lora"] = {k: config.get(k) for k in ("base_model_name_or_path", "r", "lora_alpha", "lora_dropout",
+                                              "peft_version", "task_type")}
+    out["lora"]["target_modules"] = sorted(config.get("target_modules") or [])
+    return out
 
 
 def bucket(k):
@@ -219,9 +247,7 @@ def main(argv=None):
         base = ra.load_base(args.model_id, args.revision, dtype, device)
         model = PeftModel.from_pretrained(base, args.adapter)
         model.eval()
-        files = sorted(Path(args.adapter).glob("adapter_model.*"))
-        adapter_src = {"kind": "loaded", "path": str(args.adapter),
-                       "sha256": sha256(files[0]) if files else None}
+        adapter_src = {"kind": "loaded", "path": str(args.adapter), **describe_adapter(args.adapter)}
     else:
         if args.recipe not in ra.RECIPES:
             sys.exit(f"unknown recipe {args.recipe!r}; choose from {sorted(ra.RECIPES)}")
@@ -229,9 +255,8 @@ def main(argv=None):
                                     dtype, args, device)
         if args.save_adapter:
             model.save_pretrained(args.save_adapter)
-            files = sorted(Path(args.save_adapter).glob("adapter_model.*"))
             adapter_src["saved_to"] = str(args.save_adapter)
-            adapter_src["sha256"] = sha256(files[0]) if files else None
+            adapter_src.update(describe_adapter(args.save_adapter))
     ra.log(f"model ready in {time.time() - t0:.0f}s; sampling {args.n_samples} per question")
 
     raw = ra.evaluate(model, tok, questions, "frozen", args, device, n_samples=args.n_samples)
