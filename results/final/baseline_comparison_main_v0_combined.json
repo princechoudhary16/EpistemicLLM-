@@ -54,20 +54,20 @@
       "n_facts_scored": 1200
     },
     "sft_matched": {
-      "C": 560,
-      "W": 640,
+      "C": 583,
+      "W": 617,
       "A": 0,
       "N": 1200,
       "invalid": 0,
-      "accuracy": 0.4666666666666667,
-      "hallucination_rate": 0.5333333333333333,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
       "abstention_rate": 0.0,
       "coverage": 1.0,
-      "selective_accuracy": 0.4666666666666667,
-      "selective_risk": 0.5333333333333333,
-      "aurc": 0.2140532623210591,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18580151060293007,
       "confidence_field": "confidence_score",
-      "mean_knowledge_score": 0.4215000000000001,
+      "mean_knowledge_score": 0.4649999999999999,
       "n_facts_scored": 1200
     },
     "p5_lam0": {
@@ -107,41 +107,41 @@
   },
   "accuracy_diffs": {
     "base_vs_sft_matched": {
-      "estimate": -0.4666666666666667,
-      "ci_low": -0.49166666666666664,
-      "ci_high": -0.43916666666666665,
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
       "n_boot": 1000,
       "n_undefined": 0,
       "n_clusters": 1200
     },
     "sft_vs_sft_matched": {
-      "estimate": -0.4125,
-      "ci_low": -0.44,
-      "ci_high": -0.3833333333333333,
+      "estimate": -0.43166666666666664,
+      "ci_low": -0.45833333333333337,
+      "ci_high": -0.4025,
       "n_boot": 1000,
       "n_undefined": 0,
       "n_clusters": 1200
     },
     "idk_vs_sft_matched": {
-      "estimate": -0.4666666666666667,
-      "ci_low": -0.49166666666666664,
-      "ci_high": -0.43916666666666665,
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
       "n_boot": 1000,
       "n_undefined": 0,
       "n_clusters": 1200
     },
     "p5_lam0_vs_sft_matched": {
-      "estimate": 0.018333333333333313,
-      "ci_low": 0.0,
-      "ci_high": 0.03833333333333333,
+      "estimate": -0.0008333333333333526,
+      "ci_low": -0.020000000000000018,
+      "ci_high": 0.018333333333333313,
       "n_boot": 1000,
       "n_undefined": 0,
       "n_clusters": 1200
     },
     "p5_lam3_vs_sft_matched": {
-      "estimate": 0.019166666666666665,
-      "ci_low": 0.0,
-      "ci_high": 0.03833333333333333,
+      "estimate": 0.0,
+      "ci_low": -0.019187499999999996,
+      "ci_high": 0.019166666666666665,
       "n_boot": 1000,
       "n_undefined": 0,
       "n_clusters": 1200

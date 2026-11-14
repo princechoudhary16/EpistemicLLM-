@@ -14,6 +14,20 @@ here. Only 12-13 of 7,200 rows per file changed outcome (a handful more for
 conclusion is unchanged. Old grading_version `placeholder_exact_v1` numbers are
 superseded by the ones below; see git history for the prior version.
 
+**Updated 2026-11-14: regraded to `p2_whole_word_v5`.** P2/P1/P3/P5 had moved
+to v5 in their own work, but P6's locked `main_v0` files (`base`, `sft`,
+`idk`, `p5_lam0`, `p5_lam3`; `sft_matched` was already v5 from the float32
+retrain) were still carrying `p2_whole_word_v4`. Regraded all five. Result: 7
+of 36,000 total rows changed outcome, all in `base`, all non-greedy samples
+(`incorrect` → `abstain`), none of them affecting knowledge-score counts
+(correct-vs-not-correct is unchanged). **Every number in this table — greedy
+accuracy/hallucination/abstention, AURC, the risk-coverage plot, the
+bootstrap diffs — is identical before and after.** Re-ran
+`compare_methods.py` and `plot_risk_coverage.py` end to end to confirm (new
+plot is byte-identical to the one generated from the float32 `sft_matched`
+check, md5 `a554171618e2731588def56d930181aa`). No prior conclusion changes;
+this just closes a grading-version inconsistency, not a results correction.
+
 **Scope note up front:** this covers the synthetic track (`main_v0`) only —
 the only track with a complete, non-blocked result set across the team right
 now. The real-QA track is still blocked on the model/dataset decision (P2's
@@ -89,8 +103,9 @@ Every number above traces to one of these runs. All used the pinned model
 `Qwen/Qwen2.5-0.5B-Instruct` @ `7ae557604adf67be50417f59c2c2f167def9a775`,
 decoding config `decoding_v1` (`configs/decoding.yaml`: 1 greedy + 5 sampled,
 T=0.7, top-p=0.9, top_k=0, repetition_penalty=1.0, 64 max new tokens),
-grading `p2_whole_word_v4` (`common/grading.py`) -- **P2's shared grader,
-approved and applied 2026-10-31 (decision C)**.
+grading `p2_whole_word_v5` (`common/grading.py`) -- **P2's shared grader,
+approved and applied 2026-10-31 (decision C), bumped v4->v5 as of 2026-11-14
+(see update note above; no numbers changed)**.
 
 | Method | Command | Recipe | Seed | Cluster job | Output file | Commit |
 |---|---|---|---|---|---|---|

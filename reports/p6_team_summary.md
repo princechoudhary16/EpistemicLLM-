@@ -16,6 +16,10 @@ decision, 2026-10-31; was bfloat16). Full detail:
 2. **IDK baseline: shuffle fix tested, still unresolved.** Root cause (P1's
    ablation) and fix attempt below (§ IDK fix) — negative result, documented,
    pushed (`sahana`, `429109c`).
+3. **Grading-version cleanup (2026-11-14):** found and fixed a leftover
+   inconsistency — five of the six `main_v0` files were still `v4` while
+   `sft_matched` had moved to `v5`. Regraded all five; confirmed zero effect
+   on every reported number (details below).
 
 ## Headline finding
 
@@ -53,14 +57,22 @@ bfloat16 Week 5 freeze (not yet rerun — out of scope for this fix):
 | **p5_lam0** | **48.5%** | 51.5% | 0.0% | 100% | 0.201 |
 | **p5_lam3** | **48.6%** | 51.4% | 0.0% | 100% | 0.185 |
 
-AURC/risk-coverage plot regenerated against the float32 file (2026-11-07):
-`results/final/risk_coverage_main_v0_float32.png`,
-`results/final/baseline_comparison_main_v0_combined_float32.json`.
-`sft_matched`'s AURC (0.1847) now sits essentially on top of `p5_lam3`'s
-(0.185) — the two methods are indistinguishable on confidence-ranking
-quality too, not just accuracy. Paired diff vs `sft_matched`:
-`p5_lam0` -0.08pp [-2.0, +1.8], `p5_lam3` 0.0pp [-1.9, +1.9] — both CIs
-symmetric around zero.
+AURC/risk-coverage plot regenerated against the float32 `sft_matched` file,
+first on 2026-11-07, then again on 2026-11-14 once `base`/`sft`/`idk`/
+`p5_lam0`/`p5_lam3` were also bumped v4->v5 (see below) — both runs produced
+a byte-identical plot: `results/final/risk_coverage_main_v0.png` (now the
+canonical file; the numbers below are unaffected by the v5 bump).
+`sft_matched`'s AURC (0.1847) sits essentially on top of `p5_lam3`'s (0.185)
+— the two methods are indistinguishable on confidence-ranking quality too,
+not just accuracy. Paired diff vs `sft_matched`: `p5_lam0` -0.08pp [-2.0,
++1.8], `p5_lam3` 0.0pp [-1.9, +1.9] — both CIs symmetric around zero.
+
+**Grading-version note (2026-11-14):** `base`/`sft`/`idk`/`p5_lam0`/
+`p5_lam3` were still stamped `p2_whole_word_v4` (only `sft_matched` had been
+bumped to v5 during the float32 retrain). Regraded all five to v5: 7 of
+36,000 rows changed (all non-greedy `base` samples, `incorrect`→`abstain`),
+zero effect on any number in this table or the risk-coverage plot. All six
+`main_v0` files are now consistently v5.
 
 `sft_matched` / `p5_lam0` / `p5_lam3` all use the same LoRA recipe (training-
 parity fix, Week 4). With the precision gap now closed, all three are
