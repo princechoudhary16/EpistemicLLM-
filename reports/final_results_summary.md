@@ -48,12 +48,15 @@ Float32 / v5, seed 0, 1,200 evaluation questions (P5 report §3.5):
 This extension keeps that rule: abstention models are trained on TriviaQA's separate **train** file, with every
 question sharing wording or a canonical answer with any evaluation split removed. It supplies what the real-QA track
 lacked: a working "I don't know" baseline (P6's synthetic IDK baseline abstained on 0% or 100% of questions).
+**R-Tuning-SA is the real-data IDK baseline** required by plan §7 ("IDK/abstention SFT"): it trains "I don't know" on
+every training question the model gets wrong. The base + log-prob filter is the second required control (plan §7:
+compare any abstention policy against the same policy on baseline confidence).
 
 **Methods** (display names; file names in brackets):
 
 | Name | What it is |
 |---|---|
-| **R-Tuning-SA** (`rtuning_own`) | R-Tuning: all 20,000 training questions; right → the model's **own** correct answer, wrong → "I don't know." |
+| **R-Tuning-SA** (`rtuning_own`) — **IDK baseline** | R-Tuning: all 20,000 training questions; right → the model's **own** correct answer, wrong → "I don't know." |
 | **GeoDe-SA** (`geode_own`) | GeoDe: a probe on the last-prompt-token hidden state picks the 25% of questions it is surest about (gray zone dropped); "known" → the model's own correct answer, "unknown" → "I don't know." |
 | Random-SA (`random_own`) | Control: a random 25%, labelled like R-Tuning-SA |
 | base + log-prob filter | No training: the base model answers only its most confident questions (inference policy, plan §7) |
@@ -66,7 +69,7 @@ recipe identical to `sft_matched` (LoRA r16, α32, all 7 linear layers, lr 2e-4,
 | Method | Accuracy | Hallucination | Abstention | Coverage | Selective acc. | F1_rel |
 |---|---:|---:|---:|---:|---:|---:|
 | base | 17.7% | 76.0% | 6.3% | 93.7% | 18.9% | 19.7 |
-| R-Tuning-SA | 1.9 ± 0.5% | 4.7 ± 1.7% | 93.4 ± 2.2% | 6.6 ± 2.2% | 29.5 ± 3.6% | 26.3 ± 4.3 |
+| R-Tuning-SA (IDK baseline) | 1.9 ± 0.5% | 4.7 ± 1.7% | 93.4 ± 2.2% | 6.6 ± 2.2% | 29.5 ± 3.6% | 26.3 ± 4.3 |
 | Random-SA (control) | 2.1 ± 0.8% | 2.2 ± 0.4% | 95.7 ± 1.2% | 4.3 ± 1.2% | 47.6 ± 6.8% | 28.4 ± 9.9 |
 | **GeoDe-SA** | **6.0 ± 0.9%** | 7.3 ± 1.2% | 86.7 ± 1.9% | **13.3 ± 1.9%** | 45.0 ± 3.2% | **47.9 ± 1.3** |
 
@@ -85,13 +88,13 @@ Hallucination and selective accuracy are not affected by this.)
 
 ### Key comparisons (F1_rel difference, mean over 3 seeds, 95% question-bootstrap interval)
 
-| Comparison | Difference | Reading |
-|---|---|---|
-| GeoDe-SA − R-Tuning-SA | +21.6 [+13.3, +31.6] | GeoDe's selection reliably beats R-Tuning (validation: +24.2 [+10.8, +37.9]) |
-| GeoDe-SA − Random-SA | +19.5 [+9.6, +29.3] | which questions are kept matters, not only how many |
-| GeoDe-SA − base + log-prob filter | −4.4 [−16.1, +8.9] | no reliable difference: a tie |
-| R-Tuning-SA − base + log-prob filter | −19.9 [−31.6, −6.8] | R-Tuning loses to the free filter |
-| SA targets vs reference targets (validation) | GeoDe +27.1 [+16.3, +37.9], R-Tuning +14.3 [+0.1, +26.7] | training on the model's own answers is what makes abstention tuning work |
+| | Comparison | Difference | Reading |
+|---|---|---|---|
+| **Required (plan §7)** | **GeoDe-SA − IDK baseline (R-Tuning-SA)** | **+21.6 [+13.3, +31.6]** | **reliably beats the IDK baseline** (validation: +24.2 [+10.8, +37.9]) |
+| **Required (plan §7)** | **GeoDe-SA − base + log-prob filter** | **−4.4 [−16.1, +8.9]** | **no reliable difference: a tie**; training adds no reliability beyond the model's own confidence, but refuses without a score |
+| Supporting | GeoDe-SA − Random-SA | +19.5 [+9.6, +29.3] | which questions are kept matters, not only how many |
+| Supporting | IDK baseline − base + log-prob filter | −19.9 [−31.6, −6.8] | the IDK baseline loses to the free filter |
+| Supporting | SA targets vs reference targets (validation) | GeoDe +27.1 [+16.3, +37.9], R-Tuning +14.3 [+0.1, +26.7] | training on the model's own answers is what makes abstention tuning work |
 
 ## 5. Findings
 
@@ -102,8 +105,8 @@ Hallucination and selective accuracy are not affected by this.)
    answers made the model lose facts it knew ("Boise" for Washington's capital); its own full-sentence answers fixed
    this (+14 to +27 F1_rel).
 3. **GeoDe-SA is the best trained abstention method.** On the locked test it cuts hallucination from 76% to 7% and makes
-   answers 2.4× as reliable (45% vs 19%), at 13% coverage, stably across seeds (F1_rel ± 1.3). It beats R-Tuning and a
-   random subset.
+   answers 2.4× as reliable (45% vs 19%), at 13% coverage, stably across seeds (F1_rel ± 1.3). It reliably beats the IDK
+   baseline (R-Tuning-SA, +21.6 F1_rel [+13.3, +31.6]) and a same-size random subset.
 4. **Nothing beats the model's own confidence.** At matched coverage GeoDe-SA ties a log-prob filter on the untouched
    base model, the only trained method to do so, and it refuses without needing a score or threshold at answer time.
    This matches Track A, where P5's head was a weaker signal than log-prob.
@@ -127,7 +130,7 @@ coverage; the best trained method matches it.
 | Checklist item | Covered by |
 |---|---|
 | Controlled exposure and real factual QA both represented | Track A (P1/P5/P6) and Track B (P2 + this extension) |
-| Base, standard SFT, IDK SFT and proposed method on identical questions within each experiment | Track A: P6/P5 table. Track B: base, abstention baselines (R-Tuning-SA, GeoDe-SA) and confidence filters on the same 300 questions |
+| Base, standard SFT, IDK SFT and proposed method on identical questions within each experiment | Track A: P6/P5 table. Track B: base, IDK baseline (R-Tuning-SA), GeoDe-SA and the log-prob filter on the same 300 questions (no standard SFT on real QA: real QA is evaluation-only in the plan) |
 | Accuracy, hallucination, abstention, coverage, selective accuracy reported together | Tables B1, B2 |
 | Confidence policies compared fairly; uncertainty intervals; seed limits | Table B2 (matched coverage), bootstrap intervals, 3 seeds |
 | No test leakage | Training from TriviaQA's train file; overlap check: 0 shared questions or canonical answers (2.7% alias-level overlap reported) |
