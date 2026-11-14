@@ -87,7 +87,7 @@ Hallucination and selective accuracy are not affected by this.)
 
 | Comparison | Difference | Reading |
 |---|---|---|
-| GeoDe-SA − R-Tuning-SA | +21.6 [fill from §8 command] | GeoDe's selection beats R-Tuning (validation: +24.2 [+10.8, +37.9]) |
+| GeoDe-SA − R-Tuning-SA | +21.6 [+13.3, +31.6] | GeoDe's selection reliably beats R-Tuning (validation: +24.2 [+10.8, +37.9]) |
 | GeoDe-SA − Random-SA | +19.5 [+9.6, +29.3] | which questions are kept matters, not only how many |
 | GeoDe-SA − base + log-prob filter | −4.4 [−16.1, +8.9] | no reliable difference: a tie |
 | R-Tuning-SA − base + log-prob filter | −19.9 [−31.6, −6.8] | R-Tuning loses to the free filter |
