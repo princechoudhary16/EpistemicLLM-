@@ -28,7 +28,7 @@ PREFIX = "results/raw/p2_triviaqa_v0_validation_abstention"
 ARMS = ("own_rtuning", "own_random", "own_geode", "own_kfilter", "own_kthresh", "own_ksoft")
 PAIRS = (("own_kfilter", "own_geode"), ("own_ksoft", "own_geode"), ("own_kthresh", "own_geode"),
          ("own_ksoft", "own_kfilter"), ("own_kfilter", "own_random"), ("own_ksoft", "own_random"),
-         ("own_geode", "own_random"))
+         ("own_geode", "own_random"),("own_geode", "own_rtuning"))
 SEEDS = (0, 1, 2)
 COLS = ("F1_rel", "accuracy", "hallucination_rate", "abstention_rate", "coverage", "selective_accuracy")
 
