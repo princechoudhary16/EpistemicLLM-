@@ -129,10 +129,11 @@ statistically indistinguishable from each other, and all three clearly beat
 
 ## Known, documented limitations (not fixed, intentionally)
 
-- Grading is `p2_whole_word_v4` (P2's shared grader, applied 2026-10-31),
-  not the earlier `placeholder_exact_v1` the first few weeks used — regrading
-  changed 12-13 of 7,200 rows per file, moving every reported number by at
-  most ~0.2 percentage points.
+- Grading is `p2_whole_word_v5` (bumped from `p2_whole_word_v4` on
+  2026-11-14, from the earlier `placeholder_exact_v1` before that) — the
+  v4->v5 bump changed 7 of 36,000 rows (all non-greedy `base` samples), no
+  reported number moved; the earlier v1->v4 bump changed 12-13 of 7,200 rows
+  per file, moving every reported number by at most ~0.2 percentage points.
 - `idk` is a known-degenerate result (100% abstention, a training-order
   artifact P1's ablation traced precisely) — left as-is, not retrained, since
   fixing it would mean introducing new training after the Week 5 freeze.

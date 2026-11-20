@@ -40,18 +40,35 @@ Reproduction: `results/raw/p1_main_v0_idk_shuffled_r{1,2,3}.jsonl`, jobs
 50290/50303/51143, `python -m p6_baselines.run_idk_shuffled --dataset-version
 main_v0 --idk-repeats {1,2,3}`, seed 0 throughout.
 
+### 3b. Follow-up exploration: does a much larger fraction help? (beyond the "2-3 amounts" asked for)
+
+The 1x/2x/3x sweep above was the bounded deliverable the planning doc asked
+for. As a follow-up check on the "too dilute" explanation, also ran 10x
+(300 IDK rows, 7.3% of the 4,100-row training mix) -- job 51951:
+
+| IDK repeats | IDK rows / total train rows | Correct | Incorrect | Abstain | Accuracy | Abstention |
+|---|---|---:|---:|---:|---:|---:|
+| 10 | 300 / 4,100 (7.3%) | 603 | 566 | 31 | 50.3% | 2.6% |
+
+Reproduction: `results/raw/p1_main_v0_idk_shuffled_r10.jsonl`, job 51951,
+`python -m p6_baselines.run_idk_shuffled --dataset-version main_v0
+--idk-repeats 10`, seed 0.
+
 ## 4. Conclusion
 
 The shuffle fixes the 100%-abstention collapse -- confirms P1's diagnosis was
-correct. But none of the three repeat levels restores *meaningful*
-abstention: 0% at 1x, and only ~1% at 2x/3x, with 2x and 3x landing in the
-same narrow band rather than trending upward. Increasing the repeat count
-further within this range will not fix it -- the 30 unique IDK examples are
-simply too small a fraction of the training mix (well under 3% even at 3x) for
-the gradient signal to compete with 3,800 fact presentations. Restoring a
-usable abstention baseline would need either a much larger IDK fraction or
-loss re-weighting on those examples -- out of scope for this fix, which was
-explicitly bounded to "2-3 amounts" of repetition.
+correct. None of the asked-for repeat levels (1x/2x/3x) restores *meaningful*
+abstention: 0% at 1x, and only ~1% at 2x/3x. The 10x follow-up shows
+abstention does respond to a larger IDK fraction (1.0% → 2.6% going from
+2x/3x to 10x) -- confirming the "too dilute" diagnosis -- but the response is
+slow: more than tripling the IDK fraction (2.3% → 7.3% of training rows)
+only roughly doubled abstention, nowhere near the proportion of questions the
+model genuinely can't answer (base model's bfloat16 abstention rate was
+31.7%). Restoring a fully usable abstention baseline would need either a much
+larger IDK fraction still, or loss re-weighting on those examples, or both --
+out of scope for this round. 1x/2x/3x (seed 0, matched recipe, float32) is the
+bounded deliverable; 10x is reported as a diagnostic data point, not a
+proposed replacement.
 
 This is a clean negative result, documented rather than silently left out:
 the `idk` row in `reports/p6_week5_master_table.md` remains the frozen Week 5

@@ -8,14 +8,28 @@ decision, 2026-10-31; was bfloat16). Full detail:
 
 **Updated 2026-11-05 — two new pieces since the Week 6 freeze:**
 1. **`sft_matched` retrained in float32** (job 50272): 46.7% → **48.6%**,
-   closing the gap behind the old "+1.8pp, not significant" result — now
-   statistically indistinguishable from `p5_lam0`/`p5_lam3` (48.5%/48.6%).
-   This was the team's stated top priority (longest blocking chain: P6 →
-   P1's K-per-fact → P5's K(q) training) and is pushed (`sahana`, `d5ef7d7`).
-   P1 has since re-run K-per-fact against it.
+   closing the gap behind the old "+1.8pp, not significant" result — still
+   statistically indistinguishable from `p5_lam0`/`p5_lam3` (48.2%/48.8%,
+   P5's own float32 re-export — see item 4 below). This was the team's
+   stated top priority (longest blocking chain: P6 → P1's K-per-fact → P5's
+   K(q) training) and is pushed (`sahana`, `d5ef7d7`). P1 has since re-run
+   K-per-fact against it.
 2. **IDK baseline: shuffle fix tested, still unresolved.** Root cause (P1's
    ablation) and fix attempt below (§ IDK fix) — negative result, documented,
    pushed (`sahana`, `429109c`).
+3. **Grading-version cleanup (2026-11-14):** found and fixed a leftover
+   inconsistency — five of the six `main_v0` files were still `v4` while
+   `sft_matched` had moved to `v5`. Regraded all five; confirmed zero effect
+   on every reported number (details below).
+4. **Merge from `main` (2026-11-14, `e7cb35a`):** pulling 67 commits of
+   team work surfaced that P5 had separately replaced `p5_lam0`/`p5_lam3`
+   with genuinely new float32 re-generations (not just a regrade) —
+   `main`'s `79955bc`. This is a *different* change from item 3 above: it's
+   new model output, not a grading fix, and it does move both P5 numbers
+   slightly: `p5_lam0` 48.5%→**48.2%**, `p5_lam3` 48.6%→**48.8%**. Verified
+   the new files are correctly v5-graded (re-ran the grader on them: 0/7,200
+   rows differ from what's stored). Still no conclusion changes — both
+   remain statistically indistinguishable from `sft_matched`.
 
 ## Headline finding
 
@@ -26,7 +40,7 @@ accuracy cost. But as a tool for deciding when to trust an answer, it's
 log-probability).
 
 Accuracy is statistically indistinguishable between plain SFT and the
-evidence-aware method (+1.9 points, 95% CI touches zero at the lower bound).
+evidence-aware method (+0.25pp, 95% CI [-1.6, +2.0], straddles zero).
 The story is about what's readable inside the model, not about beating the
 baseline.
 
@@ -34,9 +48,9 @@ baseline.
 
 | | |
 |---|---|
-| Accuracy, untouched → fine-tuned | 0.0% → 48.6% (base vs. p5_lam3) |
-| P5 vs. matched standard SFT | +1.9pp, 95% CI [0.0, +3.8] — not significant |
-| Abstention signal, head vs. log-prob (AURC, lower = better) | 0.258 vs. **0.185** — log-prob wins |
+| Accuracy, untouched → fine-tuned | 0.0% → 48.8% (base vs. p5_lam3) |
+| P5 vs. matched standard SFT | +0.25pp, 95% CI [-1.6, +2.0] — not significant |
+| Abstention signal, head vs. log-prob (AURC, lower = better) | 0.255 vs. **0.183** — log-prob wins |
 
 ## Full table
 
@@ -49,17 +63,35 @@ bfloat16 Week 5 freeze (not yet rerun — out of scope for this fix):
 | base (untouched, bfloat16) | 0.0% | 68.3% | 31.7% | 68.3% | 0.683 |
 | sft *(history — under-capacity recipe, bfloat16)* | 5.4% | 94.6% | 0.0% | 100% | 0.838 |
 | idk *(known-degenerate, bfloat16, see IDK fix below)* | 0.0% | 0.0% | 100% | 0.0% | — |
-| **sft_matched (float32)** | **48.6%** | 51.4% | 0.0% | 100% | n/a yet¹ |
-| **p5_lam0** | **48.5%** | 51.5% | 0.0% | 100% | 0.201 |
-| **p5_lam3** | **48.6%** | 51.4% | 0.0% | 100% | 0.185 |
+| **sft_matched (float32)** | **48.6%** | 51.4% | 0.0% | 100% | 0.1847 |
+| **p5_lam0** | **48.2%** | 51.8% | 0.0% | 100% | 0.2034 |
+| **p5_lam3** | **48.8%** | 51.2% | 0.0% | 100% | 0.1833 |
 
-¹ AURC/risk-coverage plot not yet regenerated against the float32 file —
-numbers above are from `compare_methods.py` outcome counts, not the full
-risk-coverage artifact.
+AURC/risk-coverage plot regenerated against the float32 `sft_matched` file
+(2026-11-07), then again on 2026-11-14 once `base`/`sft`/`idk`/`p5_lam0`/
+`p5_lam3` were bumped v4->v5 (no change), and a third time after merging
+`main` brought in P5's own new float32 re-export of `p5_lam0`/`p5_lam3`
+(real change, small) — current canonical file:
+`results/final/risk_coverage_main_v0.png`. `sft_matched`'s AURC (0.1847)
+still sits essentially on top of `p5_lam3`'s (0.1833) — the two methods
+remain indistinguishable on confidence-ranking quality, not just accuracy.
+Paired diff vs `sft_matched`: `p5_lam0` -0.42pp [-2.3, +1.5], `p5_lam3`
++0.25pp [-1.6, +2.0] — both CIs straddle zero.
+
+**Grading-version note (2026-11-14):** `base`/`sft`/`idk`/`p5_lam0`/
+`p5_lam3` were still stamped `p2_whole_word_v4` (only `sft_matched` had been
+bumped to v5 during the float32 retrain). Regraded all five to v5: 7 of
+36,000 rows changed (all non-greedy `base` samples, `incorrect`→`abstain`),
+zero effect on any number in this table or the risk-coverage plot. Separately
+(and distinctly from that regrade), merging `main` the same day brought in
+P5's genuinely new float32 generation of `p5_lam0`/`p5_lam3` (not a regrade
+of the old data) — that's the real, if small, shift in the two rows above.
+Verified the new files are correctly v5-graded (0/7,200 rows differ from a
+fresh regrade). All six `main_v0` files are now consistently v5.
 
 `sft_matched` / `p5_lam0` / `p5_lam3` all use the same LoRA recipe (training-
 parity fix, Week 4). With the precision gap now closed, all three are
-statistically indistinguishable on accuracy.
+statistically indistinguishable on accuracy and on AURC.
 
 ### Proposed headline baseline (Decision 5)
 
@@ -82,15 +114,18 @@ combined fact+IDK rows, matched recipe, float32, 3 different IDK amounts
 | 1x (30 rows) | 618 | 582 | 0 | 51.5% | 0.0% |
 | 2x (60 rows) | 607 | 581 | 12 | 50.6% | 1.0% |
 | 3x (90 rows) | 579 | 610 | 11 | 48.3% | 0.9% |
+| 10x (300 rows, exploratory — beyond the "2-3 amounts" asked for) | 603 | 566 | 31 | 50.3% | 2.6% |
 
-Shuffling does fix the collapse, confirming P1's diagnosis — but overcorrects:
-abstention never rises past ~1%, even at 3x repeats. The 30 unique IDK
-examples stay under 3% of the training mix at every level tried, too dilute
-to compete with 3,800 fact rows. Not a fix the team can treat as "done" —
-would need a much larger IDK fraction or loss reweighting to go further; out
-of scope for this round. Full writeup: `reports/p6_idk_shuffle_fix.md`. The
-Week 5 frozen `idk` row (100% abstention, bfloat16) is unchanged and still the
-one in the master table.
+Shuffling does fix the collapse, confirming P1's diagnosis. The asked-for 1-3x
+sweep tops out at ~1% abstention — too dilute. Pushed a 10x run as a
+follow-up diagnostic: abstention does respond to a bigger IDK fraction (1.0%
+→ 2.6%), confirming the "too dilute" explanation, but the response is slow —
+more than tripling the fraction only roughly doubled abstention, still far
+below the ~32% of questions the untouched base model abstains on. Not a fix
+the team can treat as "done" — would need a much larger IDK fraction still,
+or loss reweighting, or both. Full writeup: `reports/p6_idk_shuffle_fix.md`.
+The Week 5 frozen `idk` row (100% abstention, bfloat16) is unchanged and still
+the one in the master table.
 
 ## What this doesn't cover
 
@@ -125,5 +160,7 @@ Every P6-owned deliverable per `plan.md` §8 is complete: environment/metrics
 
 ---
 *Branch `sahana`, commits `d5ef7d7` (float32 sft_matched retrain), `429109c`
-(IDK shuffle fix + sweep). Shareable version with charts (not yet updated
-with these two items):* https://claude.ai/artifact/DCzTEQmqRcS4n98BiHJzcW
+(IDK shuffle fix + sweep), `2d554b7` (v4->v5 regrade cleanup), `e7cb35a`
+(merge main — P5's float32 lam0/lam3 re-export). Shareable version with
+charts (not yet updated with these items):*
+https://claude.ai/artifact/DCzTEQmqRcS4n98BiHJzcW
