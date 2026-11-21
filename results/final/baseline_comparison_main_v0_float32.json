@@ -1,0 +1,150 @@
+{
+  "eval_script_version": "p6-eval-v1.1",
+  "baseline": "sft_matched",
+  "summaries": {
+    "base": {
+      "C": 0,
+      "W": 796,
+      "A": 404,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.6633333333333333,
+      "abstention_rate": 0.33666666666666667,
+      "coverage": 0.6633333333333333,
+      "selective_accuracy": 0.0,
+      "selective_risk": 1.0,
+      "aurc": 0.6633333333333333,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0005000000000000001,
+      "n_facts_scored": 1200
+    },
+    "sft": {
+      "C": 99,
+      "W": 1101,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0825,
+      "hallucination_rate": 0.9175,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.0825,
+      "selective_risk": 0.9175,
+      "aurc": 0.7582263920412992,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.051166666666666694,
+      "n_facts_scored": 1200
+    },
+    "idk": {
+      "C": 0,
+      "W": 0,
+      "A": 1200,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.0,
+      "hallucination_rate": 0.0,
+      "abstention_rate": 1.0,
+      "coverage": 0.0,
+      "selective_accuracy": null,
+      "selective_risk": null,
+      "aurc": null,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.0,
+      "n_facts_scored": 1200
+    },
+    "sft_matched": {
+      "C": 583,
+      "W": 617,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48583333333333334,
+      "hallucination_rate": 0.5141666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48583333333333334,
+      "selective_risk": 0.5141666666666667,
+      "aurc": 0.18580151060293007,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4649999999999999,
+      "n_facts_scored": 1200
+    },
+    "p5_lam0": {
+      "C": 578,
+      "W": 622,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.4816666666666667,
+      "hallucination_rate": 0.5183333333333333,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.4816666666666667,
+      "selective_risk": 0.5183333333333333,
+      "aurc": 0.20344480854898794,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.4570000000000001,
+      "n_facts_scored": 1200
+    },
+    "p5_lam3": {
+      "C": 586,
+      "W": 614,
+      "A": 0,
+      "N": 1200,
+      "invalid": 0,
+      "accuracy": 0.48833333333333334,
+      "hallucination_rate": 0.5116666666666667,
+      "abstention_rate": 0.0,
+      "coverage": 1.0,
+      "selective_accuracy": 0.48833333333333334,
+      "selective_risk": 0.5116666666666667,
+      "aurc": 0.18330521714230158,
+      "confidence_field": "confidence_score",
+      "mean_knowledge_score": 0.45349999999999996,
+      "n_facts_scored": 1200
+    }
+  },
+  "accuracy_diffs": {
+    "base_vs_sft_matched": {
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "sft_vs_sft_matched": {
+      "estimate": -0.4033333333333333,
+      "ci_low": -0.43002083333333335,
+      "ci_high": -0.37414583333333334,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "idk_vs_sft_matched": {
+      "estimate": -0.48583333333333334,
+      "ci_low": -0.5125,
+      "ci_high": -0.4575,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam0_vs_sft_matched": {
+      "estimate": -0.004166666666666652,
+      "ci_low": -0.023333333333333373,
+      "ci_high": 0.015000000000000013,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    },
+    "p5_lam3_vs_sft_matched": {
+      "estimate": 0.0025000000000000022,
+      "ci_low": -0.01583333333333331,
+      "ci_high": 0.02002083333333333,
+      "n_boot": 1000,
+      "n_undefined": 0,
+      "n_clusters": 1200
+    }
+  }
+}

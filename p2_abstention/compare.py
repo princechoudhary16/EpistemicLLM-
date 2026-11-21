@@ -28,7 +28,7 @@ PREFIX = "results/raw/p2_triviaqa_v0_validation_abstention"
 ARMS = ("own_rtuning", "own_random", "own_geode", "own_kfilter", "own_kthresh", "own_ksoft")
 PAIRS = (("own_kfilter", "own_geode"), ("own_ksoft", "own_geode"), ("own_kthresh", "own_geode"),
          ("own_ksoft", "own_kfilter"), ("own_kfilter", "own_random"), ("own_ksoft", "own_random"),
-         ("own_geode", "own_random"))
+         ("own_geode", "own_random"),("own_geode", "own_rtuning"))
 SEEDS = (0, 1, 2)
 COLS = ("F1_rel", "accuracy", "hallucination_rate", "abstention_rate", "coverage", "selective_accuracy")
 
@@ -77,14 +77,15 @@ def main(argv=None):
     ap.add_argument("--arms", nargs="+", default=list(ARMS))
     ap.add_argument("--n-boot", type=int, default=1000)
     ap.add_argument("--out")
+    ap.add_argument("--split", default="validation", help="validation | locked_test")
     a = ap.parse_args(argv)
 
-    base_rows = read(BASE)
+    base_rows = read(f"results/raw/p2_triviaqa_v0_{a.split}_base.jsonl")
     base = greedy(base_rows)
     qids = sorted(base)
     runs = {}
     for arm in a.arms:
-        paths = [Path(f"{PREFIX}_{arm}_seed{s}.jsonl") for s in SEEDS]
+        paths = [Path(f"results/raw/p2_triviaqa_v0_{a.split}_abstention_{arm}_seed{s}.jsonl") for s in SEEDS]
         missing = [str(p) for p in paths if not p.exists()]
         if missing:
             print(f"skipping {arm}: missing {missing}", file=sys.stderr)

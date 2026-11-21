@@ -39,3 +39,5 @@ results/final/abstention/*adapter*/
 results/raw/cpu_check*
 
 results/final/abstention_*/*adapter*/
+results/p3_locked/features/
+results/final/teammates/
