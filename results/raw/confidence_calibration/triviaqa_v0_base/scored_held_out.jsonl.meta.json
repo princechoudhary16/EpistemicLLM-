@@ -1,0 +1,39 @@
+{
+  "inputs": [
+    {
+      "path": "results/raw/p2_triviaqa_v0_locked_test_base.jsonl",
+      "sha256": "1efff913379e707d546ae929082b9152ffe38b30d64c2c7fa787cbed34dd1152",
+      "rows": 1800,
+      "run_ids": [
+        "p2_triviaqa_v0_locked_test_base"
+      ],
+      "arrived_grading_versions": {
+        "p2_whole_word_v5": 1800
+      },
+      "grading_version": "p2_whole_word_v5",
+      "outcomes_changed_by_regrade": 0
+    }
+  ],
+  "output": "results/raw/confidence_calibration/triviaqa_v0_base/scored_held_out.jsonl",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "checkpoint_id": "Qwen/Qwen2.5-0.5B-Instruct-base",
+  "adapter": false,
+  "torch_dtype": "float32",
+  "device": "cuda",
+  "signals_version": "signals-v1",
+  "generation_agreement": {
+    "n_compared": 1800,
+    "tolerance": 0.01,
+    "n_within_tolerance": 1774,
+    "median_abs_gap": 1.1324882507324219e-06,
+    "max_abs_gap": 2.4977562824885053,
+    "greedy_argmax_match_rate": 0.9866666666666667
+  },
+  "versions": {
+    "python": "3.11.18",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6"
+  },
+  "wall_seconds": 11.7
+}

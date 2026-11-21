@@ -1,0 +1,81 @@
+{
+  "protocol": "P3-style hidden-state probe vs the model's own log-probability, on the TriviaQA LOCKED TEST (run once).\n\nPre-specified before running (do not change after seeing locked-test numbers):\n  * Model: untouched Qwen2.5-0.5B-Instruct, float32 (configs/model.yaml); shared prompt (ModelRunner._build_prompt).\n  * Features: last prompt-token state at depths 6, 12, 18, 24 (= HF hidden_states[d], P3's convention).\n  * Labels: was the base model's GREEDY answer graded correct (v5)? Abstain = not correct; invalid rows skipped.\n  * Probe (P3's setting): standardise on train_probe only; class-balanced L2 logistic regression, C = 1.\n    Fitted on train_probe (500); reported on validation (200, sanity check against P3) and locked_test (300).\n  * Free signal: the greedy answer's average token log-probability (avg_logprob in the response rows).\n  * Combinations (2-feature logistic regression, standardised, balanced, C = 1, fitted on train_probe):\n      probe18 + log-prob    -- probe score for train rows is 5-fold out-of-fold, so the combiner never sees a probe\n                               that was fitted on the same row\n      log-prob + length     -- control: \"does ANY second feature help?\" (length = prompt tokens)\n  * Headline: AUROC of each signal; paired question-bootstrap 95% intervals (2,000 draws, seed 0) for\n      probe18 - log-prob, (probe18 + log-prob) - log-prob, (probe18 + log-prob) - (log-prob + length).",
+  "train_probe": {
+    "n": 500,
+    "correct": 88
+  },
+  "validation": {
+    "n": 200,
+    "correct": 47,
+    "auroc": {
+      "log-prob": 0.7163120567375887,
+      "length": 0.3525935196773745,
+      "probe L6": 0.719232373800584,
+      "probe L12": 0.7128354888054512,
+      "probe L18": 0.737727715199555,
+      "probe L24": 0.7249339452092894,
+      "probe L18 + log-prob": 0.7804199694062022,
+      "log-prob + length": 0.7655402586566542
+    },
+    "differences": {
+      "probe L18 minus log-prob": {
+        "estimate": 0.021415658461966358,
+        "ci95": [
+          -0.10236559139784951,
+          0.1373864982234504
+        ]
+      },
+      "probe L18 + log-prob minus log-prob": {
+        "estimate": 0.06410791266861349,
+        "ci95": [
+          -0.039713261648745446,
+          0.1610671936758894
+        ]
+      },
+      "probe L18 + log-prob minus log-prob + length": {
+        "estimate": 0.01487971074954797,
+        "ci95": [
+          -0.0823804573804573,
+          0.11347197106690776
+        ]
+      }
+    }
+  },
+  "locked_test": {
+    "n": 300,
+    "correct": 53,
+    "auroc": {
+      "log-prob": 0.6713772821022076,
+      "length": 0.35474753647544116,
+      "probe L6": 0.5901764571079368,
+      "probe L12": 0.609197158353067,
+      "probe L18": 0.6191276449469101,
+      "probe L24": 0.6880299442364983,
+      "probe L18 + log-prob": 0.659919028340081,
+      "log-prob + length": 0.71109922847758
+    },
+    "differences": {
+      "probe L18 minus log-prob": {
+        "estimate": -0.05224963715529751,
+        "ci95": [
+          -0.14591784989858014,
+          0.03690510116842405
+        ]
+      },
+      "probe L18 + log-prob minus log-prob": {
+        "estimate": -0.011458253762126613,
+        "ci95": [
+          -0.08097192796610164,
+          0.053617571059431546
+        ]
+      },
+      "probe L18 + log-prob minus log-prob + length": {
+        "estimate": -0.05118020013749902,
+        "ci95": [
+          -0.1188740694789081,
+          0.013837394067796605
+        ]
+      }
+    }
+  }
+}
